@@ -1,0 +1,269 @@
+{
+    "title": "Enalim",
+    "name": "enalim",
+    "version": 0.1,
+    "font": "rudelsberg/Rudelsberg.ttf",
+    "runtime": {
+        "editor": {
+            "resolution": [ 1024, 768 ]
+        },
+        "runner": {
+            "resolution": [ 400, 300 ]
+        }        
+    },
+    "view": {
+        "size": 64,
+        "sizeZ": 32,
+        "sector": 400,
+        "camera": [ 0.000001, 0.000001, 1 ],
+        "zoom": 1.5,
+        "shear": [ 0, -1.5, 0 ]
+    },
+    "shapes": [
+        {
+            "image": "grounds.png",
+            "grid": {
+                "units": [ 8, 8 ]
+            },
+            "dpi": 288,
+            "shapes": [
+                { "name": "ground.grass", "size": [ 4, 4, 1], "pos": [8, 520] },
+                { "name": "ground.marsh", "size": [ 4, 4, 1], "pos": [88, 520] },
+                { "name": "ground.marsh.2", "size": [ 4, 4, 1], "pos": [168, 520] },
+                { "name": "ground.dirt", "size": [ 4, 4, 1], "pos": [248, 520] },
+                { "name": "ground.grass.2", "size": [ 4, 4, 1], "pos": [328, 520] },
+                { "name": "ground.water", "size": [ 4, 4, 1], "pos": [408, 520], "offset": [0, 0, -1] },
+                { "name": "ground.hay", "size": [ 4, 4, 1], "pos": [488, 520] },
+                { "name": "ground.sand", "size": [ 4, 4, 1], "pos": [568, 520] },
+                { "name": "ground.stone", "size": [ 4, 4, 1], "pos": [648, 520] },
+                { "name": "ground.cobble", "size": [ 4, 4, 1], "pos": [728, 520] },
+                { "name": "ground.grass.3", "size": [ 4, 4, 1], "pos": [808, 520] },
+                { "name": "ground.gravel", "size": [ 4, 4, 1], "pos": [888, 520] },
+                { "name": "edge.grass.nsw", "size": [ 4, 4, 1], "pos": [8, 696], "ref": "ground.grass" },    
+                { "name": "edge.grass.sew", "size": [ 4, 4, 1], "pos": [88, 696], "ref": "ground.grass" },    
+                { "name": "edge.grass.nse", "size": [ 4, 4, 1], "pos": [168, 696], "ref": "ground.grass" },    
+                { "name": "edge.grass.new", "size": [ 4, 4, 1], "pos": [248, 696], "ref": "ground.grass" },  
+                { "name": "edge.grass.ew", "size": [ 4, 4, 1], "pos": [328, 696], "ref": "ground.grass" },    
+                { "name": "edge.grass.ns", "size": [ 4, 4, 1], "pos": [408, 696], "ref": "ground.grass" },    
+                { "name": "edge.grass.nsew", "size": [ 4, 4, 1], "pos": [488, 696], "ref": "ground.grass" },
+                { "name": "edge.grass.nw", "size": [ 4, 4, 1], "pos": [8, 776], "ref": "ground.grass" },    
+                { "name": "edge.grass.sw", "size": [ 4, 4, 1], "pos": [88, 776], "ref": "ground.grass" },    
+                { "name": "edge.grass.se", "size": [ 4, 4, 1], "pos": [168, 776], "ref": "ground.grass" },    
+                { "name": "edge.grass.ne", "size": [ 4, 4, 1], "pos": [248, 776], "ref": "ground.grass" }, 
+                { "name": "edge.grass.n", "size": [ 4, 4, 1], "pos": [8, 856], "ref": "ground.grass" },    
+                { "name": "edge.grass.w", "size": [ 4, 4, 1], "pos": [88, 856], "ref": "ground.grass" },    
+                { "name": "edge.grass.s", "size": [ 4, 4, 1], "pos": [168, 856], "ref": "ground.grass" },    
+                { "name": "edge.grass.e", "size": [ 4, 4, 1], "pos": [248, 856], "ref": "ground.grass" },
+                { "name": "edge.grass.n.2", "size": [ 4, 4, 1], "pos": [328, 856], "ref": "ground.grass" },    
+                { "name": "edge.grass.w.2", "size": [ 4, 4, 1], "pos": [408, 856], "ref": "ground.grass" },    
+                { "name": "edge.grass.s.2", "size": [ 4, 4, 1], "pos": [488, 856], "ref": "ground.grass" },    
+                { "name": "edge.grass.e.2", "size": [ 4, 4, 1], "pos": [568, 856], "ref": "ground.grass" },
+                { "name": "edge.water.n", "size": [ 4, 4, 1], "pos": [568, 696], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.w", "size": [ 4, 4, 1], "pos": [648, 696], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.s", "size": [ 4, 4, 1], "pos": [728, 696], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.e", "size": [ 4, 4, 1], "pos": [808, 696], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.nw", "size": [ 4, 4, 1], "pos": [568, 774], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.sw", "size": [ 4, 4, 1], "pos": [648, 774], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.se", "size": [ 4, 4, 1], "pos": [728, 774], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.ne", "size": [ 4, 4, 1], "pos": [808, 774], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.ew", "size": [ 4, 4, 1], "pos": [648, 856], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.ns", "size": [ 4, 4, 1], "pos": [728, 856], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.w.2", "size": [ 4, 4, 1], "pos": [888, 696], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.s.2", "size": [ 4, 4, 1], "pos": [888, 776], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.n.2", "size": [ 4, 4, 1], "pos": [888, 856], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.e.2", "size": [ 4, 4, 1], "pos": [808, 856], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.nsw", "size": [ 4, 4, 1], "pos": [648, 616], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.sew", "size": [ 4, 4, 1], "pos": [728, 616], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.nse", "size": [ 4, 4, 1], "pos": [808, 616], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "edge.water.new", "size": [ 4, 4, 1], "pos": [888, 616], "ref": "ground.dirt", "target": "ground.water" }
+            ]
+        },
+        {
+            "image": "objects.png",
+            "grid": {
+                "units": [ 8, 8 ]
+            },
+            "dpi": 288,
+            "shapes": [
+                { "name": "desk.small", "size": [ 2, 2, 3], "pos": [728, 448] },
+                { "name": "plant.potted", "size": [1, 1, 4], "pos": [616, 416] },
+                { "name": "door.wood.y", "size": [ 1, 3, 6], "pos": [104, 0] },
+                { "name": "door.wood.x", "size": [ 3, 1, 6], "pos": [136, 0] },    
+                { "name": "commode.x", "size": [ 4, 1, 4], "pos": [768, 448] },
+                { "name": "wall.rock.y", "size": [ 1, 4, 6], "pos": [168, 0] },
+                { "name": "wall.rock.x", "size": [ 4, 1, 6], "pos": [208, 0] },
+                { "name": "wall.rock.ruin.y", "size": [ 1, 4, 5], "pos": [248, 8] },
+                { "name": "wall.rock.ruin.x", "size": [ 4, 1, 5], "pos": [288, 8] },
+                { "name": "post.wood", "size": [ 1, 1, 6], "pos": [0, 0] },
+                { "name": "wall.wood.y", "size": [ 1, 4, 6], "pos": [328, 0] },
+                { "name": "wall.wood.x", "size": [ 4, 1, 6], "pos": [368, 0] },
+                { "name": "wall.brick.y", "size": [ 1, 4, 6], "pos": [408, 0] },
+                { "name": "wall.brick.x", "size": [ 4, 1, 6], "pos": [448, 0] },
+                { "name": "stairs.up.x", "size": [ 4, 1, 6], "pos": [488, 0] },
+                { "name": "stairs.down.x", "size": [ 4, 1, 6], "pos": [528, 0] },
+                { "name": "plant.trunk", "size": [ 2, 2, 4], "pos": [0, 352] },
+                { "name": "plant.oak", "size": [ 4, 4, 6], "pos": [32, 352] },
+                { "name": "plant.red", "size": [ 4, 4, 6], "pos": [96, 352] },
+                { "name": "plant.pine", "size": [ 4, 4, 6], "pos": [160, 352] },
+                { "name": "plant.willow", "size": [ 4, 4, 6], "pos": [224, 352] },
+                { "name": "plant.dead", "size": [ 4, 4, 6], "pos": [288, 352] },
+                { "name": "plant.trunk.wide", "size": [ 4, 4, 4], "pos": [352, 352] },
+                { "name": "plant.corn", "size": [ 2, 2, 4], "pos": [0, 416] },
+                { "name": "sign.y", "size": [ 1, 2, 4], "pos": [424, 352] },
+                { "name": "sign.x", "size": [ 2, 1, 4], "pos": [464, 352] },
+                { "name": "fence.y", "size": [ 1, 4, 3], "pos": [432, 408] },
+                { "name": "fence.x", "size": [ 4, 1, 3], "pos": [488, 408] },
+                { "name": "rock.pile", "size": [ 4, 4, 6], "pos": [544, 336] },
+                { "name": "chair.x", "size": [ 1, 1, 2], "pos": [616, 368] },
+                { "name": "chair.y", "size": [ 1, 1, 2], "pos": [632, 368] },
+                { "name": "chest.y", "size": [ 2, 2, 2], "pos": [648, 360] },
+                { "name": "chest.x", "size": [ 2, 2, 2], "pos": [680, 360] },
+                { "name": "desk.y", "size": [ 2, 4, 4], "pos": [672, 416] },
+                { "name": "shelf.empty.x", "size": [ 4, 1, 5], "pos": [728, 368] },
+                { "name": "shelf.book.x", "size": [ 4, 1, 5], "pos": [776, 368] },
+                { "name": "shelf.book.y", "size": [ 1, 4, 5], "pos": [816, 368] },
+                { "name": "shelf.book.y", "size": [ 1, 4, 5], "pos": [864, 368] },
+                { "name": "bed.x", "size": [ 6, 3, 2], "pos": [912, 368] },
+                { "name": "step.y", "size": [ 2, 4, 1], "pos": [48, 24] },
+                { "name": "well", "size": [ 6, 2, 8], "pos": [0, 80] },
+                { "name": "stalagmite.large", "size": [ 3, 3, 4], "pos": [0, 264] },
+                { "name": "stalagmite.small", "size": [ 2, 2, 2], "pos": [64, 288] },
+                { "name": "plant.flower.green.large", "size": [ 2, 2, 2], "pos": [112, 288] },
+                { "name": "plant.flower.green.small", "size": [ 1, 1, 1], "pos": [152, 296] },
+                { "name": "plant.flower.red.large", "size": [ 2, 2, 2], "pos": [112, 240] },
+                { "name": "plant.flower.red.small", "size": [ 1, 1, 1], "pos": [152, 264] },
+                { "name": "plant.flower.yellow.large", "size": [ 2, 2, 2], "pos": [112, 192] },
+                { "name": "plant.flower.yellow.small", "size": [ 1, 1, 1], "pos": [152, 232] },
+                { "name": "plank.y", "size": [ 2, 7, 1], "pos": [104, 96] },
+                { "name": "plank.x", "size": [ 7, 2, 1], "pos": [192, 96] },
+                { "name": "telescope", "size": [ 3, 3, 2], "pos": [400, 456] },
+                { "name": "fence.black.x", "size": [ 4, 1, 2], "pos": [456, 472] },
+                { "name": "fence.black.y", "size": [ 1, 4, 2], "pos": [496, 472] },
+                { "name": "candolabra.y", "size": [ 1, 2, 5], "pos": [544, 464] },
+                { "name": "candolabra.x", "size": [ 2, 1, 5], "pos": [568, 464] },
+                { "name": "hay.x", "size": [ 6, 2, 3], "pos": [264, 96] },
+                { "name": "chimney.y", "size": [ 1, 3, 10], "pos": [344, 88] },
+                { "name": "barrel.y", "size": [ 2, 3, 3], "pos": [384, 104] },
+                { "name": "bar.y", "size": [ 2, 5, 4], "pos": [432, 96] },
+
+                { "name": "floor.stone", "size": [ 9, 9, 1], "pos": [576, 0] },
+                { "name": "floor.stone.x", "size": [ 9, 4, 1], "pos": [728, 8] },
+                { "name": "floor.stone.strip.x", "size": [ 9, 1, 1], "pos": [840, 8] },
+                { "name": "floor.stone.strip.y", "size": [ 1, 4, 1], "pos": [936, 8] },
+                { "name": "floor.stone.small.1", "size": [ 6, 4, 1], "pos": [560, 160] },
+                { "name": "floor.stone.small.2", "size": [ 4, 6, 1], "pos": [648, 160] },
+                { "name": "floor.stone.small.3", "size": [ 2, 6, 1], "pos": [728, 160] },
+                { "name": "floor.stone.small.3", "size": [ 6, 2, 1], "pos": [808, 160] }
+            ]
+        },
+        {
+            "image": "roofs.png",
+            "grid": {
+                "units": [ 8, 8 ]
+            },
+            "dpi": 288,
+            "shapes": [
+                { "name": "roof.lattice", "size": [ 10, 10, 1], "pos": [392, 120] },
+
+                { "name": "roof.gray.sw", "size": [ 6, 6, 6], "pos": [0, 464], "alphaMin": 0.75 },
+                { "name": "roof.gray.nw", "size": [ 6, 6, 6], "pos": [96, 464], "alphaMin": 0.75 },
+                { "name": "roof.gray.ne", "size": [ 6, 6, 6], "pos": [192, 464], "alphaMin": 0.75 },
+                { "name": "roof.gray.se", "size": [ 6, 6, 6], "pos": [288, 464], "alphaMin": 0.75 },
+                { "name": "roof.gray.w", "size": [ 6, 4, 6], "pos": [8, 616], "alphaMin": 0.75 },
+                { "name": "roof.gray.e", "size": [ 6, 4, 6], "pos": [88, 616], "alphaMin": 0.75 },
+                { "name": "roof.gray.s", "size": [ 4, 6, 6], "pos": [168, 616], "alphaMin": 0.75 },
+                { "name": "roof.gray.n", "size": [ 4, 6, 6], "pos": [248, 616], "alphaMin": 0.75 },
+                { "name": "roof.gray", "size": [ 4, 4, 6], "pos": [328, 632], "alphaMin": 0.75 },
+                { "name": "roof.gray.sw2", "size": [ 6, 6, 6], "pos": [0, 320], "alphaMin": 0.75 },
+                { "name": "roof.gray.se2", "size": [ 6, 6, 6], "pos": [96, 320], "alphaMin": 0.75 },
+                { "name": "roof.gray.ne2", "size": [ 6, 6, 6], "pos": [192, 320], "alphaMin": 0.75 },
+                { "name": "roof.gray.nw2", "size": [ 6, 6, 6], "pos": [288, 320], "alphaMin": 0.75 },
+                { "name": "roof.gray.w2", "size": [ 6, 6, 6], "pos": [0, 752], "alphaMin": 0.75 },
+                { "name": "roof.gray.e2", "size": [ 6, 6, 6], "pos": [96, 752], "alphaMin": 0.75 },
+                { "name": "roof.gray.s2", "size": [ 6, 6, 6], "pos": [192, 752], "alphaMin": 0.75 },
+                { "name": "roof.gray.n2", "size": [ 6, 6, 6], "pos": [288, 752], "alphaMin": 0.75 },
+
+                { "name": "roof.red.sw", "size": [ 6, 6, 6], "pos": [400, 464], "alphaMin": 0.75 },
+                { "name": "roof.red.nw", "size": [ 6, 6, 6], "pos": [496, 464], "alphaMin": 0.75 },
+                { "name": "roof.red.ne", "size": [ 6, 6, 6], "pos": [592, 464], "alphaMin": 0.75 },
+                { "name": "roof.red.se", "size": [ 6, 6, 6], "pos": [688, 464], "alphaMin": 0.75 },
+                { "name": "roof.red.w", "size": [ 6, 4, 6], "pos": [408, 616], "alphaMin": 0.75 },
+                { "name": "roof.red.e", "size": [ 6, 4, 6], "pos": [488, 616], "alphaMin": 0.75 },
+                { "name": "roof.red.s", "size": [ 4, 6, 6], "pos": [568, 616], "alphaMin": 0.75 },
+                { "name": "roof.red.n", "size": [ 4, 6, 6], "pos": [648, 616], "alphaMin": 0.75 },
+                { "name": "roof.red", "size": [ 4, 4, 6], "pos": [728, 632], "alphaMin": 0.75 },
+                { "name": "roof.red.sw2", "size": [ 6, 6, 6], "pos": [400, 320], "alphaMin": 0.75 },
+                { "name": "roof.red.se2", "size": [ 6, 6, 6], "pos": [496, 320], "alphaMin": 0.75 },
+                { "name": "roof.red.ne2", "size": [ 6, 6, 6], "pos": [592, 320], "alphaMin": 0.75 },
+                { "name": "roof.red.nw2", "size": [ 6, 6, 6], "pos": [688, 320], "alphaMin": 0.75 },
+                { "name": "roof.red.w2", "size": [ 6, 6, 6], "pos": [400, 752], "alphaMin": 0.75 },
+                { "name": "roof.red.e2", "size": [ 6, 6, 6], "pos": [496, 752], "alphaMin": 0.75 },
+                { "name": "roof.red.s2", "size": [ 6, 6, 6], "pos": [592, 752], "alphaMin": 0.75 },
+                { "name": "roof.red.n2", "size": [ 6, 6, 6], "pos": [688, 752], "alphaMin": 0.75 }        
+            ]
+        }
+    ],    
+    "creatures": [
+        { 
+            "name": "man", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 64, 64 ], 
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": ["sw", "s", "se", "e", "ne", "n", "nw", "w"]
+                },
+                {
+                    "name": "attack",
+                    "steps": 1,
+                    "dirs": ["s", "se", "e", "ne", "n", "nw", "w", "sw"]
+                }
+            ]
+        },
+        { 
+            "name": "cow", 
+            "size": [ 4, 4, 2 ], 
+            "dim": [ 64, 64 ], 
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": ["nw", "w", "sw", "s", "se", "e", "ne", "n"]
+                }
+            ]
+        },
+        { 
+            "name": "demon", 
+            "size": [ 4, 4, 4 ], 
+            "dim": [ 96, 96 ], 
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw"  ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                },
+                {
+                    "name": "attack",
+                    "steps": 2,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                }                
+            ]
+        }        
+    ]
+}

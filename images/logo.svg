@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/Users/gtorok/github/arkona/assets/images/logo.png"
+   inkscape:export-xdpi="74.984306"
+   inkscape:export-ydpi="74.984306">
+  <defs
+     id="defs4">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Chalk and Sponge"
+       id="filter4197"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Low turbulence gives sponge look and high turbulence chalk"
+       width="1.6"
+       height="2"
+       y="-0.5"
+       x="-0.3">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="2"
+         seed="52"
+         baseFrequency="3.56447 3.006"
+         result="turbulence"
+         id="feTurbulence4199" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="9.2"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4201"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix4221" />
+      <feTurbulence
+         id="feTurbulence4223"
+         baseFrequency="0.4"
+         type="fractalNoise"
+         seed="0"
+         numOctaves="5"
+         result="result1"
+         in="fbSourceGraphic" />
+      <feDisplacementMap
+         id="feDisplacementMap4225"
+         in2="result1"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="30"
+         in="fbSourceGraphic" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="295.24075"
+     inkscape:cy="734.64286"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1916"
+     inkscape:window-height="1155"
+     inkscape:window-x="4"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g5725"
+       style="stroke:#86bcd8;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(34.285714,-60)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:68.49422455px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#86bcd8;stroke-width:1.49999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="263.97861"
+         y="300.45319"
+         id="text5727"
+         sodipodi:linespacing="125%"
+         transform="matrix(0.84514423,0.09741016,-0.1345895,1.1677174,0,0)"><tspan
+           sodipodi:role="line"
+           id="tspan5729"
+           x="263.97861"
+           y="300.45319">A</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#86bcd8;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="207.49998"
+         y="359.50507"
+         id="text5731"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5733"
+           x="207.49998"
+           y="359.50507">R</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.50953293px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#86bcd8;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="172.12915"
+         y="401.82358"
+         id="text5735"
+         sodipodi:linespacing="125%"
+         transform="matrix(0.99891105,-0.13973792,0.14617371,0.98064186,0,0)"><tspan
+           sodipodi:role="line"
+           id="tspan5737"
+           x="172.12915"
+           y="401.82358">K</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#86bcd8;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="253.92856"
+         y="362.36221"
+         id="text5739"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5741"
+           x="253.92856"
+           y="362.36221">O</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#86bcd8;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="312.86581"
+         y="329.14688"
+         id="text5743"
+         sodipodi:linespacing="125%"
+         transform="matrix(0.99370749,0.11200636,-0.11200636,0.99370749,0,0)"><tspan
+           sodipodi:role="line"
+           id="tspan5745"
+           x="312.86581"
+           y="329.14688">N</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#86bcd8;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="301.78574"
+         y="367.00507"
+         id="text5747"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5749"
+           x="301.78574"
+           y="367.00507">A</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="361.42856"
+       y="431.64792"
+       id="text5691"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5693"
+         x="361.42856"
+         y="431.64792" /></text>
+    <g
+       id="g5711"
+       transform="translate(34.285714,-60)">
+      <text
+         transform="matrix(0.84514423,0.09741016,-0.1345895,1.1677174,0,0)"
+         sodipodi:linespacing="125%"
+         id="text4197"
+         y="300.45319"
+         x="263.97861"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:68.49422455px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="300.45319"
+           x="263.97861"
+           id="tspan4199"
+           sodipodi:role="line">A</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text5687"
+         y="359.50507"
+         x="207.49998"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="359.50507"
+           x="207.49998"
+           id="tspan5689"
+           sodipodi:role="line">R</tspan></text>
+      <text
+         transform="matrix(0.99891105,-0.13973792,0.14617371,0.98064186,0,0)"
+         sodipodi:linespacing="125%"
+         id="text5695"
+         y="401.82358"
+         x="172.12915"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.50953293px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="401.82358"
+           x="172.12915"
+           id="tspan5697"
+           sodipodi:role="line">K</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text5699"
+         y="362.36221"
+         x="253.92856"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="362.36221"
+           x="253.92856"
+           id="tspan5701"
+           sodipodi:role="line">O</tspan></text>
+      <text
+         transform="matrix(0.99370749,0.11200636,-0.11200636,0.99370749,0,0)"
+         sodipodi:linespacing="125%"
+         id="text5703"
+         y="329.14688"
+         x="312.86581"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="329.14688"
+           x="312.86581"
+           id="tspan5705"
+           sodipodi:role="line">N</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text5707"
+         y="367.00507"
+         x="301.78574"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:Trattatello;-inkscape-font-specification:'Trattatello, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="367.00507"
+           x="301.78574"
+           id="tspan5709"
+           sodipodi:role="line">A</tspan></text>
+    </g>
+  </g>
+</svg>
