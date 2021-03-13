@@ -90,15 +90,13 @@ def playerMoveDir(dx, dy, delta) {
     newY := int(newYf + 0.5);
 
     if(newX != player.x || newY != player.y) {
-        eraseShape(player.x, player.y, player.z);
-
         # find the new z coord
         newZ := -1;
-        if(fits(newX, newY, player.z, PLAYER_SHAPE)) {
+        if(fits(newX, newY, player.z, player.x, player.y, player.z)) {
             newZ := player.z;
         } else {
             # step up if you can
-            if(fits(newX, newY, player.z + 1, PLAYER_SHAPE)) {
+            if(fits(newX, newY, player.z + 1, player.x, player.y, player.z)) {
                 newZ := player.z + 1;
             }
         }
@@ -108,16 +106,16 @@ def playerMoveDir(dx, dy, delta) {
             while(newZ > 0 && standOnShape(newX, newY, newZ, PLAYER_X, PLAYER_Y) = false) {
                 newZ := newZ - 1;
             }
+            
             moveViewTo(newX, newY);
-
+            moveShape(player.x, player.y, player.z, newX, newY, newZ);
             player.x := newX;
             player.y := newY;
-            player.z := newZ;            
+            player.z := newZ;
         } else {
             # player is blocked
             moved := false;
         }
-        setShape(player.x, player.y, player.z, PLAYER_SHAPE);
     }
 
     if(moved) {
