@@ -90,7 +90,20 @@ def playerMoveDir(dx, dy, delta) {
     newY := int(newYf + 0.5);
 
     if(newX != player.x || newY != player.y) {
-        # find the new z coord
+        # check teleport locations
+        teleportPos := teleport(newX, newY, player.z);
+        if(teleportPos != null) {
+            print("teleport!");
+            eraseShape(player.x, player.y, player.z);
+            moveViewTo(teleportPos[0], teleportPos[1]);            
+            player.x := teleportPos[0];
+            player.y := teleportPos[1];
+            player.z := teleportPos[2];
+            setShape(player.x, player.y, player.z, PLAYER_SHAPE);
+            return true;
+        }
+
+        # find the new z coord        
         newZ := -1;
         if(fits(newX, newY, player.z, player.x, player.y, player.z)) {
             newZ := player.z;

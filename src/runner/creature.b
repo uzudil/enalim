@@ -11,14 +11,11 @@ creaturesTemplates := {
 
 creatures := [];
 
-const SECTION_SIZE = 200;
-
 def pruneCreatures(sectionX, sectionY) {
     removes := [];
     array_remove(creatures, c => {
-        creatureSectionX := int(c.pos[0] / SECTION_SIZE);
-        creatureSectionY := int(c.pos[1] / SECTION_SIZE);
-        b := creatureSectionX = sectionX && creatureSectionY = sectionY;
+        sectionPos := getSectionPos(c.pos[0], c.pos[1]);
+        b := sectionPos[0] = sectionX && sectionPos[1] = sectionY;
         if(b) {
             eraseShape(c.pos[0], c.pos[1], c.pos[2]);
             removes[len(removes)] := {

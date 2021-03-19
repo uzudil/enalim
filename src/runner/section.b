@@ -1,10 +1,25 @@
+const SECTIONS = {
+    "25,25": MAP_25_25,
+    "24,25": MAP_24_25,
+};
+
+const SECTION_SIZE = 200;
+
+def getSectionPos(x, y) {
+    return [ int(x / SECTION_SIZE), int(y / SECTION_SIZE) ];
+}
+
+def getSection(sectionX, sectionY) {
+    return SECTIONS["" + sectionX + "," + sectionY];
+}
+
 def onSectionLoad(sectionX, sectionY, data) {
     if(len(keys(data)) = 0) {
         # initialize a section
         print("+++ Initial load: " + sectionX + "," + sectionY);
-        if(sectionX = 25 && sectionY = 25) {
-            setCreature(5040, 5075, 1, creaturesTemplates.cow);
-            setCreature(5032, 5061, 1, creaturesTemplates.cow);
+        section := getSection(sectionX, sectionY);
+        if(section != null) {
+            section.init();
         }
     } else {
         # restore a section from saved data
@@ -17,4 +32,13 @@ def onSectionLoad(sectionX, sectionY, data) {
 def beforeSectionSave(sectionX, sectionY) {
     sectionCreatures := pruneCreatures(sectionX, sectionY);
     return { "creatures": sectionCreatures };
+}
+
+def teleport(x, y, z) {
+    sectionPos := getSectionPos(x, y);
+    section := getSection(sectionPos[0], sectionPos[1]);
+    if(section != null) {
+        return section.teleport(x, y, z);
+    }
+    return null;
 }
