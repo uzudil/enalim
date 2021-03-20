@@ -158,10 +158,7 @@
                 { "name": "rock.corner", "size": [2, 2, 6], "pos": [200, 648] },
                 { "name": "rock.ns", "size": [6, 2, 6], "pos": [248, 616] },
                 { "name": "rock.2", "size": [4, 4, 4], "pos": [408, 616] },
-                { "name": "rock.3", "size": [4, 4, 3], "pos": [488, 624] },
-                { "name": "roof.rock.1", "size": [4, 4, 4], "pos": [40, 616] },
-                { "name": "roof.rock.2", "size": [4, 4, 4], "pos": [40, 728] },
-                { "name": "roof.rock.3", "size": [4, 4, 4], "pos": [40, 840] }
+                { "name": "rock.3", "size": [4, 4, 3], "pos": [488, 624] }
             ]
         },
         {
@@ -245,6 +242,30 @@
                 { "name": "cave.rock.block", "size": [ 4, 4, 6], "pos": [344, 200], "alphaMin": 0.75 },
                 { "name": "cave.rock.block.2", "size": [ 8, 8, 6], "pos": [424, 200], "alphaMin": 0.75 },
                 { "name": "ground.cave", "size": [ 4, 4, 1], "pos": [224, 200], "alphaMin": 0.75 }                    
+            ]
+        },
+        {
+            "image": "mountain.png",
+            "grid": {
+                "units": [ 8, 8 ]
+            },
+            "dpi": 288,
+            "shapes": [
+                { "name": "roof.mountain.1", "size": [ 4, 4, 4], "pos": [40, 616], "alphaMin": 0.75 },
+                { "name": "mountain.s", "size": [ 4, 4, 6], "pos": [120, 584], "alphaMin": 0.75 },
+                { "name": "mountain.w", "size": [ 4, 4, 6], "pos": [200, 584], "alphaMin": 0.75 },
+                { "name": "mountain.n", "size": [ 4, 4, 6], "pos": [280, 584], "alphaMin": 0.75 },
+                { "name": "mountain.e", "size": [ 4, 4, 6], "pos": [360, 584], "alphaMin": 0.75 },
+                { "name": "roof.mountain.2", "size": [ 4, 4, 4], "pos": [40, 728], "alphaMin": 0.75 },
+                { "name": "mountain.sw", "size": [ 4, 4, 6], "pos": [120, 712], "alphaMin": 0.75 },
+                { "name": "mountain.se", "size": [ 4, 4, 6], "pos": [200, 712], "alphaMin": 0.75 },
+                { "name": "mountain.ne", "size": [ 4, 4, 6], "pos": [280, 712], "alphaMin": 0.75 },
+                { "name": "mountain.nw", "size": [ 4, 4, 6], "pos": [360, 712], "alphaMin": 0.75 },
+                { "name": "roof.mountain.3", "size": [ 4, 4, 4], "pos": [40, 840], "alphaMin": 0.75 },
+                { "name": "mountain.sw.2", "size": [ 4, 4, 6], "pos": [120, 840], "alphaMin": 0.75 },
+                { "name": "mountain.se.2", "size": [ 4, 4, 6], "pos": [200, 840], "alphaMin": 0.75 },
+                { "name": "mountain.ne.2", "size": [ 4, 4, 6], "pos": [280, 840], "alphaMin": 0.75 },
+                { "name": "mountain.nw.2", "size": [ 4, 4, 6], "pos": [360, 840], "alphaMin": 0.75 }
             ]
         }
     ],    

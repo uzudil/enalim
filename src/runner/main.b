@@ -7,6 +7,7 @@ player := {
     "scrollOffsetY": 0,
     "dir": DirN,
     "underRoof": false,
+    "teleportPos": null,
 };
 
 # the player's shape size
@@ -20,39 +21,49 @@ const PLAYER_ANIM_SPEED = 0.05;
 const PLAYER_SHAPE = "man";
 
 # called on every frame
-def events(delta) {
+def events(delta, fadeDir) {
     animationType := "stand";
-    dx := 0;
-    dy := 0;
-    if(isDown(KeyA) || isDown(KeyLeft)) {
-        dx := 1;
-    }
-    if(isDown(KeyD) || isDown(KeyRight)) {
-        dx := -1;
-    }
-    if(isDown(KeyW) || isDown(KeyUp)) {
-        dy := -1;
-    }
-    if(isDown(KeyS) || isDown(KeyDown)) {
-        dy := 1;
-    }
 
-    if(dx != 0 || dy != 0) {
-        animationType := "move";
-        playerMove(dx, dy, delta);
-    }
+    if(player.teleportPos != null) {
+        if(fadeDir = 1) {
+            eraseShape(player.x, player.y, player.z);
+            player.x := player.teleportPos[0];
+            player.y := player.teleportPos[1];
+            player.z := player.teleportPos[2];
+            setShape(player.x, player.y, player.z, PLAYER_SHAPE);
+            player.teleportPos := null;
+        }
+    } else {
+        dx := 0;
+        dy := 0;
+        if(isDown(KeyA) || isDown(KeyLeft)) {
+            dx := 1;
+        }
+        if(isDown(KeyD) || isDown(KeyRight)) {
+            dx := -1;
+        }
+        if(isDown(KeyW) || isDown(KeyUp)) {
+            dy := -1;
+        }
+        if(isDown(KeyS) || isDown(KeyDown)) {
+            dy := 1;
+        }
 
-    if(isPressed(KeySpace)) {
-        if(findShapeNearby("door.wood.y", (x,y,z) => replaceShape(x, y, z, "door.wood.x")) = false) {
-            if(findShapeNearby("door.wood.x", (x,y,z) => replaceShape(x, y, z, "door.wood.y")) = false) {
-                # do something else
+        if(dx != 0 || dy != 0) {
+            animationType := "move";
+            playerMove(dx, dy, delta);
+        }
+
+        if(isPressed(KeySpace)) {
+            if(findShapeNearby("door.wood.y", (x,y,z) => replaceShape(x, y, z, "door.wood.x")) = false) {
+                if(findShapeNearby("door.wood.x", (x,y,z) => replaceShape(x, y, z, "door.wood.y")) = false) {
+                    # do something else
+                }
             }
         }
+        setAnimation(player.x, player.y, player.z, animationType, player.dir, PLAYER_ANIM_SPEED);
+        moveCreatures(delta);
     }
-
-    setAnimation(player.x, player.y, player.z, animationType, player.dir, PLAYER_ANIM_SPEED);
-
-    moveCreatures(delta);
 }
 
 def playerMove(dx, dy, delta) {
@@ -91,15 +102,10 @@ def playerMoveDir(dx, dy, delta) {
 
     if(newX != player.x || newY != player.y) {
         # check teleport locations
-        teleportPos := teleport(newX, newY, player.z);
-        if(teleportPos != null) {
-            print("teleport!");
-            eraseShape(player.x, player.y, player.z);
-            moveViewTo(teleportPos[0], teleportPos[1]);            
-            player.x := teleportPos[0];
-            player.y := teleportPos[1];
-            player.z := teleportPos[2];
-            setShape(player.x, player.y, player.z, PLAYER_SHAPE);
+        player.teleportPos := teleport(newX, newY, player.z);
+        if(player.teleportPos != null) {
+            # start fade out
+            fadeViewTo(player.teleportPos[0], player.teleportPos[1]);
             return true;
         }
 
@@ -238,6 +244,6 @@ def isUnderRoof() {
 
 # Put main last so if there are parsing errors, the game panic()-s.
 def main() {
-    moveViewTo(player.x, player.y);
+    fadeViewTo(player.x, player.y);
     setShape(player.x, player.y, player.z, PLAYER_SHAPE);
 }

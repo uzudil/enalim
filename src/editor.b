@@ -1,5 +1,5 @@
 const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead" ];
-const ROCK_ROOF = [ "roof.rock.1", "roof.rock.2", "roof.rock.3" ];
+const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
 
 def choose(a) {
     return a[int(random() * len(a))];
@@ -13,7 +13,9 @@ def editorCommand() {
     }
     if(isPressed(KeyR)) {
         pos := getPosition();
-        setShape(pos[0], pos[1], 7, choose(ROCK_ROOF));
+        x := int(pos[0] / 4) * 4;
+        y := int(pos[1] / 4) * 4;
+        setShape(x, y, 7, choose(ROCK_ROOF));
     }
     if(isPressed(Key0)) {
         setMaxZ(24);
@@ -30,5 +32,5 @@ def editorCommand() {
 }
 
 def main() {
-    # this is never called
+    #fadeViewTo(5000, 5000);
 }
