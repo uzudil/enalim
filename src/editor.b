@@ -21,12 +21,15 @@ def editorCommand() {
         setMaxZ(24);
     }
     if(isPressed(Key1)) {
-        setMaxZ(7);
+        setMaxZ(1);
     }
     if(isPressed(Key2)) {
-        setMaxZ(14);
+        setMaxZ(7);
     }
     if(isPressed(Key3)) {
+        setMaxZ(14);
+    }
+    if(isPressed(Key4)) {
         setMaxZ(21);
     }    
 }
