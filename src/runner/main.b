@@ -1,7 +1,7 @@
 # the global player state
 player := {
-    "x": 4989,
-    "y": 5085,
+    "x": 5000,
+    "y": 5015,
     "z": 1,
     "scrollOffsetX": 0,
     "scrollOffsetY": 0,

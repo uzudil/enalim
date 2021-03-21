@@ -1,6 +1,8 @@
 const SECTIONS = {
     "25,25": MAP_25_25,
     "24,25": MAP_24_25,
+    "24,24": MAP_24_24,
+    "25,24": MAP_25_24,
 };
 
 const SECTION_SIZE = 200;
