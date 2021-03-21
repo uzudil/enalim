@@ -169,3 +169,7 @@ def range(start, end, step, fx) {
 def asPercent(n) {
     return round(n * 100);
 }
+
+def startsWith(str, prefix) {
+    return substr(str, 0, len(prefix)) = prefix;
+}

@@ -7,6 +7,7 @@ player := {
     "scrollOffsetY": 0,
     "dir": DirN,
     "underRoof": false,
+    "roof": null,
     "teleportPos": null,
 };
 
@@ -32,6 +33,7 @@ def events(delta, fadeDir) {
             player.z := player.teleportPos[2];
             setShape(player.x, player.y, player.z, PLAYER_SHAPE);
             player.teleportPos := null;
+            setRoofVisiblity();
         }
     } else {
         dx := 0;
@@ -75,15 +77,23 @@ def playerMove(dx, dy, delta) {
         moved := playerMoveDir(dx, 0, delta);
     }
     if(moved) {
-        # if under a roof, hide the roof
-        player.underRoof := isUnderRoof();
-        if(player.underRoof) {
-            setMaxZ(getRoofZ(player.z));
-        } else {
-            setMaxZ(24);
-        }
+        setRoofVisiblity();
     }
     return moved;
+}
+
+def setRoofVisiblity() {
+    # if under a roof, hide the roof
+    inspectRoof();
+    if(player.underRoof) {
+        if(startsWith(player.roof, "roof.mountain")) {
+            setMaxZ(getRoofZ(player.z), player.roof);
+        } else {
+            setMaxZ(getRoofZ(player.z), null);
+        }
+    } else {
+        setMaxZ(24, null);
+    }
 }
 
 def playerMoveDir(dx, dy, delta) {
@@ -218,23 +228,28 @@ def getRoofZ(z) {
     return (int(z / 7) + 1) * 7;
 }
 
-def isUnderRoof() {
+def inspectRoof() {
     # roofs are only at certain heights
     testZ := player.z;
     while(testZ < 24) {
         z := getRoofZ(testZ);
-        found := [true];
+        player.underRoof := true;
+        player.roof := null;
         forBase(PLAYER_X, PLAYER_Y, (x, y) => {
             info := getShape(player.x + x, player.y + y, z);
             if(info = null) {
-                found[0] := false;
+                player.underRoof := false;
+                player.roof := null;
             } else {
                 if(substr(info[0], 0, 5) != "roof." && substr(info[0], 0, 6) != "floor.") {
-                    found[0] := false;
+                    player.underRoof := false;
+                    player.roof := null;
+                } else {
+                    player.roof := info[0];
                 }
             }
         });
-        if(found[0]) {
+        if(player.underRoof) {
             return true;
         }
         testZ := testZ + 7;

@@ -18,19 +18,19 @@ def editorCommand() {
         setShape(x, y, 7, choose(ROCK_ROOF));
     }
     if(isPressed(Key0)) {
-        setMaxZ(24);
+        setMaxZ(24, null);
     }
     if(isPressed(Key1)) {
-        setMaxZ(1);
+        setMaxZ(1, null);
     }
     if(isPressed(Key2)) {
-        setMaxZ(7);
+        setMaxZ(7, null);
     }
     if(isPressed(Key3)) {
-        setMaxZ(14);
+        setMaxZ(14, null);
     }
     if(isPressed(Key4)) {
-        setMaxZ(21);
+        setMaxZ(21, null);
     }    
 }
 
