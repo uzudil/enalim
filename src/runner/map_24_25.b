@@ -1,5 +1,6 @@
 const MAP_24_25 = {
     "init": this => {
+        setNpc(4998, 5001, 1, npcs.necromancer);
     },
     "teleport": (this, x, y, z) => {
         #if(x > 4994 && x <= 4998 && y = 5045 && z = 1) {

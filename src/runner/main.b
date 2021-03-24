@@ -259,6 +259,7 @@ def inspectRoof() {
 
 # Put main last so if there are parsing errors, the game panic()-s.
 def main() {
+    initNpcs();
     fadeViewTo(player.x, player.y);
     setShape(player.x, player.y, player.z, PLAYER_SHAPE);
 }

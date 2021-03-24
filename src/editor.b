@@ -17,6 +17,12 @@ def editorCommand() {
         y := int(pos[1] / 4) * 4;
         setShape(x, y, 7, choose(ROCK_ROOF));
     }
+    if(isPressed(KeyY)) {
+        pos := getPosition();
+        x := int(pos[0] / 4) * 4;
+        y := int(pos[1] / 4) * 4;
+        drawDungeon(x, y);
+    }    
     if(isPressed(Key0)) {
         setMaxZ(24, null);
     }
@@ -34,6 +40,143 @@ def editorCommand() {
     }    
 }
 
+dungeon := {
+    "ground.cave": {
+        "floor": "ground.cave",
+        "corner.black": "cave.earth.corner.2",
+        "corner": "cave.earth.corner.1",
+        "wall.w": "cave.earth.e3", 
+        "wall.e": "cave.earth.w3", 
+        "wall.s": "cave.earth.s3", 
+        "wall.n": "cave.earth.n3", 
+        "wall.w.wide": "cave.earth.e", 
+        "wall.e.wide": "cave.earth.w", 
+        "wall.s.wide": "cave.earth.s", 
+        "wall.n.wide": "cave.earth.n", 
+    },
+    "ground.cave.2": {
+        "floor": "ground.cave.2",
+        "corner.black": "cave.rock.corner.2",
+        "corner": "cave.rock.corner.1",
+        "wall.w": "cave.rock.e3", 
+        "wall.e": "cave.rock.w3", 
+        "wall.s": "cave.rock.s3", 
+        "wall.n": "cave.rock.n3", 
+        "wall.w.wide": "cave.rock.e", 
+        "wall.e.wide": "cave.rock.w", 
+        "wall.s.wide": "cave.rock.s", 
+        "wall.n.wide": "cave.rock.n",     
+    },
+};
+
+def isDungeon(x, y) {
+    info := getShape(x, y, 0);
+    if(info != null) {
+        return dungeon[info[0]];
+    }
+    return null;
+}
+
+def drawDungeon(x, y) {
+    d := isDungeon(x, y);
+    if(d != null) {
+        drawDungeonBlock(x, y, d);
+    }
+}
+
+def drawDungeonBlock(x, y, d) {
+    range(0, 4, 1, xx => {
+        range(0, 4, 1, yy => {
+            eraseShape(x + xx, y + yy, 1);
+        });
+    });
+    eraseShape(x, y, 7);
+
+    drawDungeonWalls(x, y, d);
+    setShape(x, y, 7, choose(ROCK_ROOF));
+}
+
+def drawDungeonWalls(x, y, d) {
+    n := isDungeon(x, y - 4) = null;
+    s := isDungeon(x, y + 4) = null;
+    e := isDungeon(x + 4, y) = null;
+    w := isDungeon(x - 4, y) = null;
+    ne := isDungeon(x + 4, y - 4) = null;
+    se := isDungeon(x + 4, y + 4) = null;
+    nw := isDungeon(x - 4, y - 4) = null;
+    sw := isDungeon(x - 4, y + 4) = null;
+
+    sw_corner := s && w;
+    nw_corner := n && w;
+    se_corner := s && e;
+    ne_corner := n && e;
+
+    if(sw_corner) {
+        setShape(x, y + 3, 1, d["corner.black"]);
+        setShape(x, y, 1, d["wall.w"]);
+        setShape(x + 1, y + 3, 1, d["wall.s"]);
+        return 1;
+    }
+    if(nw_corner) {
+        setShape(x, y, 1, d["corner"]);
+        setShape(x, y + 1, 1, d["wall.w"]);
+        setShape(x + 1, y, 1, d["wall.n"]);
+        return 1;
+    }
+    if(se_corner) {
+        setShape(x + 3, y + 3, 1, d["corner.black"]);
+        setShape(x + 3, y, 1, d["wall.e"]);
+        setShape(x, y + 3, 1, d["wall.s"]);
+        return 1;
+    }
+    if(ne_corner) {
+        setShape(x + 3, y, 1, d["corner.black"]);
+        setShape(x + 3, y + 1, 1, d["wall.e"]);
+        setShape(x, y, 1, d["wall.n"]);
+        return 1;
+    }    
+
+    if(n) {
+        setShape(x, y, 1, d["wall.n.wide"]);
+        return 1;
+    }
+    if(s) {
+        setShape(x, y + 3, 1, d["wall.s.wide"]);
+        return 1;
+    }
+    if(w) {
+        setShape(x, y, 1, d["wall.w.wide"]);
+        return 1;
+    }
+    if(e) {
+        setShape(x + 3, y, 1, d["wall.e.wide"]);
+        return 1;
+    }
+
+    if(nw) {
+        setShape(x, y, 1, d["corner"]); 
+    }
+    if(ne) {
+        setShape(x + 3, y, 1, d["corner"]); 
+    }
+    if(sw) {
+        setShape(x, y + 3, 1, d["corner"]); 
+    }
+    if(se) {
+        setShape(x + 3, y + 3, 1, d["corner.black"]); 
+    }
+    return 1;
+
+}
+
+def range(start, end, step, fx) {
+    i := start;
+    while(i < end) {
+        fx(i);
+        i := i + step;
+    }
+}
+
+# put this last so parse errors make the app panic()
 def main() {
-    #fadeViewTo(5000, 5000);
 }
