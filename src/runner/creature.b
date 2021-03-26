@@ -6,6 +6,13 @@ creaturesTemplates := {
         "animSpeed": 0.2,
         "baseWidth": 4,
         "baseHeight": 4,
+    },
+    "monk-blue": {
+        "shape": "monk-blue",
+        "speed": 0.5,
+        "animSpeed": 0.2,
+        "baseWidth": 2,
+        "baseHeight": 2,
     }
 };
 
@@ -23,12 +30,13 @@ def pruneCreatures(sectionX, sectionY) {
                 "shape": c.template.shape,
                 "pos": c.pos,
                 "dir": c.dir,
+                "npc": encodeNpc(c.npc),
             };
             print("* Pruning creature: " + c.template.shape + " " + c.id);
         }
         return b;
     });
-    debugCreatures();
+    #debugCreatures();
     return removes;
 }
 
@@ -45,15 +53,17 @@ def restoreCreature(savedCreature) {
         "scrollOffset": [0, 0],
         "standTimer": 0,
         "move": moveCreatureRandom,
+        "npc": decodeNpc(savedCreature.npc),
     };
 }
 
 def setCreature(x, y, z, creature) {
     id := "c." + x + "." + y + "." + z;
-    if(array_find(creatures, c => c.id = id) = null) {
+    c := array_find(creatures, c => c.id = id);
+    if(c = null) {
         print("* Adding creature: " + creature.shape + " " + id);
         setShape(x, y, z, creature.shape);
-        creatures[len(creatures)] := {
+        c := {
             "id": id,
             "template": creature,
             "pos": [x, y, z],
@@ -61,9 +71,12 @@ def setCreature(x, y, z, creature) {
             "scrollOffset": [0, 0],
             "standTimer": 0,
             "move": moveCreatureRandom,
+            "npc": null,
         };
+        creatures[len(creatures)] := c;
         #debugCreatures();
     }
+    return c;
 }
 
 def debugCreatures() {

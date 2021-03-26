@@ -330,6 +330,23 @@
                     "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
                 }                
             ]
+        },        
+        { 
+            "name": "monk-blue", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 32, 64 ], 
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
+                }
+            ]
         }        
     ]
 }

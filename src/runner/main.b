@@ -66,6 +66,13 @@ def events(delta, fadeDir) {
         setAnimation(player.x, player.y, player.z, animationType, player.dir, PLAYER_ANIM_SPEED);
         moveCreatures(delta);
     }
+
+    if(isPressed(KeyX)) {
+        eraseShape(player.x, player.y, player.z);
+        saveGame();
+        setShape(player.x, player.y, player.z, PLAYER_SHAPE);
+        setRoofVisiblity();
+    }
 }
 
 def playerMove(dx, dy, delta) {

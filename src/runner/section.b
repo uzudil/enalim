@@ -18,16 +18,17 @@ def getSection(sectionX, sectionY) {
 def onSectionLoad(sectionX, sectionY, data) {
     if(len(keys(data)) = 0) {
         # initialize a section
-        print("+++ Initial load: " + sectionX + "," + sectionY);
+        print("+++ Initial load " + sectionX + "," + sectionY);
         section := getSection(sectionX, sectionY);
         if(section != null) {
             section.init();
         }
+        print("+++ Init done " + sectionX + "," + sectionY);
     } else {
         # restore a section from saved data
-        print("Restore load: " + sectionX + "," + sectionY);
+        print("+++ Restore load " + sectionX + "," + sectionY);
         array_foreach(data.creatures, (i, c) => restoreCreature(c));
-        print("Done restoring.");
+        print("+++ Done restoring " + sectionX + "," + sectionY);
     }
 }
 
