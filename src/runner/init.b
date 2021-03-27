@@ -1,0 +1,18 @@
+# this file is compiled last
+const ANIM_STAND = "stand";
+const ANIM_MOVE = "move";
+
+const SECTIONS = {
+    "25,25": MAP_25_25,
+    "24,25": MAP_24_25,
+    "24,24": MAP_24_24,
+    "25,24": MAP_25_24,
+};
+
+const npcDefs = {
+    "necromancer": {
+        "name": "The Necromancer",
+        "creature": creaturesTemplates["monk-blue"],
+        "convo": NECROMANCER_CONVO,
+    },
+};

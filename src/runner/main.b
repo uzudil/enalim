@@ -1,5 +1,11 @@
+const MODE_INIT = 0;
+const MODE_GAME = 1;
+const MODE_TELEPORT = 2;
+const MODE_CONVO = 3;
+
 # the global player state
 player := {
+    "mode": MODE_INIT,
     "x": 5000,
     "y": 5015,
     "z": 1,
@@ -9,6 +15,7 @@ player := {
     "underRoof": false,
     "roof": null,
     "teleportPos": null,
+    "convo": null,
 };
 
 # the player's shape size
@@ -23,48 +30,18 @@ const PLAYER_SHAPE = "man";
 
 # called on every frame
 def events(delta, fadeDir) {
-    animationType := "stand";
-
-    if(player.teleportPos != null) {
-        if(fadeDir = 1) {
-            eraseShape(player.x, player.y, player.z);
-            player.x := player.teleportPos[0];
-            player.y := player.teleportPos[1];
-            player.z := player.teleportPos[2];
-            setShape(player.x, player.y, player.z, PLAYER_SHAPE);
-            player.teleportPos := null;
-            setRoofVisiblity();
-        }
+    if(player.mode = MODE_INIT) {
+        eventsInit(delta, fadeDir);
     } else {
-        dx := 0;
-        dy := 0;
-        if(isDown(KeyA) || isDown(KeyLeft)) {
-            dx := 1;
-        }
-        if(isDown(KeyD) || isDown(KeyRight)) {
-            dx := -1;
-        }
-        if(isDown(KeyW) || isDown(KeyUp)) {
-            dy := -1;
-        }
-        if(isDown(KeyS) || isDown(KeyDown)) {
-            dy := 1;
-        }
-
-        if(dx != 0 || dy != 0) {
-            animationType := "move";
-            playerMove(dx, dy, delta);
-        }
-
-        if(isPressed(KeySpace)) {
-            if(findShapeNearby("door.wood.y", (x,y,z) => replaceShape(x, y, z, "door.wood.x")) = false) {
-                if(findShapeNearby("door.wood.x", (x,y,z) => replaceShape(x, y, z, "door.wood.y")) = false) {
-                    # do something else
-                }
+        if(player.mode = MODE_TELEPORT) {
+            eventsTeleport(delta, fadeDir);
+        } else {
+            if(player.mode = MODE_CONVO) {
+                eventsConvo(delta, fadeDir);
+            } else {
+                eventsGameplay(delta);
             }
         }
-        setAnimation(player.x, player.y, player.z, animationType, player.dir, PLAYER_ANIM_SPEED);
-        moveCreatures(delta);
     }
 
     if(isPressed(KeyX)) {
@@ -73,6 +50,74 @@ def events(delta, fadeDir) {
         setShape(player.x, player.y, player.z, PLAYER_SHAPE);
         setRoofVisiblity();
     }
+}
+
+def eventsConvo(delta, fadeDir) {
+    setAnimation(player.x, player.y, player.z, ANIM_STAND, player.dir, PLAYER_ANIM_SPEED);
+    stopCreatures();
+    renderConvo();
+}
+
+def eventsInit(delta, fadeDir) {
+    if(fadeDir = 1) {
+        setShape(player.x, player.y, player.z, PLAYER_SHAPE);
+        player.mode := MODE_GAME;
+    }
+    setAnimation(player.x, player.y, player.z, ANIM_STAND, player.dir, PLAYER_ANIM_SPEED);
+    stopCreatures();
+}
+
+def eventsTeleport(delta, fadeDir) {
+    if(fadeDir = 1) {
+        eraseShape(player.x, player.y, player.z);
+        player.x := player.teleportPos[0];
+        player.y := player.teleportPos[1];
+        player.z := player.teleportPos[2];
+        setShape(player.x, player.y, player.z, PLAYER_SHAPE);
+        player.teleportPos := null;
+        setRoofVisiblity();
+        player.mode := MODE_GAME;
+    }
+    setAnimation(player.x, player.y, player.z, ANIM_STAND, player.dir, PLAYER_ANIM_SPEED);
+    stopCreatures();
+}
+
+def eventsGameplay(delta) {
+    animationType := ANIM_STAND;
+    dx := 0;
+    dy := 0;
+    if(isDown(KeyA) || isDown(KeyLeft)) {
+        dx := 1;
+    }
+    if(isDown(KeyD) || isDown(KeyRight)) {
+        dx := -1;
+    }
+    if(isDown(KeyW) || isDown(KeyUp)) {
+        dy := -1;
+    }
+    if(isDown(KeyS) || isDown(KeyDown)) {
+        dy := 1;
+    }
+
+    if(dx != 0 || dy != 0) {
+        animationType := ANIM_MOVE;
+        playerMove(dx, dy, delta);
+    }
+
+    if(isPressed(KeySpace)) {
+        if(findShapeNearby("door.wood.y", (x,y,z) => replaceShape(x, y, z, "door.wood.x")) = false) {
+            if(findShapeNearby("door.wood.x", (x,y,z) => replaceShape(x, y, z, "door.wood.y")) = false) {
+                # do something else
+            }
+        }
+    }
+
+    if(isPressed(KeyT)) {
+        findNpcNearby(startConvo);
+    }
+
+    setAnimation(player.x, player.y, player.z, animationType, player.dir, PLAYER_ANIM_SPEED);
+    moveCreatures(delta);
 }
 
 def playerMove(dx, dy, delta) {
@@ -122,6 +167,7 @@ def playerMoveDir(dx, dy, delta) {
         player.teleportPos := teleport(newX, newY, player.z);
         if(player.teleportPos != null) {
             # start fade out
+            player.mode := MODE_TELEPORT;
             fadeViewTo(player.teleportPos[0], player.teleportPos[1]);
             return true;
         }
@@ -211,17 +257,33 @@ def findShapeUnder(px, py, pz, baseWidth, baseHeight, fx) {
 }
 
 def findShapeNearby(name, fx) {
+    return findNearby(1, (x,y,z) => {
+        info := getShape(x, y, z);
+        if(info != null) {
+            if(info[0] = name) {
+                return info;
+            }
+        }
+        return null;
+    }, info => fx(info[1], info[2], info[3]));
+}
+
+def findNpcNearby(fx) {
+    if(findNearby(4, getNpc, fx) = false) {
+        print("Not near any npc-s.");
+    }
+}
+
+def findNearby(radius, evalFx, successFx) {
     found := [false];
-    range(-1, PLAYER_X + 1, 1, x => {
-        range(-1, PLAYER_Y + 1, 1, y => {
-            range(0, PLAYER_Z, 1, z => {
+    range(-1 * radius, PLAYER_X + radius, 1, x => {
+        range(-1 * radius, PLAYER_Y + radius, 1, y => {
+            range(0, PLAYER_Z, radius, z => {
                 if(found[0] = false) {
-                    info := getShape(player.x + x, player.y + y, player.z + z);
-                    if(info != null) {
-                        if(info[0] = name) {
-                            fx(info[1], info[2], info[3]);
-                            found[0] := true;
-                        }
+                    e := evalFx(player.x + x, player.y + y, player.z + z);
+                    if(e != null) {
+                        successFx(e);
+                        found[0] := true;
                     }
                 }
             });
@@ -266,7 +328,5 @@ def inspectRoof() {
 
 # Put main last so if there are parsing errors, the game panic()-s.
 def main() {
-    initNpcs();
-    fadeViewTo(player.x, player.y);
-    setShape(player.x, player.y, player.z, PLAYER_SHAPE);
+    fadeViewTo(player.x, player.y);    
 }

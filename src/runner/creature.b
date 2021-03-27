@@ -9,7 +9,7 @@ creaturesTemplates := {
     },
     "monk-blue": {
         "shape": "monk-blue",
-        "speed": 0.5,
+        "speed": 0.25,
         "animSpeed": 0.2,
         "baseWidth": 2,
         "baseHeight": 2,
@@ -17,6 +17,11 @@ creaturesTemplates := {
 };
 
 creatures := [];
+
+def getCreature(x, y, z) {
+    # todo: if this is too slow, keep track of creaturePos in a global table
+    return array_find(creatures, c => c.pos[0] = x && c.pos[1] = y && c.pos[2] = z);
+}
 
 def pruneCreatures(sectionX, sectionY) {
     removes := [];
@@ -52,7 +57,6 @@ def restoreCreature(savedCreature) {
         "dir": savedCreature.dir,
         "scrollOffset": [0, 0],
         "standTimer": 0,
-        "move": moveCreatureRandom,
         "npc": decodeNpc(savedCreature.npc),
     };
 }
@@ -70,7 +74,6 @@ def setCreature(x, y, z, creature) {
             "dir": DirW,
             "scrollOffset": [0, 0],
             "standTimer": 0,
-            "move": moveCreatureRandom,
             "npc": null,
         };
         creatures[len(creatures)] := c;
@@ -83,6 +86,12 @@ def debugCreatures() {
     print("+++ Creatures: " + array_join(array_map(creatures, c => c.template.shape + " " + c.id), "|"));
 }
 
+def stopCreatures() {   
+    array_foreach(creatures, (i, c) => {
+        setAnimation(c.pos[0], c.pos[1], c.pos[2], ANIM_STAND, c.dir, c.template.animSpeed);
+    });
+}
+
 def moveCreatures(delta) {
     array_foreach(creatures, (i, c) => {
         # todo: instead of isInView, the view should maintain "origins" outside its borders (an extra VIEW_BORDER size?)
@@ -91,18 +100,36 @@ def moveCreatures(delta) {
             return true;
         }
 
-        animation := c.move(delta);
+        if(c.npc = null) {
+            animation := moveCreatureRandom(c, delta);
+        } else {
+            animation := moveNpc(c, delta);
+        }
         setAnimation(c.pos[0], c.pos[1], c.pos[2], animation, c.dir, c.template.animSpeed);
     });
+}
+
+def moveNpc(c, delta) {
+    if(c.standTimer > 0) {
+        animation := ANIM_STAND;
+        c.standTimer := c.standTimer - delta;
+    } else {
+        animation := ANIM_MOVE;
+        moveCreatureRandomMove(c, delta);
+        if(random() > 0.995) {
+            c.standTimer := 3;
+        }
+    }
+    return animation;
 }
 
 # directional random walk with pausing
 def moveCreatureRandom(c, delta) {
     if(c.standTimer > 0) {
-        animation := "stand";
+        animation := ANIM_STAND;
         c.standTimer := c.standTimer - delta;
     } else {
-        animation := "move";
+        animation := ANIM_MOVE;
         moveCreatureRandomMove(c, delta);
         if(random() > 0.995) {
             c.standTimer := 3;
