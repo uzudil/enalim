@@ -1,4 +1,9 @@
 # this file is compiled last
+const SCREEN_WIDTH = 400;
+const SCREEN_HEIGHT = 300;
+
+const LINE_HEIGHT = 24;
+
 const ANIM_STAND = "stand";
 const ANIM_MOVE = "move";
 

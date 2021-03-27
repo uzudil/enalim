@@ -53,9 +53,22 @@ def events(delta, fadeDir) {
 }
 
 def eventsConvo(delta, fadeDir) {
-    setAnimation(player.x, player.y, player.z, ANIM_STAND, player.dir, PLAYER_ANIM_SPEED);
-    stopCreatures();
-    renderConvo();
+    if(isPressed(KeyEscape)) {
+        endConvo();
+    } else {
+        if(isPressed(KeyW) || isPressed(KeyUp)) {
+            decrConvoAnswerIndex();
+        }
+        if(isPressed(KeyS) || isPressed(KeyDown)) {
+            incrConvoAnswerIndex();
+        }
+        if(isPressed(KeySpace)) {
+            fireConvoAnswerIndex();
+        }
+        setAnimation(player.x, player.y, player.z, ANIM_STAND, player.dir, PLAYER_ANIM_SPEED);
+        stopCreatures();
+        renderConvo();    
+    }
 }
 
 def eventsInit(delta, fadeDir) {

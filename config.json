@@ -2,13 +2,16 @@
     "title": "Enalim",
     "name": "enalim",
     "version": 0.1,
-    "font": "rudelsberg/Rudelsberg.ttf",
     "runtime": {
         "editor": {
-            "resolution": [ 1024, 768 ]
+            "resolution": [ 1024, 768 ],
+            "font": "rudelsberg/Rudelsberg.ttf",
+            "fontSize": 32
         },
         "runner": {
-            "resolution": [ 400, 300 ]
+            "resolution": [ 400, 300 ],
+            "font": "rudelsberg/Rudelsberg.ttf",
+            "fontSize": 24
         }        
     },
     "view": {
