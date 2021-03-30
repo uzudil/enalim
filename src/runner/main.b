@@ -16,6 +16,8 @@ player := {
     "roof": null,
     "teleportPos": null,
     "convo": null,
+    "elapsedTime": 0,
+    "timeouts": [],
 };
 
 # the player's shape size
@@ -30,6 +32,17 @@ const PLAYER_SHAPE = "man";
 
 # called on every frame
 def events(delta, fadeDir) {
+    player.elapsedTime := player.elapsedTime + delta;
+
+    # expire any timeouts
+    array_remove(player.timeouts, e => {
+        if(player.elapsedTime >= e[0]) {
+            e[2](e[1]);
+            return true;
+        }
+        return false;
+    });
+
     if(player.mode = MODE_INIT) {
         eventsInit(delta, fadeDir);
     } else {
@@ -120,7 +133,9 @@ def eventsGameplay(delta) {
     if(isPressed(KeySpace)) {
         if(findShapeNearby("door.wood.y", (x,y,z) => replaceShape(x, y, z, "door.wood.x")) = false) {
             if(findShapeNearby("door.wood.x", (x,y,z) => replaceShape(x, y, z, "door.wood.y")) = false) {
-                # do something else
+                if(findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
+                    scriptedActionNearby();
+                }
             }
         }
     }
@@ -287,6 +302,10 @@ def findNpcNearby(fx) {
     }
 }
 
+def scriptedActionNearby() {
+    findNearby(1, scriptedAction, null);
+}
+
 def findNearby(radius, evalFx, successFx) {
     found := [false];
     range(-1 * radius, PLAYER_X + radius, 1, x => {
@@ -295,7 +314,9 @@ def findNearby(radius, evalFx, successFx) {
                 if(found[0] = false) {
                     e := evalFx(player.x + x, player.y + y, player.z + z);
                     if(e != null) {
-                        successFx(e);
+                        if(successFx != null) {
+                            successFx(e);
+                        }
                         found[0] := true;
                     }
                 }
@@ -337,6 +358,16 @@ def inspectRoof() {
         testZ := testZ + 7;
     }
     return false;
+}
+
+def addTimeout(ttl, cleanupFx, param) {
+    player.timeouts[len(player.timeouts)] := [player.elapsedTime + ttl, param, cleanupFx];
+}
+
+def timedMessage(x, y, z, message) {
+    # todo: message should stay anchored as view is moved (maybe this should be in goland?)
+    screenPos := getScreenPos(x, y, z);
+    addTimeout(2, delMessage, addMessage(screenPos[0], screenPos[1], message, 255, 220, 30));
 }
 
 # Put main last so if there are parsing errors, the game panic()-s.

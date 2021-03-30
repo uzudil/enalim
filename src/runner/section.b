@@ -39,3 +39,14 @@ def teleport(x, y, z) {
     }
     return null;
 }
+
+def scriptedAction(x, y, z) {
+    sectionPos := getSectionPos(x, y);
+    section := getSection(sectionPos[0], sectionPos[1]);
+    if(section != null) {
+        if(section["action"] != null) {
+            return section.action(x, y, z);
+        }
+    }
+    return null;
+}
