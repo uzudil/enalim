@@ -15,6 +15,15 @@ You are certain, your ascent to the storied ranks of powerful magi is near. Whil
 
 `Enalim` is an isometric adventure game, written in [bscript](https://github.com/uzudil/benji4000/wiki/LanguageFeatures) running on [isongn](https://github.com/uzudil/isongn).
 
+To run the game, clone this repo and then isongn. Build and run from the isongn directory:
+```bash
+git clone https://github.com/uzudil/enalim.git
+git clone https://github.com/uzudil/isongn.git
+cd isongn
+go build
+./isongn -game ../enalim
+```
+
 2021 (c) Gabor Torok
 
 
