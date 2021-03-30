@@ -1,4 +1,4 @@
-![aaa](images/screens/sc1.png)
+![aaa](images/screens/sc6.png)
 
 # Welcome back adventurer!
 It's as if you never left. 
