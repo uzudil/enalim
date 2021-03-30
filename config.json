@@ -11,7 +11,15 @@
         "runner": {
             "resolution": [ 400, 300 ],
             "font": "rudelsberg/Rudelsberg.ttf",
-            "fontSize": 24
+            "fontSize": 24,
+            "calendar": {
+                "year": 1350,
+                "month": 4,
+                "day": 10,
+                "hour": 9,
+                "min": 0,
+                "incrementSpeed": 0.25
+            }
         }        
     },
     "view": {

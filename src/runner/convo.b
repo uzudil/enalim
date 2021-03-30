@@ -105,10 +105,14 @@ def addWord(topic, i, wordStart, d) {
         d.answers[len(d.answers)] := word;
     }
     lastLine := d.lines[len(d.lines) - 1];
-    lineLen := messageWidth(lastLine + " " + word);
-    if(lineLen < SCREEN_WIDTH) {
-        d.lines[len(d.lines) - 1] := lastLine + " " + word;
+    if(len(lastLine) = 0) {
+        d.lines[len(d.lines) - 1] := word;
     } else {
-        d.lines[len(d.lines)] := word;
+        lineLen := messageWidth(lastLine + " " + word);
+        if(lineLen >= SCREEN_WIDTH - 20) {
+            d.lines[len(d.lines)] := word;
+        } else {
+            d.lines[len(d.lines) - 1] := lastLine + " " + word;
+        }
     }
 }
