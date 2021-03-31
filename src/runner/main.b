@@ -365,9 +365,7 @@ def addTimeout(ttl, cleanupFx, param) {
 }
 
 def timedMessage(x, y, z, message) {
-    # todo: message should stay anchored as view is moved (maybe this should be in goland?)
-    screenPos := getScreenPos(x, y, z);
-    addTimeout(2, delMessage, addMessage(screenPos[0], screenPos[1], message, 255, 220, 30));
+    showMessageAt(x, y, z, message, MESSAGE_R, MESSAGE_G, MESSAGE_B);
 }
 
 # Put main last so if there are parsing errors, the game panic()-s.

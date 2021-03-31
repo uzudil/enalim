@@ -56,7 +56,7 @@ def fireConvoAnswerIndex() {
 
 def displayConvoMessages() {
     delConvoMessages();
-    array_foreach(player.convo.parsed.lines, (i, line) => addConvoMessage(10, 20 + i * LINE_HEIGHT, line, 255, 220, 30));
+    array_foreach(player.convo.parsed.lines, (i, line) => addConvoMessage(10, 20 + i * LINE_HEIGHT, line, MESSAGE_R, MESSAGE_G, MESSAGE_B));
     array_foreach(player.convo.parsed.answers, (i, answer) => {
         fg := 128;
         if(i = player.convo.answerIndex) {

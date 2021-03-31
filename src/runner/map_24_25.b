@@ -8,7 +8,7 @@ const MAP_24_25 = {
     },
     "action": (this, x, y, z) => {
         if(x = 4969 && y = 5001 && z = 1) {
-            timedMessage(x, y, z, "Beware of ghosts!");
+            timedMessage(x, y, z, "Beware of ghosts!");            
             return true;
         }
         return null;
