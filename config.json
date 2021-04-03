@@ -385,6 +385,23 @@
                     "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
                 }
             ]
+        },
+        { 
+            "name": "ghost", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 48, 64 ], 
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 3,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
+                }
+            ]
         }        
     ]
 }
