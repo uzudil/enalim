@@ -28,7 +28,7 @@ const PLAYER_Z = 4;
 const PLAYER_MOVE_SPEED = 0.085;
 const PLAYER_ANIM_SPEED = 0.05;
 
-const PLAYER_SHAPE = "ghost";
+const PLAYER_SHAPE = "lydell";
 
 # called on every frame
 def events(delta, fadeDir) {

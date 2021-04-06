@@ -312,6 +312,7 @@
             "name": "man", 
             "size": [ 2, 2, 4 ], 
             "dim": [ 64, 64 ], 
+            "breathe": true,
             "frames": [
                 {
                     "name": "move",
@@ -334,6 +335,7 @@
             "name": "cow", 
             "size": [ 4, 4, 2 ], 
             "dim": [ 64, 64 ], 
+            "breathe": true,
             "frames": [
                 {
                     "name": "move",
@@ -351,6 +353,7 @@
             "name": "demon", 
             "size": [ 4, 4, 4 ], 
             "dim": [ 96, 96 ], 
+            "breathe": true,
             "frames": [
                 {
                     "name": "move",
@@ -373,6 +376,7 @@
             "name": "monk-blue", 
             "size": [ 2, 2, 4 ], 
             "dim": [ 32, 64 ], 
+            "breathe": true,
             "frames": [
                 {
                     "name": "move",
@@ -390,6 +394,7 @@
             "name": "ghost", 
             "size": [ 2, 2, 4 ], 
             "dim": [ 48, 64 ], 
+            "bob": true,
             "frames": [
                 {
                     "name": "move",
@@ -402,6 +407,24 @@
                     "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
                 }
             ]
-        }        
+        },
+        { 
+            "name": "lydell", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 64, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 6,
+                    "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": ["s", "se", "e", "ne", "n", "nw", "w", "sw"]
+                }
+            ]
+        }
     ]
 }
