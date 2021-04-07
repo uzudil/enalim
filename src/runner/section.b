@@ -50,3 +50,12 @@ def scriptedAction(x, y, z) {
     }
     return null;
 }
+
+def staticInitSections() {
+    array_foreach(keys(SECTIONS), (i, k) => {
+        section := SECTIONS[k];
+        if(section["staticInit"] != null) {
+            section.staticInit();
+        }
+    });
+}

@@ -416,13 +416,13 @@
             "frames": [
                 {
                     "name": "move",
-                    "steps": 6,
+                    "steps": 4,
                     "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne" ]
                 },
                 {
                     "name": "stand",
                     "steps": 1,
-                    "dirs": ["s", "se", "e", "ne", "n", "nw", "w", "sw"]
+                    "dirs": ["se", "e", "ne", "n", "nw", "w", "sw", "s"]
                 }
             ]
         }

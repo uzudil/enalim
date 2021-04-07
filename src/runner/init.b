@@ -1,4 +1,4 @@
-# this file is compiled last
+# this file is compiled last (before calling main())
 const SCREEN_WIDTH = 400;
 const SCREEN_HEIGHT = 300;
 
@@ -18,10 +18,4 @@ const SECTIONS = {
     "25,24": MAP_25_24,
 };
 
-const npcDefs = {
-    "necromancer": {
-        "name": "The Necromancer",
-        "creature": creaturesTemplates["monk-blue"],
-        "convo": NECROMANCER_CONVO,
-    },
-};
+const npcDefs = {};

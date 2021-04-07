@@ -1,3 +1,7 @@
+def registerNpc(npc) {
+    npcDefs[npc.name] := npc;
+}
+
 def setNpc(x, y, z, npc) {
     creature := setCreature(x, y, z, npc.creature);
     creature.npc := npc;

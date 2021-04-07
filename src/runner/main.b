@@ -370,5 +370,6 @@ def timedMessage(x, y, z, message) {
 
 # Put main last so if there are parsing errors, the game panic()-s.
 def main() {
+    staticInitSections();
     fadeViewTo(player.x, player.y);    
 }

@@ -13,6 +13,13 @@ creaturesTemplates := {
         "animSpeed": 0.2,
         "baseWidth": 2,
         "baseHeight": 2,
+    },
+    "ghost": {
+        "shape": "ghost",
+        "speed": 0.2,
+        "animSpeed": 0.2,
+        "baseWidth": 2,
+        "baseHeight": 2,
     }
 };
 
