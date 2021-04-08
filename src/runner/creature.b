@@ -27,21 +27,20 @@ creatures := [];
 
 def getCreature(x, y, z) {
     # todo: if this is too slow, keep track of creaturePos in a global table
-    return array_find(creatures, c => c.pos[0] = x && c.pos[1] = y && c.pos[2] = z);
+    return array_find(creatures, c => c.move.x = x && c.move.y = y && c.move.z = z);
 }
 
 def pruneCreatures(sectionX, sectionY) {
     removes := [];
     array_remove(creatures, c => {
-        sectionPos := getSectionPos(c.pos[0], c.pos[1]);
+        sectionPos := getSectionPos(c.move.x, c.move.y);
         b := sectionPos[0] = sectionX && sectionPos[1] = sectionY;
         if(b) {
-            eraseShape(c.pos[0], c.pos[1], c.pos[2]);
+            c.move.erase();
             removes[len(removes)] := {
                 "id": c.id,
                 "shape": c.template.shape,
-                "pos": c.pos,
-                "dir": c.dir,
+                "move": c.move.encode(),
                 "npc": encodeNpc(c.npc),
             };
             print("* Pruning creature: " + c.template.shape + " " + c.id);
@@ -56,13 +55,12 @@ def restoreCreature(savedCreature) {
     # todo: this is technically wrong: shape != template name...
     tmpl := creaturesTemplates[savedCreature.shape];
     print("* Restoring creature " + tmpl.shape + " " + savedCreature.id);
-    setShape(savedCreature.pos[0], savedCreature.pos[1], savedCreature.pos[2], tmpl.shape);
+    move := decodeMovement(savedCreature.move, tmpl.baseWidth, tmpl.baseHeight, tmpl.speed, false);
+    move.setShape(tmpl.shape);
     creatures[len(creatures)] := {
         "id": savedCreature.id,
         "template": tmpl,
-        "pos": savedCreature.pos,
-        "dir": savedCreature.dir,
-        "scrollOffset": [0, 0],
+        "move": move,
         "standTimer": 0,
         "npc": decodeNpc(savedCreature.npc),
     };
@@ -73,16 +71,14 @@ def setCreature(x, y, z, creature) {
     c := array_find(creatures, c => c.id = id);
     if(c = null) {
         print("* Adding creature: " + creature.shape + " " + id);
-        setShape(x, y, z, creature.shape);
         c := {
             "id": id,
             "template": creature,
-            "pos": [x, y, z],
-            "dir": DirW,
-            "scrollOffset": [0, 0],
+            "move": newMovement(x, y, z, creature.baseWidth, creature.baseHeight, creature.speed, false),
             "standTimer": 0,
             "npc": null,
         };
+        c.move.setShape(creature.shape);
         creatures[len(creatures)] := c;
         #debugCreatures();
     }
@@ -95,7 +91,7 @@ def debugCreatures() {
 
 def stopCreatures() {   
     array_foreach(creatures, (i, c) => {
-        setAnimation(c.pos[0], c.pos[1], c.pos[2], ANIM_STAND, c.dir, c.template.animSpeed);
+        c.move.setAnimation(ANIM_STAND, c.template.animSpeed);
     });
 }
 
@@ -103,16 +99,16 @@ def moveCreatures(delta) {
     array_foreach(creatures, (i, c) => {
         # todo: instead of isInView, the view should maintain "origins" outside its borders (an extra VIEW_BORDER size?)
         # and just use the regular validPos returned by toViewPos
-        if(isInView(c.pos[0], c.pos[1]) = false) {
+        if(isInView(c.move.x, c.move.y) = false) {
             return true;
         }
 
-        if(c.npc = null) {
+        if(c.npc = null) {            
             animation := moveCreatureRandom(c, delta);
         } else {
             animation := moveNpc(c, delta);
         }
-        setAnimation(c.pos[0], c.pos[1], c.pos[2], animation, c.dir, c.template.animSpeed);
+        c.move.setAnimation(animation, c.template.animSpeed);
     });
 }
 
@@ -146,60 +142,8 @@ def moveCreatureRandom(c, delta) {
 }
 
 def moveCreatureRandomMove(c, delta) {
-    # todo: unify this with player directional movement code?
-    d := getDirMove(c.dir);
-    newXf := c.pos[0] + c.scrollOffset[0] + (d[0] * delta / c.template.speed);
-    newYf := c.pos[1] + c.scrollOffset[1] + (d[1] * delta / c.template.speed);
-    newX := int(newXf + 0.5);
-    newY := int(newYf + 0.5);
-
-    moved := true;
-    if(newX != c.pos[0] || newY != c.pos[1]) {
-        fitOk := fits(newX, newY, c.pos[2], c.pos[0], c.pos[1], c.pos[2]);
-        underOk := inspectUnder(newX, newY, c.pos[2], c.template.baseWidth, c.template.baseHeight);
-        if(fitOk && underOk) {
-            moveShape(c.pos[0], c.pos[1], c.pos[2], newX, newY, c.pos[2]);
-            c.pos[0] := newX;
-            c.pos[1] := newY;
-        } else {
-            moved := false;
-            c.dir := int(random() * 8);
-        }
-    }    
-
-    if(moved) {
-        # pixel scrolling
-        c.scrollOffset[0] := newXf - newX;
-        c.scrollOffset[1] := newYf - newY;
-        setOffset(c.pos[0], c.pos[1], c.pos[2], c.scrollOffset[0], c.scrollOffset[1]);
+    d := getDelta(c.move.dir);
+    if(c.move.moveInDir(d[0], d[1], delta, null) = false) {
+        c.move.dir := int(random() * 8);
     }
-}
-
-
-def getDirMove(dir) {
-    if(dir = DirW) {
-        return [1, 0];
-    }
-    if(dir = DirE) {
-        return [-1, 0];
-    }
-    if(dir = DirN) {
-        return [0, -1];
-    }
-    if(dir = DirS) {
-        return [0, 1];
-    }
-    if(dir = DirNW) {
-        return [1, -1];
-    }
-    if(dir = DirNE) {
-        return [-1, -1];
-    }
-    if(dir = DirSW) {
-        return [1, 1];
-    }
-    if(dir = DirSE) {
-        return [-1, 1];
-    }
-    return [0, 0];
 }

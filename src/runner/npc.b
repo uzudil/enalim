@@ -1,4 +1,5 @@
 def registerNpc(npc) {
+    npc.creature := creaturesTemplates[npc.creature];
     npcDefs[npc.name] := npc;
 }
 

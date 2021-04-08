@@ -1,7 +1,7 @@
 const necromancer = {
     "name": "necromancer",
     "label": "The Necromancer",
-    "creature": creaturesTemplates["monk-blue"],
+    "creature": "monk-blue",
     "convo": {
         "": "Ah, $Lydell my boy... there you are. Hiding from your $chores as usual? There is plenty of work on this $island and I need your $help more than ever.",
         "Lydell": "Why Lydell is you: my trusted apprentice. You have been assisting me in my necromantic ventures for as long as I can remember. Time flies on this $island that is for sure.",
@@ -15,6 +15,10 @@ const necromancer = {
         "ghost": "You may have noticed that our corn-field is haunted by a strange specter some nights. I need you to figure out what it $wants and get rid of it.",
         "wants": "Honestly, I'm not surprised - our line of work does upset the dead occasionally. But I can't have a $ghost traipsing around the $island so let me know when you've taken care of it.",
     },
+    "schedule": [
+        { "from": 8, "to": 18, "pos": [ 5010, 5000, 1 ], "movement": "anchor" },
+        { "from": 18, "to": 8, "pos": [ 5000, 5005, 8 ], "movement": "anchor" },
+    ],
 };
 
 const MAP_24_25 = {

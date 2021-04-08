@@ -1,10 +1,14 @@
 const ghost = {
     "name": "ghost",
     "label": "Ghost of Lydell",
-    "creature": creaturesTemplates["ghost"],
+    "creature": "ghost",
     "convo": {
         "": "I... oooo... arakw..."
     },
+    "schedule": [
+        { "from": 5, "to": 21, "pos": [ 4974, 4910, 1 ], "movement": "anchor" },
+        { "from": 21, "to": 5, "pos": [ 4974, 4971, 1 ], "movement": "anchor" },
+    ],    
 };
 
 const MAP_24_24 = {
