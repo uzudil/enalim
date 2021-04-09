@@ -196,7 +196,8 @@
                 { "name": "rock.ns", "size": [6, 2, 6], "pos": [248, 616] },
                 { "name": "rock.2", "size": [4, 4, 4], "pos": [408, 616] },
                 { "name": "rock.3", "size": [4, 4, 3], "pos": [488, 624] },
-                { "name": "clock.y", "size": [1, 2, 4], "pos": [832, 456] }
+                { "name": "clock.y", "size": [1, 2, 4], "pos": [832, 456] },
+                { "name": "logo", "size": [6, 13, 4], "pos": [720, 800], "breathe": true }
             ]
         },
         {

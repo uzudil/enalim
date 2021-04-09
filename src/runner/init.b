@@ -12,6 +12,7 @@ const MESSAGE_G = 220;
 const MESSAGE_B = 30;
 
 const SECTIONS = {
+    "21,20": MAP_21_20,
     "25,25": MAP_25_25,
     "24,25": MAP_24_25,
     "24,24": MAP_24_24,

@@ -1,7 +1,13 @@
+const TITLE_X = 4204;
+const TITLE_Y = 4175;
+
 const MODE_INIT = 0;
 const MODE_GAME = 1;
 const MODE_TELEPORT = 2;
 const MODE_CONVO = 3;
+const MODE_TITLE = 4;
+const MODE_TITLE2 = 5;
+const MODE_TITLE3 = 6;
 
 # the global player state
 player := {
@@ -47,7 +53,19 @@ def events(delta, fadeDir) {
             if(player.mode = MODE_CONVO) {
                 eventsConvo(delta, fadeDir);
             } else {
-                eventsGameplay(delta);
+                if(player.mode = MODE_TITLE) {
+                    eventsTitle(delta, fadeDir);
+                } else {
+                    if(player.mode = MODE_TITLE2) {
+                        eventsTitle2(delta, fadeDir);
+                    } else {
+                        if(player.mode = MODE_TITLE3) {
+                            eventsTitle3(delta, fadeDir);
+                        } else {
+                            eventsGameplay(delta);
+                        }
+                    }
+                }
             }
         }
     }
@@ -81,11 +99,45 @@ def eventsConvo(delta, fadeDir) {
 
 def eventsInit(delta, fadeDir) {
     if(fadeDir = 1) {
-        player.move.setShape(PLAYER_SHAPE);
-        player.mode := MODE_GAME;
+        player.mode := MODE_TITLE;
+        addMessage(110, 250, "2021 (c) Gabor Torok", 200, 200, 200);
+        addMessage(110, 275, "Press SPACE to start", 128, 128, 128);
     }
-    player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
-    stopCreatures();
+}
+
+def eventsTitle(delta, fadeDir) {
+    if(isPressed(KeySpace)) {
+        delAllMessages();
+        player.mode := MODE_TITLE2;
+        # all black
+        fadeViewTo(100, 100); 
+    } else {
+        moveCreatures(delta);
+    }
+}
+
+def eventsTitle2(delta, fadeDir) {
+    if(fadeDir = 1) {
+        player.mode := MODE_TITLE3;
+        addMessage(10, 25, "The story so far...", 200, 200, 200);
+        o := parseTopic("Your name is Lydell and you have always lived on the island, serving the Necromancer. One day he will train you to be a powerful wizard, you are sure.");
+        array_foreach(o.lines, (index, line) => addMessage(10, 75 + (index * LINE_HEIGHT), line, 128, 128, 128));
+        o := parseTopic("Strangely, you don't seem to recall how you got to the island...");
+        array_foreach(o.lines, (index, line) => addMessage(10, 200 + (index * LINE_HEIGHT), line, 128, 128, 128));
+        addMessage(110, 275, "Press SPACE to continue", 128, 128, 128);
+    }
+}
+
+def eventsTitle3(delta, fadeDir) {
+    if(isPressed(KeySpace)) {
+        delAllMessages();
+        player.mode := MODE_GAME;
+        player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_MOVE_SPEED, true);
+        player.move.setShape(PLAYER_SHAPE);
+        player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
+        stopCreatures();
+        fadeViewTo(player.move.x, player.move.y);
+    }
 }
 
 def eventsTeleport(delta, fadeDir) {
@@ -277,6 +329,7 @@ def timedMessage(x, y, z, message) {
 # Put main last so if there are parsing errors, the game panic()-s.
 def main() {
     staticInitSections();
-    player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_MOVE_SPEED, true);
-    fadeViewTo(player.move.x, player.move.y);    
+    #player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_MOVE_SPEED, true);
+    #fadeViewTo(player.move.x, player.move.y);    
+    fadeViewTo(TITLE_X, TITLE_Y);    
 }
