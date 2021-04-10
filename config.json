@@ -197,7 +197,12 @@
                 { "name": "rock.2", "size": [4, 4, 4], "pos": [408, 616] },
                 { "name": "rock.3", "size": [4, 4, 3], "pos": [488, 624] },
                 { "name": "clock.y", "size": [1, 2, 4], "pos": [832, 456] },
-                { "name": "logo", "size": [6, 13, 4], "pos": [720, 800], "breathe": true }
+                { "name": "logo", "size": [6, 13, 4], "pos": [720, 800], "breathe": true },
+                { "name": "wall.rock.low.y", "size": [ 1, 4, 2], "pos": [184, 216] },
+                { "name": "wall.rock.low.x", "size": [ 4, 1, 2], "pos": [232, 216] },
+                { "name": "window.y", "size": [ 1, 2, 4], "pos": [296, 224] },
+                { "name": "window.x", "size": [ 2, 1, 4], "pos": [328, 224] }
+    
             ]
         },
         {

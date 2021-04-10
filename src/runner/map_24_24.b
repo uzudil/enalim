@@ -19,7 +19,7 @@ const MAP_24_24 = {
         setNpc(4974, 4971, 1, ghost);
     },
     "teleport": (this, x, y, z) => {
-        if(x >= 4996 && x <= 4999 && y = 4990 && z = 1) {
+        if(x >= 4996 && x <= 4999 && y = 4986 && z = 1) {
             return [5004, 5031, 1];
         }
         return null;

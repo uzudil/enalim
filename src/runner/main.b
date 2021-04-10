@@ -178,8 +178,10 @@ def eventsGameplay(delta) {
     if(isPressed(KeySpace)) {
         if(findShapeNearby("door.wood.y", (x,y,z) => replaceShape(x, y, z, "door.wood.x")) = false) {
             if(findShapeNearby("door.wood.x", (x,y,z) => replaceShape(x, y, z, "door.wood.y")) = false) {
-                if(findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
-                    scriptedActionNearby();
+                if(operateWindow() = false) {
+                    if(findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
+                        scriptedActionNearby();
+                    }
                 }
             }
         }
@@ -240,6 +242,78 @@ def replaceShape(x, y, z, name) {
     } else {
         print("player blocks!");
     }
+}
+
+const WIN_X_POS = [
+    [ 2, 0, 0, 0, 1, 0 ],
+    [ -2, 0, 1, 0, 0, 0 ],
+    [ 0, 3, 0, 0, 0, -1 ],
+    [ 0, -3, -1, 0, 0, 0 ],
+];
+const WIN_Y_POS = [
+    [ 0, 2, 0, 0, 0, 1 ],
+    [ 0, -2, 1, 0, 0, 0 ],
+    [ 3, 0, 0, 0, -1, 0 ],
+    [ -3, 0, -1, 0, 0, 0 ],
+];
+
+def operateWindow() {
+    winX := [0, 0, 0];
+    winY := [0, 0, 0];
+    findShapeNearby("window.x", (x,y,z) => {
+        winX[0] := x;
+        winX[1] := y;
+        winX[2] := z;
+    });
+    findShapeNearby("window.y", (x,y,z) => {
+        winY[0] := x;
+        winY[1] := y;
+        winY[2] := z;
+    });
+
+    # no windows near
+    if(winX[0] = 0 && winY[0] = 0) {
+        return false;
+    }
+
+    a := [0, 0, 0];
+    if(winX[0] > 0) {
+        a := winX;
+        pos := array_find(WIN_X_POS, e => isShapeAt("window.x", a[0] + e[0], a[1] + e[1], a[2]));
+        if(pos != null) {
+            changeWindowState(a, pos, "window.x", "window.y");
+        }
+    } else {
+        a := winY;
+        pos := array_find(WIN_Y_POS, e => isShapeAt("window.y", a[0] + e[0], a[1] + e[1], a[2]));
+        if(pos != null) {            
+            changeWindowState(a, pos, "window.y", "window.x");
+        }
+    }
+    
+    return true;
+}
+
+def changeWindowState(a, pos, oShape, nShape) {
+    b := [a[0] + pos[0], a[1] + pos[1], a[2]];
+    eraseShape(a[0], a[1], a[2]);
+    eraseShape(b[0], b[1], b[2]);
+    if(isEmpty(a[0] + pos[2], a[1] + pos[3], a[2], nShape) && isEmpty(b[0] + pos[4], b[1] + pos[5], b[2], nShape)) {
+        setShape(a[0] + pos[2], a[1] + pos[3], a[2], nShape);
+        setShape(b[0] + pos[4], b[1] + pos[5], b[2], nShape);
+    } else {
+        print("player blocks!");
+        setShape(a[0], a[1], a[2], oShape);
+        setShape(b[0], b[1], b[2], oShape);
+    }
+}
+
+def isShapeAt(shape, x, y, z) {
+    info := getShape(x, y, z);
+    if(info != null) {
+        return info[0] = shape;
+    }
+    return false;
 }
 
 def findShapeNearby(name, fx) {

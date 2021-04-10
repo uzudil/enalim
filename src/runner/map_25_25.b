@@ -4,7 +4,7 @@ const MAP_25_25 = {
     },
     "teleport": (this, x, y, z) => {
         if(x = 5000 && y <= 5034 && y >= 5030 && z = 1) {
-            return [4998, 4993, 1];
+            return [4998, 4989, 1];
         }
         return null;
     }    
