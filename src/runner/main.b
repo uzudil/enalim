@@ -1,13 +1,13 @@
 const TITLE_X = 4204;
 const TITLE_Y = 4175;
 
-const MODE_INIT = 0;
-const MODE_GAME = 1;
-const MODE_TELEPORT = 2;
-const MODE_CONVO = 3;
-const MODE_TITLE = 4;
-const MODE_TITLE2 = 5;
-const MODE_TITLE3 = 6;
+const MODE_INIT = "init";
+const MODE_GAME = "game";
+const MODE_TELEPORT = "teleport";
+const MODE_CONVO = "convo";
+const MODE_TITLE = "title";
+const MODE_TITLE2 = "title2";
+const MODE_TITLE3 = "title3";
 
 # the global player state
 player := {
@@ -31,6 +31,8 @@ const PLAYER_ANIM_SPEED = 0.05;
 
 const PLAYER_SHAPE = "lydell";
 
+const EVENTS_MAP = {};
+
 # called on every frame
 def events(delta, fadeDir) {
     player.elapsedTime := player.elapsedTime + delta;
@@ -44,31 +46,7 @@ def events(delta, fadeDir) {
         return false;
     });
 
-    if(player.mode = MODE_INIT) {
-        eventsInit(delta, fadeDir);
-    } else {
-        if(player.mode = MODE_TELEPORT) {
-            eventsTeleport(delta, fadeDir);
-        } else {
-            if(player.mode = MODE_CONVO) {
-                eventsConvo(delta, fadeDir);
-            } else {
-                if(player.mode = MODE_TITLE) {
-                    eventsTitle(delta, fadeDir);
-                } else {
-                    if(player.mode = MODE_TITLE2) {
-                        eventsTitle2(delta, fadeDir);
-                    } else {
-                        if(player.mode = MODE_TITLE3) {
-                            eventsTitle3(delta, fadeDir);
-                        } else {
-                            eventsGameplay(delta);
-                        }
-                    }
-                }
-            }
-        }
-    }
+    EVENTS_MAP[player.mode](delta, fadeDir);
 
     if(isPressed(KeyX)) {
         player.move.erase();
@@ -153,7 +131,7 @@ def eventsTeleport(delta, fadeDir) {
     stopCreatures();
 }
 
-def eventsGameplay(delta) {
+def eventsGameplay(delta, fadeDir) {
     animationType := ANIM_STAND;
     dx := 0;
     dy := 0;
@@ -403,7 +381,14 @@ def timedMessage(x, y, z, message) {
 # Put main last so if there are parsing errors, the game panic()-s.
 def main() {
     staticInitSections();
-    #player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_MOVE_SPEED, true);
-    #fadeViewTo(player.move.x, player.move.y);    
+
+    EVENTS_MAP[MODE_INIT] := (s, d,f) => eventsInit(d, f);
+    EVENTS_MAP[MODE_TELEPORT] := (s, d,f) => eventsTeleport(d, f);
+    EVENTS_MAP[MODE_CONVO] := (s, d,f) => eventsConvo(d, f);
+    EVENTS_MAP[MODE_TITLE] := (s, d,f) => eventsTitle(d, f);
+    EVENTS_MAP[MODE_TITLE2] := (s, d,f) => eventsTitle2(d, f);
+    EVENTS_MAP[MODE_TITLE3] := (s, d,f) => eventsTitle3(d, f);
+    EVENTS_MAP[MODE_GAME] := (s, d,f) => eventsGameplay(d, f);
+
     fadeViewTo(TITLE_X, TITLE_Y);    
 }
