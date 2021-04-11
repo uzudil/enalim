@@ -1,4 +1,4 @@
-![aaa](images/screens/sc6.png)
+![aaa](images/screens/sc8.png)
 
 # Welcome back adventurer!
 It's as if you never left. 
@@ -23,6 +23,7 @@ cd isongn
 go build
 ./isongn -game ../enalim
 ```
+![aaa](images/screens/sc7.png)
 
 2021 (c) Gabor Torok
 
