@@ -112,7 +112,16 @@
                 { "name": "edge.water.nsw", "size": [ 4, 4, 1], "pos": [648, 616], "ref": "ground.dirt", "target": "ground.water" },
                 { "name": "edge.water.sew", "size": [ 4, 4, 1], "pos": [728, 616], "ref": "ground.dirt", "target": "ground.water" },
                 { "name": "edge.water.nse", "size": [ 4, 4, 1], "pos": [808, 616], "ref": "ground.dirt", "target": "ground.water" },
-                { "name": "edge.water.new", "size": [ 4, 4, 1], "pos": [888, 616], "ref": "ground.dirt", "target": "ground.water" }
+                { "name": "edge.water.new", "size": [ 4, 4, 1], "pos": [888, 616], "ref": "ground.dirt", "target": "ground.water" },
+                { "name": "rug.red", "size": [ 4, 4, 0], "pos": [ 8, 440], "extra": true },
+                { "name": "rug.blue", "size": [ 4, 4, 0], "pos": [ 88, 440], "extra": true },
+                { "name": "rug.black", "size": [ 4, 4, 0], "pos": [ 168, 440], "extra": true },
+                { "name": "rug.green", "size": [ 4, 4, 0], "pos": [ 248, 440], "extra": true },
+                { "name": "rug.ne", "size": [ 4, 4, 0], "pos": [ 8, 360], "extra": true },
+                { "name": "rug.nw", "size": [ 4, 4, 0], "pos": [ 88, 360], "extra": true },
+                { "name": "rug.sw", "size": [ 4, 4, 0], "pos": [ 168, 360], "extra": true },
+                { "name": "rug.se", "size": [ 4, 4, 0], "pos": [ 248, 360], "extra": true }
+    
             ]
         },
         {
