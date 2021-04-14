@@ -1,6 +1,6 @@
 const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead" ];
 const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
-const RUG_SIZE = 4;
+const RUG_SIZE = 2;
 
 def editorCommand() {
     if(isPressed(KeyT)) {
@@ -51,8 +51,10 @@ def editorCommand() {
 
 def startRug(rug) {
     pos := getPosition();
-    x := int(pos[0] / RUG_SIZE) * RUG_SIZE;
-    y := int(pos[1] / RUG_SIZE) * RUG_SIZE;
+    #x := int(pos[0] / RUG_SIZE) * RUG_SIZE;
+    #y := int(pos[1] / RUG_SIZE) * RUG_SIZE;
+    x := pos[0];
+    y := pos[1];
     z := int(pos[2]/7)*7 + 1;
     eraseAllExtras(x, y, z);
     setShapeExtra(x, y, z, rug);
@@ -74,11 +76,27 @@ def drawRugEdge(x, y, z, rug) {
 
     n := len(array_filter(getShapeExtra(x, y - RUG_SIZE, z), s => startsWith(s, "rug."))) > 0;
     s := len(array_filter(getShapeExtra(x, y + RUG_SIZE, z), s => startsWith(s, "rug."))) > 0;
-    w := len(array_filter(getShapeExtra(x - RUG_SIZE, y, z), s => startsWith(s, "rug."))) > 0;
-    e := len(array_filter(getShapeExtra(x + RUG_SIZE, y, z), s => startsWith(s, "rug."))) > 0;
+    w := len(array_filter(getShapeExtra(x + RUG_SIZE, y, z), s => startsWith(s, "rug."))) > 0;
+    e := len(array_filter(getShapeExtra(x - RUG_SIZE, y, z), s => startsWith(s, "rug."))) > 0;
     if(n && s && e && w) {
         return 1;
     }
+    if(n && s && w = false) {
+        setShapeExtra(x, y, z, "rug.w");
+        return 1;
+    }
+    if(n && s && e = false) {
+        setShapeExtra(x, y, z, "rug.e");
+        return 1;
+    }    
+    if(e && w && n = false) {
+        setShapeExtra(x, y, z, "rug.n");
+        return 1;
+    }    
+    if(e && w && s = false) {
+        setShapeExtra(x, y, z, "rug.s");
+        return 1;
+    }    
     if(n && e) {
         setShapeExtra(x, y, z, "rug.sw");
         return 1;

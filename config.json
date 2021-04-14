@@ -113,14 +113,18 @@
                 { "name": "edge.water.sew", "size": [ 4, 4, 1], "pos": [728, 616], "ref": "ground.dirt", "target": "ground.water" },
                 { "name": "edge.water.nse", "size": [ 4, 4, 1], "pos": [808, 616], "ref": "ground.dirt", "target": "ground.water" },
                 { "name": "edge.water.new", "size": [ 4, 4, 1], "pos": [888, 616], "ref": "ground.dirt", "target": "ground.water" },
-                { "name": "rug.red", "size": [ 4, 4, 0], "pos": [ 8, 440], "extra": true },
-                { "name": "rug.blue", "size": [ 4, 4, 0], "pos": [ 88, 440], "extra": true },
-                { "name": "rug.black", "size": [ 4, 4, 0], "pos": [ 168, 440], "extra": true },
-                { "name": "rug.green", "size": [ 4, 4, 0], "pos": [ 248, 440], "extra": true },
-                { "name": "rug.ne", "size": [ 4, 4, 0], "pos": [ 8, 360], "extra": true },
-                { "name": "rug.nw", "size": [ 4, 4, 0], "pos": [ 88, 360], "extra": true },
-                { "name": "rug.sw", "size": [ 4, 4, 0], "pos": [ 168, 360], "extra": true },
-                { "name": "rug.se", "size": [ 4, 4, 0], "pos": [ 248, 360], "extra": true }
+                { "name": "rug.red", "size": [ 2, 2, 0], "pos": [ 24, 440], "extra": true },
+                { "name": "rug.blue", "size": [ 2, 2, 0], "pos": [ 72, 440], "extra": true },
+                { "name": "rug.black", "size": [ 2, 2, 0], "pos": [ 120, 440], "extra": true },
+                { "name": "rug.green", "size": [ 2, 2, 0], "pos": [ 168, 440], "extra": true },
+                { "name": "rug.nw", "size": [ 2, 2, 0], "pos": [ 24, 392], "extra": true },
+                { "name": "rug.ne", "size": [ 2, 2, 0], "pos": [ 72, 392], "extra": true },
+                { "name": "rug.se", "size": [ 2, 2, 0], "pos": [ 120, 392], "extra": true },
+                { "name": "rug.sw", "size": [ 2, 2, 0], "pos": [ 168, 392], "extra": true },
+                { "name": "rug.w", "size": [ 2, 2, 0], "pos": [ 24, 344], "extra": true },
+                { "name": "rug.e", "size": [ 2, 2, 0], "pos": [ 56, 344], "extra": true },
+                { "name": "rug.s", "size": [ 2, 2, 0], "pos": [ 104, 344], "extra": true },
+                { "name": "rug.n", "size": [ 2, 2, 0], "pos": [ 144, 336], "extra": true }
     
             ]
         },
@@ -210,8 +214,13 @@
                 { "name": "wall.rock.low.y", "size": [ 1, 4, 2], "pos": [184, 216] },
                 { "name": "wall.rock.low.x", "size": [ 4, 1, 2], "pos": [232, 216] },
                 { "name": "window.y", "size": [ 1, 2, 4], "pos": [296, 224] },
-                { "name": "window.x", "size": [ 2, 1, 4], "pos": [328, 224] }
-    
+                { "name": "window.x", "size": [ 2, 1, 4], "pos": [328, 224] },
+                { "name": "candle.gold", "size": [ 1, 1, 5], "pos": [648, 416] },
+                { "name": "workbench.y", "size": [ 2, 4, 2], "pos": [600, 512] },
+                { "name": "workbench.x", "size": [ 4, 2, 2], "pos": [656, 512] },
+                { "name": "chair.x2", "size": [ 1, 1, 2], "pos": [616, 320] },
+                { "name": "chair.y2", "size": [ 1, 1, 2], "pos": [632, 320] },
+                { "name": "table.large", "size": [ 3, 5, 2], "pos": [656, 280] }
             ]
         },
         {
