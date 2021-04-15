@@ -220,7 +220,10 @@
                 { "name": "workbench.x", "size": [ 4, 2, 2], "pos": [656, 512] },
                 { "name": "chair.x2", "size": [ 1, 1, 2], "pos": [616, 320] },
                 { "name": "chair.y2", "size": [ 1, 1, 2], "pos": [632, 320] },
-                { "name": "table.large", "size": [ 3, 5, 2], "pos": [656, 280] }
+                { "name": "table.large", "size": [ 3, 5, 2], "pos": [656, 280] },
+                { "name": "table.med", "size": [ 2, 2, 2], "pos": [728, 304] },
+                { "name": "table.square", "size": [ 2, 2, 2], "pos": [768, 304] },
+                { "name": "bed.y", "size": [ 3, 6, 2], "pos": [816, 264] }
             ]
         },
         {
@@ -329,7 +332,22 @@
                 { "name": "mountain.ne.2", "size": [ 4, 4, 6], "pos": [280, 840], "alphaMin": 0.75 },
                 { "name": "mountain.nw.2", "size": [ 4, 4, 6], "pos": [360, 840], "alphaMin": 0.75 }
             ]
-        }
+        },
+        {
+            "image": "objects2.png",
+            "grid": {
+                "units": [ 8, 8 ]
+            },
+            "dpi": 288,
+            "shapes": [
+                { "name": "step.1.y", "size": [ 1, 4, 1], "pos": [0, 64] },
+                { "name": "step.2.y", "size": [ 1, 4, 2], "pos": [48, 56] },
+                { "name": "step.3.y", "size": [ 1, 4, 3], "pos": [96, 48] },
+                { "name": "step.4.y", "size": [ 1, 4, 4], "pos": [144, 40] },
+                { "name": "step.5.y", "size": [ 1, 4, 5], "pos": [192, 32] },
+                { "name": "step.6.y", "size": [ 1, 4, 6], "pos": [240, 24] }
+            ]
+        }        
     ],    
     "creatures": [
         { 

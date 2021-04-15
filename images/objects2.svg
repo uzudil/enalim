@@ -1,0 +1,2027 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="287.99997"
+   inkscape:export-xdpi="287.99997"
+   inkscape:export-filename="/Users/gtorok/go/src/github.com/uzudil/enalim/images/objects2.png"
+   sodipodi:docname="objects2.svg"
+   inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 264.58333 264.58334"
+   height="1000"
+   width="1000">
+  <defs
+     id="defs2">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 132.29167 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="264.58333 : 132.29167 : 1"
+       inkscape:persp3d-origin="132.29166 : 88.194447 : 1"
+       id="perspective8311" />
+    <linearGradient
+       id="linearGradient6228"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#2d2d2d;stop-opacity:1;"
+         offset="0"
+         id="stop6226" />
+    </linearGradient>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1066"
+       x="-3.0719998e-05"
+       width="1.0000614"
+       y="-1.3963635e-05"
+       height="1.0000279">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.00013546665"
+         id="feGaussianBlur1068" />
+    </filter>
+    <filter
+       inkscape:label="Pointillism"
+       style="color-interpolation-filters:sRGB"
+       inkscape:menu-tooltip="Gives a turbulent pointillist HSL sensitive transparency"
+       inkscape:menu="Scatter"
+       height="1.2"
+       width="1.2"
+       y="-0.1"
+       x="-0.1"
+       id="filter7174">
+      <feTurbulence
+         seed="50"
+         type="fractalNoise"
+         baseFrequency="1"
+         numOctaves="3"
+         result="result1"
+         id="feTurbulence7176" />
+      <feColorMatrix
+         type="luminanceToAlpha"
+         in="SourceGraphic"
+         result="result0"
+         id="feColorMatrix7178" />
+      <feColorMatrix
+         result="result2"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         id="feColorMatrix7180" />
+      <feComposite
+         result="result3"
+         operator="over"
+         in="result1"
+         in2="result2"
+         id="feComposite7182" />
+      <feColorMatrix
+         result="result91"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -3.2"
+         id="feColorMatrix7184" />
+      <feComposite
+         in2="result91"
+         operator="arithmetic"
+         k1="1.5"
+         result="result93"
+         id="feComposite7186"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in2="result93"
+         in="SourceGraphic"
+         operator="out"
+         result="result4"
+         id="feComposite7188" />
+      <feComposite
+         in2="result4"
+         operator="arithmetic"
+         k2="0.5"
+         k1="1"
+         id="feComposite7190"
+         k3="0"
+         k4="0" />
+      <feDisplacementMap
+         scale="15"
+         xChannelSelector="R"
+         yChannelSelector="A"
+         in2="result1"
+         result="result92"
+         id="feDisplacementMap7192" />
+    </filter>
+    <filter
+       inkscape:label="Pointillism"
+       style="color-interpolation-filters:sRGB"
+       inkscape:menu-tooltip="Gives a turbulent pointillist HSL sensitive transparency"
+       inkscape:menu="Scatter"
+       height="1.2"
+       width="1.2"
+       y="-0.1"
+       x="-0.1"
+       id="filter7174-2">
+      <feTurbulence
+         seed="50"
+         type="fractalNoise"
+         baseFrequency="1"
+         numOctaves="3"
+         result="result1"
+         id="feTurbulence7176-7" />
+      <feColorMatrix
+         type="luminanceToAlpha"
+         in="SourceGraphic"
+         result="result0"
+         id="feColorMatrix7178-0" />
+      <feColorMatrix
+         result="result2"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         id="feColorMatrix7180-8" />
+      <feComposite
+         result="result3"
+         operator="over"
+         in="result1"
+         in2="result2"
+         id="feComposite7182-3" />
+      <feColorMatrix
+         result="result91"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -3.2"
+         id="feColorMatrix7184-9" />
+      <feComposite
+         in2="result91"
+         operator="arithmetic"
+         k1="1.5"
+         result="result93"
+         id="feComposite7186-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in2="result93"
+         in="SourceGraphic"
+         operator="out"
+         result="result4"
+         id="feComposite7188-8" />
+      <feComposite
+         in2="result4"
+         operator="arithmetic"
+         k2="0.5"
+         k1="1"
+         id="feComposite7190-0"
+         k3="0"
+         k4="0" />
+      <feDisplacementMap
+         scale="15"
+         xChannelSelector="R"
+         yChannelSelector="A"
+         in2="result1"
+         result="result92"
+         id="feDisplacementMap7192-2" />
+    </filter>
+    <filter
+       x="-0.1"
+       y="-0.1"
+       width="1.2"
+       height="1.2"
+       inkscape:menu="Scatter"
+       inkscape:menu-tooltip="Gives a turbulent pointillist HSL sensitive transparency"
+       id="filter76899"
+       inkscape:label="Pointillism"
+       style="color-interpolation-filters:sRGB">
+      <feTurbulence
+         id="feTurbulence76901"
+         result="turbulence"
+         baseFrequency="2.5539 2.6071"
+         seed="1"
+         numOctaves="1"
+         type="fractalNoise" />
+      <feDisplacementMap
+         result="fbSourceGraphic"
+         id="feDisplacementMap76903"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="13.1649"
+         in2="turbulence"
+         in="SourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix76965"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feTurbulence
+         result="result1"
+         numOctaves="3"
+         baseFrequency="1"
+         type="fractalNoise"
+         seed="50"
+         id="feTurbulence76967" />
+      <feColorMatrix
+         result="result0"
+         in="fbSourceGraphic"
+         type="luminanceToAlpha"
+         id="feColorMatrix76969" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         result="result2"
+         id="feColorMatrix76971" />
+      <feComposite
+         in="result1"
+         operator="over"
+         result="result3"
+         in2="result2"
+         id="feComposite76973" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -3.2"
+         result="result91"
+         id="feColorMatrix76975" />
+      <feComposite
+         result="result93"
+         k1="1.5"
+         operator="arithmetic"
+         in2="result91"
+         id="feComposite76977"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         result="result4"
+         operator="out"
+         in="fbSourceGraphic"
+         in2="result93"
+         id="feComposite76979" />
+      <feComposite
+         result="result94"
+         k1="1"
+         k2="0.5"
+         operator="arithmetic"
+         in2="result4"
+         id="feComposite76981"
+         k3="0"
+         k4="0" />
+      <feDisplacementMap
+         result="result92"
+         yChannelSelector="A"
+         xChannelSelector="R"
+         scale="15"
+         in2="result1"
+         id="feDisplacementMap76983" />
+    </filter>
+    <filter
+       x="-0.1"
+       y="-0.1"
+       width="1.2"
+       height="1.2"
+       inkscape:menu="Scatter"
+       inkscape:menu-tooltip="Gives a turbulent pointillist HSL sensitive transparency"
+       id="filter76893"
+       inkscape:label="Pointillism"
+       style="color-interpolation-filters:sRGB">
+      <feTurbulence
+         id="feTurbulence76895"
+         result="turbulence"
+         baseFrequency="2.5539 2.6071"
+         seed="1"
+         numOctaves="1"
+         type="fractalNoise" />
+      <feDisplacementMap
+         result="fbSourceGraphic"
+         id="feDisplacementMap76897"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="13.1649"
+         in2="turbulence"
+         in="SourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix76945"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feTurbulence
+         result="result1"
+         numOctaves="3"
+         baseFrequency="1"
+         type="fractalNoise"
+         seed="50"
+         id="feTurbulence76947" />
+      <feColorMatrix
+         result="result0"
+         in="fbSourceGraphic"
+         type="luminanceToAlpha"
+         id="feColorMatrix76949" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         result="result2"
+         id="feColorMatrix76951" />
+      <feComposite
+         in="result1"
+         operator="over"
+         result="result3"
+         in2="result2"
+         id="feComposite76953" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -3.2"
+         result="result91"
+         id="feColorMatrix76955" />
+      <feComposite
+         result="result93"
+         k1="1.5"
+         operator="arithmetic"
+         in2="result91"
+         id="feComposite76957"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         result="result4"
+         operator="out"
+         in="fbSourceGraphic"
+         in2="result93"
+         id="feComposite76959" />
+      <feComposite
+         result="result94"
+         k1="1"
+         k2="0.5"
+         operator="arithmetic"
+         in2="result4"
+         id="feComposite76961"
+         k3="0"
+         k4="0" />
+      <feDisplacementMap
+         result="result92"
+         yChannelSelector="A"
+         xChannelSelector="R"
+         scale="15"
+         in2="result1"
+         id="feDisplacementMap76963" />
+    </filter>
+    <filter
+       x="-0.1"
+       y="-0.1"
+       width="1.2"
+       height="1.2"
+       inkscape:menu="Scatter"
+       inkscape:menu-tooltip="Gives a turbulent pointillist HSL sensitive transparency"
+       id="filter76887"
+       inkscape:label="Pointillism"
+       style="color-interpolation-filters:sRGB">
+      <feTurbulence
+         id="feTurbulence76889"
+         result="turbulence"
+         baseFrequency="2.5539 2.6071"
+         seed="1"
+         numOctaves="1"
+         type="fractalNoise" />
+      <feDisplacementMap
+         result="fbSourceGraphic"
+         id="feDisplacementMap76891"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="13.1649"
+         in2="turbulence"
+         in="SourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix76925"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feTurbulence
+         result="result1"
+         numOctaves="3"
+         baseFrequency="1"
+         type="fractalNoise"
+         seed="50"
+         id="feTurbulence76927" />
+      <feColorMatrix
+         result="result0"
+         in="fbSourceGraphic"
+         type="luminanceToAlpha"
+         id="feColorMatrix76929" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         result="result2"
+         id="feColorMatrix76931" />
+      <feComposite
+         in="result1"
+         operator="over"
+         result="result3"
+         in2="result2"
+         id="feComposite76933" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -3.2"
+         result="result91"
+         id="feColorMatrix76935" />
+      <feComposite
+         result="result93"
+         k1="1.5"
+         operator="arithmetic"
+         in2="result91"
+         id="feComposite76937"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         result="result4"
+         operator="out"
+         in="fbSourceGraphic"
+         in2="result93"
+         id="feComposite76939" />
+      <feComposite
+         result="result94"
+         k1="1"
+         k2="0.5"
+         operator="arithmetic"
+         in2="result4"
+         id="feComposite76941"
+         k3="0"
+         k4="0" />
+      <feDisplacementMap
+         result="result92"
+         yChannelSelector="A"
+         xChannelSelector="R"
+         scale="15"
+         in2="result1"
+         id="feDisplacementMap76943" />
+    </filter>
+    <filter
+       x="-0.1"
+       y="-0.1"
+       width="1.2"
+       height="1.2"
+       inkscape:menu="Scatter"
+       inkscape:menu-tooltip="Gives a turbulent pointillist HSL sensitive transparency"
+       id="filter76881"
+       inkscape:label="Pointillism"
+       style="color-interpolation-filters:sRGB">
+      <feTurbulence
+         id="feTurbulence76883"
+         result="turbulence"
+         baseFrequency="2.5539 2.6071"
+         seed="1"
+         numOctaves="1"
+         type="fractalNoise" />
+      <feDisplacementMap
+         result="fbSourceGraphic"
+         id="feDisplacementMap76885"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="13.1649"
+         in2="turbulence"
+         in="SourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix76905"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feTurbulence
+         result="result1"
+         numOctaves="3"
+         baseFrequency="1"
+         type="fractalNoise"
+         seed="50"
+         id="feTurbulence76907" />
+      <feColorMatrix
+         result="result0"
+         in="fbSourceGraphic"
+         type="luminanceToAlpha"
+         id="feColorMatrix76909" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         result="result2"
+         id="feColorMatrix76911" />
+      <feComposite
+         in="result1"
+         operator="over"
+         result="result3"
+         in2="result2"
+         id="feComposite76913" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -3.2"
+         result="result91"
+         id="feColorMatrix76915" />
+      <feComposite
+         result="result93"
+         k1="1.5"
+         operator="arithmetic"
+         in2="result91"
+         id="feComposite76917"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         result="result4"
+         operator="out"
+         in="fbSourceGraphic"
+         in2="result93"
+         id="feComposite76919" />
+      <feComposite
+         result="result94"
+         k1="1"
+         k2="0.5"
+         operator="arithmetic"
+         in2="result4"
+         id="feComposite76921"
+         k3="0"
+         k4="0" />
+      <feDisplacementMap
+         result="result92"
+         yChannelSelector="A"
+         xChannelSelector="R"
+         scale="15"
+         in2="result1"
+         id="feDisplacementMap76923" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Roughen"
+       id="filter18211">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="21"
+         baseFrequency="0.6658 0.6126"
+         result="turbulence"
+         id="feTurbulence18213" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="18.0851"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap18215" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Greyscale"
+       id="filter4978">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix4980" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Greyscale"
+       id="filter4974">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix4976" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Greyscale"
+       id="filter4970">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix4972" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Greyscale"
+       id="filter4966">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix4968" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Greyscale"
+       id="filter4962">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix4964" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Roughen"
+       id="filter8750-2">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="245"
+         baseFrequency="2.4742 2.6869"
+         result="turbulence"
+         id="feTurbulence8752-4" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="4.9"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap8754-9"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix8894-5" />
+      <feTurbulence
+         id="feTurbulence8896-4"
+         type="fractalNoise"
+         numOctaves="1"
+         seed="18"
+         baseFrequency="0.6658 0.7722"
+         result="turbulence" />
+      <feDisplacementMap
+         id="feDisplacementMap8898-6"
+         in2="turbulence"
+         in="fbSourceGraphic"
+         scale="12.234"
+         yChannelSelector="G"
+         xChannelSelector="R" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Roughen"
+       id="filter8911-8">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="18"
+         baseFrequency="0.6658 0.7722"
+         result="turbulence"
+         id="feTurbulence8913-3" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="12.2"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap8915-5" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Roughen"
+       id="filter8911-2">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="18"
+         baseFrequency="0.6658 0.7722"
+         result="turbulence"
+         id="feTurbulence8913-4" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="12.2"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap8915-4" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5143">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5139" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5141" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5149">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5145" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5147" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5155">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5151" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5153" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5161">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5157" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5159" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5167">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5163" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5165" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5173">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5169" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5171" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5179">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5175" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5177" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5185">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5181" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5183" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5613">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5609" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5611" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5619">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5615" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5617" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5625">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5621" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5623" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5631">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence5627" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5629" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4209">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4205" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4207" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4215">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4211" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4213" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4221">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4217" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4219" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4227">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4223" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4225" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4233">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4229" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4231" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4417">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4413" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4415" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4423">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4419" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4421" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4429">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4425" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4427" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter4435">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence4431" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap4433" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter5425"
+       x="-4.2306066e-05"
+       width="1.400086"
+       y="-0.00030859999"
+       height="1.0176239">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0045602246"
+         id="feGaussianBlur5427" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6173">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6169" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6171" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6179">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6175" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6177" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6215">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6211" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6213" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6221">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6217" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6219" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6237">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6233" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6235" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6246">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6242" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6244" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6295">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6291" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6293" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6318">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6314" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6316" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6365">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6361" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6363" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6373">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6369" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6371" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6408">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6404" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6406" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6451">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6447" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6449" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6489">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6485" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6487" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6523">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6519" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6521" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6558">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6554" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6556" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6566">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6562" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6564" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6612">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6608" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6610" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6618">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6614" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6616" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6624">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6620" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6622" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter6630">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="1.7 1.7"
+         result="turbulence"
+         id="feTurbulence6626" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="6"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap6628" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter15704">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="3.68813 3.68813"
+         result="turbulence"
+         id="feTurbulence15700" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="2.09581"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap15702" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter18895">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="5"
+         seed="1"
+         baseFrequency="6.4691 6.56284"
+         result="turbulence"
+         id="feTurbulence18891" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="2.24551"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap18893" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter5718">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="1"
+         baseFrequency="8.87511 8.90636"
+         result="turbulence"
+         id="feTurbulence5714" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="0.598802"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap5716" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="16"
+     inkscape:cx="95.33873"
+     inkscape:cy="79.193879"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     inkscape:snap-global="false"
+     inkscape:window-width="2008"
+     inkscape:window-height="1198"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="axonomgrid"
+       id="grid833"
+       originx="0"
+       originy="0"
+       spacingy="4.2333334"
+       gridanglex="45"
+       gridanglez="45"
+       units="px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid835"
+       spacingx="2.1166667"
+       spacingy="2.1166667"
+       originy="0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="stencils"
+     style="display:none;mix-blend-mode:normal">
+    <path
+       style="fill:#6f8a91;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round"
+       d="m 0,19.05 v 2.116667 l 8.4666673,8.466666 2.1166657,-2.116667 V 25.4 L 2.1166666,16.933333 Z"
+       id="path7738" />
+    <path
+       style="fill:#6f8a91;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round"
+       d="m 12.700001,21.166666 8.466666,8.466666 2.116667,-2.116667 v -4.233333 l -8.466667,-8.466666 -2.116666,2.116666 z"
+       id="path7740" />
+    <path
+       style="fill:#6f8a91;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round"
+       d="m 25.4,21.166666 8.466667,8.466666 2.116666,-2.116667 V 21.166666 L 27.516667,12.699999 25.4,14.816666 Z"
+       id="path7742" />
+    <path
+       style="fill:#6f8a91;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round"
+       d="m 38.1,21.166666 8.466666,8.466666 2.116667,-2.116667 V 19.049999 L 40.216666,10.583332 38.1,12.699999 Z"
+       id="path7744" />
+    <path
+       style="display:inline;fill:#6f8a91;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 50.8,21.166666 8.466666,8.466666 2.116667,-2.116667 V 16.933332 L 52.916666,8.4666656 50.8,10.583332 Z"
+       id="path7746" />
+    <path
+       style="fill:#6f8a91;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 63.499999,21.166667 8.466667,8.466666 2.116666,-2.116667 V 14.816667 L 65.616666,6.3499999 63.499999,8.4666666 Z"
+       id="path7898" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="plants"
+     style="display:inline;opacity:1;filter:url(#filter5425)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="furniture"
+     style="display:inline" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="rocks"
+     style="display:inline" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="walls"
+     style="display:inline;filter:url(#filter1066)">
+    <path
+       id="path7983"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:#000000;stroke-width:0.999999;stroke-linejoin:round;stroke-opacity:1"
+       d="M 248.8125 24.837891 L 245.98438 26.515625 L 245.27734 27.578125 L 243.95117 29.167969 L 241.30078 31.113281 L 240.58008 32.3125 L 240.50391 32.439453 L 240.24023 34.824219 L 240.41602 37.476562 L 240.50391 42.779297 L 240.0625 46.580078 L 240.59375 47.640625 L 240.68164 51.619141 L 240.24023 54.09375 L 240.59375 56.921875 L 240.32812 58.423828 L 240.32812 61.341797 L 240.32812 64.523438 L 240.50391 65.849609 L 240.59375 68.855469 L 241.03516 71.330078 L 240.76953 73.716797 L 240.41602 76.367188 L 240.94727 80.080078 L 241.21094 81.140625 L 269.05469 109.16016 L 271.08789 110.48633 L 271.91211 110.48633 L 272.94336 110.48633 L 273.91602 109.16016 L 274.88867 108.45312 L 275.41797 107.03906 L 276.39062 106.41992 L 277.89258 104.91602 L 278.95312 104.47461 L 279.92578 103.23828 L 280.83203 100.26172 L 280.76562 79.697266 L 280.69922 57.451172 L 280.01367 55.978516 L 280.01367 55.949219 L 248.8125 24.837891 z M 200.11133 33.234375 L 198.25586 34.117188 L 196.31055 36.238281 L 193.74805 38.449219 L 193.3418 39.296875 L 192.77539 40.482422 L 192.50977 42.072266 L 192.95117 43.751953 L 192.42188 45.962891 L 192.33398 48.525391 C 192.33398 48.525391 193.30469 50.823685 193.30469 51.265625 C 193.30469 51.707569 192.86328 53.5625 192.86328 53.5625 L 192.6875 57.541016 L 192.24414 60.457031 L 192.42188 62.578125 L 192.50977 64.169922 L 193.12891 67.617188 L 192.42188 70.179688 L 192.15625 73.716797 L 192.50977 77.427734 L 192.86328 79.460938 L 193.39453 80.962891 L 195.07227 82.466797 L 196.75195 83.880859 L 197.8125 84.322266 L 199.8457 87.240234 L 202.76367 90.068359 L 204.53125 91.835938 L 205.76758 92.189453 L 206.82812 93.779297 L 208.33203 95.990234 L 210.89453 98.552734 L 213.36914 99.966797 L 214.7832 101.73438 L 217.34766 104.91602 L 219.55664 106.06641 L 221.14844 108.62891 L 223.17969 110.83984 L 223.59766 110.83984 L 224.77148 110.83984 L 225.30273 109.68945 L 227.42383 107.56836 L 230.25195 105.09375 L 231.40039 104.0332 L 232.63867 101.11523 L 232.63867 98.287109 L 232.63867 96.166016 L 232.63867 93.072266 L 232.63867 90.244141 L 232.63867 86.265625 L 232.63867 84.763672 L 232.63867 81.669922 L 232.63867 77.957031 L 232.63867 75.748047 L 232.63867 73.539062 L 232.63867 71.328125 L 232.63867 68.853516 L 232.63867 67.261719 L 232.46094 65.230469 L 231.23242 63.921875 L 231.22461 63.904297 L 230.25195 62.667969 L 228.57227 61.695312 L 227.1582 60.457031 L 226.09766 58.689453 L 224.06445 56.921875 L 222.5625 55.595703 L 221.94336 54.712891 L 218.31836 50.912109 L 217.08203 49.585938 L 215.40234 48.525391 L 214.42969 46.933594 L 213.36914 46.404297 L 212.39648 44.990234 L 210.89453 43.576172 L 209.65625 42.515625 L 208.77344 41.365234 L 207.44727 40.570312 L 206.0332 38.625 L 204.97266 37.830078 L 203.4707 35.974609 L 201.87891 34.736328 L 200.11133 33.234375 z M 151.32031 41.189453 L 149.46484 43.132812 L 148.75781 44.105469 L 148.75781 44.8125 L 147.78516 45.785156 L 146.54883 46.316406 C 146.54883 46.316406 145.04446 47.288529 144.7793 47.730469 C 144.6952 47.870562 144.6869 48.0113 144.61133 48.234375 C 144.44842 48.715023 144.25 49.320312 144.25 49.320312 L 144.51562 51.441406 L 144.51562 52.679688 L 144.16211 54.535156 L 144.33789 58.335938 L 144.25 59.308594 L 144.51562 62.84375 L 144.51562 64.523438 L 144.16211 65.583984 L 144.07227 68.855469 L 144.7793 70.091797 L 144.69141 72.037109 L 144.42578 73.980469 L 144.69141 76.808594 L 144.16211 77.693359 L 144.42578 79.548828 L 145.13281 80.699219 L 147.16602 82.201172 L 149.90625 84.763672 L 150.25977 85.648438 L 151.58594 87.150391 L 153.17773 87.947266 L 153.88477 88.917969 L 154.94531 89.890625 L 156.00586 90.863281 L 156.35938 91.748047 L 157.24219 92.896484 L 159.54102 94.132812 L 161.2207 95.900391 L 161.66211 96.873047 L 162.81055 98.199219 L 165.02148 100.32031 L 167.76172 102 L 168.73242 103.85547 L 170.05859 104.91602 L 171.38477 106.41992 L 173.85938 108.54102 L 174.125 109.68945 L 175.62695 110.92773 L 176.08789 110.89258 L 176.77734 110.83984 L 178.54492 108.98242 L 178.7207 107.74609 L 179.95898 106.68555 L 181.81445 105.53516 L 182.96484 104.38672 L 184.02539 102.97266 L 184.64258 100.23242 L 184.64258 96.960938 L 184.64258 95.105469 L 184.64258 92.365234 L 184.64258 90.244141 L 184.64258 87.945312 L 184.64258 87.238281 L 184.64258 84.322266 L 184.64258 81.316406 L 184.64258 78.576172 L 184.64258 76.101562 L 184.37891 73.628906 L 182.75586 71.46875 L 182.69922 71.240234 L 179.78125 68.943359 L 178.63281 68.324219 L 175.7168 65.230469 L 175.09766 63.462891 L 171.5625 60.193359 L 169.70508 59.662109 L 168.99805 58.513672 L 168.29102 57.453125 L 166.70117 56.126953 L 165.81641 54.359375 L 164.04883 53.033203 L 161.57422 51.441406 L 160.07227 49.144531 L 157.86133 46.316406 L 155.74023 44.724609 L 154.06055 42.779297 L 152.64648 41.542969 L 151.32031 41.189453 z M 104.12109 49.498047 L 102.88477 50.027344 L 101.73438 51.353516 L 100.14453 52.679688 L 98.994141 54.359375 L 96.873047 55.949219 L 96.777344 56.181641 L 96.255859 57.453125 L 96.609375 60.193359 L 96.255859 62.048828 L 96.078125 66.644531 L 96.519531 68.855469 L 96.609375 71.505859 L 96.519531 73.539062 L 96.34375 75.837891 L 96.519531 79.726562 L 121.97656 105.625 L 125.07031 108.45312 L 127.10156 110.83984 L 128.01953 111.19141 L 128.25195 111.28125 L 129.3125 110.04297 L 130.10742 109.16016 L 131.43359 107.65625 L 132.31641 107.30273 L 135.76367 103.76758 L 136.56055 100.58594 L 136.56055 95.371094 L 136.56055 92.720703 L 136.56055 89.802734 L 136.56055 88.212891 L 136.56055 84.587891 L 136.56055 82.113281 L 135.23438 80.080078 L 135.14648 80.017578 L 132.31641 78.046875 L 131.16797 76.013672 L 130.28516 74.777344 L 127.10156 72.037109 L 125.77734 71.330078 L 124.00977 69.384766 L 122.77148 67.792969 L 119.05859 64.082031 L 116.84961 62.314453 L 115.96484 60.722656 L 113.04883 57.982422 L 109.95508 55.154297 L 106.68555 51.177734 L 104.12109 49.498047 z M 57.009766 57.806641 L 56.126953 58.601562 L 53.740234 59.396484 L 52.148438 60.988281 L 48.878906 63.904297 L 48.513672 65.082031 L 48.083984 66.46875 L 48.347656 70.003906 L 48.701172 72.566406 L 48.4375 77.251953 L 48.4375 79.638672 L 63.197266 94.839844 L 65.583984 96.609375 L 67.439453 98.111328 L 68.5 99.525391 L 69.826172 101.38086 L 71.417969 102.97266 L 73.273438 104.20898 L 74.423828 105.44727 L 75.130859 106.68555 L 77.515625 109.42383 L 79.195312 111.10352 L 79.427734 111.10352 L 80.433594 111.10352 L 81.582031 109.86719 L 82.732422 109.07031 L 83.703125 107.56836 L 87.857422 103.94531 L 88.564453 101.20508 L 88.564453 98.023438 L 88.564453 95.990234 L 88.564453 92.189453 L 88.564453 90.15625 L 87.21875 88.683594 L 86.974609 88.035156 L 84.410156 85.914062 L 82.996094 84.587891 L 82.554688 83.615234 L 80.167969 80.699219 L 78.753906 79.992188 L 76.367188 77.871094 L 75.660156 76.544922 L 73.716797 74.246094 L 71.064453 72.125 L 68.501953 68.677734 L 66.644531 68.236328 L 64.082031 64.523438 L 62.490234 63.904297 L 61.695312 62.136719 L 58.955078 59.308594 L 57.009766 57.806641 z M 271.17578 61.076172 L 272.1543 61.369141 L 272.1543 61.371094 L 271.17578 61.076172 z M 8.5 66 L 6.75 66.75 L 5.25 67.875 L 4.125 69.125 L 3.25 70.125 L 1.875 71.5 L 1.1113281 72.919922 L 1 73.125 L 0.75 79.875 L 3.25 81.875 L 3.625 83 L 6.25 85.75 L 7.75 86.75 L 9.25 87.75 L 10.625 89.875 L 12.75 92 L 14.75 93 L 15.125 94 L 16.625 96.125 L 18.5 96.625 L 19.625 97.875 L 20.375 99.375 L 22.5 101.125 L 24 101.5 L 24.375 103.375 L 26.5 105.125 L 27.125 106.375 L 32 111.25 L 32.064453 111.09961 L 32.375 110.375 L 34.375 109.25 L 35 107.875 L 36.625 106.625 L 39.164062 104.74023 L 40.738281 103.09375 L 40.597656 97.46875 L 39.25 96.5 L 39.181641 96.4375 L 37.25 94.625 L 33.25 90.25 L 31.75 89 L 30.75 87.375 L 28.125 84.875 L 26.5 84 L 23.875 81.5 L 22.25 79.125 L 19.875 76.75 L 19.25 76.5 L 17.125 74.75 L 16.5 73.75 L 15.75 72.5 L 9.375 66.25 L 8.5 66 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7752"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 13.857422 79.152344 L 14.888672 79.464844 L 14.6875 78.5625 L 13.75 78.1875 L 13.857422 79.152344 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8045"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 12.382812 83.492188 L 12.875 83.3125 L 13.1875 82 L 14 80.4375 L 13.857422 79.152344 L 13.5625 79.0625 L 12.0625 76.6875 L 10.125 76.1875 L 8.625 76.5625 L 6.8457031 78.03125 L 8.484375 80.080078 L 10.164062 80.787109 L 10.695312 81.847656 L 12.382812 83.492188 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8043"
+       style="display:inline;mix-blend-mode:normal;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 13.332031 84.416016 L 14.25 83 L 15.1875 80.8125 L 14.888672 79.464844 L 13.857422 79.152344 L 14 80.4375 L 13.1875 82 L 12.875 83.3125 L 12.382812 83.492188 L 13.332031 84.416016 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8041"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 37.400391 94.765625 L 36.25 95.875 L 32.25 96.375 L 30.5 96.0625 L 28.761719 94.683594 L 27.630859 96.539062 L 27.753906 96.609375 L 28.814453 98.464844 L 32.439453 99.791016 L 34.207031 99.259766 L 36.59375 98.376953 L 38.271484 96.873047 L 39.181641 96.4375 L 37.400391 94.765625 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8112"
+       style="display:inline;mix-blend-mode:normal;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 36.314453 93.601562 L 35.5 94.8125 L 33.25 95.1875 L 31.25 94.9375 L 29.414062 93.498047 L 28.875 94.5 L 28.761719 94.683594 L 30.5 96.0625 L 32.25 96.375 L 36.25 95.875 L 37.400391 94.765625 L 37.25 94.625 L 36.314453 93.601562 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8110"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 32.644531 89.744141 L 30.625 92.1875 L 30.087891 92.242188 L 29.414062 93.498047 L 31.25 94.9375 L 33.25 95.1875 L 35.5 94.8125 L 36.314453 93.601562 L 33.25 90.25 L 32.644531 89.744141 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8076"
+       style="display:inline;mix-blend-mode:normal;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 28.638672 92.335938 L 27.375 94.1875 L 26.287109 95.705078 L 26.515625 95.900391 L 27.630859 96.539062 L 28.875 94.5 L 30.087891 92.242188 L 28.75 92.375 L 28.638672 92.335938 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8074"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 22 87.375 L 20.375 88.6875 L 19.150391 89.789062 L 22.804688 91.658203 L 23.511719 93.337891 L 26.287109 95.705078 L 27.375 94.1875 L 28.638672 92.335938 L 24.6875 90.9375 L 22 88.4375 L 22 87.375 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8069"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 25.136719 82.701172 L 23.625 84.8125 L 23.3125 86.1875 L 24.625 89.1875 L 27 90.5 L 29.8125 90.9375 L 31.611328 88.773438 L 30.75 87.375 L 28.125 84.875 L 26.5 84 L 25.136719 82.701172 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8067"
+       style="display:inline;mix-blend-mode:normal;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 24.027344 81.646484 L 22.875 83.125 L 22 84.25 L 22.25 85.625 L 19.875 87.75 L 18.539062 88.554688 L 19.003906 89.714844 L 19.150391 89.789062 L 20.375 88.6875 L 22 87.375 L 22 88.4375 L 24.6875 90.9375 L 28.75 92.375 L 30.625 92.1875 L 32.644531 89.744141 L 31.75 89 L 31.611328 88.773438 L 29.8125 90.9375 L 27 90.5 L 24.625 89.1875 L 23.3125 86.1875 L 23.625 84.8125 L 25.136719 82.701172 L 24.027344 81.646484 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8065"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 18.962891 76.263672 L 18.8125 77.625 L 17.625 79 L 15.625 79.6875 L 14.888672 79.464844 L 15.1875 80.8125 L 14.25 83 L 13.332031 84.416016 L 14.142578 85.207031 L 18.119141 87.503906 L 18.539062 88.554688 L 19.875 87.75 L 22.25 85.625 L 22 84.25 L 22.875 83.125 L 24.027344 81.646484 L 23.875 81.5 L 22.25 79.125 L 19.875 76.75 L 19.25 76.5 L 18.962891 76.263672 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8039"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 13.878906 70.666016 L 12.875 71.4375 L 10.25 73.125 L 10.875 75.1875 L 12.875 76.25 L 13.8125 77.5 L 15.9375 78.3125 L 18.0625 76.4375 L 18.119141 75.568359 L 17.125 74.75 L 16.5 73.75 L 15.75 72.5 L 13.878906 70.666016 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8037"
+       style="display:inline;mix-blend-mode:normal;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 12.865234 69.671875 L 11.375 71.125 L 9.125 72.3125 L 8.375 74 L 7.0625 76.25 L 5.9160156 76.949219 L 6.0097656 76.986328 L 6.8457031 78.03125 L 8.625 76.5625 L 10.125 76.1875 L 12.0625 76.6875 L 13.5625 79.0625 L 13.857422 79.152344 L 13.75 78.1875 L 14.6875 78.5625 L 14.888672 79.464844 L 15.625 79.6875 L 17.625 79 L 18.8125 77.625 L 18.962891 76.263672 L 18.119141 75.568359 L 18.0625 76.4375 L 15.9375 78.3125 L 13.8125 77.5 L 12.875 76.25 L 10.875 75.1875 L 10.25 73.125 L 12.875 71.4375 L 13.878906 70.666016 L 12.865234 69.671875 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8035"
+       style="display:inline;mix-blend-mode:normal;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 8.5 66 L 6.75 66.75 L 5.25 67.875 L 4.125 69.125 L 3.25 70.125 L 1.875 71.5 L 1.1113281 72.919922 L 1.3261719 73.363281 L 2.3867188 75.041016 L 4.4199219 76.367188 L 5.9160156 76.949219 L 7.0625 76.25 L 8.375 74 L 9.125 72.3125 L 11.375 71.125 L 12.865234 69.671875 L 9.375 66.25 L 8.5 66 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7748"
+       style="display:inline;mix-blend-mode:normal;fill:#676767;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="m 32.662109,99.724609 -0.222656,1.392581 -0.177734,2.47461 -0.619141,2.38672 0.53125,3.53515 -0.109375,1.58594 0.310547,-0.72461 2,-1.125 0.625,-1.375 1.625,-1.25 2.539214,-1.88388 1.573223,-1.64645 -0.140165,-5.625 L 39.25,96.5 l -0.06836,-0.0625 -0.910157,0.435547 -1.677734,1.503906 -2.386719,0.882813 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="ccccccccccccccccccc" />
+    <path
+       id="path7757"
+       style="display:inline;mix-blend-mode:normal;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 22.822266 101.20508 L 23.5 99.125 L 23.8125 98.1875 L 22 96.5 L 19.625 94.9375 L 18.0625 94.125 L 17.125 94.4375 L 16.193359 95.513672 L 16.625 96.125 L 18.5 96.625 L 19.625 97.875 L 20.375 99.375 L 22.5 101.125 L 22.822266 101.20508 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8101"
+       style="display:inline;mix-blend-mode:normal;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 27.644531 96.546875 L 25.75 98.125 L 24.375 100 L 24.001953 101.51172 L 24.375 103.375 L 26.5 105.125 L 27.125 106.375 L 32 111.25 L 32.064453 111.09961 L 32.173828 109.51367 L 31.642578 105.97852 L 32.261719 103.5918 L 32.439453 101.11719 L 32.662109 99.724609 L 32.439453 99.791016 L 28.814453 98.464844 L 27.753906 96.609375 L 27.644531 96.546875 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8099"
+       style="display:inline;mix-blend-mode:normal;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 19.189453 89.808594 L 18.625 90.9375 L 18.375 93 L 19.4375 93.1875 L 21.4375 94.3125 L 23.0625 95.9375 L 24.875 97.125 L 25.875 96.4375 L 26.210938 95.640625 L 23.511719 93.337891 L 22.804688 91.658203 L 19.189453 89.808594 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8097"
+       style="display:inline;mix-blend-mode:normal;fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 18.429688 88.28125 L 17.6875 91.375 L 17.625 92.4375 L 16.75 93.8125 L 15.601562 94.673828 L 16.193359 95.513672 L 17.125 94.4375 L 18.0625 94.125 L 19.625 94.9375 L 22 96.5 L 23.8125 98.1875 L 23.5 99.125 L 22.822266 101.20508 L 24 101.5 L 24.001953 101.51172 L 24.375 100 L 25.75 98.125 L 27.644531 96.546875 L 26.515625 95.900391 L 26.210938 95.640625 L 25.875 96.4375 L 24.875 97.125 L 23.0625 95.9375 L 21.4375 94.3125 L 19.4375 93.1875 L 18.375 93 L 18.625 90.9375 L 19.189453 89.808594 L 19.003906 89.714844 L 18.429688 88.28125 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8095"
+       style="display:inline;mix-blend-mode:normal;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 13.28125 84.367188 L 12.375 85.3125 L 11.8125 87.1875 L 11.0625 89.25 L 10.861328 90.111328 L 12.75 92 L 14.75 93 L 15.125 94 L 15.601562 94.673828 L 16.75 93.8125 L 17.625 92.4375 L 17.6875 91.375 L 18.429688 88.28125 L 18.119141 87.503906 L 14.142578 85.207031 L 13.28125 84.367188 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8090"
+       style="display:inline;mix-blend-mode:normal;fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 12.339844 83.451172 L 12.125 84.3125 L 11.3125 85.375 L 10.4375 86.8125 L 10.4375 88.5 L 10.152344 89.142578 L 10.625 89.875 L 10.861328 90.111328 L 11.0625 89.25 L 11.8125 87.1875 L 12.375 85.3125 L 13.28125 84.367188 L 12.339844 83.451172 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8088"
+       style="display:inline;mix-blend-mode:normal;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 6.9238281 78.128906 L 6.375 80.375 L 6.5625 81.875 L 5.75 84 L 5.3691406 84.828125 L 6.25 85.75 L 7.75 86.75 L 9.25 87.75 L 10.152344 89.142578 L 10.4375 88.5 L 10.4375 86.8125 L 11.3125 85.375 L 12.125 84.3125 L 12.339844 83.451172 L 10.695312 81.847656 L 10.164062 80.787109 L 8.484375 80.080078 L 6.9238281 78.128906 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8083"
+       style="display:inline;mix-blend-mode:normal;fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 5.859375 76.927734 L 5.75 77.0625 L 5.375 79.5 L 5.4375 81.0625 L 5.1875 82.4375 L 4.3867188 83.796875 L 5.3691406 84.828125 L 5.75 84 L 6.5625 81.875 L 6.375 80.375 L 6.9238281 78.128906 L 6.0097656 76.986328 L 5.859375 76.927734 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8081"
+       style="display:inline;mix-blend-mode:normal;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round"
+       d="M 1.1113281 72.919922 L 1 73.125 L 0.75 79.875 L 3.25 81.875 L 3.625 83 L 4.3867188 83.796875 L 5.1875 82.4375 L 5.4375 81.0625 L 5.375 79.5 L 5.75 77.0625 L 5.859375 76.927734 L 4.4199219 76.367188 L 2.3867188 75.041016 L 1.3261719 73.363281 L 1.1113281 72.919922 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7764"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 83.332031 92.916016 L 82.6875 92.625 L 81.375 92.9375 L 79.132812 93.597656 L 79.373047 93.957031 L 80.167969 94.222656 L 82.554688 93.779297 L 83.332031 92.916016 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8146"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 83.345703 84.916016 L 82.8125 85.5625 L 82.4375 87.9375 L 82.9375 89.5625 L 82.75 90.6875 L 84.214844 91.761719 L 84.587891 90.421875 L 85.382812 89.890625 L 87.21875 88.683594 L 86.974609 88.035156 L 84.410156 85.914062 L 83.345703 84.916016 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8144"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 82.576172 83.664062 L 81.5 85.0625 L 81.125 87.3125 L 81.375 89.3125 L 81.0625 91.25 L 80.625 92.0625 L 78.482422 92.619141 L 79.132812 93.597656 L 81.375 92.9375 L 82.6875 92.625 L 83.332031 92.916016 L 84.146484 92.011719 L 84.214844 91.761719 L 82.75 90.6875 L 82.9375 89.5625 L 82.4375 87.9375 L 82.8125 85.5625 L 83.345703 84.916016 L 82.996094 84.587891 L 82.576172 83.664062 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8142"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 79.484375 80.357422 L 76.6875 82.375 L 76.4375 84 L 74.1875 88.125 L 73.798828 88.748047 L 77.605469 91.304688 L 78.482422 92.619141 L 80.625 92.0625 L 81.0625 91.25 L 81.375 89.3125 L 81.125 87.3125 L 81.5 85.0625 L 82.576172 83.664062 L 82.554688 83.615234 L 80.167969 80.699219 L 79.484375 80.357422 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8140"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 78.207031 79.505859 L 76.8125 80.5625 L 75.125 82.0625 L 74.4375 83.9375 L 73.25 86.875 L 72.458984 87.847656 L 73.798828 88.748047 L 74.1875 88.125 L 76.4375 84 L 76.6875 82.375 L 79.484375 80.357422 L 78.753906 79.992188 L 78.207031 79.505859 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8138"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 74.699219 75.408203 L 73.6875 76.8125 L 72.4375 80.6875 L 72.375 82.75 L 71.3125 84.8125 L 70.402344 86.199219 L 71.947266 87.503906 L 72.458984 87.847656 L 73.25 86.875 L 74.4375 83.9375 L 75.125 82.0625 L 76.8125 80.5625 L 78.207031 79.505859 L 76.367188 77.871094 L 75.660156 76.544922 L 74.699219 75.408203 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8153"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 74.078125 74.673828 L 72.75 76.875 L 71.25 80.8125 L 71.1875 82.5 L 70.25 84.75 L 69.503906 85.441406 L 70.402344 86.199219 L 71.3125 84.8125 L 72.375 82.75 L 72.4375 80.6875 L 73.6875 76.8125 L 74.699219 75.408203 L 74.078125 74.673828 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8151"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 65.072266 65.958984 L 64.082031 64.523438 L 62.490234 63.904297 L 61.695312 62.136719 L 58.955078 59.308594 L 58.164062 58.697266 L 57.625 59.75 L 56.5 62.4375 L 56.375 64.5625 L 57.25 66.0625 L 60.625 68.5 L 63.8125 67.6875 L 65.072266 65.958984 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8170"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 68.710938 68.958984 L 68.501953 68.677734 L 66.644531 68.236328 L 65.869141 67.113281 L 65.125 68.1875 L 62 68.9375 L 60.625 69.375 L 60.4375 72 L 61.5 74.5625 L 61.5 77.5 L 61.115234 78.035156 L 61.783203 78.578125 L 63.345703 79.359375 L 64.1875 77.75 L 65.5 74.5 L 65.3125 73.0625 L 66.9375 70.9375 L 68.710938 68.958984 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8168"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 72.447266 77.667969 L 72.75 76.875 L 74.078125 74.673828 L 73.716797 74.246094 L 71.064453 72.125 L 69.337891 69.800781 L 68 71.375 L 67.25 72.1875 L 67.3125 74.4375 L 68.125 75.9375 L 69.1875 75.875 L 70.8125 77.0625 L 72.447266 77.667969 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8166"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 64.574219 79.972656 L 64.611328 79.992188 L 66.732422 81.582031 L 68.5 83.439453 L 69.119141 85.117188 L 69.503906 85.441406 L 70.25 84.75 L 71.1875 82.5 L 71.25 80.8125 L 72.068359 78.662109 L 69.875 77.3125 L 66.375 76.5625 L 65.375 77.0625 L 64.8125 79.375 L 64.574219 79.972656 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8164"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 64.574219 79.972656 L 64.8125 79.375 L 65.375 77.0625 L 66.375 76.5625 L 69.875 77.3125 L 72.068359 78.662109 L 72.447266 77.667969 L 70.8125 77.0625 L 69.1875 75.875 L 68.125 75.9375 L 67.3125 74.4375 L 67.25 72.1875 L 68 71.375 L 69.337891 69.800781 L 68.710938 68.958984 L 66.9375 70.9375 L 65.3125 73.0625 L 65.5 74.5 L 64.1875 77.75 L 63.345703 79.359375 L 64.574219 79.972656 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8162"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 54.035156 70.449219 L 55.595703 71.505859 L 56.568359 73.363281 L 57.541016 75.041016 L 59.396484 76.632812 L 59.958984 77.089844 L 60.25 76.3125 L 60.5625 75.0625 C 60.5625 75.0625 59.875016 74.25 59.625 74.25 C 59.374984 74.25 59.25 71.5 59.25 71.5 L 59.125 69.1875 L 57.1875 68 L 55.8125 66.9375 L 54.375 64.875 L 53.0625 65.3125 L 53.25 67.5 L 54.3125 69.5625 L 54.035156 70.449219 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8160"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 57.185547 57.943359 L 57.009766 57.806641 L 56.126953 58.601562 L 53.740234 59.396484 L 52.148438 60.988281 L 48.878906 63.904297 L 48.513672 65.082031 L 50.027344 67.175781 L 52.724609 69.537109 L 52.9375 68.6875 L 52.5625 67.25 L 52.625 65 L 55.25 62.9375 L 56.75 59.4375 L 57.185547 57.943359 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8158"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 57.185547 57.943359 L 56.75 59.4375 L 55.25 62.9375 L 52.625 65 L 52.5625 67.25 L 52.9375 68.6875 L 52.724609 69.537109 L 52.855469 69.650391 L 54.035156 70.449219 L 54.3125 69.5625 L 53.25 67.5 L 53.0625 65.3125 L 54.375 64.875 L 55.8125 66.9375 L 57.1875 68 L 59.125 69.1875 L 59.25 71.5 C 59.25 71.5 59.374984 74.25 59.625 74.25 C 59.875016 74.25 60.5625 75.0625 60.5625 75.0625 L 60.25 76.3125 L 59.958984 77.089844 L 61.115234 78.035156 L 61.5 77.5 L 61.5 74.5625 L 60.4375 72 L 60.625 69.375 L 62 68.9375 L 65.125 68.1875 L 65.869141 67.113281 L 65.072266 65.958984 L 63.8125 67.6875 L 60.625 68.5 L 57.25 66.0625 L 56.375 64.5625 L 56.5 62.4375 L 57.625 59.75 L 58.164062 58.697266 L 57.185547 57.943359 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7769"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 59.464844 90.996094 L 63.197266 94.839844 L 64.896484 96.099609 L 65.25 94.6875 L 64.5625 91.0625 L 63.75 88.6875 L 62.125 88.1875 L 61.5 89.1875 L 61.125 90.3125 L 59.464844 90.996094 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8133"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 73.820312 88.761719 L 73.5625 91.8125 L 73.875 94.25 L 74.875 96.6875 L 76.625 99 L 80.0625 100 L 80.0625 101.25 L 77.9375 100.625 L 74.9375 99.25 L 72.8125 97.75 L 71.5625 99.1875 L 71.25 100.5 L 70.386719 101.94141 L 71.417969 102.97266 L 73.273438 104.20898 L 74.423828 105.44727 L 75.130859 106.68555 L 77.515625 109.42383 L 79.195312 111.10352 L 79.427734 111.10352 L 79.373047 109.51367 L 79.902344 105.44727 L 80.433594 101.73438 L 80.609375 96.078125 L 79.585938 94.027344 L 79.373047 93.957031 L 77.605469 91.304688 L 73.820312 88.761719 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8131"
+       style="display:inline;fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 72.361328 87.78125 L 72.3125 92.1875 L 72.75 95 L 70.875 98.0625 L 70 100 L 69.371094 100.74414 L 69.826172 101.38086 L 70.386719 101.94141 L 71.25 100.5 L 71.5625 99.1875 L 72.8125 97.75 L 74.9375 99.25 L 77.9375 100.625 L 80.0625 101.25 L 80.0625 100 L 76.625 99 L 74.875 96.6875 L 73.875 94.25 L 73.5625 91.8125 L 73.820312 88.761719 L 72.361328 87.78125 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8129"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 70.408203 86.205078 L 70.0625 88.3125 L 68.125 89.25 L 66.25 89.8125 L 66.125 91.375 L 66.375 92.9375 L 66.375 95 L 65.886719 96.855469 L 67.439453 98.111328 L 68.5 99.525391 L 69.371094 100.74414 L 70 100 L 70.875 98.0625 L 72.75 95 L 72.3125 92.1875 L 72.361328 87.78125 L 71.947266 87.503906 L 70.408203 86.205078 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8127"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 64.654297 80.025391 L 63.125 81.9375 L 62.0625 84.5625 L 63.125 86.6875 L 66.3125 88.5625 L 68.8125 87.5625 L 69.371094 85.330078 L 69.119141 85.117188 L 68.5 83.439453 L 66.732422 81.582031 L 64.654297 80.025391 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8125"
+       style="display:inline;fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 63.669922 79.521484 L 61.9375 81.5625 L 60.5 83.3125 L 60.3125 86.8125 L 60.25 89.8125 L 58.667969 90.175781 L 59.464844 90.996094 L 61.125 90.3125 L 61.5 89.1875 L 62.125 88.1875 L 63.75 88.6875 L 64.5625 91.0625 L 65.25 94.6875 L 64.896484 96.099609 L 65.583984 96.609375 L 65.886719 96.855469 L 66.375 95 L 66.375 92.9375 L 66.125 91.375 L 66.25 89.8125 L 68.125 89.25 L 70.0625 88.3125 L 70.408203 86.205078 L 69.371094 85.330078 L 68.8125 87.5625 L 66.3125 88.5625 L 63.125 86.6875 L 62.0625 84.5625 L 63.125 81.9375 L 64.654297 80.025391 L 64.611328 79.992188 L 63.669922 79.521484 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8123"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 61.103516 78.023438 L 60.875 78.5625 L 59.5625 80.0625 L 56.625 81 L 55.125 80 L 54.3125 78.5 L 53.4375 79.8125 L 53.5625 81.8125 L 52.421875 83.742188 L 58.667969 90.175781 L 60.25 89.8125 L 60.3125 86.8125 L 60.5 83.3125 L 61.9375 81.5625 L 63.669922 79.521484 L 61.783203 78.578125 L 61.103516 78.023438 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8121"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 54.130859 70.513672 L 54.0625 72.375 L 53.5 73.8125 L 53.4375 75.4375 L 54.125 76.625 L 55.4375 77.9375 L 56.0625 79 L 57.4375 79.5 L 59.0625 78.6875 L 59.888672 77.035156 L 59.396484 76.632812 L 57.541016 75.041016 L 56.568359 73.363281 L 55.595703 71.505859 L 54.130859 70.513672 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8119"
+       style="display:inline;fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 52.71875 69.53125 L 52.625 70.1875 L 53.125 71.75 L 52.6875 74.1875 L 52.9375 77.8125 L 52.375 81.0625 L 51.425781 82.714844 L 52.421875 83.742188 L 53.5625 81.8125 L 53.4375 79.8125 L 54.3125 78.5 L 55.125 80 L 56.625 81 L 59.5625 80.0625 L 60.875 78.5625 L 61.103516 78.023438 L 59.888672 77.035156 L 59.0625 78.6875 L 57.4375 79.5 L 56.0625 79 L 55.4375 77.9375 L 54.125 76.625 L 53.4375 75.4375 L 53.5 73.8125 L 54.0625 72.375 L 54.130859 70.513672 L 52.855469 69.650391 L 52.71875 69.53125 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8117"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 48.513672 65.082031 L 48.083984 66.46875 L 48.347656 70.003906 L 48.701172 72.566406 L 48.4375 77.251953 L 48.4375 79.638672 L 51.425781 82.714844 L 52.375 81.0625 L 52.9375 77.8125 L 52.6875 74.1875 L 53.125 71.75 L 52.625 70.1875 L 52.71875 69.53125 L 50.027344 67.175781 L 48.513672 65.082031 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7781"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 96.777344,56.181641 -0.521485,1.271484 0.353516,2.740234 -0.353516,1.855469 -0.177734,4.595703 0.441406,2.210938 0.08984,2.65039 -0.08984,2.033203 -0.175781,2.298829 0.175781,3.888671 25.457029,25.898438 3.09375,2.82812 2.03125,2.38672 0.91797,0.35157 0.4082,-2.29688 -0.52929,-3.35937 0.26562,-3.09375 0.88282,-2.740238 -0.44141,-2.03125 0.0879,-2.830078 0.70703,-1.94336 -0.17578,-3.005859 -0.0898,-2.386719 0.57226,-1.716797 -1.89844,-1.464843 -4.06445,-2.828125 -2.29883,-2.47461 -1.58984,-1.15039 -1.32617,-0.529297 -0.61914,-1.945313 -4.68555,-2.65039 -2.47461,-1.414063 -1.14844,-1.591797 -0.26562,-1.501953 -0.97266,-2.033203 -1.41406,-0.353516 -2.47461,-2.121093 -3.88867,-4.332032 z"
+       transform="scale(0.26458333)" />
+    <path
+       id="path7776"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 106.17969 65.189453 L 108.0625 62.875 L 108.5625 61.1875 L 107.5625 59.625 L 105.25 58.125 L 103.0625 59.5 L 102.0293 61.005859 L 104.47461 63.728516 L 106.17969 65.189453 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8203"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066);stroke-opacity:1"
+       d="M 119.19531 77.605469 L 120.75 76.75 L 121.625 74.4375 L 120.875 72.25 L 119.5625 71.4375 L 118.625 70.5 L 118.125 69 L 115.4375 68.625 L 114.625 68.9375 L 113.125 71.25 L 112.28125 72.205078 L 113.22461 72.744141 L 117.91016 75.394531 L 118.5293 77.339844 L 119.19531 77.605469 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8201"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066);stroke-opacity:1"
+       d="M 132.6582 83.246094 L 130.5 81.3125 L 128.0625 80.875 L 126.625 81.8125 L 125.58789 82.777344 L 127.80859 84.322266 L 129.75391 85.824219 L 132.58203 83.439453 L 132.6582 83.246094 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8199"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066);stroke-opacity:1"
+       d="M 131.89648 77.302734 L 130.5625 77.6875 L 129.125 79.625 L 130.8125 80.5625 L 133.18555 81.888672 L 133.20117 81.847656 L 135.14648 80.017578 L 132.31641 78.046875 L 131.89648 77.302734 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8197"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066);stroke-opacity:1"
+       d="M 131.2168 76.101562 L 129.6875 77.0625 L 128.4375 78.25 L 127.3125 80 L 124.13477 81.765625 L 125.58789 82.777344 L 126.625 81.8125 L 128.0625 80.875 L 130.5 81.3125 L 132.6582 83.246094 L 133.18555 81.888672 L 130.8125 80.5625 L 129.125 79.625 L 130.5625 77.6875 L 131.89648 77.302734 L 131.2168 76.101562 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8195"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066);stroke-opacity:1"
+       d="M 128.03711 72.841797 L 127.8125 73.375 L 124.1875 74.8125 L 122.625 75.875 L 121.5 78.3125 L 121.10352 78.771484 L 121.44531 79.019531 L 123.74414 81.494141 L 124.13477 81.765625 L 127.3125 80 L 128.4375 78.25 L 129.6875 77.0625 L 131.2168 76.101562 L 131.16797 76.013672 L 130.28516 74.777344 L 128.03711 72.841797 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8193"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066);stroke-opacity:1"
+       d="M 119.75977 64.783203 L 118.25 65.8125 L 117.5 66.375 L 117.4375 67.375 L 118.4375 67.6875 L 119.6875 69.1875 L 121 70.8125 L 121.9375 71.9375 L 123.6875 73.3125 L 126.5625 72.6875 L 126.93359 71.947266 L 125.77734 71.330078 L 124.00977 69.384766 L 122.77148 67.792969 L 119.75977 64.783203 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8191"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066);stroke-opacity:1"
+       d="M 118.44531 63.591797 L 117.8125 64.8125 L 115.375 66.125 L 114.25 67.5625 L 113 68.625 L 110.94336 71.439453 L 112.28125 72.205078 L 113.125 71.25 L 114.625 68.9375 L 115.4375 68.625 L 118.125 69 L 118.625 70.5 L 119.5625 71.4375 L 120.875 72.25 L 121.625 74.4375 L 120.75 76.75 L 119.19531 77.605469 L 119.85547 77.869141 L 121.10352 78.771484 L 121.5 78.3125 L 122.625 75.875 L 124.1875 74.8125 L 127.8125 73.375 L 128.03711 72.841797 L 127.10156 72.037109 L 126.93359 71.947266 L 126.5625 72.6875 L 123.6875 73.3125 L 121.9375 71.9375 L 121 70.8125 L 119.6875 69.1875 L 118.4375 67.6875 L 117.4375 67.375 L 117.5 66.375 L 118.25 65.8125 L 119.75977 64.783203 L 119.05859 64.082031 L 118.44531 63.591797 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8189"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 113.89648 58.779297 L 111.0625 61 L 109.6875 62.8125 L 108.25 64.3125 L 107.20703 65.914062 L 108.36328 66.203125 L 109.33594 68.236328 L 109.60156 69.738281 L 110.75 71.330078 L 110.94336 71.439453 L 113 68.625 L 114.25 67.5625 L 115.375 66.125 L 117.8125 64.8125 L 118.44531 63.591797 L 116.84961 62.314453 L 115.96484 60.722656 L 113.89648 58.779297 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8187"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 108.79492 53.744141 L 108.0625 55.0625 L 106.75 56.375 L 107.3125 57.625 L 108.3125 59.125 L 109.75 60.25 L 112.0625 58.5 L 112.81445 57.769531 L 109.95508 55.154297 L 108.79492 53.744141 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8185"
+       style="display:inline;fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 108.01172 52.791016 L 106.6875 55.4375 L 105 56.75 L 102.75 57.75 L 101.19727 60.078125 L 102.0293 61.005859 L 103.0625 59.5 L 105.25 58.125 L 107.5625 59.625 L 108.5625 61.1875 L 108.0625 62.875 L 106.17969 65.189453 L 106.94922 65.849609 L 107.20703 65.914062 L 108.25 64.3125 L 109.6875 62.8125 L 111.0625 61 L 113.89648 58.779297 L 113.04883 57.982422 L 112.81445 57.769531 L 112.0625 58.5 L 109.75 60.25 L 108.3125 59.125 L 107.3125 57.625 L 106.75 56.375 L 108.0625 55.0625 L 108.79492 53.744141 L 108.01172 52.791016 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path8183"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="M 104.12109 49.498047 L 102.88477 50.027344 L 101.73438 51.353516 L 100.14453 52.679688 L 98.994141 54.359375 L 96.873047 55.949219 L 96.777344 56.181641 L 100.58594 59.396484 L 101.19727 60.078125 L 102.75 57.75 L 105 56.75 L 106.6875 55.4375 L 108.01172 52.791016 L 106.68555 51.177734 L 104.12109 49.498047 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7793"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 144.61133,48.234375 c -0.16291,0.480648 -0.36133,1.085937 -0.36133,1.085937 l 0.26562,2.121094 v 1.238282 l -0.35351,1.855468 0.17578,3.800782 -0.0879,0.972656 0.26562,3.535156 v 1.679688 l -0.35351,1.060546 -0.0898,3.271485 0.70703,1.236328 -0.0879,1.945312 -0.26563,1.94336 0.26563,2.828125 -0.5293,0.884765 0.26367,1.855469 0.70703,1.150391 2.03321,1.501953 2.74023,2.5625 0.35352,0.884766 1.32617,1.501953 1.59179,0.796875 0.70704,0.970703 1.06054,0.972656 1.06055,0.972656 0.35352,0.884766 0.88281,1.148437 2.29883,1.236328 1.67968,1.767579 0.44141,0.972656 1.14844,1.326172 2.21093,2.121091 2.74024,1.67969 0.9707,1.85547 1.32617,1.06055 1.32618,1.5039 2.47461,2.1211 0.26562,1.14843 1.50195,1.23828 0.46094,-0.0352 0.0703,-2.79297 0.5293,-2.0332 -0.17578,-3.53516 -0.26563,-2.0332 -0.26562,-3.625003 0.35351,-3.003906 0.44336,-4.066407 -0.97265,-3.535156 -0.0879,-3.005859 0.35351,-3.623047 0.91016,-3.015625 -1.70703,-0.697266 -1.32422,-0.707031 -1.85742,-1.679688 -1.76758,-2.386718 -2.91602,-1.414063 -2.21093,-1.855469 -1.41407,-1.767578 -1.85547,-1.326172 -1.85546,-1.857421 -2.47657,-0.882813 -1.58984,-2.298828 -1.50391,-1.855469 -0.9707,-1.767578 -3.18359,-1.767578 -0.97071,-1.679687 -2.82812,-2.208985 c 0,0 -1.06202,-1.227039 -1.9375,-2.236328 z"
+       transform="scale(0.26458333)" />
+    <path
+       id="path7788"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 144.61133,48.234375 c 0.87548,1.009289 1.9375,2.236328 1.9375,2.236328 l 2.82812,2.208985 0.97071,1.679687 3.18359,1.767578 0.9707,1.767578 1.50391,1.855469 1.58984,2.298828 2.47657,0.882813 1.85546,1.857421 1.85547,1.326172 1.41407,1.767578 2.21093,1.855469 2.91602,1.414063 1.76758,2.386718 1.85742,1.679688 1.32422,0.707031 1.94531,0.794922 1.94531,-0.707031 2.29688,-1.501953 0.70703,-1.679688 0.58789,-1.363281 -0.0566,-0.228516 -2.91797,-2.296875 -1.14844,-0.61914 -2.91601,-3.09375 -0.61914,-1.767578 -3.53516,-3.269532 -1.85742,-0.53125 -0.70703,-1.148437 -0.70703,-1.060547 -1.58985,-1.326172 -0.88476,-1.767578 -1.76758,-1.326172 -2.47461,-1.591797 -1.50195,-2.296875 -2.21094,-2.828125 -2.1211,-1.591797 -1.67968,-1.945312 -1.41407,-1.236328 -1.32617,-0.353516 -1.85547,1.943359 -0.70703,0.972657 V 44.8125 l -0.97265,0.972656 -1.23633,0.53125 c 0,0 -1.50437,0.972123 -1.76953,1.414063 -0.0841,0.140093 -0.0924,0.280831 -0.16797,0.503906 z"
+       transform="scale(0.26458333)" />
+    <path
+       id="path7805"
+       style="display:inline;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 193.3418,39.296875 -0.56641,1.185547 -0.26562,1.589844 0.4414,1.679687 -0.52929,2.210938 -0.0879,2.5625 c 0,0 0.97071,2.298294 0.97071,2.740234 0,0.441944 -0.44141,2.296875 -0.44141,2.296875 l -0.17578,3.978516 -0.44336,2.916015 0.17774,2.121094 0.0879,1.591797 0.61914,3.447266 -0.70703,2.5625 -0.26563,3.537109 0.35352,3.710937 0.35351,2.033204 0.53125,1.501953 1.67774,1.503906 1.67968,1.414062 1.06055,0.441407 2.0332,2.917968 2.91797,2.828125 1.76758,1.767579 1.23633,0.353515 1.06054,1.589844 1.50391,2.210937 2.5625,2.5625 2.47461,1.414063 1.41406,1.767583 2.56446,3.18164 2.20898,1.15039 1.5918,2.5625 2.03125,2.21093 h 0.41797 l -0.15235,-2.0332 1.50391,-6.54102 0.17578,-3.712886 -0.97266,-3.269531 0.0898,-3.09375 -0.44336,-4.154297 -0.17578,-2.033203 0.26562,-3.09375 0.44141,-5.65625 1.06054,-2.298828 -0.35351,-2.121094 -0.26563,-3.09375 0.23047,-1.802734 -1.99804,-1.998047 -1.41407,-1.414062 -3.44726,-0.884766 -2.0332,-2.5625 -1.14844,-2.386719 -3.09375,-1.148437 -2.1211,-1.767578 -0.61914,-2.121094 -3.26953,-1.945313 L 204,49.320312 l -0.61914,-1.236328 -5.39063,-3.359375 -2.82812,-3.800781 z"
+       transform="scale(0.26458333)" />
+    <path
+       id="path7800"
+       style="display:inline;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 193.3418,39.296875 1.82031,1.626953 2.82812,3.800781 5.39063,3.359375 0.61914,1.236328 1.85742,2.386719 3.26953,1.945313 0.61914,2.121094 2.1211,1.767578 3.09375,1.148437 1.14844,2.386719 2.0332,2.5625 3.44726,0.884766 1.41407,1.414062 2.47461,2.474609 2.0332,-0.175781 1.5918,-2.652344 1.23632,-0.707031 0.89258,-0.955078 -0.008,-0.01758 -0.97266,-1.236328 -1.67968,-0.972657 -1.41407,-1.238281 -1.06054,-1.767578 -2.03321,-1.767578 -1.50195,-1.326172 -0.61914,-0.882812 -3.625,-3.800782 -1.23633,-1.326171 -1.67969,-1.060547 -0.97265,-1.591797 -1.06055,-0.529297 -0.97266,-1.414063 -1.50195,-1.414062 -1.23828,-1.060547 -0.88281,-1.150391 -1.32617,-0.794922 -1.41407,-1.945312 -1.06054,-0.794922 -1.50196,-1.855469 -1.59179,-1.238281 -1.76758,-1.501953 -1.85547,0.882813 -1.94531,2.121093 -2.5625,2.210938 z"
+       transform="scale(0.26458333)" />
+    <path
+       id="path7909"
+       style="fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 240.58008 32.3125 L 240.50391 32.439453 L 240.24023 34.824219 L 240.41602 37.476562 L 240.50391 42.779297 L 240.0625 46.580078 L 240.59375 47.640625 L 240.68164 51.619141 L 240.24023 54.09375 L 240.59375 56.921875 L 240.32812 58.423828 L 240.32812 61.341797 L 240.32812 64.523438 L 240.50391 65.849609 L 240.59375 68.855469 L 241.03516 71.330078 L 240.76953 73.716797 L 240.41602 76.367188 L 240.94727 80.080078 L 241.21094 81.140625 L 269.05469 109.16016 L 271.08789 110.48633 L 271.91211 110.48633 L 271.9707 108.36328 L 271.79492 103.06055 L 271.35156 102 L 270.91016 98.464844 L 271.44141 95.105469 L 272.85547 91.128906 L 272.41211 88.035156 L 271.5293 86.001953 L 271.26367 83.527344 L 271.26367 79.902344 L 271.70508 76.544922 L 272.58984 74.6875 L 272.50195 71.505859 L 272.05859 70.179688 L 272.23633 66.822266 L 272.85547 63.375 L 272.7207 61.541016 L 271.17578 61.076172 L 269.9375 59.220703 L 268.52344 57.982422 L 265.16406 54.978516 L 263.83984 53.474609 L 262.42578 52.060547 L 259.94922 50.380859 L 259.1543 49.054688 L 258.09375 47.376953 L 256.85742 47.023438 L 255.70703 45.607422 L 253.93945 44.8125 L 251.55273 43.839844 L 250.8457 41.808594 L 249.69727 41.189453 L 248.10547 40.216797 L 247.57617 38.714844 L 247.13477 37.654297 L 245.63086 36.0625 L 243.59766 35.355469 L 242.00781 33.763672 L 240.58008 32.3125 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7904"
+       style="fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 240.58008 32.3125 L 242.00781 33.763672 L 243.59766 35.355469 L 245.63086 36.0625 L 247.13477 37.654297 L 247.57617 38.714844 L 248.10547 40.216797 L 249.69727 41.189453 L 250.8457 41.808594 L 251.55273 43.839844 L 253.93945 44.8125 L 255.70703 45.607422 L 256.85742 47.023438 L 258.09375 47.376953 L 259.1543 49.054688 L 259.94922 50.380859 L 262.42578 52.060547 L 263.83984 53.474609 L 265.16406 54.978516 L 268.52344 57.982422 L 269.9375 59.220703 L 271.17578 61.076172 L 272.94336 61.607422 L 275.41797 61.429688 L 276.21289 59.839844 L 277.80469 58.777344 L 278.95312 57.009766 L 280.01367 55.978516 L 280.01367 55.949219 L 248.8125 24.837891 L 245.98438 26.515625 L 245.27734 27.578125 L 243.95117 29.167969 L 241.30078 31.113281 L 240.58008 32.3125 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="path7760"
+       style="display:inline;fill:#676767;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 79.585938,94.027344 -0.302388,2.846276 0.354549,4.59559 -0.619638,3.18256 0.354586,4.8619 0.05469,1.58985 h 1.00586 l 1.148437,-1.23633 1.150391,-0.79688 0.970703,-1.50195 4.154297,-3.62305 0.707107,-2.74023 V 98.023438 95.990234 92.189453 90.15625 l -1.345779,-1.472656 -1.835938,1.207031 -0.794921,0.53125 -0.441407,1.589844 -1.591796,1.767578 -2.386719,0.443359 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="ccccccccccccccccccccccc" />
+    <path
+       id="path7772"
+       style="display:inline;fill:#676767;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 128.24862,87.157128 -0.74903,1.451632 -0.48473,2.209943 0.44095,2.121975 -0.1767,2.915632 -0.0437,3.227826 -5.3e-4,4.417734 0.39876,-2.2979 -0.92853,5.61282 0.79445,2.29871 0.51988,2.07591 0.23242,0.0898 1.06055,-1.23828 0.79492,-0.88281 1.32617,-1.50391 0.88282,-0.35352 3.4483,-3.5347 0.79545,-3.18259 v -5.214845 -2.65039 -2.917969 -1.589844 -3.625 l 4.5e-4,-2.475031 -1.32628,-2.032283 -0.0879,-0.0625 -1.94531,1.830078 -0.61914,1.591797 -3.57942,1.854436 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccc" />
+    <path
+       id="path7784"
+       style="display:inline;fill:#676767;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 176.98047,76.623047 -1.57307,1.336246 -0.4861,4.109183 0.8834,4.199102 -0.39737,3.756127 -0.48755,3.978019 1.0607,2.871323 -0.39729,3.492423 -0.70664,2.60772 0.57352,3.09322 0.13362,2.43095 0.50422,2.39522 0.68945,-0.0527 1.76758,-1.85742 0.17578,-1.23633 1.23828,-1.06054 1.85547,-1.15039 1.15039,-1.14844 1.05964,-1.41403 0.61872,-2.73978 V 96.961475 95.106006 92.365772 90.244638 87.94581 87.238779 84.322763 81.316904 78.576669 76.10206 l -0.26418,-2.473651 -1.62316,-2.159659 -0.58789,1.363281 -0.70703,1.679688 -2.29688,1.501953 -1.94531,0.707031 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccc" />
+    <path
+       id="path7796"
+       style="display:inline;fill:#676767;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;filter:url(#filter1066)"
+       d="m 223.50195,68.873047 -0.14836,1.744676 0.37102,2.339308 -0.58399,2.746094 -0.24804,1.673828 0.99609,5.53125 -0.26562,3.09375 0.17578,2.033203 -0.36914,4.216797 0.0352,3.34375 -0.0898,3.707031 0.26172,4.275386 -0.19141,5.22852 0.15235,2.0332 h 1.17382 l 0.53125,-1.15039 2.1211,-2.12109 2.82812,-2.47461 1.14844,-1.06055 1.23744,-2.91705 v -2.828121 -2.121093 -3.09375 -2.828125 -3.978516 -1.501953 -3.09375 -3.712891 -2.208984 -2.208985 -2.210937 -2.474609 -1.591797 l -0.17678,-2.032133 -1.22864,-1.308631 -0.89258,0.955078 -1.23632,0.707031 -1.7168,1.027344 -2.0957,0.863281 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccc" />
+    <path
+       id="path7900"
+       style="fill:#676767;fill-opacity:1;stroke:none;stroke-width:0.999999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 272.36715,62.424899 -0.66073,1.568819 -0.1772,2.916936 -0.35451,3.622587 0.35497,1.679725 -4.9e-4,2.474534 0.1759,1.857422 -0.44141,3.357422 v 3.625 l 0.26563,2.474609 -0.35463,2.298368 0.001,3.005362 0.26532,3.799786 -0.53125,3.359375 0.4414,3.535156 0.0898,3.80059 -0.26617,2.91624 0.7369,1.7695 h 1.03125 l 0.97266,-1.32617 0.97265,-0.70704 0.5293,-1.41406 0.97265,-0.61914 1.50196,-1.5039 1.06054,-0.44141 0.97266,-1.23633 0.90586,-2.97611 -0.0664,-20.565384 -0.0664,-22.244766 -0.68513,-1.473504 -1.06055,1.03125 -1.14843,1.767578 -1.5918,1.0625 -1.76719,0.971126 -2.38622,0.08935 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccc" />
+    <path
+       style="fill:#717171;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3.8860677,21.332031 0.2149739,-0.479557 -0.4299479,-0.198438 -0.082682,0.09922 0.1157552,0.479557 z"
+       id="path8048" />
+    <path
+       style="fill:#484848;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 9.673828,26.061458 9.458854,27.73164 9.3927082,26.160677 Z"
+       id="path8104" />
+    <path
+       style="fill:#484848;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 9.1115884,28.938802 -0.1157552,-0.876433 0.082682,-1.008724 0.1157552,1.07487 0.066146,0.396875 z"
+       id="path8106" />
+    <path
+       style="fill:#484848;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 22.109245,24.540104 0.03307,0.859896 0.04961,0.843359 -0.132292,0.479557 -0.04961,0.529167 0.148828,0.396875 -0.01654,-0.496094 0.09922,-0.578776 0.231511,-0.562239 -0.08268,-0.496094 -0.06615,-0.545703 0.03307,-0.479558 -0.04961,-0.198437 z"
+       id="path8173" />
+    <path
+       style="fill:#484848;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 21.646224,29.054557 0.04961,-1.554427 0.148828,0.677995 0.06615,0.380338 0.03307,0.264584 z"
+       id="path8175" />
+    <path
+       style="fill:#484848;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 22.919531,26.722916 0.181901,-0.876432 -0.132292,-0.810286 -0.09922,-0.79375 0.165364,-0.446485 -0.01654,0.760677 0.281119,1.124479 -0.09922,0.529167 z"
+       id="path8177" />
+    <path
+       style="fill:#484848;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 21.828125,24.870833 -0.264584,0.56224 -0.248046,-0.06615 -0.03307,-0.479558 z"
+       id="path8179" />
+  </g>
+</svg>
