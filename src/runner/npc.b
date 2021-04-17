@@ -71,7 +71,7 @@ def moveNpcSchedule(c, delta) {
 
     dest := c.npc.schedule[c.npc.activeSchedule].pos;
     dist := c.move.distanceTo(dest[0], dest[1], dest[2]);
-    print(c.npc.name + " move to " + dest[0] + "," + dest[1] + "," + dest[2] + " distance=" + dist);
+    print(c.npc.name + " move to " + dest[0] + "," + dest[1] + "," + dest[2] + " distance=" + dist + " curr=" + c.move.x + "," + c.move.y + "," + c.move.z);
 
     # already there?
     if(dist <= 8) {
@@ -81,12 +81,13 @@ def moveNpcSchedule(c, delta) {
             del c.npc["path"];
             del c.npc["step"];
         }
+        c["anchor"] := dest;
         return null;
     }
 
     # are we on a path?
     if(c.npc["path"] != null) {
-        if(c.npc.step >= len(c.npc.path)) {
+        if(c.npc.step >= len(c.npc.path)/3) {
             # finished path?
             del c.npc["path"];
             del c.npc["step"];
@@ -106,7 +107,7 @@ def moveNpcSchedule(c, delta) {
             dx := normalize(dest[0] - c.move.x);
             dy := normalize(dest[1] - c.move.y);
             print(c.npc.name + " abs move: " + dx + "," + dy);
-            if(c.move.moveInDir(dx, dy, delta, null)) {
+            if(c.move.moveInDir(dx, dy, delta, null, null)) {
                 return ANIM_MOVE;
             }
             return ANIM_STAND;
@@ -130,17 +131,16 @@ def moveNpcSchedule(c, delta) {
 
 def takePathStep(c, delta) {
     # take a step on path
-    nextPos := c.npc.path[c.npc.step]
-    dx := nextPos[0] - c.move.x;
-    dy := nextPos[1] - c.move.y;
-    print(c.npc.name + " path step (" + c.npc.step + "/" + len(c.npc.path) + "): " + dx + "," + dy);
-    moved := c.move.moveInDir(dx, dy, delta, (newX, newY, newZ) => {
+    nextX := c.npc.path[c.npc.step * 3];
+    nextY := c.npc.path[(c.npc.step * 3) + 1];
+    deltaX := nextX - c.move.x;
+    deltaY := nextY - c.move.y;
+    moved := c.move.moveInDir(deltaX, deltaY, delta, null, (newX, newY, newZ) => {
         c.npc.step := c.npc.step + 1;
-        # return false to not interrupt the move
-        return false;
     });
     if(moved) {
         return ANIM_MOVE;
     }
+    print(c.npc.name + " failed to move on path. From: " + c.move.x + "," + c.move.y + " To:" + nextX + "," + nextY);
     return ANIM_STAND;
 }

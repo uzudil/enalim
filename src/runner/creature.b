@@ -139,7 +139,7 @@ def moveCreatureRandomMove(c, delta) {
     if(dist > 8) {
         dirChange := true;
     } else {
-        if(c.move.moveInDir(d[0], d[1], delta, null) = false) {
+        if(c.move.moveInDir(d[0], d[1], delta, null, null) = false) {
             dirChange := true;
         }
     }

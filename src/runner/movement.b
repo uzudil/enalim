@@ -23,7 +23,7 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView) {
             move.set(saved.x, saved.y, saved.z);
             move.dir := saved.dir;
         },
-        "moveInDir": (move, dx, dy, delta, interceptMove) => {
+        "moveInDir": (move, dx, dy, delta, interceptMove, onPosChange) => {
             move.dir := getDir(dx, dy);
             moved := true;
 
@@ -51,6 +51,9 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView) {
                     }
                     moveShape(move.x, move.y, move.z, newX, newY, newZ);
                     move.set(newX, newY, newZ);
+                    if(onPosChange != null) {
+                        onPosChange(newX, newY, newZ);
+                    }
                 } else {
                     # player is blocked
                     moved := false;
@@ -100,9 +103,7 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView) {
         "erase": move => eraseShape(move.x, move.y, move.z),
         "setShape": (move, shape) => setShape(move.x, move.y, move.z, shape),
         "distanceTo": (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),
-        "findPath": (move, destX, destY, destZ) => {
-            return null;
-        },
+        "findPath": (move, destX, destY, destZ) => findPath(move.x, move.y, move.z, destX, destY, destZ),
     };
 }
 

@@ -192,12 +192,12 @@ def eventsGameplay(delta, fadeDir) {
 }
 
 def playerMove(dx, dy, delta) {
-    moved := player.move.moveInDir(dx, dy, delta, checkTeleportLocations);
+    moved := player.move.moveInDir(dx, dy, delta, checkTeleportLocations, null);
     if(moved = false && dx != 0 && dy != 0) {
-        moved := player.move.moveInDir(0, dy, delta, checkTeleportLocations);
+        moved := player.move.moveInDir(0, dy, delta, checkTeleportLocations, null);
     }
     if(moved = false && dx != 0 && dy != 0) {
-        moved := player.move.moveInDir(dx, 0, delta, checkTeleportLocations);
+        moved := player.move.moveInDir(dx, 0, delta, checkTeleportLocations, null);
     }
     if(moved) {
         setRoofVisiblity();
