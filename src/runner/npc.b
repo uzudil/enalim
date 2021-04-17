@@ -41,15 +41,17 @@ def evalNpcSchedules(hour) {
     array_foreach(creatures, (i, c) => {
         if(c.npc != null) {
             if(c.npc["schedule"] != null) {
-                index := array_find_index(c.npc.schedule, sched => hour >= sched.from && hour < sched.to);
+                index := array_find_index(c.npc.schedule, sched => {
+                    if(sched.from < sched.to) {
+                        return hour >= sched.from && hour < sched.to;
+                    } else {
+                        return hour >= sched.from || hour < sched.to;
+                    }
+                });
                 if(index != c.npc["activeSchedule"]) {
                     c.npc["activeSchedule"] := index;
                     c.npc["activeScheduleChange"] := true;
                     print(c.npc.name + " active schedule is now:" + c.npc.activeSchedule);
-                    #dest := c.npc.schedule[c.npc.activeSchedule].pos;
-                    #print(c.npc.name + " schedule change movement to " + dest[0] + "," + dest[1] + "," + dest[2]);
-                    #dist := c.move.distanceTo(dest[0], dest[1], dest[2]);
-                    #print(c.npc.name + " schedule change distance=" + dist);
                 }
             }
         }
@@ -70,18 +72,20 @@ def moveNpcSchedule(c, delta) {
     }
 
     dest := c.npc.schedule[c.npc.activeSchedule].pos;
-    dist := c.move.distanceTo(dest[0], dest[1], dest[2]);
-    print(c.npc.name + " move to " + dest[0] + "," + dest[1] + "," + dest[2] + " distance=" + dist + " curr=" + c.move.x + "," + c.move.y + "," + c.move.z);
+    print(c.npc.name + " move to " + dest[0] + "," + dest[1] + "," + dest[2] + 
+        " curr=" + c.move.x + "," + c.move.y + "," + c.move.z);
 
     # already there?
-    if(dist <= 8) {
+    if(c.move.isAt(dest[0], dest[1], dest[2])) {
         print(c.npc.name + " schedule change done");
         del c.npc["activeScheduleChange"];
         if(c.npc["path"] != null) {
             del c.npc["path"];
             del c.npc["step"];
         }
-        c["anchor"] := dest;
+        c["anchor"][0] := dest[0];
+        c["anchor"][1] := dest[1];
+        c["anchor"][2] := dest[2];
         return null;
     }
 
