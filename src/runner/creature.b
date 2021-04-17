@@ -61,6 +61,7 @@ def restoreCreature(savedCreature) {
         "id": savedCreature.id,
         "template": tmpl,
         "move": move,
+        "anchor": [ move.x, move.y, move.z ],
         "standTimer": 0,
         "npc": decodeNpc(savedCreature.npc),
     };
@@ -75,6 +76,7 @@ def setCreature(x, y, z, creature) {
             "id": id,
             "template": creature,
             "move": newMovement(x, y, z, creature.baseWidth, creature.baseHeight, creature.speed, false),
+            "anchor": [ x, y, z ],
             "standTimer": 0,
             "npc": null,
         };
@@ -103,27 +105,13 @@ def moveCreatures(delta) {
             return true;
         }
 
-        if(c.npc = null) {            
+        if(c.npc = null) {
             animation := moveCreatureRandom(c, delta);
         } else {
             animation := moveNpc(c, delta);
         }
         c.move.setAnimation(animation, c.template.animSpeed);
     });
-}
-
-def moveNpc(c, delta) {
-    if(c.standTimer > 0) {
-        animation := ANIM_STAND;
-        c.standTimer := c.standTimer - delta;
-    } else {
-        animation := ANIM_MOVE;
-        moveCreatureRandomMove(c, delta);
-        if(random() > 0.995) {
-            c.standTimer := 3;
-        }
-    }
-    return animation;
 }
 
 # directional random walk with pausing
@@ -143,7 +131,19 @@ def moveCreatureRandom(c, delta) {
 
 def moveCreatureRandomMove(c, delta) {
     d := getDelta(c.move.dir);
-    if(c.move.moveInDir(d[0], d[1], delta, null) = false) {
+    dist := distance(
+        c.anchor[0], c.anchor[1], c.anchor[2], 
+        c.move.x + d[0], c.move.y + d[1], c.move.z
+    );
+    dirChange := false;
+    if(dist > 8) {
+        dirChange := true;
+    } else {
+        if(c.move.moveInDir(d[0], d[1], delta, null) = false) {
+            dirChange := true;
+        }
+    }
+    if(dirChange) {
         c.move.dir := int(random() * 8);
     }
 }

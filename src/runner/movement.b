@@ -99,6 +99,10 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView) {
         "setAnimation": (move, animation, anim_speed) => setAnimation(move.x, move.y, move.z, animation, move.dir, anim_speed),
         "erase": move => eraseShape(move.x, move.y, move.z),
         "setShape": (move, shape) => setShape(move.x, move.y, move.z, shape),
+        "distanceTo": (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),
+        "findPath": (move, destX, destY, destZ) => {
+            return null;
+        },
     };
 }
 

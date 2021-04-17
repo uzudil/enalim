@@ -173,3 +173,10 @@ def asPercent(n) {
 def startsWith(str, prefix) {
     return substr(str, 0, len(prefix)) = prefix;
 }
+
+def normalize(x) {
+    if(x = 0) {
+        return 0;
+    }
+    return x/abs(x);
+}

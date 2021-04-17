@@ -33,6 +33,20 @@ const PLAYER_SHAPE = "lydell";
 
 const EVENTS_MAP = {};
 
+const REPLACE_SHAPES = {
+    "door.wood.y": "door.wood.x",
+    "door.wood.x": "door.wood.y",
+    "door.black.y": "door.black.x",
+    "door.black.x": "door.black.y",
+};
+
+# called when the hour changes
+def onHour(hour) {
+    print("* HOUR tick: " + hour);
+    evalNpcSchedules(hour);
+    print("* HOUR tick done");
+}
+
 # called on every frame
 def events(delta, fadeDir) {
     player.elapsedTime := player.elapsedTime + delta;
@@ -154,12 +168,16 @@ def eventsGameplay(delta, fadeDir) {
     }
 
     if(isPressed(KeySpace)) {
-        if(findShapeNearby("door.wood.y", (x,y,z) => replaceShape(x, y, z, "door.wood.x")) = false) {
-            if(findShapeNearby("door.wood.x", (x,y,z) => replaceShape(x, y, z, "door.wood.y")) = false) {
-                if(operateWindow() = false) {
-                    if(findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
-                        scriptedActionNearby();
-                    }
+        handled := array_find(
+            keys(REPLACE_SHAPES), 
+            shape => findShapeNearby(shape, (x,y,z) => replaceShape(
+                x, y, z, REPLACE_SHAPES[shape]
+            ))
+        );
+        if(handled = null) {
+            if(operateWindow() = false) {
+                if(findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
+                    scriptedActionNearby();
                 }
             }
         }
