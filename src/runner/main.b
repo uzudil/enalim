@@ -102,7 +102,7 @@ def eventsTitle(delta, fadeDir) {
         delAllMessages();
         player.mode := MODE_TITLE2;
         # all black
-        fadeViewTo(100, 100); 
+        fadeViewTo(500, 500); 
     } else {
         moveCreatures(delta);
     }
