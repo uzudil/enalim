@@ -6,7 +6,7 @@ const ghost = {
         "": "I... oooo... arakw..."
     },
     "schedule": [
-        { "from": 5, "to": 21, "pos": [ 4974, 4910, 1 ], "movement": "anchor" },
+        { "from": 5, "to": 21, "pos": [ 4974, 4934, 1 ], "movement": "anchor" },
         { "from": 21, "to": 5, "pos": [ 4974, 4971, 1 ], "movement": "anchor" },
     ],    
 };
@@ -16,7 +16,7 @@ const MAP_24_24 = {
         registerNpc(ghost);
     },
     "init": this => {
-        setNpc(4974, 4971, 1, ghost);
+        setNpc(4974, 4934, 1, ghost);
     },
     "teleport": (this, x, y, z) => {
         if(x >= 4996 && x <= 4999 && y = 4986 && z = 1) {

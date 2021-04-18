@@ -107,20 +107,21 @@ def moveNpcSchedule(c, delta) {
         if(c.npc.nextPathSearch < 0) {
             del c.npc["nextPathSearch"];
         } else {
-            # try to move in the right direction
-            dx := normalize(dest[0] - c.move.x);
-            dy := normalize(dest[1] - c.move.y);
-            print(c.npc.name + " abs move: " + dx + "," + dy);
-            if(c.move.moveInDir(dx, dy, delta, null, null)) {
-                return ANIM_MOVE;
-            }
-            return ANIM_STAND;
+            return moveCreatureRandom(c, delta);
         }
     }
     
     # try to get there via astar            
+    print("+++ " + c.npc.name + " calling findPath!");
     path := c.move.findPath(dest[0], dest[1], dest[2]);
     print("+++ " + c.npc.name + " path finder: " + path);
+    if(path = null) {
+        if(findCloserReachablePos(c, dest)) {
+            print("+++ trying findPath again to closer pos: " + dest);
+            path := c.move.findPath(dest[0], dest[1], dest[2]);
+            print("+++ " + c.npc.name + " closer path finder: " + path);
+        }
+    }   
     if(path != null) {
         c.npc["path"] := path;
         c.npc["step"] := 0;
@@ -132,6 +133,33 @@ def moveNpcSchedule(c, delta) {
     return ANIM_STAND;
 }
 
+def findCloserReachablePos(c, dest) {
+    minX := c.move.x - VIEW_SIZE/2 + 4;
+    maxX := c.move.x + VIEW_SIZE/2 - 4;
+    minY := c.move.y - VIEW_SIZE/2 + 4;
+    maxY := c.move.y + VIEW_SIZE/2 - 4;
+    changed := false;
+    if(dest[0] < minX) {
+        dest[0] := minX;
+        changed := true;
+    }
+    if(dest[0] > maxX) {
+        dest[0] := maxX;
+        changed := true;
+    }
+    if(dest[1] < minY) {
+        dest[1] := minY;
+        changed := true;
+    }
+    if(dest[1] > maxY) {
+        dest[1] := maxY;
+        changed := true;
+    }
+    if(changed) {
+        dest[2] := c.move.z;
+    }
+    return changed;
+}
 
 def takePathStep(c, delta) {
     # take a step on path

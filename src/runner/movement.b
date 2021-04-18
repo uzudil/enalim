@@ -83,7 +83,8 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView) {
                 }
             }
 
-            if(newZ > 0 && newZ <= move.z + 1 && inspectUnder(newX, newY, newZ, move.width, move.height)) {
+            #if(newZ > 0 && newZ <= move.z + 1 && inspectUnder(newX, newY, newZ, move.width, move.height)) {
+            if(newZ > 0 && newZ <= move.z + 1) {
                 # drop down
                 while(newZ > 0 && standOnShape(newX, newY, newZ, move.width, move.height) = false) {
                     newZ := newZ - 1;

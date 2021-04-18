@@ -11,6 +11,8 @@ const MESSAGE_R = 255;
 const MESSAGE_G = 220;
 const MESSAGE_B = 30;
 
+const VIEW_SIZE = 64;
+
 const SECTIONS = {
     "21,20": MAP_21_20,
     "25,25": MAP_25_25,
