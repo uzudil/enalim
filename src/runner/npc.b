@@ -72,8 +72,8 @@ def moveNpcSchedule(c, delta) {
     }
 
     dest := c.npc.schedule[c.npc.activeSchedule].pos;
-    print(c.npc.name + " move to " + dest[0] + "," + dest[1] + "," + dest[2] + 
-        " curr=" + c.move.x + "," + c.move.y + "," + c.move.z);
+    # print(c.npc.name + " move to " + dest[0] + "," + dest[1] + "," + dest[2] + 
+    #    " curr=" + c.move.x + "," + c.move.y + "," + c.move.z);
 
     # already there?
     if(c.move.isAt(dest[0], dest[1], dest[2])) {
