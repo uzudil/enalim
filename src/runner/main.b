@@ -388,6 +388,14 @@ def inspectRoof() {
     return false;
 }
 
+def forBase(w, h, fx) {
+    range(0, w, 1, x => {
+        range(0, h, 1, y => {
+            fx(x, y);
+        });
+    });
+}
+
 def addTimeout(ttl, cleanupFx, param) {
     player.timeouts[len(player.timeouts)] := [player.elapsedTime + ttl, param, cleanupFx];
 }
