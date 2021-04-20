@@ -124,7 +124,7 @@ def eventsTitle3(delta, fadeDir) {
     if(isPressed(KeySpace)) {
         delAllMessages();
         player.mode := MODE_GAME;
-        player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_MOVE_SPEED, true);
+        player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_MOVE_SPEED, true, false);
         player.move.setShape(PLAYER_SHAPE);
         player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
         stopCreatures();

@@ -1,14 +1,15 @@
-def decodeMovement(savedMove, width, height, speed, centerView) {
-    move := newMovement(0, 0, 0, width, height, speed, centerView);
+def decodeMovement(savedMove, width, height, speed, centerView, isFlying) {
+    move := newMovement(0, 0, 0, width, height, speed, centerView, isFlying);
     move.decode(savedMove);
     return move;
 }
 
-def newMovement(startX, startY, startZ, width, height, speed, centerView) {
+def newMovement(startX, startY, startZ, width, height, speed, centerView, isFlying) {
     return {
         "x": startX,
         "y": startY,
         "z": startZ,
+        "isFlying": isFlying,
         "centerView": centerView,
         "scrollOffsetX": 0,
         "scrollOffsetY": 0,
@@ -44,7 +45,7 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView) {
                     }
                 }
 
-                newZ := moveShape(move.x, move.y, move.z, newX, newY);
+                newZ := moveShape(move.x, move.y, move.z, newX, newY, move.isFlying);
                 if(newZ > -1) {
                     if(move.centerView) {
                         moveViewTo(newX, newY);
@@ -80,7 +81,7 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView) {
         "setShape": (move, shape) => setShape(move.x, move.y, move.z, shape),
         "distanceTo": (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),
         "distanceXyTo": (move, nx, ny) => distance(move.x, move.y, move.z, nx, ny, move.z),
-        "findPath": (move, destX, destY, destZ) => findPath(move.x, move.y, move.z, destX, destY, destZ),
+        "findPath": (move, destX, destY, destZ) => findPath(move.x, move.y, move.z, destX, destY, destZ, move.isFlying),
     };
 }
 
