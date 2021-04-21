@@ -102,8 +102,6 @@ def stopCreatures() {
 
 def moveCreatures(delta) {
     array_foreach(creatures, (i, c) => {
-        # todo: instead of isInView, the view should maintain "origins" outside its borders (an extra VIEW_BORDER size?)
-        # and just use the regular validPos returned by toViewPos
         if(isInView(c.move.x, c.move.y) = false) {
             return true;
         }

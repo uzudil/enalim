@@ -18,7 +18,6 @@ player := {
     "teleportPos": null,
     "convo": null,
     "elapsedTime": 0,
-    "timeouts": [],
 };
 
 # the player's shape size
@@ -50,15 +49,6 @@ def onHour(hour) {
 # called on every frame
 def events(delta, fadeDir) {
     player.elapsedTime := player.elapsedTime + delta;
-
-    # expire any timeouts
-    array_remove(player.timeouts, e => {
-        if(player.elapsedTime >= e[0]) {
-            e[2](e[1]);
-            return true;
-        }
-        return false;
-    });
 
     EVENTS_MAP[player.mode](delta, fadeDir);
 
@@ -394,10 +384,6 @@ def forBase(w, h, fx) {
             fx(x, y);
         });
     });
-}
-
-def addTimeout(ttl, cleanupFx, param) {
-    player.timeouts[len(player.timeouts)] := [player.elapsedTime + ttl, param, cleanupFx];
 }
 
 def timedMessage(x, y, z, message) {
