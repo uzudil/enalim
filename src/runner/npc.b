@@ -86,6 +86,7 @@ def moveNpcSchedule(c, delta) {
         c["anchor"][0] := dest[0];
         c["anchor"][1] := dest[1];
         c["anchor"][2] := dest[2];
+        c.movement := c.npc.schedule[c.npc.activeSchedule].movement;
         return null;
     }
 

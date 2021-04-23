@@ -7,6 +7,7 @@ creaturesTemplates := {
         "baseWidth": 4,
         "baseHeight": 4,
         "isFlying": false,
+        "movement": "anchor",
     },
     "monk-blue": {
         "shape": "monk-blue",
@@ -15,6 +16,7 @@ creaturesTemplates := {
         "baseWidth": 2,
         "baseHeight": 2,
         "isFlying": false,
+        "movement": "anchor",
     },
     "ghost": {
         "shape": "ghost",
@@ -23,6 +25,7 @@ creaturesTemplates := {
         "baseWidth": 2,
         "baseHeight": 2,
         "isFlying": true,
+        "movement": "anchor",
     }
 };
 
@@ -45,6 +48,7 @@ def pruneCreatures(sectionX, sectionY) {
                 "shape": c.template.shape,
                 "move": c.move.encode(),
                 "npc": encodeNpc(c.npc),
+                "movement": c.movement,
             };
             print("* Pruning creature: " + c.template.shape + " " + c.id);
         }
@@ -67,6 +71,7 @@ def restoreCreature(savedCreature) {
         "anchor": [ move.x, move.y, move.z ],
         "standTimer": 0,
         "npc": decodeNpc(savedCreature.npc),
+        "movement": savedCreature.movement,
     };
 }
 
@@ -82,6 +87,7 @@ def setCreature(x, y, z, creature) {
             "anchor": [ x, y, z ],
             "standTimer": 0,
             "npc": null,
+            "movement": creature.movement,
         };
         c.move.setShape(creature.shape);
         creatures[len(creatures)] := c;
@@ -117,14 +123,18 @@ def moveCreatures(delta) {
 
 # directional random walk with pausing
 def moveCreatureRandom(c, delta) {
-    if(c.standTimer > 0) {
-        animation := ANIM_STAND;
-        c.standTimer := c.standTimer - delta;
+    if(c.movement = "stand") {
+        return ANIM_STAND;
     } else {
-        animation := ANIM_MOVE;
-        moveCreatureRandomMove(c, delta);
-        if(random() > 0.995) {
-            c.standTimer := 3;
+        if(c.standTimer > 0) {
+            animation := ANIM_STAND;
+            c.standTimer := c.standTimer - delta;
+        } else {
+            animation := ANIM_MOVE;
+            moveCreatureRandomMove(c, delta);
+            if(random() > 0.995) {
+                c.standTimer := 3;
+            }
         }
     }
     return animation;
