@@ -402,5 +402,7 @@ def main() {
     EVENTS_MAP[MODE_TITLE3] := (s, d,f) => eventsTitle3(d, f);
     EVENTS_MAP[MODE_GAME] := (s, d,f) => eventsGameplay(d, f);
 
+    setPathThroughShapes(keys(REPLACE_SHAPES));
+
     fadeViewTo(TITLE_X, TITLE_Y);    
 }
