@@ -347,7 +347,11 @@
                 { "name": "step.3.y", "size": [ 1, 4, 3], "pos": [96, 48] },
                 { "name": "step.4.y", "size": [ 1, 4, 4], "pos": [144, 40] },
                 { "name": "step.5.y", "size": [ 1, 4, 5], "pos": [192, 32] },
-                { "name": "step.6.y", "size": [ 1, 4, 6], "pos": [240, 24] }
+                { "name": "step.6.y", "size": [ 1, 4, 6], "pos": [240, 24] },
+                { "name": "item.bottle", "size": [ 1, 1, 1], "pos": [0, 208] },
+                { "name": "item.book.1", "size": [ 1, 1, 1], "pos": [16, 208] },
+                { "name": "item.book.2", "size": [ 1, 1, 1], "pos": [32, 208] },
+                { "name": "item.candle", "size": [ 1, 1, 1], "pos": [48, 208] }
             ]
         }        
     ],    
