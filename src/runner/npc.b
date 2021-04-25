@@ -174,6 +174,11 @@ def takePathStep(c, delta) {
     if(moved) {
         return ANIM_MOVE;
     }
-    print(c.npc.name + " failed to move on path. From: " + c.move.x + "," + c.move.y + " To:" + nextX + "," + nextY);
+    if(c.move.operateDoorNearby() != null) {
+        # a door opened: recalc path
+        c.npc["path"] := null;
+    } else {
+        print(c.npc.name + " failed to move on path. From: " + c.move.x + "," + c.move.y + " To:" + nextX + "," + nextY);
+    }
     return ANIM_STAND;
 }

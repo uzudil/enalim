@@ -114,7 +114,7 @@ def eventsTitle3(delta, fadeDir) {
     if(isPressed(KeySpace)) {
         delAllMessages();
         player.mode := MODE_GAME;
-        player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_MOVE_SPEED, true, false);
+        player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_Z, PLAYER_SHAPE, PLAYER_MOVE_SPEED, true, false);
         player.move.setShape(PLAYER_SHAPE);
         player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
         stopCreatures();
@@ -158,23 +158,17 @@ def eventsGameplay(delta, fadeDir) {
     }
 
     if(isPressed(KeySpace)) {
-        handled := array_find(
-            keys(REPLACE_SHAPES), 
-            shape => findShapeNearby(shape, (x,y,z) => replaceShape(
-                x, y, z, REPLACE_SHAPES[shape]
-            ))
-        );
-        if(handled = null) {
+        if(player.move.operateDoorNearby() = null) {
             if(operateWindow() = false) {
-                if(findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
-                    scriptedActionNearby();
+                if(player.move.findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
+                    player.move.findNearby(1, scriptedAction, null);
                 }
             }
         }
     }
 
     if(isPressed(KeyT)) {
-        findNpcNearby(startConvo);
+        player.move.findNpcNearby(startConvo);
     }
 
     player.move.setAnimation(animationType, PLAYER_ANIM_SPEED);
@@ -221,15 +215,6 @@ def checkTeleportLocations(newX, newY, newZ) {
     return false;
 }
 
-def replaceShape(x, y, z, name) {
-    if(intersectsShapes(x, y, z, name, PLAYER_SHAPE) = false) {
-        eraseShape(x, y, z);
-        setShape(x, y, z, name);
-    } else {
-        print("player blocks!");
-    }
-}
-
 const WIN_X_POS = [
     [ 2, 0, 0, 0, 1, 0 ],
     [ -2, 0, 1, 0, 0, 0 ],
@@ -246,12 +231,12 @@ const WIN_Y_POS = [
 def operateWindow() {
     winX := [0, 0, 0];
     winY := [0, 0, 0];
-    findShapeNearby("window.x", (x,y,z) => {
+    player.move.findShapeNearby("window.x", (x,y,z) => {
         winX[0] := x;
         winX[1] := y;
         winX[2] := z;
     });
-    findShapeNearby("window.y", (x,y,z) => {
+    player.move.findShapeNearby("window.y", (x,y,z) => {
         winY[0] := x;
         winY[1] := y;
         winY[2] := z;
@@ -302,48 +287,6 @@ def isShapeAt(shape, x, y, z) {
     return false;
 }
 
-def findShapeNearby(name, fx) {
-    return findNearby(1, (x,y,z) => {
-        info := getShape(x, y, z);
-        if(info != null) {
-            if(info[0] = name) {
-                return info;
-            }
-        }
-        return null;
-    }, info => fx(info[1], info[2], info[3]));
-}
-
-def findNpcNearby(fx) {
-    if(findNearby(4, getNpc, fx) = false) {
-        print("Not near any npc-s.");
-    }
-}
-
-def scriptedActionNearby() {
-    findNearby(1, scriptedAction, null);
-}
-
-def findNearby(radius, evalFx, successFx) {
-    found := [false];
-    range(-1 * radius, PLAYER_X + radius, 1, x => {
-        range(-1 * radius, PLAYER_Y + radius, 1, y => {
-            range(0, PLAYER_Z, radius, z => {
-                if(found[0] = false) {
-                    e := evalFx(player.move.x + x, player.move.y + y, player.move.z + z);
-                    if(e != null) {
-                        if(successFx != null) {
-                            successFx(e);
-                        }
-                        found[0] := true;
-                    }
-                }
-            });
-        });
-    });
-    return found[0];
-}
-
 def getRoofZ(z) {
     # roofs are only at certain heights
     return (int(z / 7) + 1) * 7;
@@ -356,8 +299,8 @@ def inspectRoof() {
         z := getRoofZ(testZ);
         player.underRoof := true;
         player.roof := null;
-        forBase(PLAYER_X, PLAYER_Y, (x, y) => {
-            info := getShape(player.move.x + x, player.move.y + y, z);
+        player.move.forBase((x, y) => {
+            info := getShape(x, y, z);
             if(info = null) {
                 player.underRoof := false;
                 player.roof := null;
@@ -376,14 +319,6 @@ def inspectRoof() {
         testZ := testZ + 7;
     }
     return false;
-}
-
-def forBase(w, h, fx) {
-    range(0, w, 1, x => {
-        range(0, h, 1, y => {
-            fx(x, y);
-        });
-    });
 }
 
 def timedMessage(x, y, z, message) {

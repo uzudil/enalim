@@ -1,10 +1,10 @@
-def decodeMovement(savedMove, width, height, speed, centerView, isFlying) {
-    move := newMovement(0, 0, 0, width, height, speed, centerView, isFlying);
+def decodeMovement(savedMove, width, height, depth, shape, speed, centerView, isFlying) {
+    move := newMovement(0, 0, 0, width, height, depth, shape, speed, centerView, isFlying);
     move.decode(savedMove);
     return move;
 }
 
-def newMovement(startX, startY, startZ, width, height, speed, centerView, isFlying) {
+def newMovement(startX, startY, startZ, width, height, depth, shape, speed, centerView, isFlying) {
     return {
         "x": startX,
         "y": startY,
@@ -17,6 +17,8 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView, isFlyi
         "speed": speed,
         "width": width,
         "height": height,
+        "depth": depth,
+        "shape": shape,
         "encode": (move) => {
             return { "x": move.x, "y": move.y, "z": move.z, "dir": move.dir };
         },
@@ -82,6 +84,77 @@ def newMovement(startX, startY, startZ, width, height, speed, centerView, isFlyi
         "distanceTo": (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),
         "distanceXyTo": (move, nx, ny) => distance(move.x, move.y, move.z, nx, ny, move.z),
         "findPath": (move, destX, destY, destZ) => findPath(move.x, move.y, move.z, destX, destY, destZ, move.isFlying),
+        "findNearby": (move, radius, evalFx, successFx) => {
+            found := [false];
+            range(-1 * radius, move.width + radius, 1, x => {
+                range(-1 * radius, move.height + radius, 1, y => {
+                    range(0, move.depth, 1, z => {
+                        if(found[0] = false) {
+                            e := evalFx(move.x + x, move.y + y, move.z + z);
+                            if(e != null) {
+                                if(successFx != null) {
+                                    successFx(e);
+                                }
+                                found[0] := true;
+                            }
+                        }
+                    });
+                });
+            });
+            return found[0];
+        },
+        "findShapeNearby": (move, name, fx) => {
+            return move.findNearby(1, (x,y,z) => {
+                info := getShape(x, y, z);
+                if(info != null) {
+                    if(info[0] = name) {
+                        return info;
+                    }
+                }
+                return null;
+            }, info => fx(info[1], info[2], info[3]));
+        },
+        "findNpcNearby": (move, fx) => {
+            if(move.findNearby(4, getNpc, fx) = false) {
+                print("Not near any npc-s.");
+            }
+        },
+        "forBase": (move, fx) => {
+            range(0, move.width, 1, x => {
+                range(0, move.height, 1, y => {
+                    fx(move.x + x, move.y + y);
+                });
+            });
+        },
+        "operateDoorNearby": (move) => {
+            return array_find(
+                keys(REPLACE_SHAPES), 
+                shape => move.findShapeNearby(shape, (x,y,z) => {
+                    dx := 0;
+                    dy := 0;
+                    if(endsWith(shape, ".x")) {
+                        dx := 1;
+                    } else {
+                        dy := 1;
+                    }
+                    newShape := REPLACE_SHAPES[shape];
+                    d := 0;
+                    while(d < 4) {
+                        if(intersectsShapes(x, y, z, newShape, move.x, move.y, move.z, move.shape) = false) {
+                            eraseShape(x, y, z);
+                            setShape(x, y, z, newShape);
+                            return 1;
+                        }
+                        d := d + 1;                        
+                        if(move.moveInDir(dx, dy, move.speed, null, null) = false) {
+                            print("door is blocked!");
+                            return 1;
+                        }
+                    }
+                    print("can't open door");
+                })
+            );
+        }
     };
 }
 

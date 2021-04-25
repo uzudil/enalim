@@ -174,6 +174,10 @@ def startsWith(str, prefix) {
     return substr(str, 0, len(prefix)) = prefix;
 }
 
+def endsWith(str, suffix) {
+    return substr(str, len(str) - len(suffix), len(suffix)) = suffix;
+}
+
 def normalize(x) {
     if(x = 0) {
         return 0;

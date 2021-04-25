@@ -6,6 +6,7 @@ creaturesTemplates := {
         "animSpeed": 0.2,
         "baseWidth": 4,
         "baseHeight": 4,
+        "sizeZ": 2,
         "isFlying": false,
         "movement": "anchor",
     },
@@ -15,6 +16,7 @@ creaturesTemplates := {
         "animSpeed": 0.2,
         "baseWidth": 2,
         "baseHeight": 2,
+        "sizeZ": 4,
         "isFlying": false,
         "movement": "anchor",
     },
@@ -24,6 +26,7 @@ creaturesTemplates := {
         "animSpeed": 0.2,
         "baseWidth": 2,
         "baseHeight": 2,
+        "sizeZ": 4,
         "isFlying": true,
         "movement": "anchor",
     }
@@ -62,7 +65,7 @@ def restoreCreature(savedCreature) {
     # todo: this is technically wrong: shape != template name...
     tmpl := creaturesTemplates[savedCreature.shape];
     print("* Restoring creature " + tmpl.shape + " " + savedCreature.id);
-    move := decodeMovement(savedCreature.move, tmpl.baseWidth, tmpl.baseHeight, tmpl.speed, false, tmpl.isFlying);
+    move := decodeMovement(savedCreature.move, tmpl.baseWidth, tmpl.baseHeight, tmpl.sizeZ, tmpl.shape, tmpl.speed, false, tmpl.isFlying);
     move.setShape(tmpl.shape);
     creatures[len(creatures)] := {
         "id": savedCreature.id,
@@ -83,7 +86,7 @@ def setCreature(x, y, z, creature) {
         c := {
             "id": id,
             "template": creature,
-            "move": newMovement(x, y, z, creature.baseWidth, creature.baseHeight, creature.speed, false, creature.isFlying),
+            "move": newMovement(x, y, z, creature.baseWidth, creature.baseHeight, creature.sizeZ, creature.shape, creature.speed, false, creature.isFlying),
             "anchor": [ x, y, z ],
             "standTimer": 0,
             "npc": null,
