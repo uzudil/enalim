@@ -129,32 +129,43 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
         "operateDoorNearby": (move) => {
             return array_find(
                 keys(REPLACE_SHAPES), 
-                shape => move.findShapeNearby(shape, (x,y,z) => {
-                    dx := 0;
-                    dy := 0;
-                    if(endsWith(shape, ".x")) {
-                        dx := 1;
-                    } else {
-                        dy := 1;
-                    }
-                    newShape := REPLACE_SHAPES[shape];
-                    d := 0;
-                    while(d < 4) {
-                        if(intersectsShapes(x, y, z, newShape, move.x, move.y, move.z, move.shape) = false) {
-                            eraseShape(x, y, z);
-                            setShape(x, y, z, newShape);
-                            return 1;
-                        }
-                        d := d + 1;                        
-                        if(move.moveInDir(dx, dy, move.speed, null, null) = false) {
-                            print("door is blocked!");
-                            return 1;
-                        }
-                    }
-                    print("can't open door");
-                })
+                shape => move.findShapeNearby(shape, (x, y, z) => move.operateDoor(shape, x, y, z))
             );
-        }
+        },
+        "operateDoorAt": (move, x, y, z) => {
+            shape := getShape(x, y, z);
+            if(shape != null) {
+                if(REPLACE_SHAPES[shape[0]] != null) {
+                    move.operateDoor(shape[0], x, y, z);
+                    return true;
+                }
+            }
+            return false;
+        },
+        "operateDoor": (move, shape, x, y, z) => {
+            dx := 0;
+            dy := 0;
+            if(endsWith(shape, ".x")) {
+                dx := 1;
+            } else {
+                dy := 1;
+            }
+            newShape := REPLACE_SHAPES[shape];
+            d := 0;
+            while(d < 4) {
+                if(intersectsShapes(x, y, z, newShape, move.x, move.y, move.z, move.shape) = false) {
+                    eraseShape(x, y, z);
+                    setShape(x, y, z, newShape);
+                    return 1;
+                }
+                d := d + 1;                        
+                if(move.moveInDir(dx, dy, move.speed, null, null) = false) {
+                    print("door is blocked!");
+                    return 1;
+                }
+            }
+            print("can't open door");
+        },
     };
 }
 

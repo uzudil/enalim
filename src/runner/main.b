@@ -136,6 +136,14 @@ def eventsTeleport(delta, fadeDir) {
 }
 
 def eventsGameplay(delta, fadeDir) {
+
+    if(didClick()) {
+        pos := getClick();
+        if(player.move.operateDoorAt(pos[0], pos[1], pos[2])) {
+            print("door!");
+        }
+    }
+
     animationType := ANIM_STAND;
     dx := 0;
     dy := 0;
