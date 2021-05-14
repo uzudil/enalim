@@ -18,6 +18,7 @@ player := {
     "teleportPos": null,
     "convo": null,
     "elapsedTime": 0,
+    "dragShape": null,
 };
 
 # the player's shape size
@@ -47,7 +48,9 @@ def onHour(hour) {
 }
 
 # called on every frame
-def events(delta, fadeDir) {
+def events(delta, fadeDir, mouseX, mouseY) {
+    player.mouseX := mouseX;
+    player.mouseY := mouseY;
     player.elapsedTime := player.elapsedTime + delta;
 
     EVENTS_MAP[player.mode](delta, fadeDir);
@@ -139,8 +142,18 @@ def eventsGameplay(delta, fadeDir) {
 
     if(didClick()) {
         pos := getClick();
-        if(player.move.operateDoorAt(pos[0], pos[1], pos[2])) {
-            print("door!");
+        dragging := pos[3];
+        isDragStart := pos[4];
+        if(dragging) {
+            if(isDragStart) {
+                startDrag(pos);
+            } else {
+                endDrag(pos);
+            }
+        } else {        
+            if(player.move.operateDoorAt(pos[0], pos[1], pos[2])) {
+                print("door!");
+            }
         }
     }
 
@@ -181,6 +194,36 @@ def eventsGameplay(delta, fadeDir) {
 
     player.move.setAnimation(animationType, PLAYER_ANIM_SPEED);
     moveCreatures(delta);
+}
+
+def startDrag(pos) {
+    info := getShape(pos[0], pos[1], pos[2]);
+    if(info != null) {
+        # should check if shape is draggable (is it an item?, etc)
+        player.dragShape := info;
+        eraseShape(info[1], info[2], info[3]);
+        setCursorShape(info[0], info[1], info[2], info[3]);
+    }
+}
+
+def endDrag(pos) {
+    if(player.dragShape != null) {
+        x := pos[0];
+        y := pos[1];
+        z := findTop(x, y, player.dragShape[0]);        
+        print("Dropping at: " + x + "," + y + "," + z);
+        if(z = 0) {
+            print("Can't drop item there.");
+            x := player.dragShape[1];
+            y := player.dragShape[2];
+            z := player.dragShape[3];
+        }
+        print("Placing at " + x + "," + y + "," + z);
+        setShape(x, y, z, player.dragShape[0]);
+        player.dragShape := null;
+        clearCursorShape();
+        print("Drop is done.");
+    }
 }
 
 def playerMove(dx, dy, delta) {
