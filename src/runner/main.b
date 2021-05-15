@@ -19,7 +19,9 @@ player := {
     "convo": null,
     "elapsedTime": 0,
     "dragShape": null,
-};
+    "inventoryUi": null,
+    "inventory": null,
+};    
 
 # the player's shape size
 const PLAYER_X = 2;
@@ -144,15 +146,23 @@ def eventsGameplay(delta, fadeDir) {
         pos := getClick();
         dragging := pos[3];
         isDragStart := pos[4];
+        dragAction := pos[5];
+        dragIndex := pos[6];
         if(dragging) {
             if(isDragStart) {
-                startDrag(pos);
+                startDrag(pos, dragAction, dragIndex);
             } else {
                 endDrag(pos);
             }
         } else {        
-            if(player.move.operateDoorAt(pos[0], pos[1], pos[2])) {
-                print("door!");
+            done := player.move.operateDoorAt(pos[0], pos[1], pos[2]);
+            if(done = false) {
+                shape := getShape(pos[0], pos[1], pos[2]);
+                if(shape != null) {
+                    if(shape[0] = "lydell") {
+                        openInventory();
+                    }
+                }
             }
         }
     }
@@ -192,37 +202,96 @@ def eventsGameplay(delta, fadeDir) {
         player.move.findNpcNearby(startConvo);
     }
 
+    if(isPressed(KeyI)) {
+        openInventory();
+    }
+
+    if(isPressed(KeyEscape)) {
+        closeTopPanel();
+    }
+
     player.move.setAnimation(animationType, PLAYER_ANIM_SPEED);
     moveCreatures(delta);
 }
 
-def startDrag(pos) {
-    info := getShape(pos[0], pos[1], pos[2]);
-    if(info != null) {
-        # should check if shape is draggable (is it an item?, etc)
-        player.dragShape := info;
-        eraseShape(info[1], info[2], info[3]);
-        setCursorShape(info[0], info[1], info[2], info[3]);
+def openInventory() {
+    raisePanel("inventory", "inventory");
+    updateInventoryUi();
+}
+
+def updateInventoryUi() {
+    updatePanel("inventory", player.inventory.render());
+}
+
+def startDrag(pos, action, index) {
+    if(action = "inventory") {
+        item := player.inventory.remove(index);
+        player.dragShape := [ item.shape, item.x, item.y, -1 ];
+        setCursorShape(player.dragShape[0]);
+        updateInventoryUi();
+    } else {
+        info := getShape(pos[0], pos[1], pos[2]);
+        if(info != null) {
+            # should check if shape is draggable (is it an item?, etc)
+            player.dragShape := info;
+            eraseShape(info[1], info[2], info[3]);
+            setCursorShape(info[0]);
+        }
     }
 }
 
 def endDrag(pos) {
     if(player.dragShape != null) {
-        x := pos[0];
-        y := pos[1];
-        z := findTop(x, y, player.dragShape[0]);        
-        print("Dropping at: " + x + "," + y + "," + z);
-        if(z = 0) {
-            print("Can't drop item there.");
-            x := player.dragShape[1];
-            y := player.dragShape[2];
-            z := player.dragShape[3];
+        handled := false;
+        if(pos[2] > 0) {
+            info := getShape(pos[0], pos[1], pos[2] - 1);
+            if(info != null) {
+                if(info[0] = "lydell") {
+                    # drop over character
+                    player.inventory.add(player.dragShape[0], -1, -1);
+                    updateInventoryUi();
+                    handled := true;
+                }
+            }
         }
-        print("Placing at " + x + "," + y + "," + z);
-        setShape(x, y, z, player.dragShape[0]);
+
+        if(handled = false) {
+            # drop over inventory panel
+            xy := isOverPanel("inventory");
+            if(xy[0] >= 0) {
+                player.inventory.add(player.dragShape[0], xy[0], xy[1]);
+                updateInventoryUi();
+                handled := true;
+            }
+        }
+
+        if(handled = false) {
+            # drop on map
+            x := pos[0];
+            y := pos[1];
+            z := findTop(x, y, player.dragShape[0]);        
+            willSetShape := true;
+            if(z = 0) {
+                print("Can't drop item there.");
+                if(player.dragShape[3] < 0) {
+                    # this is kind of hacky... there should be a dragSource value instead of checking dragShape[3] < 0
+                    player.inventory.add(player.dragShape[0], player.dragShape[1], player.dragShape[2]);
+                    updateInventoryUi();
+                    willSetShape := false;
+                } else {
+                    x := player.dragShape[1];
+                    y := player.dragShape[2];
+                    z := player.dragShape[3];
+                }
+            }
+            if(willSetShape) {
+                setShape(x, y, z, player.dragShape[0]);
+            }
+        }
+
+        # dragging is done
         player.dragShape := null;
         clearCursorShape();
-        print("Drop is done.");
     }
 }
 
@@ -387,6 +456,9 @@ def main() {
     EVENTS_MAP[MODE_TITLE2] := (s, d,f) => eventsTitle2(d, f);
     EVENTS_MAP[MODE_TITLE3] := (s, d,f) => eventsTitle3(d, f);
     EVENTS_MAP[MODE_GAME] := (s, d,f) => eventsGameplay(d, f);
+
+    # init player
+    player.inventory := newInventory();    
 
     setPathThroughShapes(keys(REPLACE_SHAPES));
 
