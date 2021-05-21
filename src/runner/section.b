@@ -22,13 +22,16 @@ def onSectionLoad(sectionX, sectionY, data) {
         # restore a section from saved data
         print("+++ Restore load " + sectionX + "," + sectionY);
         array_foreach(data.creatures, (i, c) => restoreCreature(c));
+        array_foreach(data.containers, (i, c) => restoreContainer(c));
         print("+++ Done restoring " + sectionX + "," + sectionY);
     }
 }
 
 def beforeSectionSave(sectionX, sectionY) {
-    sectionCreatures := pruneCreatures(sectionX, sectionY);
-    return { "creatures": sectionCreatures };
+    return { 
+        "creatures": pruneCreatures(sectionX, sectionY), 
+        "containers": pruneContainers(sectionX, sectionY),
+    };
 }
 
 def teleport(x, y, z) {

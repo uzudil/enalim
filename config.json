@@ -354,7 +354,9 @@
                 { "name": "item.candle", "size": [ 1, 1, 1], "pos": [48, 208], "drag": true }
             ],
             "images": [
-                { "name": "inventory", "size": [192, 176], "pos": [0, 824] }
+                { "name": "inventory", "size": [192, 176], "pos": [0, 824] },
+                { "name": "bag", "size": [192, 176], "pos": [200, 824] },
+                { "name": "chest", "size": [200, 184], "pos": [400, 808] }
             ]
         }        
     ],    

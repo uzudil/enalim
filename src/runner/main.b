@@ -154,15 +154,23 @@ def eventsGameplay(delta, fadeDir) {
             } else {
                 endDrag(pos);
             }
-        } else {        
-            done := player.move.operateDoorAt(pos[0], pos[1], pos[2]);
-            if(done = false) {
-                shape := getShape(pos[0], pos[1], pos[2]);
-                if(shape != null) {
-                    if(shape[0] = "lydell") {
-                        openInventory();
+        } else {
+            print("Regular click. action=" + dragAction + " index=" + dragIndex);
+            if(dragAction = "") {   
+                done := player.move.operateDoorAt(pos[0], pos[1], pos[2]);
+                if(done = false) {
+                    shape := getShape(pos[0], pos[1], pos[2]);
+                    if(shape != null) {
+                        done := openContainer(shape[1], shape[2], shape[3], "map");
+                        if(done = false) {
+                            if(shape[0] = "lydell") {
+                                openInventory();
+                            }
+                        }
                     }
                 }
+            } else {
+                openContainer(dragIndex, -1, -1, dragAction);
             }
         }
     }
@@ -223,21 +231,58 @@ def updateInventoryUi() {
     updatePanel("inventory", player.inventory.render());
 }
 
+def openContainer(x, y, z, location) {
+    c := getContainer(x, y, z, location);
+    if(c = null) {
+        return false;
+    }
+    raisePanel(c.id, c.uiImage);
+    updateContainerUi(c);
+    return true;
+}
+
+def updateContainerUi(c) {
+    updatePanel(c.id, c.items.render());
+}
+
 def startDrag(pos, action, index) {
     if(action = "inventory") {
-        item := player.inventory.remove(index);
-        player.dragShape := [ item.shape, item.x, item.y, -1 ];
-        setCursorShape(player.dragShape[0]);
+        # drag from inventory ui
+        item := player.inventory.remove(index, action);
+        player.dragShape := {
+            "shape": item.shape,
+            "pos": [item.x, item.y, -1],
+            "fromUi": action,
+            "draggedContainer": getContainer(index, -1, -1, action),
+        };
         updateInventoryUi();
     } else {
-        info := getShape(pos[0], pos[1], pos[2]);
-        if(info != null) {
-            # should check if shape is draggable (is it an item?, etc)
-            player.dragShape := info;
-            eraseShape(info[1], info[2], info[3]);
-            setCursorShape(info[0]);
+        if(startsWith(action, "i.")) {
+            # drag from a container ui
+            c := getContainerById(action);
+            item := c.items.remove(index, action);
+            player.dragShape := {
+                "shape": item.shape,
+                "pos": [item.x, item.y, -1],                
+                "fromUi": action,
+                "draggedContainer": getContainer(index, -1, -1, action),
+            };
+            updateContainerUi(c);
+        } else {
+            info := getShape(pos[0], pos[1], pos[2]);
+            if(info != null) {
+                # drag from map
+                player.dragShape := {
+                    "shape": info[0],
+                    "pos": [info[1], info[2], info[3]],
+                    "fromUi": "map",
+                    "draggedContainer": getContainer(info[1], info[2], info[3], "map"),
+                };
+                eraseShape(info[1], info[2], info[3]);
+            }
         }
     }
+    setCursorShape(player.dragShape.shape);
 }
 
 def endDrag(pos) {
@@ -248,20 +293,37 @@ def endDrag(pos) {
             if(info != null) {
                 if(info[0] = "lydell") {
                     # drop over character
-                    player.inventory.add(player.dragShape[0], -1, -1);
+                    index := player.inventory.add(player.dragShape.shape, -1, -1);
                     updateInventoryUi();
+                    if(player.dragShape.draggedContainer != null) {
+                        updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
+                    }
                     handled := true;
                 }
             }
         }
 
         if(handled = false) {
-            # drop over inventory panel
-            xy := isOverPanel("inventory");
-            if(xy[0] >= 0) {
-                player.inventory.add(player.dragShape[0], xy[0], xy[1]);
+            panel := getOverPanel();
+            if(panel[0] = "inventory") {
+                # drop over inventory panel
+                index := player.inventory.add(player.dragShape.shape, panel[1], panel[2]);
                 updateInventoryUi();
+                if(player.dragShape.draggedContainer != null) {
+                    updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
+                }
                 handled := true;
+            } else {
+                if(panel[0] != null) {
+                    # drop over a container panel
+                    c := getContainerById(panel[0]);
+                    index := c.items.add(player.dragShape.shape, panel[1], panel[2]);
+                    updateContainerUi(c);
+                    if(player.dragShape.draggedContainer != null) {
+                        updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, c.id);
+                    }
+                    handled := true;
+                }
             }
         }
 
@@ -269,23 +331,36 @@ def endDrag(pos) {
             # drop on map
             x := pos[0];
             y := pos[1];
-            z := findTop(x, y, player.dragShape[0]);        
-            willSetShape := true;
+            z := findTop(x, y, player.dragShape.shape);        
+            willSetShape := true;            
             if(z = 0) {
                 print("Can't drop item there.");
-                if(player.dragShape[3] < 0) {
-                    # this is kind of hacky... there should be a dragSource value instead of checking dragShape[3] < 0
-                    player.inventory.add(player.dragShape[0], player.dragShape[1], player.dragShape[2]);
+                if(player.dragShape.fromUi = "inventory") {
+                    # return to inventory
+                    player.inventory.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
                     updateInventoryUi();
                     willSetShape := false;
                 } else {
-                    x := player.dragShape[1];
-                    y := player.dragShape[2];
-                    z := player.dragShape[3];
+                    if(player.dragShape.fromUi = "map") {
+                        # return to original map location
+                        x := player.dragShape.pos[0];
+                        y := player.dragShape.pos[1];
+                        z := player.dragShape.pos[2];                        
+                    } else {
+                        # return to container
+                        c := getContainerById(player.dragShape.fromUi);
+                        c.items.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
+                        updateContainerUi(c);
+                        willSetShape := false;
+                    }
                 }
             }
             if(willSetShape) {
-                setShape(x, y, z, player.dragShape[0]);
+                # drop on map
+                setShape(x, y, z, player.dragShape.shape);
+                if(player.dragShape.draggedContainer != null) {
+                    updateContainerLocation(player.dragShape.draggedContainer, x, y, z, "map");
+                }
             }
         }
 
@@ -445,7 +520,6 @@ def timedMessage(x, y, z, message) {
     showMessageAt(x, y, z, message, MESSAGE_R, MESSAGE_G, MESSAGE_B);
 }
 
-# Put main last so if there are parsing errors, the game panic()-s.
 def main() {
     staticInitSections();
 
