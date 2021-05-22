@@ -316,11 +316,20 @@ def endDrag(pos) {
             } else {
                 if(panel[0] != null) {
                     # drop over a container panel
-                    c := getContainerById(panel[0]);
-                    index := c.items.add(player.dragShape.shape, panel[1], panel[2]);
-                    updateContainerUi(c);
+                    targetContainer := getContainerById(panel[0]);
                     if(player.dragShape.draggedContainer != null) {
-                        updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, c.id);
+                        if(targetContainer.id = player.dragShape.draggedContainer.id) {
+                            # trying to drop container on itself?
+                            cancelDrag();
+                            handled := true;
+                        }
+                    }
+                    if(handled = false) {
+                        index := targetContainer.items.add(player.dragShape.shape, panel[1], panel[2]);
+                        updateContainerUi(targetContainer);
+                        if(player.dragShape.draggedContainer != null) {
+                            updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, targetContainer.id);
+                        }
                     }
                     handled := true;
                 }
@@ -332,30 +341,9 @@ def endDrag(pos) {
             x := pos[0];
             y := pos[1];
             z := findTop(x, y, player.dragShape.shape);        
-            willSetShape := true;            
             if(z = 0) {
-                print("Can't drop item there.");
-                if(player.dragShape.fromUi = "inventory") {
-                    # return to inventory
-                    player.inventory.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
-                    updateInventoryUi();
-                    willSetShape := false;
-                } else {
-                    if(player.dragShape.fromUi = "map") {
-                        # return to original map location
-                        x := player.dragShape.pos[0];
-                        y := player.dragShape.pos[1];
-                        z := player.dragShape.pos[2];                        
-                    } else {
-                        # return to container
-                        c := getContainerById(player.dragShape.fromUi);
-                        c.items.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
-                        updateContainerUi(c);
-                        willSetShape := false;
-                    }
-                }
-            }
-            if(willSetShape) {
+                cancelDrag();
+            } else {
                 # drop on map
                 setShape(x, y, z, player.dragShape.shape);
                 if(player.dragShape.draggedContainer != null) {
@@ -367,6 +355,32 @@ def endDrag(pos) {
         # dragging is done
         player.dragShape := null;
         clearCursorShape();
+    }
+}
+
+def cancelDrag() {
+    print("Can't drop item there.");
+    if(player.dragShape.fromUi = "inventory") {
+        # return to inventory
+        player.inventory.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
+        updateInventoryUi();
+    } else {
+        if(player.dragShape.fromUi = "map") {
+            # return to original map location
+            x := player.dragShape.pos[0];
+            y := player.dragShape.pos[1];
+            z := player.dragShape.pos[2];
+            # drop on map
+            setShape(x, y, z, player.dragShape.shape);
+            if(player.dragShape.draggedContainer != null) {
+                updateContainerLocation(player.dragShape.draggedContainer, x, y, z, "map");
+            }
+        } else {
+            # return to container
+            c := getContainerById(player.dragShape.fromUi);
+            c.items.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
+            updateContainerUi(c);
+        }
     }
 }
 
