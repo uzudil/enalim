@@ -155,22 +155,33 @@ def eventsGameplay(delta, fadeDir) {
                 endDrag(pos);
             }
         } else {
-            print("Regular click. action=" + dragAction + " index=" + dragIndex);
-            if(dragAction = "") {   
-                done := player.move.operateDoorAt(pos[0], pos[1], pos[2]);
-                if(done = false) {
-                    shape := getShape(pos[0], pos[1], pos[2]);
-                    if(shape != null) {
-                        done := openContainer(shape[1], shape[2], shape[3], "map");
-                        if(done = false) {
-                            if(shape[0] = "lydell") {
-                                openInventory();
+            panel := getOverPanel();
+            if(panel[0] != null) {
+                # raise clicked panel
+                if(panel[0] = "inventory") {
+                    openInventory();
+                } else {
+                    c := getContainerById(panel[0]);
+                    raisePanel(c.id, c.uiImage);
+                }
+            } else {
+                # handle click
+                if(dragAction = "") {   
+                    done := player.move.operateDoorAt(pos[0], pos[1], pos[2]);
+                    if(done = false) {
+                        shape := getShape(pos[0], pos[1], pos[2]);
+                        if(shape != null) {
+                            done := openContainer(shape[1], shape[2], shape[3], "map");
+                            if(done = false) {
+                                if(shape[0] = "lydell") {
+                                    openInventory();
+                                }
                             }
                         }
                     }
+                } else {
+                    openContainer(dragIndex, -1, -1, dragAction);
                 }
-            } else {
-                openContainer(dragIndex, -1, -1, dragAction);
             }
         }
     }
@@ -299,6 +310,17 @@ def endDrag(pos) {
                         updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
                     }
                     handled := true;
+                } else {
+                    # drop over container
+                    c := getContainer(info[1], info[2], info[3], "map");
+                    if(c != null) {
+                        index := c.items.add(player.dragShape.shape, -1, -1);
+                        updateContainerUi(c);
+                        if(player.dragShape.draggedContainer != null) {
+                            updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, c.id);
+                        }
+                        handled := true;
+                    }
                 }
             }
         }
