@@ -5,13 +5,16 @@
     "runtime": {
         "editor": {
             "resolution": [ 1024, 768 ],
-            "font": "rudelsberg/Rudelsberg.ttf",
-            "fontSize": 32
+            "fonts": [
+                { "font": "rudelsberg/Rudelsberg.ttf", "fontSize": 32 }
+            ]
         },
         "runner": {
             "resolution": [ 400, 300 ],
-            "font": "rudelsberg/Rudelsberg.ttf",
-            "fontSize": 24,
+            "fonts": [
+                { "font": "rudelsberg/Rudelsberg.ttf", "fontSize": 24 },
+                { "font": "bainsley/Bainsley-VGgJ6.ttf", "fontSize": 14 }
+            ],
             "calendar": {
                 "year": 1350,
                 "month": 4,
@@ -356,7 +359,8 @@
             "images": [
                 { "name": "inventory", "size": [192, 176], "pos": [0, 824] },
                 { "name": "bag", "size": [192, 176], "pos": [200, 824] },
-                { "name": "chest", "size": [200, 184], "pos": [400, 808] }
+                { "name": "chest", "size": [200, 184], "pos": [400, 808] },
+                { "name": "book", "size": [360, 290], "pos": [600, 702] }
             ]
         }        
     ],    

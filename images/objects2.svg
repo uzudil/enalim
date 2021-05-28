@@ -23,6 +23,18 @@
      id="defs2">
     <linearGradient
        inkscape:collect="always"
+       id="linearGradient1347">
+      <stop
+         style="stop-color:#fff6d5;stop-opacity:1;"
+         offset="0"
+         id="stop1343" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0.91696757"
+         offset="1"
+         id="stop1345" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
        id="linearGradient1334">
       <stop
          style="stop-color:#0d2024;stop-opacity:1"
@@ -101,6 +113,26 @@
        fx="36.374195"
        fy="94.878738"
        r="24.248554" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1347"
+       id="linearGradient1349"
+       x1="175.81563"
+       y1="240.84641"
+       x2="207.66617"
+       y2="240.51569"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.7630177,0,0,1.7630177,-119.39604,-200.81229)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1347"
+       id="linearGradient1357"
+       x1="193.93958"
+       y1="240.38339"
+       x2="168.24327"
+       y2="240.1188"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.7630177,0,0,1.7630177,-120.09574,-200.81229)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -109,16 +141,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="362.62487"
-     inkscape:cy="581.67522"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="775.30968"
+     inkscape:cy="880.72852"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
      inkscape:snap-global="false"
-     inkscape:window-width="2235"
+     inkscape:window-width="2283"
      inkscape:window-height="1219"
      inkscape:window-x="0"
      inkscape:window-y="25"
@@ -147,7 +179,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -361,6 +393,31 @@
          d="m 116.41667,232.83333 v 23.28334"
          id="path1431" />
     </g>
+    <path
+       id="path1409"
+       style="fill:#008066;stroke:#000000;stroke-width:0.699698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 160.24978,187.17004 v 70.9027 h 53.87672 v 1.86586 l 2.09909,1.74924 2.09909,-1.98248 v -1.63262 h 34.98489 v -70.9027 z" />
+    <path
+       style="fill:#008066;stroke:none;stroke-width:0.866992;stroke-linecap:round;stroke-linejoin:round"
+       d="m 160.24978,187.17004 v 70.9027 h 93.0598 v -70.9027 z"
+       id="path1327"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#005242;fill-opacity:1;stroke:none;stroke-width:0.396875;stroke-linecap:round;stroke-linejoin:round"
+       d="m 164.43854,190.43385 -4.23333,4.7625 v 62.97084 h 85.46041 l 3.63803,-2.97657 -67.73334,-47.88958 z"
+       id="path1341" />
+    <path
+       style="fill:url(#linearGradient1349);fill-opacity:1;stroke:#000000;stroke-width:0.233233;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 164.33136,255.16794 v -64.85985 c 0,0 23.78972,-1.30929 33.58549,-1.41001 9.79577,-0.10067 8.74622,1.71214 8.74622,1.71214 v 64.55772 c 0,0 1.516,1.10786 -10.61208,1.20857 -12.12809,0.10067 -31.71963,-1.20857 -31.71963,-1.20857 z"
+       id="path1329" />
+    <path
+       style="fill:#d35f5f;stroke:none;stroke-width:0.932931;stroke-linecap:round;stroke-linejoin:round"
+       d="m 214.12651,252.35854 v 7.58006 l 2.09908,1.74925 2.0991,-1.98248 v -7.46346 z"
+       id="path1339" />
+    <path
+       style="fill:url(#linearGradient1357);fill-opacity:1;stroke:#000000;stroke-width:0.233233;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 249.28866,255.16794 v -64.85985 c 0,0 -23.78972,-1.30929 -33.58548,-1.41001 -9.79577,-0.10067 -8.74623,1.71214 -8.74623,1.71214 v 64.55772 c 0,0 -1.516,1.10786 10.61208,1.20857 12.1281,0.10067 31.71963,-1.20857 31.71963,-1.20857 z"
+       id="path1337" />
   </g>
   <g
      inkscape:groupmode="layer"

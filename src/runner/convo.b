@@ -67,7 +67,7 @@ def displayConvoMessages() {
 }
 
 def addConvoMessage(x, y, msg, r,g,b) {
-    player.convo.indexes[len(player.convo.indexes)] := addMessage(x, y, msg, r, g, b);
+    player.convo.indexes[len(player.convo.indexes)] := addMessage(x, y, msg, 0, r, g, b);
 }
 
 def delConvoMessages() {
@@ -108,7 +108,7 @@ def addWord(topic, i, wordStart, d) {
     if(len(lastLine) = 0) {
         d.lines[len(d.lines) - 1] := word;
     } else {
-        lineLen := messageWidth(lastLine + " " + word);
+        lineLen := messageWidth(lastLine + " " + word, 0);
         if(lineLen >= SCREEN_WIDTH - 20) {
             d.lines[len(d.lines)] := word;
         } else {

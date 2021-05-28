@@ -27,6 +27,7 @@ const MAP_24_25 = {
     },
     "init": this => {
         setNpc(4998, 5001, 1, necromancer);
+        setBook(4984, 5009, 3, "map", "On ghosts and spirits");
     },
     "teleport": (this, x, y, z) => {
         return null;

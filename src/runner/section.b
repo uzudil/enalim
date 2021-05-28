@@ -22,7 +22,7 @@ def onSectionLoad(sectionX, sectionY, data) {
         # restore a section from saved data
         print("+++ Restore load " + sectionX + "," + sectionY);
         array_foreach(data.creatures, (i, c) => restoreCreature(c));
-        array_foreach(data.containers, (i, c) => restoreContainer(c));
+        array_foreach(data.items, (i, c) => restoreItems(c));
         print("+++ Done restoring " + sectionX + "," + sectionY);
     }
 }
@@ -30,7 +30,7 @@ def onSectionLoad(sectionX, sectionY, data) {
 def beforeSectionSave(sectionX, sectionY) {
     return { 
         "creatures": pruneCreatures(sectionX, sectionY), 
-        "containers": pruneContainers(sectionX, sectionY),
+        "items": pruneItems(sectionX, sectionY),
     };
 }
 

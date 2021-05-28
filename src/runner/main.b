@@ -8,6 +8,7 @@ const MODE_CONVO = "convo";
 const MODE_TITLE = "title";
 const MODE_TITLE2 = "title2";
 const MODE_TITLE3 = "title3";
+const MODE_BOOK = "book";
 
 # the global player state
 player := {
@@ -87,8 +88,8 @@ def eventsConvo(delta, fadeDir) {
 def eventsInit(delta, fadeDir) {
     if(fadeDir = 1) {
         player.mode := MODE_TITLE;
-        addMessage(110, 250, "2021 (c) Gabor Torok", 200, 200, 200);
-        addMessage(110, 275, "Press SPACE to start", 128, 128, 128);
+        addMessage(110, 250, "2021 (c) Gabor Torok", 1, 200, 200, 200);
+        addMessage(110, 275, "Press SPACE to start", 1, 128, 128, 128);
     }
 }
 
@@ -106,12 +107,12 @@ def eventsTitle(delta, fadeDir) {
 def eventsTitle2(delta, fadeDir) {
     if(fadeDir = 1) {
         player.mode := MODE_TITLE3;
-        addMessage(10, 25, "The story so far...", 200, 200, 200);
+        addMessage(10, 25, "The story so far...", 0, 200, 200, 200);
         o := parseTopic("Your name is Lydell and you have always lived on the island, serving the Necromancer. One day he will train you to be a powerful wizard, you are sure.");
-        array_foreach(o.lines, (index, line) => addMessage(10, 75 + (index * LINE_HEIGHT), line, 128, 128, 128));
+        array_foreach(o.lines, (index, line) => addMessage(10, 75 + (index * LINE_HEIGHT), line, 0, 128, 128, 128));
         o := parseTopic("Strangely, you don't seem to recall how you got to the island...");
-        array_foreach(o.lines, (index, line) => addMessage(10, 200 + (index * LINE_HEIGHT), line, 128, 128, 128));
-        addMessage(110, 275, "Press SPACE to continue", 128, 128, 128);
+        array_foreach(o.lines, (index, line) => addMessage(10, 200 + (index * LINE_HEIGHT), line, 0, 128, 128, 128));
+        addMessage(110, 275, "Press SPACE to continue", 1, 128, 128, 128);
     }
 }
 
@@ -154,19 +155,20 @@ def eventsGameplay(delta, fadeDir) {
             } else {
                 endDrag(pos);
             }
-        } else {
-            panel := getOverPanel();
-            if(panel[0] != null) {
-                # raise clicked panel
-                if(panel[0] = "inventory") {
-                    openInventory();
+        } else {            
+            # handle click
+            if(dragAction = "") {
+                panel := getOverPanel();
+                if(panel[0] != null) {
+                    print("click on panel " + panel[0]);
+                    # raise clicked panel
+                    if(panel[0] = "inventory") {
+                        openInventory();
+                    } else {
+                        c := getItemById(panel[0]);
+                        raisePanel(c.id, c.uiImage);
+                    }
                 } else {
-                    c := getContainerById(panel[0]);
-                    raisePanel(c.id, c.uiImage);
-                }
-            } else {
-                # handle click
-                if(dragAction = "") {   
                     done := player.move.operateDoorAt(pos[0], pos[1], pos[2]);
                     if(done = false) {
                         shape := getShape(pos[0], pos[1], pos[2]);
@@ -179,9 +181,9 @@ def eventsGameplay(delta, fadeDir) {
                             }
                         }
                     }
-                } else {
-                    openContainer(dragIndex, -1, -1, dragAction);
                 }
+            } else {
+                openContainer(dragIndex, -1, -1, dragAction);
             }
         }
     }
@@ -233,6 +235,20 @@ def eventsGameplay(delta, fadeDir) {
     moveCreatures(delta);
 }
 
+def eventsBook(delta, fadeDir) {
+    if(isPressed(KeyEscape)) {
+        closeTopPanel();
+        player.mode := MODE_GAME;
+    }
+
+    if(isPressed(KeyA) || isPressed(KeyLeft)) {
+        turnBookPage(-1);
+    }
+    if(isPressed(KeyD) || isPressed(KeyRight)) {
+        turnBookPage(1);
+    }
+}
+
 def openInventory() {
     raisePanel("inventory", "inventory");
     updateInventoryUi();
@@ -243,13 +259,24 @@ def updateInventoryUi() {
 }
 
 def openContainer(x, y, z, location) {
-    c := getContainer(x, y, z, location);
+    c := getItem(x, y, z, location);
+    print("openContainer: c=" + c);
     if(c = null) {
         return false;
     }
-    raisePanel(c.id, c.uiImage);
-    updateContainerUi(c);
-    return true;
+    print("openContainer: type=" + c.type);
+    if(c.type = CONTAINER_TYPE) {
+        raisePanel(c.id, c.uiImage);
+        updateContainerUi(c);
+        return true;
+    }
+    if(c.type = BOOK_TYPE) {
+        raisePanel(c.id, c.uiImage);
+        updateBookUi(c);
+        player.mode := MODE_BOOK;
+        return true;
+    }
+    return false;
 }
 
 def updateContainerUi(c) {
@@ -264,19 +291,19 @@ def startDrag(pos, action, index) {
             "shape": item.shape,
             "pos": [item.x, item.y, -1],
             "fromUi": action,
-            "draggedContainer": getContainer(index, -1, -1, action),
+            "draggedContainer": getItem(index, -1, -1, action),
         };
         updateInventoryUi();
     } else {
         if(startsWith(action, "i.")) {
             # drag from a container ui
-            c := getContainerById(action);
+            c := getItemById(action);
             item := c.items.remove(index, action);
             player.dragShape := {
                 "shape": item.shape,
                 "pos": [item.x, item.y, -1],                
                 "fromUi": action,
-                "draggedContainer": getContainer(index, -1, -1, action),
+                "draggedContainer": getItem(index, -1, -1, action),
             };
             updateContainerUi(c);
         } else {
@@ -287,7 +314,7 @@ def startDrag(pos, action, index) {
                     "shape": info[0],
                     "pos": [info[1], info[2], info[3]],
                     "fromUi": "map",
-                    "draggedContainer": getContainer(info[1], info[2], info[3], "map"),
+                    "draggedContainer": getItem(info[1], info[2], info[3], "map"),
                 };
                 eraseShape(info[1], info[2], info[3]);
             }
@@ -307,17 +334,17 @@ def endDrag(pos) {
                     index := player.inventory.add(player.dragShape.shape, -1, -1);
                     updateInventoryUi();
                     if(player.dragShape.draggedContainer != null) {
-                        updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
+                        updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
                     }
                     handled := true;
                 } else {
                     # drop over container
-                    c := getContainer(info[1], info[2], info[3], "map");
+                    c := getItem(info[1], info[2], info[3], "map");
                     if(c != null) {
                         index := c.items.add(player.dragShape.shape, -1, -1);
                         updateContainerUi(c);
                         if(player.dragShape.draggedContainer != null) {
-                            updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, c.id);
+                            updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, c.id);
                         }
                         handled := true;
                     }
@@ -332,13 +359,13 @@ def endDrag(pos) {
                 index := player.inventory.add(player.dragShape.shape, panel[1], panel[2]);
                 updateInventoryUi();
                 if(player.dragShape.draggedContainer != null) {
-                    updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
+                    updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
                 }
                 handled := true;
             } else {
                 if(panel[0] != null) {
                     # drop over a container panel
-                    targetContainer := getContainerById(panel[0]);
+                    targetContainer := getItemById(panel[0]);
                     if(player.dragShape.draggedContainer != null) {
                         if(targetContainer.id = player.dragShape.draggedContainer.id) {
                             # trying to drop container on itself?
@@ -350,7 +377,7 @@ def endDrag(pos) {
                         index := targetContainer.items.add(player.dragShape.shape, panel[1], panel[2]);
                         updateContainerUi(targetContainer);
                         if(player.dragShape.draggedContainer != null) {
-                            updateContainerLocation(player.dragShape.draggedContainer, index, -1, -1, targetContainer.id);
+                            updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, targetContainer.id);
                         }
                     }
                     handled := true;
@@ -369,7 +396,7 @@ def endDrag(pos) {
                 # drop on map
                 setShape(x, y, z, player.dragShape.shape);
                 if(player.dragShape.draggedContainer != null) {
-                    updateContainerLocation(player.dragShape.draggedContainer, x, y, z, "map");
+                    updateItemLocation(player.dragShape.draggedContainer, x, y, z, "map");
                 }
             }
         }
@@ -395,11 +422,11 @@ def cancelDrag() {
             # drop on map
             setShape(x, y, z, player.dragShape.shape);
             if(player.dragShape.draggedContainer != null) {
-                updateContainerLocation(player.dragShape.draggedContainer, x, y, z, "map");
+                updateItemLocation(player.dragShape.draggedContainer, x, y, z, "map");
             }
         } else {
             # return to container
-            c := getContainerById(player.dragShape.fromUi);
+            c := getItemById(player.dragShape.fromUi);
             c.items.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
             updateContainerUi(c);
         }
@@ -553,7 +580,7 @@ def inspectRoof() {
 }
 
 def timedMessage(x, y, z, message) {
-    showMessageAt(x, y, z, message, MESSAGE_R, MESSAGE_G, MESSAGE_B);
+    showMessageAt(x, y, z, message, 0, MESSAGE_R, MESSAGE_G, MESSAGE_B);
 }
 
 def main() {
@@ -566,6 +593,7 @@ def main() {
     EVENTS_MAP[MODE_TITLE2] := (s, d,f) => eventsTitle2(d, f);
     EVENTS_MAP[MODE_TITLE3] := (s, d,f) => eventsTitle3(d, f);
     EVENTS_MAP[MODE_GAME] := (s, d,f) => eventsGameplay(d, f);
+    EVENTS_MAP[MODE_BOOK] := (s, d,f) => eventsBook(d, f);
 
     # init player
     player.inventory := newInventory();    
