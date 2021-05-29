@@ -13,7 +13,7 @@
             "resolution": [ 400, 300 ],
             "fonts": [
                 { "font": "rudelsberg/Rudelsberg.ttf", "fontSize": 24 },
-                { "font": "bainsley/Bainsley-VGgJ6.ttf", "fontSize": 14 }
+                { "font": "bainsley/Bainsley-VGgJ6.ttf", "fontSize": 12, "alphaMin": 135, "alphaDiv": 4 }
             ],
             "calendar": {
                 "year": 1350,

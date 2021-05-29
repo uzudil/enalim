@@ -1,5 +1,6 @@
 def startConvo(npc) {
     player.mode := MODE_CONVO;
+    setCalendarPaused(true);
     player.convo := {
         "npc": npc,
         "topic": "",
@@ -24,6 +25,7 @@ def renderConvo() {
 def endConvo() {
     delConvoMessages();
     player.convo := null;
+    setCalendarPaused(false);
     player.mode := MODE_GAME;
 }
 

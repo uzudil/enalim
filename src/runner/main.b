@@ -238,6 +238,7 @@ def eventsGameplay(delta, fadeDir) {
 def eventsBook(delta, fadeDir) {
     if(isPressed(KeyEscape)) {
         closeTopPanel();
+        setCalendarPaused(false);
         player.mode := MODE_GAME;
     }
 
@@ -272,7 +273,9 @@ def openContainer(x, y, z, location) {
     }
     if(c.type = BOOK_TYPE) {
         raisePanel(c.id, c.uiImage);
+        #book.currentPage := 0;
         updateBookUi(c);
+        setCalendarPaused(true);
         player.mode := MODE_BOOK;
         return true;
     }
