@@ -273,7 +273,7 @@ def openContainer(x, y, z, location) {
     }
     if(c.type = BOOK_TYPE) {
         raisePanel(c.id, c.uiImage);
-        #book.currentPage := 0;
+        openBook.currentPage := 0;
         updateBookUi(c);
         setCalendarPaused(true);
         player.mode := MODE_BOOK;
