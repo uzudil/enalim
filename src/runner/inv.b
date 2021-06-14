@@ -14,7 +14,16 @@ def setContainer(uiImage, x, y, z, location, invItems) {
     c := setItem(uiImage, x, y, z, location, CONTAINER_TYPE);
     if(c["items"] = null) {
         c["items"] := newInventory();
-        array_foreach(invItems, (i, item) => c.items.add(item, -1, -1));
+        array_foreach(invItems, (i, item) => {
+            if(typeof(item) = "map") {
+                c.items.add(item.shape, -1, -1);
+                if(item["book"] != null) {
+                    setBook(len(c.items.items) - 1, 0, 0, c.id, item.book);
+                }
+            } else {
+                c.items.add(item, -1, -1);
+            }
+        });
     }
     return c;
 }
