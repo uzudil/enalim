@@ -28,6 +28,9 @@ def onSectionLoad(sectionX, sectionY, data) {
 }
 
 def beforeSectionSave(sectionX, sectionY) {
+    if(player.mode = MODE_GAME || player.mode = MODE_TELEPORT) {
+        player.move.erase();
+    }
     return { 
         "creatures": pruneCreatures(sectionX, sectionY), 
         "items": pruneItems(sectionX, sectionY),

@@ -40,11 +40,13 @@ def getCreature(x, y, z) {
 }
 
 def pruneCreatures(sectionX, sectionY) {
+    print("pruneCreatures: " + sectionX + "," + sectionY);
     removes := [];
     array_remove(creatures, c => {
         sectionPos := getSectionPos(c.move.x, c.move.y);
         b := sectionPos[0] = sectionX && sectionPos[1] = sectionY;
         if(b) {
+            print("\tpruneCreatures: creature " + c.template.shape + " at " + c.move.x + "," + c.move.y);
             c.move.erase();
             removes[len(removes)] := {
                 "id": c.id,

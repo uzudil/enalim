@@ -355,7 +355,9 @@
                 { "name": "item.bottle", "size": [ 1, 1, 1], "pos": [0, 208], "drag": true },
                 { "name": "item.book.1", "size": [ 1, 1, 1], "pos": [16, 208], "drag": true },
                 { "name": "item.book.2", "size": [ 1, 1, 1], "pos": [32, 208], "drag": true },
-                { "name": "item.candle", "size": [ 1, 1, 1], "pos": [48, 208], "drag": true }
+                { "name": "item.candle", "size": [ 1, 1, 1], "pos": [48, 208], "drag": true },
+                { "name": "teleport.x", "size": [ 1, 4, 6], "pos": [288, 24] },
+                { "name": "column.large.gray", "size": [ 2, 2, 6], "pos": [336, 16] }
             ],
             "images": [
                 { "name": "inventory", "size": [192, 176], "pos": [0, 824] },
