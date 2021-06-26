@@ -152,9 +152,8 @@ def prune_contained(tests) {
 def restoreItem(savedItem) {
     print("* Restoring item " + savedItem.uiImage + " " + savedItem.id);
     c := loadItem(savedItem);
-    c.items.decode(savedItem.items);
-    items[len(items)] := c;
     restore_contained(savedItem.containers);
+    print("* Done restoring item");
 }
 
 def restore_contained(saved) {
