@@ -22,6 +22,9 @@ player := {
     "dragShape": null,
     "inventoryUi": null,
     "inventory": null,
+    "gameState": {
+        "unlocked": [],
+    },
 };    
 
 # the player's shape size
@@ -468,7 +471,8 @@ def checkTeleportLocations(newX, newY, newZ) {
     # check teleport locations
     player.teleportPos := teleport(newX, newY, player.move.z);
     if(player.teleportPos != null) {
-        # start fade out
+        # erase player or else it stays on map sometimes...
+        player.move.erase();
         player.mode := MODE_TELEPORT;
         fadeViewTo(player.teleportPos[0], player.teleportPos[1]);
         return true;
@@ -580,6 +584,37 @@ def inspectRoof() {
         testZ := testZ + 7;
     }
     return false;
+}
+
+def unlock_door(x, y, z, isPlayer) {
+    # check if this door is unlocked
+    locked := array_find(player.gameState.unlocked, u => u.x = x && u.y = y && u.z = z) = null;
+    if(locked) {
+        key := null;
+
+        # is there a key for this door?
+        sectionPos := getSectionPos(x, y);
+        section := getSection(sectionPos[0], sectionPos[1]);
+        if(section != null) {
+            if(section["locked"] != null) {
+                key := section.locked(x, y, z);                        
+            }
+        }
+
+        if(key = null) {
+            # if there is no key, the door is open
+            locked := false;
+        } else {
+            # does the player have the key?
+            if(locked && isPlayer && array_find(player.inventory.items, item => item.shape = key) != null) {
+                locked := false;
+                player.gameState.unlocked[len(player.gameState.unlocked)] := { "x": x, "y": y, "z": z };
+                print("Player unlocks the door with " + key);
+                timedMessage(x, y, z, "Door is unlocked!");
+            }
+        }
+    }
+    return locked;
 }
 
 def timedMessage(x, y, z, message) {

@@ -46,8 +46,8 @@ def pruneCreatures(sectionX, sectionY) {
         sectionPos := getSectionPos(c.move.x, c.move.y);
         b := sectionPos[0] = sectionX && sectionPos[1] = sectionY;
         if(b) {
-            print("\tpruneCreatures: creature " + c.template.shape + " at " + c.move.x + "," + c.move.y);
-            c.move.erase();
+            # not needed: shapes with animations are marked IsSave=false
+            # c.move.erase();
             removes[len(removes)] := {
                 "id": c.id,
                 "shape": c.template.shape,

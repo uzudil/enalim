@@ -11,6 +11,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
         "z": startZ,
         "isFlying": isFlying,
         "centerView": centerView,
+        "isPlayer": centerView,
         "scrollOffsetX": 0,
         "scrollOffsetY": 0,
         "dir": DirW,
@@ -143,6 +144,14 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             return false;
         },
         "operateDoor": (move, shape, x, y, z) => {
+            if(unlock_door(x, y, z, move.isPlayer)) {
+                print("Door is locked.");
+                if(move.isPlayer) {
+                    timedMessage(x, y, z, "Locked!");
+                }
+                return 1;
+            }
+
             dx := 0;
             dy := 0;
             if(endsWith(shape, ".x")) {

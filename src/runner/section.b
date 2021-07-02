@@ -25,12 +25,17 @@ def onSectionLoad(sectionX, sectionY, data) {
         array_foreach(data.items, (i, c) => restoreItem(c));
         print("+++ Done restoring " + sectionX + "," + sectionY);
     }
+
+    # start section
+    section := getSection(sectionX, sectionY);
+    if(section != null) {
+        if(section["start"] != null) {
+            section.start();
+        }
+    }
 }
 
 def beforeSectionSave(sectionX, sectionY) {
-    if(player.mode = MODE_GAME || player.mode = MODE_TELEPORT) {
-        player.move.erase();
-    }
     return { 
         "creatures": pruneCreatures(sectionX, sectionY), 
         "items": pruneItems(sectionX, sectionY),

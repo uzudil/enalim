@@ -15,7 +15,11 @@ def renderConvo() {
     if(player.convo.update) {
         if(player.convo.parsed = null) {
             player.convo.answerIndex := 0;
-            player.convo.parsed := parseTopic(player.convo.npc.convo[player.convo.topic]);
+            t := player.convo.npc.convo[player.convo.topic];
+            if(typeof(t) = "function") {
+                t := t();
+            }
+            player.convo.parsed := parseTopic(t);
         }
         displayConvoMessages();
         player.convo.update := false;        

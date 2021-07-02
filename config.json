@@ -21,7 +21,7 @@
                 "day": 10,
                 "hour": 9,
                 "min": 0,
-                "incrementSpeed": 0.25,
+                "incrementSpeed": 0.5,
                 "daylight": {
                     "0": [60, 60, 150],
                     "1": [60, 60, 150],
@@ -357,13 +357,14 @@
                 { "name": "item.book.2", "size": [ 1, 1, 1], "pos": [32, 208], "drag": true },
                 { "name": "item.candle", "size": [ 1, 1, 1], "pos": [48, 208], "drag": true },
                 { "name": "teleport.x", "size": [ 1, 4, 6], "pos": [288, 24] },
-                { "name": "column.large.gray", "size": [ 2, 2, 6], "pos": [336, 16] }
+                { "name": "column.large.gray", "size": [ 2, 2, 6], "pos": [336, 16] },
+                { "name": "key.storage_room", "size": [1, 1, 1], "pos": [64, 208], "drag": true }
             ],
             "images": [
                 { "name": "inventory", "size": [192, 176], "pos": [0, 824] },
                 { "name": "bag", "size": [192, 176], "pos": [200, 824] },
                 { "name": "chest", "size": [200, 184], "pos": [400, 808] },
-                { "name": "book", "size": [360, 290], "pos": [600, 702] }
+                { "name": "book", "size": [360, 290], "pos": [600, 702] }                
             ]
         }        
     ],    
