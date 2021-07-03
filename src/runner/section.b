@@ -1,6 +1,8 @@
 
 const SECTION_SIZE = 200;
 
+activeSections := [];
+
 def getSectionPos(x, y) {
     return [ int(x / SECTION_SIZE), int(y / SECTION_SIZE) ];
 }
@@ -33,13 +35,28 @@ def onSectionLoad(sectionX, sectionY, data) {
             section.start();
         }
     }
+
+    activeSections[len(activeSections)] := [sectionX, sectionY];
 }
 
 def beforeSectionSave(sectionX, sectionY) {
+    array_remove(activeSections, s => s[0] = sectionX && s[1] = sectionY);
     return { 
         "creatures": pruneCreatures(sectionX, sectionY), 
         "items": pruneItems(sectionX, sectionY),
     };
+}
+
+def restartActiveSections() {
+    array_foreach(activeSections, (i, p) => {
+        print("Restarting active section: " + p[0] + "," + p[1]);
+        section := getSection(p[0], p[1]);
+        if(section != null) {
+            if(section["start"] != null) {
+                section.start();
+            }
+        }    
+    });
 }
 
 def teleport(x, y, z) {
@@ -60,13 +77,4 @@ def scriptedAction(x, y, z) {
         }
     }
     return null;
-}
-
-def staticInitSections() {
-    array_foreach(keys(SECTIONS), (i, k) => {
-        section := SECTIONS[k];
-        if(section["staticInit"] != null) {
-            section.staticInit();
-        }
-    });
 }

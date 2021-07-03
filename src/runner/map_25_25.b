@@ -1,7 +1,23 @@
-const MAP_25_25 = {
+const armin = {
+    "name": "armin",
+    "label": "Brother Armin",
+    "creature": "monk",
+    "convo": {
+        "": "Hello there!",
+    },
+    "schedule": [
+        { "from": 8, "to": 18, "pos": [ 5127, 5002, 1 ], "movement": "anchor" },
+        { "from": 18, "to": 8, "pos": [ 5129, 5012, 1 ], "movement": "anchor" },
+    ],
+};
+addNpcDef(armin);
+
+
+SECTIONS["25,25"] := {
     "init": this => {
+        setNpc(5127, 5002, 1, armin);
         setCreature(5023, 5001, 1, creaturesTemplates.cow);
-        setContainer("chest", 5015, 5017, 1, "map", [ "item.bottle", "item.book.1" ]);
+        setContainer("chest", 5015, 5017, 1, "map", [ "item.bottle", { "shape": "item.book.1", "book": "On ghosts and spirits" } ]);
         
         setContainer("chest", 5010, 5021, 1, "map", [ "item.candle", { "shape": "item.book.2", "book": "On ghosts and spirits" }, "item.candle" ]);
 

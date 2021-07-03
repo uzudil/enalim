@@ -1,6 +1,4 @@
-const MAP_21_20 = {
-    "staticInit": this => {
-    },
+SECTIONS["21,20"] := {
     "init": this => {
         setCreature(4210, 4176, 1, creaturesTemplates["monk-blue"]);
         setCreature(4196, 4178, 1, creaturesTemplates["monk-blue"]);

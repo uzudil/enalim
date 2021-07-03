@@ -264,11 +264,11 @@ def updateInventoryUi() {
 
 def openContainer(x, y, z, location) {
     c := getItem(x, y, z, location);
-    print("openContainer: c=" + c);
     if(c = null) {
+        print("openContainer: nothing at=" + x + "," + y + "," + z);
         return false;
     }
-    print("openContainer: type=" + c.type);
+    print("openContainer: c=" + c + " type=" + c.type);
     if(c.type = CONTAINER_TYPE) {
         raisePanel(c.id, c.uiImage);
         updateContainerUi(c);
@@ -622,8 +622,6 @@ def timedMessage(x, y, z, message) {
 }
 
 def main() {
-    staticInitSections();
-
     EVENTS_MAP[MODE_INIT] := (s, d,f) => eventsInit(d, f);
     EVENTS_MAP[MODE_TELEPORT] := (s, d,f) => eventsTeleport(d, f);
     EVENTS_MAP[MODE_CONVO] := (s, d,f) => eventsConvo(d, f);

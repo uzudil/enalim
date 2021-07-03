@@ -104,11 +104,22 @@ def parseTopic(topic) {
     return d;
 }
 
+const CONVO_SUFFIX = [ ",", "!", "?", ".", ":", ";" ];
+
 def addWord(topic, i, wordStart, d) {
     word := substr(topic, wordStart, (i - wordStart));
     if(substr(word, 0, 1) = "$") {
         word := substr(word, 1, len(word) - 1);
-        d.answers[len(d.answers)] := word;
+        
+        # remove ending punctuation
+        w := [ word ];
+        array_foreach(CONVO_SUFFIX, (i, p) => {
+            while(endsWith(w[0], p)) {
+                w[0] := substr(w[0], 0, len(w[0]) - len(p));
+                print("\tword changed to: " + w[0]);
+            }            
+        });        
+        d.answers[len(d.answers)] := w[0];
     }
     lastLine := d.lines[len(d.lines) - 1];
     if(len(lastLine) = 0) {

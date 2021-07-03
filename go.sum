@@ -25,8 +25,8 @@ github.com/stretchr/testify v1.4.0 h1:2E4SXV/wtOkTonXsotYi4li6zVWxYlZuYNCXe9XRJy
 github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=
 github.com/uzudil/bscript v0.0.0-20210327001739-283213401613 h1:ICb5HWSW0DeyJiY6y+pnSBHws8KqXrLDVg8r2s7cbz4=
 github.com/uzudil/bscript v0.0.0-20210327001739-283213401613/go.mod h1:/a/RS7gNnW+R4MG9YBuxzZgOtVS8d9tgvSYQhN9FgNQ=
-github.com/uzudil/isongn v0.0.0-20210529213500-060caea3d53d h1:657700BaSg9gJsnATax7/avfstqpB4q5dQzzDL/hHSQ=
-github.com/uzudil/isongn v0.0.0-20210529213500-060caea3d53d/go.mod h1:CsDYL+JA4yRUaojv3HsxwaVNoSqPlpoSeKd2VNMS1O4=
+github.com/uzudil/bscript v0.0.0-20210703050114-041c5bc50670 h1:E6nKSyfmBJBZsj1d9RZ6mk5H515RJanVGWqEfnWRd+k=
+github.com/uzudil/bscript v0.0.0-20210703050114-041c5bc50670/go.mod h1:/a/RS7gNnW+R4MG9YBuxzZgOtVS8d9tgvSYQhN9FgNQ=
 golang.org/x/image v0.0.0-20190321063152-3fc05d484e9f/go.mod h1:kZ7UVZpmo3dzQBMxlp+ypCbDeSB+sBbTgSJuh5dn5js=
 golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
 golang.org/x/image v0.0.0-20210504121937-7319ad40d33e h1:PzJMNfFQx+QO9hrC1GwZ4BoPGeNGhfeQEgcQFArEjPk=

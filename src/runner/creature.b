@@ -29,7 +29,17 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": true,
         "movement": "anchor",
-    }
+    },
+    "monk": {
+        "shape": "monk",
+        "speed": 0.25,
+        "animSpeed": 0.2,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "anchor",
+    },
 };
 
 creatures := [];

@@ -181,6 +181,7 @@ def newInventory() {
             };
             return len(self.items) - 1;
         },
+        "findIndex": (self, name) => array_find_index(self.items, item => item.shape = name),
         "remove": (self, index, location) => {
             # adjust the location of items in this inventory
             i := index + 1;

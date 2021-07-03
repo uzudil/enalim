@@ -17,15 +17,16 @@ const ghost = {
         "Necromancer": "Much calamity ha has caused elsewhere and will again soon here as well. Hence my $warning to ye... Remember, tell him nothing of this!",
     },
     "schedule": [
-        { "from": 5, "to": 21, "pos": [ 4974, 4934, 1 ], "movement": "anchor" },
-        { "from": 21, "to": 5, "pos": [ 4974, 4971, 1 ], "movement": "anchor" },
+        { "from": 5, "to": 10, "pos": [ 4974, 4934, 1 ], "movement": "anchor" },
+        { "from": 10, "to": 15, "pos": [ 4974, 4971, 1 ], "movement": "anchor" },
+        { "from": 15, "to": 20, "pos": [ 4974, 4934, 1 ], "movement": "anchor" },
+        { "from": 20, "to": 5, "pos": [ 4974, 4971, 1 ], "movement": "anchor" },
     ],    
 };
+addNpcDef(ghost);
 
-const MAP_24_24 = {
-    "staticInit": this => {
-        registerNpc(ghost);
-    },
+
+SECTIONS["24,24"] := {
     "init": this => {
         setNpc(4974, 4934, 1, ghost);
         setBook(4997, 4992, 10, "map", "Raising the dead");

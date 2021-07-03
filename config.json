@@ -358,7 +358,9 @@
                 { "name": "item.candle", "size": [ 1, 1, 1], "pos": [48, 208], "drag": true },
                 { "name": "teleport.x", "size": [ 1, 4, 6], "pos": [288, 24] },
                 { "name": "column.large.gray", "size": [ 2, 2, 6], "pos": [336, 16] },
-                { "name": "key.storage_room", "size": [1, 1, 1], "pos": [64, 208], "drag": true }
+                { "name": "key.storage_room", "size": [1, 1, 1], "pos": [64, 208], "drag": true },
+                { "name": "doc.ourdlen", "size": [1, 1, 1], "pos": [80, 208], "drag": true },
+                { "name": "vial.nercromancer", "size": [1, 1, 1], "pos": [96, 208], "drag": true }
             ],
             "images": [
                 { "name": "inventory", "size": [192, 176], "pos": [0, 824] },
@@ -484,6 +486,24 @@
                     "name": "stand",
                     "steps": 1,
                     "dirs": ["se", "e", "ne", "n", "nw", "w", "sw", "s"]
+                }
+            ]
+        },
+        { 
+            "name": "monk", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 32, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
                 }
             ]
         }
