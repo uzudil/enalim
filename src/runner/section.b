@@ -36,14 +36,16 @@ def onSectionLoad(sectionX, sectionY, data) {
         }
     }
 
+    setRoofVisiblity();
     activeSections[len(activeSections)] := [sectionX, sectionY];
 }
 
 def beforeSectionSave(sectionX, sectionY) {
     array_remove(activeSections, s => s[0] = sectionX && s[1] = sectionY);
+    save_game();
     return { 
         "creatures": pruneCreatures(sectionX, sectionY), 
-        "items": pruneItems(sectionX, sectionY),
+        "items": pruneItems("map", sectionX, sectionY, true),
     };
 }
 

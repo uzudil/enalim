@@ -9,6 +9,7 @@ const MODE_TITLE = "title";
 const MODE_TITLE2 = "title2";
 const MODE_TITLE3 = "title3";
 const MODE_BOOK = "book";
+const MODE_EXIT = "exit";
 
 # the global player state
 player := {
@@ -124,6 +125,7 @@ def eventsTitle3(delta, fadeDir) {
         delAllMessages();
         player.mode := MODE_GAME;
         player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_Z, PLAYER_SHAPE, PLAYER_MOVE_SPEED, true, false);
+        load_game();
         player.move.setShape(PLAYER_SHAPE);
         player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
         stopCreatures();
@@ -231,11 +233,48 @@ def eventsGameplay(delta, fadeDir) {
     }
 
     if(isPressed(KeyEscape)) {
-        closeTopPanel();
+        if(closeTopPanel() != true) {
+            raisePanel("exit", "marble");
+            updatePanel("exit", [{
+                "type": "uiText",
+                "text": "Exit game?",
+                "x": 75,
+                "y": 35,
+                "fontIndex": 0,
+            },{
+                "type": "uiText",
+                "text": "Press SPACE to quit.",
+                "x": 70,
+                "y": 100,
+                "fontIndex": 1,
+            }]);
+            centerPanel("exit");
+            player.mode := MODE_EXIT;
+        }
     }
 
     player.move.setAnimation(animationType, PLAYER_ANIM_SPEED);
     moveCreatures(delta);
+}
+
+def eventsExit(delta, fadeDir) {
+    if(isPressed(KeyEscape)) {
+        closeTopPanel();
+        setCalendarPaused(false);
+        player.mode := MODE_GAME;
+    }
+
+    if(isPressed(KeySpace)) {
+        #saveGame();
+        exit();
+    }
+}
+
+# called by golang on exit
+def exitEvent() {
+    print("+++ exitEvent start");
+    saveGame();
+    print("+++ exitEvent done");
 }
 
 def eventsBook(delta, fadeDir) {
@@ -276,6 +315,7 @@ def openContainer(x, y, z, location) {
     }
     if(c.type = BOOK_TYPE) {
         raisePanel(c.id, c.uiImage);
+        centerPanel(c.id);
         openBook.currentPage := 0;
         updateBookUi(c);
         setCalendarPaused(true);
@@ -621,6 +661,31 @@ def timedMessage(x, y, z, message) {
     showMessageAt(x, y, z, message, 0, MESSAGE_R, MESSAGE_G, MESSAGE_B);
 }
 
+def save_game() {
+    if(player.move != null) {
+        saveMap("savegame.json", {
+            "calendar": getCalendarRaw(),
+            "gameState": player.gameState,
+            "items": pruneItems("inventory", 0, 0, false),
+            "inventory": player.inventory.encode(),
+            "move": player.move.encode(),
+        });
+    }
+}
+
+def load_game() {
+    saved := loadMap("savegame.json");
+    if(saved != null) {
+        setCalendarRaw(saved.calendar);
+        player.gameState := saved.gameState;
+        array_foreach(saved.items, (i, c) => restoreItem(c));
+        player.inventory.decode(saved.inventory);
+        player.move.decode(saved.move);
+        return true;
+    }
+    return false;
+}
+
 def main() {
     EVENTS_MAP[MODE_INIT] := (s, d,f) => eventsInit(d, f);
     EVENTS_MAP[MODE_TELEPORT] := (s, d,f) => eventsTeleport(d, f);
@@ -630,6 +695,7 @@ def main() {
     EVENTS_MAP[MODE_TITLE3] := (s, d,f) => eventsTitle3(d, f);
     EVENTS_MAP[MODE_GAME] := (s, d,f) => eventsGameplay(d, f);
     EVENTS_MAP[MODE_BOOK] := (s, d,f) => eventsBook(d, f);
+    EVENTS_MAP[MODE_EXIT] := (s, d,f) => eventsExit(d, f);
 
     # init player
     player.inventory := newInventory();    

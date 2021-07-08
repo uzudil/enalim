@@ -77,6 +77,9 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             move.x := x;
             move.y := y;
             move.z := z;
+            if(move.centerView) {
+                setViewScroll(0, 0, int(move.z / 7) * 7);
+            }
         },
         "isAt": (move, x, y, z) => x = move.x && y = move.y && z = move.z,
         "setAnimation": (move, animation, anim_speed) => setAnimation(move.x, move.y, move.z, animation, move.dir, anim_speed),

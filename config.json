@@ -366,7 +366,8 @@
                 { "name": "inventory", "size": [192, 176], "pos": [0, 824] },
                 { "name": "bag", "size": [192, 176], "pos": [200, 824] },
                 { "name": "chest", "size": [200, 184], "pos": [400, 808] },
-                { "name": "book", "size": [360, 290], "pos": [600, 702] }                
+                { "name": "book", "size": [360, 290], "pos": [600, 702] },
+                { "name": "marble", "size": [232, 120], "pos": [8, 680] }                
             ]
         }        
     ],    

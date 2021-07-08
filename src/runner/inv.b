@@ -109,59 +109,60 @@ def loadItem(savedItem) {
     if(savedItem["book"] != null) {
         c["book"] := savedItem["book"];
     }
-    items[len(items)] := c;
+    return c;
 }
 
-def pruneItems(sectionX, sectionY) {
-    removes := [];
-    array_remove(items, c => {
-        if(c.location = "map") {
+def pruneItems(location, sectionX, sectionY, doRemove) {
+    saves := array_reduce(items, [], (a, c) => {
+        b := c.location = location;
+        if(location = "map") {
             sectionPos := getSectionPos(c.x, c.y);
             b := sectionPos[0] = sectionX && sectionPos[1] = sectionY;
-            if(b) {
-                removes[len(removes)] := saveItem(c);
-                print("* Pruning item: " + c.uiImage + " " + c.id);
-            }
-            return b;
         }
-        return false;
+        if(b) {
+            a[len(a)] := saveItem(c);
+        }
+        return a;
     });
-    prune_contained(removes);
-    return removes;
+    if(doRemove && len(saves) > 0) {
+        array_remove(items, c => array_find(saves, s => s.id = c.id) != null);
+    }
+    prune_contained(saves, doRemove);
+    return saves;
 }
 
-def prune_contained(tests) {
+def prune_contained(tests, doRemove) {
     if(len(tests) = 0) {
         return 1;
     }
-    a := [];
-    array_foreach(tests, (i, r) => {
-        array_remove(items, c => {
+    saves := array_reduce(tests, [], (a, r) => {
+        array_foreach(items, (t, c) => {
             if(c.location = r.id) {
                 result := saveItem(c);
                 r.containers[len(r.containers)] := result;
                 a[len(a)] := result;
-                return true;
             }
-            return false;
         });
+        return a;
     });
-    prune_contained(a);
+    if(doRemove && len(saves) > 0) {
+        array_remove(items, c => array_find(saves, s => s.id = c.id) != null);
+    }
+    prune_contained(saves, doRemove);
 }
 
 def restoreItem(savedItem) {
-    print("* Restoring item " + savedItem.uiImage + " " + savedItem.id);
+    print("* Restoring item " + savedItem.uiImage + " " + savedItem.id + " saved=" + savedItem);
     c := loadItem(savedItem);
+    items[len(items)] := c;
     restore_contained(savedItem.containers);
     print("* Done restoring item");
 }
 
 def restore_contained(saved) {
-    if(len(saved) = 0) {
-        return 1;
-    }
     array_foreach(saved, (i, s) => {
-        items[len(items)] := loadItem(s);
+        c := loadItem(s);
+        items[len(items)] := c;
         restore_contained(s.containers);
     });
 }
