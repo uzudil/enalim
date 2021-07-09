@@ -1,6 +1,9 @@
 SECTIONS["25,24"] := {
     "init": this => {
         setCreature(5019, 4993, 1, creaturesTemplates.cow);
+        setCreature(5189, 4992, 1, creaturesTemplates.goblin);
+        setCreature(5162, 4981, 1, creaturesTemplates.goblin);
+        setCreature(5167, 4981, 1, creaturesTemplates.goblin);
         setContainer("chest", 5015, 4961, 3, "map", [ "vial.nercromancer", { "shape": "item.book.2", "book": "Raising the dead" } ]);
         setContainer("chest", 5003, 4961, 1, "map", [ "item.candle", "item.candle", "item.candle" ]);
     },

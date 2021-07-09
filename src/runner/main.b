@@ -265,7 +265,7 @@ def eventsExit(delta, fadeDir) {
     }
 
     if(isPressed(KeySpace)) {
-        #saveGame();
+        exitEvent();
         exit();
     }
 }

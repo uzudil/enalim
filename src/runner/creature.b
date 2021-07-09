@@ -40,6 +40,28 @@ creaturesTemplates := {
         "isFlying": false,
         "movement": "anchor",
     },
+    "goblin": {
+        "shape": "goblin",
+        "speed": 0.25,
+        "animSpeed": 0.15,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "hunt",
+        "attack": [1,3],
+    },
+    "ogre": {
+        "shape": "ogre",
+        "speed": 0.5,
+        "animSpeed": 0.2,
+        "baseWidth": 4,
+        "baseHeight": 4,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "hunt",
+        "attack": [2,5],
+    },
 };
 
 creatures := [];
@@ -127,10 +149,14 @@ def moveCreatures(delta) {
             return true;
         }
 
-        if(c.npc = null) {
-            animation := moveCreatureRandom(c, delta);
-        } else {
+        if(c.npc != null) {
             animation := moveNpc(c, delta);
+        } else {
+            if(c.template.movement = "hunt") {
+                animation := moveMonster(c, delta);
+            } else {
+                animation := moveCreatureRandom(c, delta);
+            }
         }
         c.move.setAnimation(animation, c.template.animSpeed);
     });

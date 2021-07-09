@@ -507,6 +507,52 @@
                     "dirs": [ "w", "sw", "s", "se", "e", "ne", "n", "nw"  ]
                 }
             ]
+        },
+        { 
+            "name": "goblin", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 64, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne"  ]
+                },
+                {
+                    "name": "attack",
+                    "steps": 1,
+                    "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne"  ]
+                }
+            ]
+        },
+        { 
+            "name": "ogre", 
+            "size": [ 4, 4, 4 ], 
+            "dim": [ 96, 96 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne"  ]
+                },
+                {
+                    "name": "attack",
+                    "steps": 1,
+                    "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne"  ]
+                }
+            ]
         }
     ]
 }

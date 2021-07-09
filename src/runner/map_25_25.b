@@ -17,6 +17,11 @@ SECTIONS["25,25"] := {
     "init": this => {
         setNpc(5127, 5002, 1, armin);
         setCreature(5023, 5001, 1, creaturesTemplates.cow);
+        
+        setCreature(5158, 5025, 1, creaturesTemplates.goblin);
+        setCreature(5179, 5023, 1, creaturesTemplates.goblin);
+        setCreature(5170, 5033, 1, creaturesTemplates.goblin);
+        
         setContainer("chest", 5015, 5017, 1, "map", [ "item.bottle", { "shape": "item.book.1", "book": "On ghosts and spirits" } ]);
         
         setContainer("chest", 5010, 5021, 1, "map", [ "item.candle", { "shape": "item.book.2", "book": "On ghosts and spirits" }, "item.candle" ]);
