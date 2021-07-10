@@ -526,7 +526,7 @@
                 },
                 {
                     "name": "attack",
-                    "steps": 1,
+                    "steps": 2,
                     "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne"  ]
                 }
             ]
@@ -549,7 +549,7 @@
                 },
                 {
                     "name": "attack",
-                    "steps": 1,
+                    "steps": 2,
                     "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne"  ]
                 }
             ]

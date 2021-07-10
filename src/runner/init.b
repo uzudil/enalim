@@ -7,6 +7,7 @@ const LINE_HEIGHT_SMALL = 16;
 
 const ANIM_STAND = "stand";
 const ANIM_MOVE = "move";
+const ANIM_ATTACK = "attack";
 
 const MESSAGE_R = 255;
 const MESSAGE_G = 220;

@@ -3,7 +3,6 @@ creaturesTemplates := {
     "cow": {
         "shape": "cow",
         "speed": 0.5,
-        "animSpeed": 0.2,
         "baseWidth": 4,
         "baseHeight": 4,
         "sizeZ": 2,
@@ -13,7 +12,6 @@ creaturesTemplates := {
     "monk-blue": {
         "shape": "monk-blue",
         "speed": 0.25,
-        "animSpeed": 0.2,
         "baseWidth": 2,
         "baseHeight": 2,
         "sizeZ": 4,
@@ -23,7 +21,6 @@ creaturesTemplates := {
     "ghost": {
         "shape": "ghost",
         "speed": 0.2,
-        "animSpeed": 0.2,
         "baseWidth": 2,
         "baseHeight": 2,
         "sizeZ": 4,
@@ -33,7 +30,6 @@ creaturesTemplates := {
     "monk": {
         "shape": "monk",
         "speed": 0.25,
-        "animSpeed": 0.2,
         "baseWidth": 2,
         "baseHeight": 2,
         "sizeZ": 4,
@@ -43,7 +39,6 @@ creaturesTemplates := {
     "goblin": {
         "shape": "goblin",
         "speed": 0.25,
-        "animSpeed": 0.15,
         "baseWidth": 2,
         "baseHeight": 2,
         "sizeZ": 4,
@@ -54,7 +49,6 @@ creaturesTemplates := {
     "ogre": {
         "shape": "ogre",
         "speed": 0.5,
-        "animSpeed": 0.2,
         "baseWidth": 4,
         "baseHeight": 4,
         "sizeZ": 4,
@@ -139,7 +133,7 @@ def debugCreatures() {
 
 def stopCreatures() {   
     array_foreach(creatures, (i, c) => {
-        c.move.setAnimation(ANIM_STAND, c.template.animSpeed);
+        c.move.setAnimation(ANIM_STAND);
     });
 }
 
@@ -158,8 +152,14 @@ def moveCreatures(delta) {
                 animation := moveCreatureRandom(c, delta);
             }
         }
-        c.move.setAnimation(animation, c.template.animSpeed);
+        c.move.setAnimation(animation);
     });
+}
+
+def anchorAndMoveCreatureRandom(c, delta) {
+    # re-anchor at current location
+    c.anchor := [ c.move.x, c.move.y, c.move.z ];
+    return moveCreatureRandom(c, delta);
 }
 
 # directional random walk with pausing

@@ -34,7 +34,6 @@ const PLAYER_Y = 2;
 const PLAYER_Z = 4;
 
 const PLAYER_MOVE_SPEED = 0.085;
-const PLAYER_ANIM_SPEED = 0.05;
 
 const PLAYER_SHAPE = "lydell";
 
@@ -83,7 +82,7 @@ def eventsConvo(delta, fadeDir) {
         if(isPressed(KeySpace)) {
             fireConvoAnswerIndex();
         }
-        player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
+        player.move.setAnimation(ANIM_STAND);
         stopCreatures();
         renderConvo();    
     }
@@ -127,7 +126,7 @@ def eventsTitle3(delta, fadeDir) {
         player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_Z, PLAYER_SHAPE, PLAYER_MOVE_SPEED, true, false);
         load_game();
         player.move.setShape(PLAYER_SHAPE);
-        player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
+        player.move.setAnimation(ANIM_STAND);
         stopCreatures();
         fadeViewTo(player.move.x, player.move.y);
     }
@@ -142,7 +141,7 @@ def eventsTeleport(delta, fadeDir) {
         setRoofVisiblity();
         player.mode := MODE_GAME;
     }
-    player.move.setAnimation(ANIM_STAND, PLAYER_ANIM_SPEED);
+    player.move.setAnimation(ANIM_STAND);
     stopCreatures();
 }
 
@@ -253,7 +252,7 @@ def eventsGameplay(delta, fadeDir) {
         }
     }
 
-    player.move.setAnimation(animationType, PLAYER_ANIM_SPEED);
+    player.move.setAnimation(animationType);
     moveCreatures(delta);
 }
 

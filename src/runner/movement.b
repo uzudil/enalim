@@ -82,7 +82,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             }
         },
         "isAt": (move, x, y, z) => x = move.x && y = move.y && z = move.z,
-        "setAnimation": (move, animation, anim_speed) => setAnimation(move.x, move.y, move.z, animation, move.dir, anim_speed),
+        "setAnimation": (move, animation) => setAnimation(move.x, move.y, move.z, animation, move.dir),
         "erase": move => eraseShapeExact(move.x, move.y, move.z),
         "setShape": (move, shape) => setShape(move.x, move.y, move.z, shape),
         "distanceTo": (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),

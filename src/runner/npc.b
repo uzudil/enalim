@@ -71,6 +71,35 @@ def moveNpcSchedule(c, delta) {
         return null;
     }
 
+    p := c.npc.schedule[c.npc.activeSchedule].pos;
+    return pathMove(c, delta, {
+        "name": c.npc.name, 
+        "dest": { "x": p[0], "y": p[1], "z": p[2] }, 
+        "nearDistance": 0,
+        "farDistance": 0,
+        "onSuccess": self => {
+            del c.npc["activeScheduleChange"];
+            c["anchor"][0] := p[0];
+            c["anchor"][1] := p[1];
+            c["anchor"][2] := p[2];
+            c.movement := c.npc.schedule[c.npc.activeSchedule].movement;    
+            return null;
+        },
+    });
+}
+
+
+
+##########################################################
+##########################################################
+##########################################################
+# unused code - remove eventually
+#
+def moveNpcScheduleOld(c, delta) {
+    if(c.npc["activeScheduleChange"] = null) {
+        return null;
+    }
+
     dest := c.npc.schedule[c.npc.activeSchedule].pos;
     # print(c.npc.name + " move to " + dest[0] + "," + dest[1] + "," + dest[2] + 
     #    " curr=" + c.move.x + "," + c.move.y + "," + c.move.z);
