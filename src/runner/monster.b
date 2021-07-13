@@ -20,8 +20,6 @@ def moveMonster(c, delta) {
         "farDistance": 20,
         "onSuccess": self => {
             # todo: combat!
-            #return anchorAndMoveCreatureRandom(c, delta);
-            print("ATTACK!");
             # 0.1 is how long the attack sequence takes for 2 frames
             c.monster.attackTime := 0.1; 
             c.monster.coolTime := 0.5;

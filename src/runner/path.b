@@ -13,12 +13,16 @@ def pathMove(c, delta, opts) {
         c["pathMove"] := initPath(c, opts.name);
     }
 
-    destDistance := c.move.distanceTo(opts.dest.x, opts.dest.y, opts.dest.z);
-    # print(c.template.shape + " distance to player:" + destDistance);
+    #destDistance := c.move.distanceTo(opts.dest.x, opts.dest.y, opts.dest.z);
+    destDistance := distance(
+        c.move.x + c.template.baseWidth/2, c.move.y + c.template.baseHeight/2, c.move.z, 
+        opts.dest.x + opts.nearDistance/2, opts.dest.y + opts.nearDistance/2, opts.dest.z);
+
+    minDist := (c.template.baseWidth + opts.nearDistance) / 2;
 
     # already there?
-    if(destDistance <= opts.nearDistance) {
-        print(c.pathMove.name + " move done - will act!");
+    if(int(destDistance) <= minDist) {
+        #print(c.pathMove.name + " move done - will act!");
         return opts.onSuccess();
     }
 
@@ -30,7 +34,7 @@ def pathMove(c, delta, opts) {
             c.pathMove.step := 0;
             print(c.pathMove.name + " path done, will try new path");
         } else {
-            return takePathMoveStep(c, delta);
+            return takePathMoveStep(c, delta, destDistance, minDist);
         }
     }
 
@@ -39,6 +43,8 @@ def pathMove(c, delta, opts) {
         return anchorAndMoveCreatureRandom(c, delta);
     }
 
+    #print(c.template.shape + " distance to player:" + destDistance + " vs + " + opts.nearDistance);
+
     # can't call findPath yet
     if(c.pathMove.nextCheck > 0) {
         c.pathMove.nextCheck := c.pathMove.nextCheck - delta;
@@ -46,15 +52,18 @@ def pathMove(c, delta, opts) {
     }
     
     # try to get there via astar            
-    print("+++ " + c.pathMove.name + " calling findPath!");
-    path := c.move.findPath(opts.dest.x, opts.dest.y, opts.dest.z);
-    print("+++ " + c.pathMove.name + " path finder: " + path);
+    #print("+++ " + c.pathMove.name + " calling findPath!");
+    path := c.move.findPath(opts.dest.x, opts.dest.y, opts.dest.z, c.template.baseWidth, opts.nearDistance);
+    #print("+++ " + c.pathMove.name + " path finder: " + path);
     if(path != null) {
+        print("+++ " + c.pathMove.name + " has path!");
         c.pathMove.path := path;
         c.pathMove.step := 0;
         c.pathMove.pathFail := 0;
         c.pathMove.nextCheck := 0;
-        return takePathMoveStep(c, delta);
+        return takePathMoveStep(c, delta, destDistance, minDist);
+    } else {
+        print("+++ " + c.pathMove.name + " no path found!");
     }
 
     # can't find path: try again later
@@ -69,7 +78,7 @@ def pathMove(c, delta, opts) {
     return anchorAndMoveCreatureRandom(c, delta);
 }
 
-def takePathMoveStep(c, delta) {
+def takePathMoveStep(c, delta, destDistance, minDist) {
     # waiting for the path to unblock?
     if(c.pathMove.nextCheck > 0) {
         c.pathMove.nextCheck := c.pathMove.nextCheck - delta;
@@ -91,7 +100,7 @@ def takePathMoveStep(c, delta) {
         # a door opened: recalc path
         c.pathMove["path"] := null;
     } else {
-        print(c.template.shape + " failed to move on path. From: " + c.move.x + "," + c.move.y + " To:" + nextX + "," + nextY);
+        print(c.template.shape + " failed to move on path. dist=" + destDistance + " vs " + minDist);
         
         # after 3 fails, give up on this path
         c.pathMove.pathFail := c.pathMove.pathFail + 1;

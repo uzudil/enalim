@@ -87,7 +87,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
         "setShape": (move, shape) => setShape(move.x, move.y, move.z, shape),
         "distanceTo": (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),
         "distanceXyTo": (move, nx, ny) => distance(move.x, move.y, move.z, nx, ny, move.z),
-        "findPath": (move, destX, destY, destZ) => findPath(move.x, move.y, move.z, destX, destY, destZ, move.isFlying),
+        "findPath": (move, destX, destY, destZ, dSrc, dDst) => findPath(move.x, move.y, move.z, destX, destY, destZ, move.isFlying, dSrc, dDst),
         "findNearby": (move, radius, evalFx, successFx) => {
             found := [false];
             range(-1 * radius, move.width + radius, 1, x => {
