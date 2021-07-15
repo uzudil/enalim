@@ -23,6 +23,8 @@ player := {
     "dragShape": null,
     "inventoryUi": null,
     "inventory": null,
+    "attackTimer": 0,
+    "coolTimer": 0,
     "gameState": {
         "unlocked": [],
     },
@@ -181,6 +183,16 @@ def eventsGameplay(delta, fadeDir) {
                             if(done = false) {
                                 if(shape[0] = "lydell") {
                                     openInventory();
+                                } else {
+                                    creature := getCreature(pos[0], pos[1], pos[2]);
+                                    print("clicked creature: " + creature.template.shape);
+                                    if(creature != null) {
+                                        if(creature.template.movement = "hunt") {
+                                            startAttack(creature);
+                                        } else {
+                                            startConvo(creature.npc);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -193,62 +205,71 @@ def eventsGameplay(delta, fadeDir) {
     }
 
     animationType := ANIM_STAND;
-    dx := 0;
-    dy := 0;
-    if(isDown(KeyA) || isDown(KeyLeft)) {
-        dx := 1;
-    }
-    if(isDown(KeyD) || isDown(KeyRight)) {
-        dx := -1;
-    }
-    if(isDown(KeyW) || isDown(KeyUp)) {
-        dy := -1;
-    }
-    if(isDown(KeyS) || isDown(KeyDown)) {
-        dy := 1;
-    }
+    if(player.attackTimer > 0) {
+        player.attackTimer := player.attackTimer - delta;
+        animationType := ANIM_ATTACK;
+    } else {
+        if(player.coolTimer > 0) {
+            player.coolTimer := player.coolTimer - delta;
+        } else {
+            dx := 0;
+            dy := 0;
+            if(isDown(KeyA) || isDown(KeyLeft)) {
+                dx := 1;
+            }
+            if(isDown(KeyD) || isDown(KeyRight)) {
+                dx := -1;
+            }
+            if(isDown(KeyW) || isDown(KeyUp)) {
+                dy := -1;
+            }
+            if(isDown(KeyS) || isDown(KeyDown)) {
+                dy := 1;
+            }
 
-    if(dx != 0 || dy != 0) {
-        animationType := ANIM_MOVE;
-        playerMove(dx, dy, delta);
-    }
+            if(dx != 0 || dy != 0) {
+                animationType := ANIM_MOVE;
+                playerMove(dx, dy, delta);
+            }
 
-    if(isPressed(KeySpace)) {
-        if(player.move.operateDoorNearby() = null) {
-            if(operateWindow() = false) {
-                if(player.move.findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
-                    player.move.findNearby(1, scriptedAction, null);
+            if(isPressed(KeySpace)) {
+                if(player.move.operateDoorNearby() = null) {
+                    if(operateWindow() = false) {
+                        if(player.move.findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
+                            player.move.findNearby(1, scriptedAction, null);
+                        }
+                    }
                 }
             }
-        }
-    }
 
-    if(isPressed(KeyT)) {
-        player.move.findNpcNearby(startConvo);
-    }
+            if(isPressed(KeyT)) {
+                player.move.findNpcNearby(startConvo);
+            }
 
-    if(isPressed(KeyI)) {
-        openInventory();
-    }
+            if(isPressed(KeyI)) {
+                openInventory();
+            }
 
-    if(isPressed(KeyEscape)) {
-        if(closeTopPanel() != true) {
-            raisePanel("exit", "marble");
-            updatePanel("exit", [{
-                "type": "uiText",
-                "text": "Exit game?",
-                "x": 75,
-                "y": 35,
-                "fontIndex": 0,
-            },{
-                "type": "uiText",
-                "text": "Press SPACE to quit.",
-                "x": 70,
-                "y": 100,
-                "fontIndex": 1,
-            }]);
-            centerPanel("exit");
-            player.mode := MODE_EXIT;
+            if(isPressed(KeyEscape)) {
+                if(closeTopPanel() != true) {
+                    raisePanel("exit", "marble");
+                    updatePanel("exit", [{
+                        "type": "uiText",
+                        "text": "Exit game?",
+                        "x": 75,
+                        "y": 35,
+                        "fontIndex": 0,
+                    },{
+                        "type": "uiText",
+                        "text": "Press SPACE to quit.",
+                        "x": 70,
+                        "y": 100,
+                        "fontIndex": 1,
+                    }]);
+                    centerPanel("exit");
+                    player.mode := MODE_EXIT;
+                }
+            }
         }
     }
 
@@ -683,6 +704,37 @@ def load_game() {
         return true;
     }
     return false;
+}
+
+def distanceAndDirToCreature(creature) {
+    cx := creature.move.x + creature.template.baseWidth/2;
+    cy := creature.move.y + creature.template.baseHeight/2;
+    px := player.move.x + 1;
+    py := player.move.y + 1;
+    dx := (cx - px);
+    if(dx != 0) {
+        dx := dx / abs(dx);
+    }
+    dy := (cy - py);
+    if(dy != 0) {
+        dy := dy / abs(dy);
+    }
+    dir := getDir(dx, dy);
+    d := distance(
+        cx, cy, creature.move.z, 
+        px, py, player.move.z);
+    return [d, dir];
+}
+
+def startAttack(creature) {
+    if(player.coolTimer <= 0) {
+        distAndDir := distanceAndDirToCreature(creature);
+        player.move.dir := distAndDir[1];
+        if(int(distAndDir[0]) <= creature.template.baseWidth/2 + 1) {
+            player.attackTimer := ANIMATION_SPEED * 2;
+            player.coolTimer := 0.5;
+        }
+    }
 }
 
 def main() {

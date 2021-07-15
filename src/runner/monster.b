@@ -20,8 +20,7 @@ def moveMonster(c, delta) {
         "farDistance": 20,
         "onSuccess": self => {
             # todo: combat!
-            # 0.1 is how long the attack sequence takes for 2 frames
-            c.monster.attackTime := 0.1; 
+            c.monster.attackTime := ANIMATION_SPEED * c.template.attackSteps; 
             c.monster.coolTime := 0.5;
             return ANIM_ATTACK;
         },

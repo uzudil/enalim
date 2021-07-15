@@ -44,6 +44,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "hunt",
+        "attackSteps": 2,
         "attack": [1,3],
     },
     "ogre": {
@@ -54,6 +55,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "hunt",
+        "attackSteps": 2,
         "attack": [2,5],
     },
 };

@@ -9,6 +9,9 @@ const ANIM_STAND = "stand";
 const ANIM_MOVE = "move";
 const ANIM_ATTACK = "attack";
 
+# how long 1 frame of animation takes
+const ANIMATION_SPEED = 0.05;
+
 const MESSAGE_R = 255;
 const MESSAGE_G = 220;
 const MESSAGE_B = 30;

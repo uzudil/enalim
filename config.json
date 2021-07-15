@@ -487,6 +487,11 @@
                     "name": "stand",
                     "steps": 1,
                     "dirs": ["se", "e", "ne", "n", "nw", "w", "sw", "s"]
+                },
+                {
+                    "name": "attack",
+                    "steps": 2,
+                    "dirs": ["s", "se", "e", "ne", "n", "nw", "w", "sw"]
                 }
             ]
         },
