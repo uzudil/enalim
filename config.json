@@ -140,8 +140,8 @@
             "shapes": [
                 { "name": "desk.small", "size": [ 2, 2, 3], "pos": [728, 448] },
                 { "name": "plant.potted", "size": [1, 1, 4], "pos": [616, 416], "drag": true },
-                { "name": "door.wood.y", "size": [ 1, 3, 6], "pos": [104, 0] },
-                { "name": "door.wood.x", "size": [ 3, 1, 6], "pos": [136, 0] },    
+                { "name": "door.wood.y", "size": [ 1, 3, 6], "pos": [104, 0], "interactive": true },
+                { "name": "door.wood.x", "size": [ 3, 1, 6], "pos": [136, 0], "interactive": true },    
                 { "name": "commode.x", "size": [ 4, 1, 4], "pos": [768, 448] },
                 { "name": "wall.rock.y", "size": [ 1, 4, 6], "pos": [168, 0] },
                 { "name": "wall.rock.x", "size": [ 4, 1, 6], "pos": [208, 0] },
@@ -212,7 +212,7 @@
                 { "name": "rock.ns", "size": [6, 2, 6], "pos": [248, 616] },
                 { "name": "rock.2", "size": [4, 4, 4], "pos": [408, 616] },
                 { "name": "rock.3", "size": [4, 4, 3], "pos": [488, 624] },
-                { "name": "clock.y", "size": [1, 2, 4], "pos": [832, 456] },
+                { "name": "clock.y", "size": [1, 2, 4], "pos": [832, 456], "interactive": true },
                 { "name": "logo", "size": [6, 13, 4], "pos": [720, 800], "breathe": true },
                 { "name": "wall.rock.low.y", "size": [ 1, 4, 2], "pos": [184, 216] },
                 { "name": "wall.rock.low.x", "size": [ 4, 1, 2], "pos": [232, 216] },
@@ -227,8 +227,8 @@
                 { "name": "table.med", "size": [ 2, 2, 2], "pos": [728, 304] },
                 { "name": "table.square", "size": [ 2, 2, 2], "pos": [768, 304] },
                 { "name": "bed.y", "size": [ 3, 6, 2], "pos": [816, 264] },
-                { "name": "door.black.y", "size": [ 1, 3, 6], "pos": [360, 208] },
-                { "name": "door.black.x", "size": [ 3, 1, 6], "pos": [392, 208] },
+                { "name": "door.black.y", "size": [ 1, 3, 6], "pos": [360, 208], "interactive": true },
+                { "name": "door.black.x", "size": [ 3, 1, 6], "pos": [392, 208], "interactive": true },
                 { "name": "deck.y", "size": [ 5, 4, 1], "pos": [928, 72] }
             ]
         },
@@ -367,7 +367,16 @@
                 { "name": "bag", "size": [192, 176], "pos": [200, 824] },
                 { "name": "chest", "size": [200, 184], "pos": [400, 808] },
                 { "name": "book", "size": [360, 290], "pos": [600, 702] },
-                { "name": "marble", "size": [232, 120], "pos": [8, 680] }                
+                { "name": "marble", "size": [232, 120], "pos": [8, 680] },
+                { "name": "cursor.hand", "size": [24, 24], "pos": [280, 680], "cursor": [0, 0] },
+                { "name": "cursor.nw", "size": [24, 24], "pos": [320, 680], "cursor": [0, 0] },
+                { "name": "cursor.n", "size": [24, 24], "pos": [360, 680], "cursor": [11, 0] },
+                { "name": "cursor.ne", "size": [24, 24], "pos": [400, 680], "cursor": [23, 0] },
+                { "name": "cursor.w", "size": [24, 24], "pos": [320, 720], "cursor": [0, 11] },
+                { "name": "cursor.e", "size": [24, 24], "pos": [400, 720], "cursor": [23, 11] },
+                { "name": "cursor.sw", "size": [24, 24], "pos": [320, 760], "cursor": [0, 23] },
+                { "name": "cursor.s", "size": [24, 24], "pos": [360, 760], "cursor": [11, 23] },
+                { "name": "cursor.se", "size": [24, 24], "pos": [400, 760], "cursor": [23, 23] }
             ]
         }        
     ],    

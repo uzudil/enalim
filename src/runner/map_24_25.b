@@ -3,13 +3,19 @@ const necromancer = {
     "label": "The Necromancer",
     "creature": "monk-blue",
     "convo": {
-        "": "Ah, $Lydell my boy... there you are. Hiding from your $chores as usual? There is plenty of work on this $island and I need your $help more than ever.",
+        "": () => {
+            if(player.gameState["chores_done"] = null || player.gameState["chores_done"] = null) {
+                return "Ah, $Lydell my boy... there you are. Hiding from your $chores as usual? There is plenty of work on this $island and I need your $help more than ever.";
+            } else {
+                return "Ah $Lydell, I see you're still on our $island. How is your $mission progressing? Do you need a reminder of the ways of $magic?";
+            }
+        },
         "Lydell": "Why Lydell is you: my trusted apprentice. You have been assisting me in my necromantic ventures for as long as I can remember. Time flies on this $island that is for sure.",
         "chores": () => {
             if(player.gameState["chores_done"] = null) {
                 return "For the upcoming lunar alignment, I need you to bring me some spell $components. They're in the $basement $somewhere I think...";
             } else {
-                return "Look busy, my young apprentice, there is plenty to do on this $island. Maybe go and investigate our $ghost problem!";
+                return "You have completed your assignments but there is still plenty to do on this $island. Maybe go and investigate our $ghost problem!";
             }
         },
         "components": () => {
@@ -37,10 +43,21 @@ const necromancer = {
         },
         "wants": "Honestly, I'm not surprised - our line of work does upset the dead occasionally. But I can't have a $ghost traipsing around the $island so let me know when you've taken care of it.",
         "task": () => {
-            player.gameState["gate_to_ruins"] := 1;
-            restartActiveSections();
-            return "I need you to $travel to the ruined monastery of $Ourdlen and see if you can find some... uh... $paperwork there.";
+            if(player.gameState["chores_done"] = null) {
+                return "Yes, I have a task for you as soon as you have finished your $chores. Come back when you have done as I asked.";
+            } else {
+                player.gameState["gate_to_ruins"] := 1;
+                restartActiveSections();
+                return "Before I explain what I need you to do, we must first speak of a subject I'm sure you're interested in: $magic.";
+            }
         },
+        "magic": "The way of the mage will serve you well, as it has served me all these years. I see you $eventually becoming a great Wizard, indeed!",
+        "eventually": "Before you acquire awesome cosmic $powers, let's start with the basics. You will need a $spellbook so you can record the magics you learn on your $mission.",
+        "powers": "Learning magic is a life-long endeavour, however since you're just starting out, I will teach you a very basic $spell so you can defend yourself while on your $mission.",
+        "spellbook": "A vital part of your becoming a Mage is for you to find your own spellbook. It is not something I can give you, rather it is a personal quest for every Wizard to find their own book. For now I will just teach you a basic $spell.",
+        "spell": "Without the aid of a $spellbook you will only be able to remember a single spell. I will now teach you Hemmun-Eld, the spell of $wounding. Remember without a spellbook, if you learn another spell, you will not forget the previous one.",
+        "wounding": "You will doubtlessly encounter hostile beings on your $mission. You can can use the spell Hemmun-Eld to defend yourself. Simply stand near the enemy and recite the words. With practice you will be able to deal more damage using this $spell.",
+        "mission": "I need you to $travel to the ruined monastery of $Ourdlen and see if you can find some... uh... $paperwork there.",
         "Ourdlen": "The monastery at Ourdlen housed a group of monks some years ago, venerating their god Vreit. No one knows why their island fell to $hard times nor what happened to the monks.",
         "hard": "Since the monastery island is only reachable by sea, I was unable to retrieve my $paperwork until I devised a magical way to $travel there.",
         "travel": "I have enabled a dimensional door to $Ourdlen. You will find it in the storage room. Simply walk through it, like any other portal, and you will find yourself transported to Ourdlen. Remember to look for my $paperwork!",

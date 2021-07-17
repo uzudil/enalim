@@ -27,3 +27,13 @@ def addNpcDef(npc) {
 }
 
 const npcDefs = {};
+
+const DIR_W = 0;
+const DIR_SW = 1;
+const DIR_S = 2;
+const DIR_SE = 3;
+const DIR_E = 4;
+const DIR_NE = 5;
+const DIR_N = 6;
+const DIR_NW = 7;
+const DIR_NONE = 8;

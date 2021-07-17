@@ -28,6 +28,9 @@ player := {
     "gameState": {
         "unlocked": [],
     },
+    "cursor": "cursor.nw",
+    "mouseDrive": false,
+    "mouseOnInteractive": 0,
 };    
 
 # the player's shape size
@@ -56,9 +59,14 @@ def onHour(hour) {
 }
 
 # called on every frame
-def events(delta, fadeDir, mouseX, mouseY) {
+def events(delta, fadeDir, mouseX, mouseY, mouseWorldX, mouseWorldY, mouseWorldZ, mouseButtonDown, mouseOnInteractive) {
     player.mouseX := mouseX;
     player.mouseY := mouseY;
+    player.mouseWorldX := mouseWorldX;
+    player.mouseWorldY := mouseWorldY;
+    player.mouseWorldZ := mouseWorldZ;
+    player.mouseButtonDown := mouseButtonDown;
+    player.mouseOnInteractive := mouseOnInteractive;
     player.elapsedTime := player.elapsedTime + delta;
 
     EVENTS_MAP[player.mode](delta, fadeDir);
@@ -99,7 +107,8 @@ def eventsInit(delta, fadeDir) {
 }
 
 def eventsTitle(delta, fadeDir) {
-    if(isPressed(KeySpace)) {
+    if(isPressed(KeySpace) || didClick()) {
+        getClick();
         delAllMessages();
         player.mode := MODE_TITLE2;
         # all black
@@ -122,7 +131,8 @@ def eventsTitle2(delta, fadeDir) {
 }
 
 def eventsTitle3(delta, fadeDir) {
-    if(isPressed(KeySpace)) {
+    if(isPressed(KeySpace) || didClick()) {
+        getClick();
         delAllMessages();
         player.mode := MODE_GAME;
         player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_Z, PLAYER_SHAPE, PLAYER_MOVE_SPEED, true, false);
@@ -148,62 +158,7 @@ def eventsTeleport(delta, fadeDir) {
 }
 
 def eventsGameplay(delta, fadeDir) {
-
-    if(didClick()) {
-        pos := getClick();
-        dragging := pos[3];
-        isDragStart := pos[4];
-        dragAction := pos[5];
-        dragIndex := pos[6];
-        if(dragging) {
-            if(isDragStart) {
-                startDrag(pos, dragAction, dragIndex);
-            } else {
-                endDrag(pos);
-            }
-        } else {            
-            # handle click
-            if(dragAction = "") {
-                panel := getOverPanel();
-                if(panel[0] != null) {
-                    print("click on panel " + panel[0]);
-                    # raise clicked panel
-                    if(panel[0] = "inventory") {
-                        openInventory();
-                    } else {
-                        c := getItemById(panel[0]);
-                        raisePanel(c.id, c.uiImage);
-                    }
-                } else {
-                    done := player.move.operateDoorAt(pos[0], pos[1], pos[2]);
-                    if(done = false) {
-                        shape := getShape(pos[0], pos[1], pos[2]);
-                        if(shape != null) {
-                            done := openContainer(shape[1], shape[2], shape[3], "map");
-                            if(done = false) {
-                                if(shape[0] = "lydell") {
-                                    openInventory();
-                                } else {
-                                    creature := getCreature(pos[0], pos[1], pos[2]);
-                                    print("clicked creature: " + creature.template.shape);
-                                    if(creature != null) {
-                                        if(creature.template.movement = "hunt") {
-                                            startAttack(creature);
-                                        } else {
-                                            startConvo(creature.npc);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                openContainer(dragIndex, -1, -1, dragAction);
-            }
-        }
-    }
-
+    cursorDir := setCursorAndGetDir();
     animationType := ANIM_STAND;
     if(player.attackTimer > 0) {
         player.attackTimer := player.attackTimer - delta;
@@ -212,62 +167,68 @@ def eventsGameplay(delta, fadeDir) {
         if(player.coolTimer > 0) {
             player.coolTimer := player.coolTimer - delta;
         } else {
-            dx := 0;
-            dy := 0;
-            if(isDown(KeyA) || isDown(KeyLeft)) {
-                dx := 1;
-            }
-            if(isDown(KeyD) || isDown(KeyRight)) {
-                dx := -1;
-            }
-            if(isDown(KeyW) || isDown(KeyUp)) {
-                dy := -1;
-            }
-            if(isDown(KeyS) || isDown(KeyDown)) {
-                dy := 1;
-            }
+            if(player.mouseDrive) {
+                if(player.mouseButtonDown = 1) {
+                    dx := cursorDir[0];
+                    dy := cursorDir[1];
+                    if(dx != 0 || dy != 0) {
+                        animationType := ANIM_MOVE;
+                        playerMove(dx, dy, delta);
+                    }
+                } else {
+                    player.mouseDrive := false;
+                }
+            } else {
+                if(didClick()) {
+                    handleGameClick();
+                } else {
+                    if(player.mouseButtonDown = 1 && player.mouseOnInteractive = 0 && player.dragShape = null) {
+                        player.mouseDrive := true;
+                    }
 
-            if(dx != 0 || dy != 0) {
-                animationType := ANIM_MOVE;
-                playerMove(dx, dy, delta);
-            }
+                    dx := 0;
+                    dy := 0;
+                    if(isDown(KeyA) || isDown(KeyLeft)) {
+                        dx := 1;
+                    }
+                    if(isDown(KeyD) || isDown(KeyRight)) {
+                        dx := -1;
+                    }
+                    if(isDown(KeyW) || isDown(KeyUp)) {
+                        dy := -1;
+                    }
+                    if(isDown(KeyS) || isDown(KeyDown)) {
+                        dy := 1;
+                    }
 
-            if(isPressed(KeySpace)) {
-                if(player.move.operateDoorNearby() = null) {
-                    if(operateWindow() = false) {
-                        if(player.move.findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
-                            player.move.findNearby(1, scriptedAction, null);
+                    if(dx != 0 || dy != 0) {
+                        animationType := ANIM_MOVE;
+                        playerMove(dx, dy, delta);
+                    }
+
+                    if(isPressed(KeySpace)) {
+                        if(player.move.operateDoorNearby() = null) {
+                            if(operateWindow() = false) {
+                                if(player.move.findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
+                                    player.move.findNearby(1, scriptedAction, null);
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            if(isPressed(KeyT)) {
-                player.move.findNpcNearby(startConvo);
-            }
+                    if(isPressed(KeyT)) {
+                        player.move.findNpcNearby(startConvo);
+                    }
 
-            if(isPressed(KeyI)) {
-                openInventory();
-            }
+                    if(isPressed(KeyI)) {
+                        openInventory();
+                    }
 
-            if(isPressed(KeyEscape)) {
-                if(closeTopPanel() != true) {
-                    raisePanel("exit", "marble");
-                    updatePanel("exit", [{
-                        "type": "uiText",
-                        "text": "Exit game?",
-                        "x": 75,
-                        "y": 35,
-                        "fontIndex": 0,
-                    },{
-                        "type": "uiText",
-                        "text": "Press SPACE to quit.",
-                        "x": 70,
-                        "y": 100,
-                        "fontIndex": 1,
-                    }]);
-                    centerPanel("exit");
-                    player.mode := MODE_EXIT;
+                    if(isPressed(KeyEscape)) {
+                        if(closeTopPanel() != true) {
+                            startExitMode();
+                        }
+                    }                
                 }
             }
         }
@@ -275,6 +236,125 @@ def eventsGameplay(delta, fadeDir) {
 
     player.move.setAnimation(animationType);
     moveCreatures(delta);
+}
+
+def handleGameClick() {
+    pos := getClick();
+    dragging := pos[3];
+    isDragStart := pos[4];
+    dragAction := pos[5];
+    dragIndex := pos[6];
+    if(dragging) {
+        if(isDragStart) {
+            startDrag(pos, dragAction, dragIndex);
+        } else {
+            endDrag(pos);
+        }
+    } else {
+        # handle click
+        if(dragAction = "") {
+            panel := getOverPanel();
+            if(panel[0] != null) {
+                # raise clicked panel
+                if(panel[0] = "inventory") {
+                    openInventory();
+                } else {
+                    c := getItemById(panel[0]);
+                    raisePanel(c.id, c.uiImage);
+                }
+            } else {
+                if(player.move.operateDoorAt(pos[0], pos[1], pos[2]) = false) {
+                    shape := getShape(pos[0], pos[1], pos[2]);
+                    if(shape != null) {
+                        if(openContainer(shape[1], shape[2], shape[3], "map") = false) {
+                            if(shape[0] = "lydell") {
+                                openInventory();
+                            } else {
+                                creature := getCreature(pos[0], pos[1], pos[2]);
+                                if(creature != null) {
+                                    if(creature.template.movement = "hunt") {
+                                        startAttack(creature);
+                                    } else {
+                                        startConvo(creature.npc);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            openContainer(dragIndex, -1, -1, dragAction);
+        }
+    }
+}
+
+def startExitMode() {
+    raisePanel("exit", "marble");
+    updatePanel("exit", [{
+        "type": "uiText",
+        "text": "Exit game?",
+        "x": 75,
+        "y": 35,
+        "fontIndex": 0,
+    },{
+        "type": "uiText",
+        "text": "Press SPACE to quit.",
+        "x": 70,
+        "y": 100,
+        "fontIndex": 1,
+    }]);
+    centerPanel("exit");
+    player.mode := MODE_EXIT;
+}
+
+def setCursorAndGetDir() {
+    if(player.dragShape != null) {
+        setCursor("cursor.hand");
+        return [0,0];
+    }
+    if(player.mouseDrive = false && player.mouseOnInteractive = 1) {
+        setCursor("cursor.hand");
+        return [0,0];
+    }
+    dir := getDirScreen(player.mouseX, player.mouseY);
+    dx := 0;
+    dy := 0;
+    cursor := "";
+    if(dir = DIR_W) {
+        dx := 1; dy := -1;
+        cursor := "cursor.w";
+    }
+    if(dir = DIR_E) {
+        dx := -1; dy := 1;
+        cursor := "cursor.e";
+    }
+    if(dir = DIR_N) {
+        dx := -1; dy := -1;
+        cursor := "cursor.n";
+    }
+    if(dir = DIR_S) {
+        dx := 1; dy := 1;
+        cursor := "cursor.s";
+    }
+    if(dir = DIR_NE) {
+        dx := -1;
+        cursor := "cursor.ne";
+    }
+    if(dir = DIR_SE) {
+        dy := 1;
+        cursor := "cursor.se";
+    }
+    if(dir = DIR_NW) {
+        dy := -1;
+        cursor := "cursor.nw";
+    }
+    if(dir = DIR_SW) {
+        dx := 1;
+        cursor := "cursor.sw";
+    }
+    setCursor(cursor);
+    return [dx, dy];
 }
 
 def eventsExit(delta, fadeDir) {
@@ -324,7 +404,6 @@ def updateInventoryUi() {
 def openContainer(x, y, z, location) {
     c := getItem(x, y, z, location);
     if(c = null) {
-        print("openContainer: nothing at=" + x + "," + y + "," + z);
         return false;
     }
     print("openContainer: c=" + c + " type=" + c.type);
