@@ -60,6 +60,24 @@ def fireConvoAnswerIndex() {
     }
 }
 
+def setConvoAnswerIndexAt(x, y) {
+    if(player.convo = null) {
+        return 1;
+    }
+    if(player.convo.parsed = null) {
+        return 1;
+    }
+    lineCount := len(player.convo.parsed.lines);
+    i := int((y - 20 - (lineCount - 1) * LINE_HEIGHT) / LINE_HEIGHT);
+    if(i >= 0 && i < len(player.convo.parsed.answers) && i != player.convo.answerIndex) {
+        answerLength := messageWidth("" + (i + 1) + ": " + player.convo.parsed.answers[i], 0);
+        if(x >= 10 && x < 10 + answerLength) {
+            player.convo.answerIndex := i;
+            player.convo.update := true;
+        }
+    }
+}
+
 def displayConvoMessages() {
     delConvoMessages();
     array_foreach(player.convo.parsed.lines, (i, line) => addConvoMessage(10, 20 + i * LINE_HEIGHT, line, MESSAGE_R, MESSAGE_G, MESSAGE_B));
@@ -116,7 +134,6 @@ def addWord(topic, i, wordStart, d) {
         array_foreach(CONVO_SUFFIX, (i, p) => {
             while(endsWith(w[0], p)) {
                 w[0] := substr(w[0], 0, len(w[0]) - len(p));
-                print("\tword changed to: " + w[0]);
             }            
         });        
         d.answers[len(d.answers)] := w[0];

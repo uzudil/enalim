@@ -9,6 +9,7 @@ SECTIONS["25,24"] := {
         setCreature(5170, 4932, 1, creaturesTemplates.ogre);
         setContainer("chest", 5015, 4961, 3, "map", [ "vial.nercromancer", { "shape": "item.book.2", "book": "Raising the dead" } ]);
         setContainer("chest", 5003, 4961, 1, "map", [ "item.candle", "item.candle", "item.candle" ]);
+        setContainer("chest", 5183, 4925, 3, "map", [ "key.ourdlen2", "item.candle" ]);
     },
     "start": this => {
         eraseShape(5005, 4967, 1);
@@ -25,6 +26,9 @@ SECTIONS["25,24"] := {
     "locked": (this, x, y, z) => {
         if(x = 5023 && y = 4962 && z = 1) {
             return "key.storage_room";
+        }
+        if(x = 5176 && y = 4956 && z = 1) {
+            return "key.ourdlen";
         }
         return null;
     },

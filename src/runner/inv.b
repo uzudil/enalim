@@ -185,6 +185,7 @@ def newInventory() {
         "findIndex": (self, name) => array_find_index(self.items, item => item.shape = name),
         "remove": (self, index, location) => {
             # adjust the location of items in this inventory
+            item := getItem(index, -1, -1, location);
             i := index + 1;
             while(i < len(self.items)) {
                 c := getItem(i, -1, -1, location);
@@ -194,11 +195,12 @@ def newInventory() {
                 i := i + 1;
             }
             # remove the item
-            item := self.items[index];
+            invItem := self.items[index];
             out := { 
-                "shape": item.shape, 
-                "x": item.x, 
-                "y": item.y, 
+                "shape": invItem.shape, 
+                "x": invItem.x, 
+                "y": invItem.y, 
+                "item": item,
             };
             del self.items[index];
             return out;

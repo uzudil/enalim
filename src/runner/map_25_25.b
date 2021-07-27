@@ -3,7 +3,15 @@ const armin = {
     "label": "Brother Armin",
     "creature": "monk",
     "convo": {
-        "": "Hello there!",
+        "": "Welcome to $Ourdlen traveler. The outside world has $forgot about our humble monastery.",
+        "Ourdlen": "Once a majestic homage to our Lord $Vreit and a libray of rare $documents, our monastery is now mostly a ruin. Dangerous $goblins roam the grounds above and so we are forced to now dwell $underground.",
+        "underground": "Because of the threat from the $goblins, we were forced to move our worship of Lord $Vreit here to the lower levels of the monastery.",
+        "Vreit": "Lord Vreit is the god of the underworld, so it is only fitting that we should worship him $underground. He's the protector of the dead who guards the souls of those passed on to the other side.",
+        "forgot": "There aren't many left who remember our monastery at $Ourdlen. Once we were openly venerating Lord $Vreit and generating much of our income from the research of rare $documents.",
+        "documents": "You seek such a document? A paperwork for your master, the Necromancer? If we still have the scroll, it would be in the locked $storage room. Ask Brother $Hermil for the key.",
+        "storage": "The storage room is locked most of the time. If the $goblins should ever breach our $underground halls, this will hopefully prevent the destruction of the $documents.",
+        "goblins": "Wretched monsters they are! No one knows where they came from but their appearance forced us $underground and signalled an end of an era for $Ourdlen.",
+        "Hermil": "Brother Hermil is the keeper of keys to the $storage room. He is a mighty scholar, able to decode even the most ancient tomes."
     },
     "schedule": [
         { "from": 8, "to": 18, "pos": [ 5127, 5002, 1 ], "movement": "anchor" },
@@ -28,6 +36,7 @@ SECTIONS["25,25"] := {
 
         setBook(5027, 5017, 3, "map", "Raising the dead");
         setBook(5031, 5013, 6, "map", "Necromantic reagents");        
+        setBook(5197, 5016, 3, "map", "On ghosts and spirits");        
     },
     "teleport": (this, x, y, z) => {
         if(x = 5000 && y <= 5034 && y >= 5030 && z = 1) {
