@@ -378,7 +378,8 @@
                 { "name": "cursor.e", "size": [24, 24], "pos": [400, 720], "cursor": [23, 11] },
                 { "name": "cursor.sw", "size": [24, 24], "pos": [320, 760], "cursor": [0, 23] },
                 { "name": "cursor.s", "size": [24, 24], "pos": [360, 760], "cursor": [11, 23] },
-                { "name": "cursor.se", "size": [24, 24], "pos": [400, 760], "cursor": [23, 23] }
+                { "name": "cursor.se", "size": [24, 24], "pos": [400, 760], "cursor": [23, 23] },
+                { "name": "cursor.no", "size": [24, 24], "pos": [360, 720], "cursor": [0, 0] }
             ]
         }        
     ],    

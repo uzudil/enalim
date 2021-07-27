@@ -297,6 +297,7 @@ def handleGameClick() {
                 # print("SHAPE CLICK: " + d);
                 if(d > 8) {
                     # too far
+                    setCursorTmp("cursor.no");
                     return 1;
                 }
 
@@ -332,13 +333,28 @@ def handleGameClick() {
                         return 1;
                     }
                 }
+
+                if(player.mouseOnInteractive = 1) {
+                    timedMessage(shape[1], shape[2], shape[3], getShapeDescription(shape[0]));
+                }
             }
         } else {
             if(openContainer(dragIndex, -1, -1, dragAction)) {
                 return 1;
             }
-
+            
+            desc := getShapeDescription(getContainedShape(dragAction, dragIndex));
+            timedMessageXY(player.mouseX, player.mouseY, desc);
         }
+    }
+}
+
+def getContainedShape(location, index) {
+    if(location = "inventory") {
+        return player.inventory.items[index].shape;
+    } else {
+        c := getItemById(location);
+        return c.items.items[index].shape;
     }
 }
 
@@ -865,6 +881,10 @@ def unlock_door(x, y, z, isPlayer) {
 
 def timedMessage(x, y, z, message) {
     showMessageAt(x, y, z, message, 0, MESSAGE_R, MESSAGE_G, MESSAGE_B);
+}
+
+def timedMessageXY(x, y, message) {
+    showMessageAtXY(x, y, message, 0, MESSAGE_R, MESSAGE_G, MESSAGE_B);
 }
 
 def save_game() {
