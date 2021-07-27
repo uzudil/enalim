@@ -12,8 +12,13 @@ const hermil = {
         "grain": "Yes, the grain chamber is where we keep our dry food. However, we keep it locked because two hideous $monsters became trapped there.",
         "monsters": "I can give you the $key to the $grain chamber but be warned the horrors walking around there will test your very sanity!",
         "key": () => {
-            player.inventory.add("key.ourdlen", -1, -1);
-            return "Here you go. If you are able to clear out the $grain chamber, you're welcome to take whatever you find there. The monks of $Ourdlen will be forever in your debt!";
+            if(player.gameState["ourdlen.grain.key"] = null) {
+                player.gameState["ourdlen.grain.key"] := 1;
+                player.inventory.add("key.ourdlen", -1, -1);
+                return "Here you go. If you are able to clear out the $grain chamber, you're welcome to take whatever you find there. The monks of $Ourdlen will be forever in your debt!";
+            } else {
+                return "The key I gave you should give you access to the $grain chamber. If you are able to clear it out, you're welcome to take whatever you find there. The monks of $Ourdlen will be forever in your debt!";
+            }            
         },
     },
     "schedule": [
