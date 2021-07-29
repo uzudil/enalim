@@ -1,12 +1,18 @@
 const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead" ];
+const MISC_OUTDOOR = [ "rock", "rock.corner", "rock.2", "rock.3" ];
 const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
 const RUG_SIZE = 2;
 
 def editorCommand() {
+    if(isPressed(KeyL)) {
+        drawWater(getPosition());
+    }
+    if(isPressed(KeyG)) {
+        drawGrass(getPosition());
+    }
     if(isPressed(KeyT)) {
         pos := getPosition();
-        setShape(pos[0], pos[1], pos[2], "plant.trunk");
-        setShape(pos[0] - 1, pos[1] - 1, pos[2] + 4, choose(TREES));
+        drawTree(pos[0], pos[1], pos[2]);
     }
     if(isPressed(KeyR)) {
         pos := getPosition();
@@ -242,6 +248,103 @@ def drawDungeonWalls(x, y, d) {
     }
     return 1;
 
+}
+
+const LAND_UNIT = 32;
+
+def isGround(x, y) {
+    info := getShape(x, y, 0);
+    if(info = null) {
+        return false;
+    }
+    return info[0] != "ground.water";
+}
+
+def fillFloor(x, y, w, h, shape) {
+    range(x, x + w, 4, xx => {
+        range(y, y + h, 4, yy => {
+            setShape(xx, yy, 0, shape);
+        });
+    });    
+}
+
+def drawTree(x, y, z) {
+    setShape(x, y, z, "plant.trunk");
+    setShape(x - 1, y - 1, z + 4, choose(TREES));
+}
+
+def drawMisc(x, y, z) {
+    setShape(x, y, z, choose(MISC_OUTDOOR));
+}
+
+def drawLand(x, y, w, h) {
+    p := choose([0.25, 0.5, 0.75]);
+    range(x, x + w, 4, xx => {
+        range(y, y + h, 4, yy => {
+            if(random() < p) {
+                mode := random();
+                if(mode < 0.9) {
+                    drawTree(xx + 1, yy + 1, 1);
+                } else {
+                    drawMisc(xx, yy, 1);
+                }
+            }
+        });
+    });
+}
+
+def drawGrass(pos) {
+    x := int(pos[0] / LAND_UNIT) * LAND_UNIT;
+    y := int(pos[1] / LAND_UNIT) * LAND_UNIT;
+    clearArea(x, y, LAND_UNIT, LAND_UNIT);
+    fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.grass");
+    drawLand(x, y, LAND_UNIT/2, LAND_UNIT/2);
+    drawLand(x + LAND_UNIT/2, y, LAND_UNIT/2, LAND_UNIT/2);
+    drawLand(x + LAND_UNIT/2, y + LAND_UNIT/2, LAND_UNIT/2, LAND_UNIT/2);
+    drawLand(x, y + LAND_UNIT/2, LAND_UNIT/2, LAND_UNIT/2);    
+}
+
+def drawEdge(fx) {
+    range(0, 1 + int(random() * 3), 1, fx);
+}
+
+def drawWater(pos) {
+    x := int(pos[0] / LAND_UNIT) * LAND_UNIT;
+    y := int(pos[1] / LAND_UNIT) * LAND_UNIT;
+
+    n := isGround(x + LAND_UNIT/2, y - 1);
+    s := isGround(x + LAND_UNIT/2, y + LAND_UNIT);
+    w := isGround(x - 1, y + LAND_UNIT/2);
+    e := isGround(x + LAND_UNIT, y + LAND_UNIT/2);
+
+    clearArea(x, y, LAND_UNIT, LAND_UNIT);
+    fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.water");
+    
+    # edges
+    if(n) {
+        print("north edge");
+        range(x, x + LAND_UNIT, 4, xx => {
+            drawEdge(i => setShapeEditor(xx, y + i * 4, 0, "ground.dirt"));
+        });
+    }
+    if(s) {
+        print("south edge");
+        range(x, x + LAND_UNIT, 4, xx => {
+            drawEdge(i => setShapeEditor(xx, y + LAND_UNIT - 4 - i * 4, 0, "ground.dirt"));
+        });
+    }
+    if(e) {
+        print("east edge");
+        range(y, y + LAND_UNIT, 4, yy => {
+            drawEdge(i => setShapeEditor(x + LAND_UNIT - 4 - i * 4, yy, 0, "ground.dirt"));
+        });
+    }
+    if(w) {
+        print("west edge");
+        range(y, y + LAND_UNIT, 4, yy => {
+            drawEdge(i => setShapeEditor(x + i * 4, yy, 0, "ground.dirt"));
+        });
+    }
 }
 
 # put this last so parse errors make the app panic()
