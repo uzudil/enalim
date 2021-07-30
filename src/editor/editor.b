@@ -1,5 +1,5 @@
-const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead" ];
-const MISC_OUTDOOR = [ "rock", "rock.corner", "rock.2", "rock.3" ];
+const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead", "plant.pine2" ];
+const MISC_OUTDOOR = [ "rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y", "plant.bush" ];
 const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
 const RUG_SIZE = 2;
 
