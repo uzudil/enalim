@@ -20,6 +20,7 @@ func main() {
 	winWidth := flag.Int("width", 800, "Window width (default: 800)")
 	winHeight := flag.Int("height", 600, "Window height (default: 600)")
 	fps := flag.Float64("fps", 60, "Frames per second")
+	fs := flag.Bool("fullscreen", false, "Fullscreen mode?")
 	flag.Parse()
 
 	if err := glfw.Init(); err != nil {
@@ -29,6 +30,6 @@ func main() {
 
 	var game gfx.Game = runner.NewRunner()
 	script.InitScript()
-	app := gfx.NewApp(game, ".", *winWidth, *winHeight, *fps)
+	app := gfx.NewApp(game, ".", *winWidth, *winHeight, *fps, *fs)
 	app.Run()
 }

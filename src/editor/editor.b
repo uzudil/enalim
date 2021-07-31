@@ -1,5 +1,6 @@
 const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead", "plant.pine2" ];
 const MISC_OUTDOOR = [ "rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y", "plant.bush" ];
+const OUTDOOR_EXTRA = [ "plant.flower.green.large", "plant.flower.yellow.large", "plant.flower.red.large", "plant.flower.green.small", "plant.flower.yellow.small", "plant.flower.red.small" ];
 const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
 const RUG_SIZE = 2;
 
@@ -277,17 +278,26 @@ def drawMisc(x, y, z) {
     setShape(x, y, z, choose(MISC_OUTDOOR));
 }
 
+def drawOutdoorExtra(x, y, z) {
+    setShapeExtra(x, y, z, choose(OUTDOOR_EXTRA));
+}
+
 def drawLand(x, y, w, h) {
     p := choose([0.25, 0.5, 0.75]);
-    range(x, x + w, 4, xx => {
-        range(y, y + h, 4, yy => {
-            if(random() < p) {
-                mode := random();
-                if(mode < 0.9) {
-                    drawTree(xx + 1, yy + 1, 1);
-                } else {
-                    drawMisc(xx, yy, 1);
+    range(x, x + w, 2, xx => {
+        range(y, y + h, 2, yy => {
+            if(xx % 4 = 0 && yy % 4 = 0) {
+                if(random() < p) {
+                    mode := random();
+                    if(mode < 0.9) {
+                        drawTree(xx + 1, yy + 1, 1);
+                    } else {
+                        drawMisc(xx, yy, 1);
+                    }
                 }
+            }
+            if(random() < 0.25) {
+                drawOutdoorExtra(xx, yy, 1);
             }
         });
     });
