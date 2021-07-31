@@ -58,6 +58,43 @@ creaturesTemplates := {
         "attackSteps": 2,
         "attack": [2,5],
     },
+    "man-blue": {
+        "shape": "man-blue",
+        "speed": 0.25,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "anchor",
+    },
+    "man-yellow": {
+        "shape": "man-yellow",
+        "speed": 0.25,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "anchor",
+    },
+    "woman": {
+        "shape": "woman",
+        "speed": 0.25,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "anchor",
+    },
+    "woman.brown": {
+        "shape": "woman.brown",
+        "speed": 0.25,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "anchor",
+    },
+
 };
 
 creatures := [];

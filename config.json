@@ -579,6 +579,78 @@
                     "dirs": [ "n", "nw", "w", "sw", "s", "se", "e", "ne"  ]
                 }
             ]
+        },
+        { 
+            "name": "man-blue", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 32, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "sw", "s", "se", "e", "ne", "n", "nw", "w" ]
+                }
+            ]
+        },
+        { 
+            "name": "man-yellow", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 32, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "sw", "s", "se", "e", "ne", "n", "nw", "w" ]
+                }
+            ]
+        },
+        { 
+            "name": "woman.brown", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 32, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "sw", "s", "se", "e", "ne", "n", "nw", "w" ]
+                }
+            ]
+        },
+        { 
+            "name": "woman", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 32, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "s", "se", "e", "ne", "n", "nw", "w", "sw" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "sw", "s", "se", "e", "ne", "n", "nw", "w" ]
+                }
+            ]
         }
     ]
 }
