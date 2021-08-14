@@ -6,7 +6,7 @@ const ennid = {
         "": "Welcome traveler to Sylvanes",
     },
     "schedule": [
-        { "from": 11, "to": 22, "pos": [ 5382, 4998, 1 ], "movement": "anchor" },
+        { "from": 11, "to": 22, "pos": [ 5387, 5000, 1 ], "movement": "anchor" },
         { "from": 22, "to": 11, "pos": [ 5384, 4964, 1 ], "movement": "anchor" },
     ],
 };
@@ -56,7 +56,7 @@ addNpcDef(zanka);
 
 SECTIONS["26,24"] := {
     "init": this => {
-        setNpc(5382, 4998, 1, ennid);
+        setNpc(5387, 5000, 1, ennid);
         setNpc(5388, 4997, 1, hamid);
         setNpc(5388, 5003, 1, zanka);
         setNpc(5399, 4997, 1, alton);

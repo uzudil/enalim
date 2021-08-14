@@ -56,14 +56,19 @@ def pathMove(c, delta, opts) {
     path := c.move.findPath(opts.dest.x, opts.dest.y, opts.dest.z, c.template.baseWidth, opts.nearDistance);
     #print("+++ " + c.pathMove.name + " path finder: " + path);
     if(path != null) {
-        print("+++ " + c.pathMove.name + " has path!");
+        #print("+++ " + c.pathMove.name + " has path: ");
+        #s := "";
+        #range(0, len(path), 3, ii => {
+        #    s := s + "(" + path[ii] + "," + path[ii + 1] + ") ";
+        #});
+        #print(s);
         c.pathMove.path := path;
         c.pathMove.step := 0;
         c.pathMove.pathFail := 0;
         c.pathMove.nextCheck := 0;
         return takePathMoveStep(c, delta, destDistance, minDist);
     } else {
-        print("+++ " + c.pathMove.name + " no path found!");
+        print("+++ " + c.pathMove.name + " no path found! from: " + c.move.x + "," + c.move.y + "," + c.move.z + " to: " + opts.dest.x + "," + opts.dest.y + "," + opts.dest.z);
     }
 
     # can't find path: try again later
@@ -96,10 +101,18 @@ def takePathMoveStep(c, delta, destDistance, minDist) {
     if(moved) {
         return ANIM_MOVE;
     }
-    if(c.move.operateDoorNearby() != null) {
-        # a door opened: recalc path
-        c.pathMove["path"] := null;
-    } else {
+
+    cantMove := true;
+    #if(c.move.blockedByCreature(c, nextX, nextY) = false) {
+        # not blocked by a creature: try to open a door
+        if(c.move.operateDoorNearby() != null) {
+            # a door opened: recalc path
+            c.pathMove["path"] := null;
+            cantMove := false;
+        }
+    #}
+
+    if(cantMove) {
         print(c.template.shape + " failed to move on path. dist=" + destDistance + " vs " + minDist);
         
         # after 3 fails, give up on this path

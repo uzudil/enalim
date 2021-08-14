@@ -178,6 +178,30 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             }
             print("can't open door");
         },
+        "blockedByCreature": (self, c, nextX, nextY) => {
+            # blocked by player?
+            if(self.intersect(player.move, nextX, nextY)) {
+                return true;
+            }
+
+            # blocked by another creature?
+            return array_find(creatures, cc => cc.id != c.id && self.intersect(cc.move, nextX, nextY)) != null;
+        },
+        "intersect": (self, another, nextX, nextY) => intersect3d(
+            nextX, nextY, self.z, self.width, self.height, self.depth,
+            another.x, another.y, another.z, another.width, another.height, another.depth
+        ),
     };
 }
 
+def intersect3d(ax, ay, az, aw, ah, ad, bx, by, bz, bw, bh, bd) {
+    return (
+        intersect1d(ax, ax+aw, bx, bx+bw) &&
+		intersect1d(ay, ay+ah, by, by+bh) &&
+		intersect1d(az, az+ad, bz, bz+bd)
+    );
+}
+
+def intersect1d(start, end, start2, end2) {
+	return (start < end2 && end > start2);
+}
