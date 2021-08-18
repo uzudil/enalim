@@ -54,6 +54,11 @@ def fireConvoAnswerIndex() {
     if(player.convo.npc.convo[t] = null) {
         print("Error: missing convo topic: '" + t + "'. Talking to " + player.convo.npc.name);
     } else {
+        if(typeof(player.convo.npc.convo[t]) = "string") {
+            if(startsWith(player.convo.npc.convo[t], ">")) {
+                t := substr(player.convo.npc.convo[t], 1, len(player.convo.npc.convo[t]) - 1);
+            }
+        }
         player.convo.topic := t;
         player.convo.parsed := null;
         player.convo.update := true;
@@ -122,7 +127,22 @@ def parseTopic(topic) {
     return d;
 }
 
-const CONVO_SUFFIX = [ ",", "!", "?", ".", ":", ";" ];
+const CONVO_SUFFIX = [ ",", "!", "?", ".", ":", ";", "\"", "'" ];
+
+def stripSuffix(w) {
+    m := 0;
+    while(m < len(w)) {
+        i := 0;
+        while(i < len(CONVO_SUFFIX)) {
+            if(substr(w, m, 1) = CONVO_SUFFIX[i]) {
+                return substr(w, 0, m);
+            }
+            i := i + 1;
+        }
+        m := m + 1;
+    }
+    return w;
+}
 
 def addWord(topic, i, wordStart, d) {
     word := substr(topic, wordStart, (i - wordStart));
@@ -133,9 +153,10 @@ def addWord(topic, i, wordStart, d) {
         w := [ word ];
         array_foreach(CONVO_SUFFIX, (i, p) => {
             while(endsWith(w[0], p)) {
-                w[0] := substr(w[0], 0, len(w[0]) - len(p));
-            }            
-        });        
+                #w[0] := substr(w[0], 0, len(w[0]) - len(p));
+                w[0] := stripSuffix(w[0]);
+            }
+        });
         d.answers[len(d.answers)] := w[0];
     }
     lastLine := d.lines[len(d.lines) - 1];

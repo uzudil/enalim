@@ -131,9 +131,9 @@ def eventsTitle2(delta, fadeDir) {
     if(fadeDir = 1) {
         player.mode := MODE_TITLE3;
         addMessage(10, 25, "The story so far...", 0, 200, 200, 200);
-        o := parseTopic("Your name is Lydell and you have always lived on the island, serving the Necromancer. One day he will train you to be a powerful wizard, you are sure.");
+        o := parseTopic("The story so far: ...");
         array_foreach(o.lines, (index, line) => addMessage(10, 75 + (index * LINE_HEIGHT), line, 0, 128, 128, 128));
-        o := parseTopic("Strangely, you don't seem to recall how you got to the island...");
+        o := parseTopic("And also: ...");
         array_foreach(o.lines, (index, line) => addMessage(10, 200 + (index * LINE_HEIGHT), line, 0, 128, 128, 128));
         addMessage(110, 275, "Press SPACE to continue", 1, 128, 128, 128);
     }

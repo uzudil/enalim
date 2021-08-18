@@ -18,6 +18,16 @@ def onSectionLoad(sectionX, sectionY, data) {
         section := getSection(sectionX, sectionY);
         if(section != null) {
             section.init();
+            
+            # add npc-s
+            array_foreach(keys(npcDefs), (i, name) => {
+                npc := npcDefs[name];
+                pos := npc.schedule[0].pos;
+                sectionPos := getSectionPos(pos[0], pos[1]);
+                if(sectionPos[0] = sectionX && sectionPos[1] = sectionY) {
+                    setNpc(pos[0], pos[1], pos[2], npc);
+                }
+            });
         }
         print("+++ Init done " + sectionX + "," + sectionY);
     } else {
