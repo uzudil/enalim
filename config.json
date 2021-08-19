@@ -12,7 +12,7 @@
         "runner": {
             "resolution": [ 400, 300 ],
             "fonts": [
-                { "font": "rudelsberg/Rudelsberg.ttf", "fontSize": 24 },
+                { "font": "rudelsberg/Rudelsberg.ttf", "fontSize": 21 },
                 { "font": "bainsley/Bainsley-VGgJ6.ttf", "fontSize": 12, "alphaMin": 135, "alphaDiv": 4 }
             ],
             "calendar": {
@@ -359,7 +359,7 @@
                 { "name": "teleport.x", "size": [ 1, 4, 6], "pos": [288, 24] },
                 { "name": "column.large.gray", "size": [ 2, 2, 6], "pos": [336, 16] },
                 { "name": "key.storage_room", "description": "Basement key", "size": [1, 1, 1], "pos": [64, 208], "drag": true },
-                { "name": "doc.ourdlen", "description": "A contract", "size": [1, 1, 1], "pos": [80, 208], "drag": true },
+                { "name": "doc.ourdlen", "description": "Ancient manuscript", "size": [1, 1, 1], "pos": [80, 208], "drag": true },
                 { "name": "vial.nercromancer", "description": "Spell component vial", "size": [1, 1, 1], "pos": [96, 208], "drag": true },
                 { "name": "key.ourdlen", "description": "Grain room key", "size": [1, 1, 1], "pos": [64, 208], "drag": true },
                 { "name": "key.ourdlen2", "description": "Storage room key", "size": [1, 1, 1], "pos": [64, 208], "drag": true },

@@ -1,5 +1,10 @@
+const CONVO_R=160;
+const CONVO_G=150;
+const CONVO_B=100;
+
 def startConvo(npc) {
     player.mode := MODE_CONVO;
+    setOverlayBackground(0, 0, 0, 200);
     setCalendarPaused(true);
     player.convo := {
         "npc": npc,
@@ -8,6 +13,7 @@ def startConvo(npc) {
         "indexes": [],
         "parsed": null,
         "answerIndex": 0,
+        "quote": false,
     };
 }
 
@@ -20,6 +26,7 @@ def renderConvo() {
                 t := t();
             }
             player.convo.parsed := parseTopic(t);
+            player.convo.quote := false;
         }
         displayConvoMessages();
         player.convo.update := false;        
@@ -27,6 +34,7 @@ def renderConvo() {
 }
 
 def endConvo() {
+    setOverlayBackground(0, 0, 0, 0);
     delConvoMessages();
     player.convo := null;
     setCalendarPaused(false);
@@ -85,18 +93,37 @@ def setConvoAnswerIndexAt(x, y) {
 
 def displayConvoMessages() {
     delConvoMessages();
-    array_foreach(player.convo.parsed.lines, (i, line) => addConvoMessage(10, 20 + i * LINE_HEIGHT, line, MESSAGE_R, MESSAGE_G, MESSAGE_B));
+    array_foreach(player.convo.parsed.lines, (i, line) => addConvoMessage(10, 20 + i * LINE_HEIGHT, line, CONVO_R, CONVO_G, CONVO_B));
     array_foreach(player.convo.parsed.answers, (i, answer) => {
         fg := 128;
         if(i = player.convo.answerIndex) {
             fg := 255;
         }
-        addConvoMessage(10, 20 + len(player.convo.parsed.lines) * LINE_HEIGHT + i * LINE_HEIGHT, "" + (i + 1) + ": " + answer, fg, fg, fg);
+        addConvoMessage(10, 20 + len(player.convo.parsed.lines) * LINE_HEIGHT + i * LINE_HEIGHT, answer, fg, fg, fg);
     });
 }
 
 def addConvoMessage(x, y, msg, r,g,b) {
-    player.convo.indexes[len(player.convo.indexes)] := addMessage(x, y, msg, 0, r, g, b);
+    i := 0;    
+    s := "";
+    if(player.convo.quote) {
+       s := s + "|&c255,220,30|";
+    }
+    while(i < len(msg)) {
+        c := substr(msg, i, 1);        
+        if(c = "\"") {
+            player.convo.quote := player.convo.quote = false;
+            if(player.convo.quote) {
+                s := s + "|&c255,220,30|\"";
+            } else {
+                s := s + "\"|&c" + CONVO_R + "," + CONVO_G + "," + CONVO_B + "|";
+            }
+        } else {
+            s := s + c;
+        }
+        i := i + 1;
+    }
+    player.convo.indexes[len(player.convo.indexes)] := addMessage(x, y, s, 0, r, g, b);
 }
 
 def delConvoMessages() {
