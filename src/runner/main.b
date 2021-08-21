@@ -880,11 +880,11 @@ def unlock_door(x, y, z, isPlayer) {
 }
 
 def timedMessage(x, y, z, message) {
-    showMessageAt(x, y, z, message, 0, MESSAGE_R, MESSAGE_G, MESSAGE_B);
+    showMessageAt(x, y, z, message, 2, MESSAGE_R, MESSAGE_G, MESSAGE_B);
 }
 
 def timedMessageXY(x, y, message) {
-    showMessageAtXY(x, y, message, 0, MESSAGE_R, MESSAGE_G, MESSAGE_B);
+    showMessageAtXY(x, y, message, 2, MESSAGE_R, MESSAGE_G, MESSAGE_B);
 }
 
 def save_game() {
@@ -944,6 +944,9 @@ def startAttack(creature) {
 }
 
 def main() {
+    # register npc-s
+    array_foreach(npcReg, (i, npc) => registerNpc(npc));
+
     EVENTS_MAP[MODE_INIT] := (s, d,f) => eventsInit(d, f);
     EVENTS_MAP[MODE_TELEPORT] := (s, d,f) => eventsTeleport(d, f);
     EVENTS_MAP[MODE_CONVO] := (s, d,f) => eventsConvo(d, f);

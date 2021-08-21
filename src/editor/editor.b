@@ -1,6 +1,4 @@
 const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead", "plant.pine2" ];
-const MISC_OUTDOOR = [ "rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y", "plant.bush" ];
-const OUTDOOR_EXTRA = [ "plant.flower.green.large", "plant.flower.yellow.large", "plant.flower.red.large", "plant.flower.green.small", "plant.flower.yellow.small", "plant.flower.red.small" ];
 const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
 const RUG_SIZE = 2;
 
@@ -9,7 +7,43 @@ def editorCommand() {
         drawWater(getPosition());
     }
     if(isPressed(KeyG)) {
-        drawGrass(getPosition());
+        drawGrass(getPosition(), 
+            null,
+            ["rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y", "plant.bush"],
+            [ "plant.flower.green.large", "plant.flower.yellow.large", "plant.flower.red.large" ]
+        );
+    }
+    if(isPressed(KeyH)) {
+        drawGrass(getPosition(), 
+            array_flatten([
+                array_times("plant.oak", 6), 
+                array_times("plant.willow", 2), 
+                array_times("plant.red", 2),
+                "plant.dead"
+            ]), 
+            ["rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y", "plant.bush"],
+            [ "plant.flower.green.large", "plant.flower.yellow.large", "plant.flower.red.large" ]
+        );
+    }
+    if(isPressed(KeyJ)) {
+        drawGrass(getPosition(), 
+            array_flatten([
+                array_times("plant.pine", 10), 
+                array_times("plant.dead", 1)
+            ]),
+            [ "rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y" ],
+            [ "plant.flower.green.large", "plant.flower.yellow.large" ]
+        );
+    }
+    if(isPressed(KeyK)) {
+        drawGrass(getPosition(), 
+            array_flatten([
+                array_times("plant.pine2", 10), 
+                array_times("plant.dead", 1)
+            ]),
+            [ "rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y" ],
+            [ "plant.flower.green.large" ]
+        );
     }
     if(isPressed(KeyT)) {
         pos := getPosition();
@@ -261,10 +295,32 @@ def isGround(x, y) {
     return info[0] != "ground.water";
 }
 
-def fillFloor(x, y, w, h, shape) {
+def highest_frequency(m) {
+    mm := null;
+    ii := 0;
+    a := keys(m);
+    while(ii < len(a)) {
+        k := a[ii];
+        if(mm = null) {
+            mm := k;
+        } else {
+            if(m[k] > m[mm]) {
+                mm := k;
+            }
+        }
+        ii := ii + 1;
+    }
+    return [mm, m[mm]];
+}
+
+def fillFloor(x, y, w, h, shape, shape2) {
     range(x, x + w, 4, xx => {
         range(y, y + h, 4, yy => {
-            setShape(xx, yy, 0, shape);
+            if(xx > x && yy > y && xx < x + w - 4 && yy < y + h - 4 && random() < 0.5 && shape2 != null) {
+                setShapeEditor(xx, yy, 0, choose(shape2));
+            } else {
+                setShapeEditor(xx, yy, 0, shape);
+            }
         });
     });    
 }
@@ -274,44 +330,116 @@ def drawTree(x, y, z) {
     setShape(x - 1, y - 1, z + 4, choose(TREES));
 }
 
-def drawMisc(x, y, z) {
-    setShape(x, y, z, choose(MISC_OUTDOOR));
-}
-
-def drawOutdoorExtra(x, y, z) {
-    setShapeExtra(x, y, z, choose(OUTDOOR_EXTRA));
-}
-
-def drawLand(x, y, w, h) {
-    p := choose([0.25, 0.5, 0.75]);
-    range(x, x + w, 2, xx => {
-        range(y, y + h, 2, yy => {
-            if(xx % 4 = 0 && yy % 4 = 0) {
-                if(random() < p) {
-                    mode := random();
-                    if(mode < 0.9) {
-                        drawTree(xx + 1, yy + 1, 1);
+def cellularExtra(x, y, z, w, h, dx, dy) {
+    range(x + dx, x + w - dx, dx, xx => {
+        range(y + dy, y + h - dy, dy, yy => {
+            a := [];
+            range(-1, 2, 1, xxx => {
+                range(-1, 2, 1, yyy => {
+                    o := getShapeExtra(xx + xxx * dx, yy + yyy * dy, z);
+                    if(len(o) > 0) {
+                        a[len(a)] := o[0];
+                    }
+                });
+            });
+            oo := getShapeExtra(xx, yy, z);
+            if(len(a) > 0) {                    
+                m := array_reduce(a, {}, (d, e) => {
+                    if(d[e] = null) {
+                        d[e] := 1;
                     } else {
-                        drawMisc(xx, yy, 1);
+                        d[e] := d[e] + 1;
+                    }
+                    return d;
+                });
+                if(len(oo) > 0) {
+                    c := m[oo[0]];
+                    if(c = null) {
+                        eraseAllExtras(xx, yy, z);
+                    } else {
+                        if(c < 3) {
+                            eraseAllExtras(xx, yy, z);
+                        }
+                    }
+                } else {
+                    fr := highest_frequency(m);
+                    if(fr[1] > 3) {
+                        setShapeExtra(xx, yy, z, fr[0]);
                     }
                 }
-            }
-            if(random() < 0.25) {
-                drawOutdoorExtra(xx, yy, 1);
             }
         });
     });
 }
 
-def drawGrass(pos) {
+def drawLandExtras(x, y, w, h, extras) {
+    range(x, x + w, 2, xx => {
+        range(y, y + h, 2, yy => {
+            if(random() < 0.15 * len(extras)) {
+                setShapeExtra(xx, yy, 1, choose(extras));
+            }
+        });
+    });
+    range(0, 5, 1, i => {    
+        cellularExtra(x, y, 1, w, h, 2, 2);
+    });
+    small := {
+        "plant.flower.green.large": "plant.flower.green.small", 
+        "plant.flower.yellow.large": "plant.flower.yellow.small", 
+        "plant.flower.red.large": "plant.flower.red.small"
+    };
+    range(x, x + w, 2, xx => {
+        range(y, y + h, 2, yy => {
+            o := getShapeExtra(xx, yy, 1);
+            if(len(o) > 0 && random() < 0.25) {
+                if(small[o[0]] != null) {
+                    eraseAllExtras(xx, yy, 1);
+                    setShapeExtra(xx, yy, 1, small[o[0]]);
+                }
+            }
+        });
+    });    
+}
+
+def drawLand(x, y, w, h, trees, objects, extras) {
+    drawLandExtras(x, y, w, h, extras);
+    pos := [];
+    range(x, x + w, 4, xx => {
+        range(y, y + h, 4, yy => {
+            pos[len(pos)] := [xx, yy];
+        });
+    });
+    n := len(pos);
+    if(trees != null) {
+        range(0, int(n*0.5), 1, i => {
+            i := int(random() * len(pos));
+            p := pos[i];
+            setShape(p[0] + 1, p[1] + 1, 1, "plant.trunk");
+            setShape(p[0], p[1], 5, choose(trees));
+            del pos[i];
+        });
+    }
+    if(objects != null) {
+        range(0, int(n*0.15), 1, i => {
+            i := int(random() * len(pos));
+            p := pos[i];
+            setShape(p[0], p[1], 1, choose(objects));
+            del pos[i];
+        });
+    }
+}
+
+def drawGrass(pos, trees, objects, extras) {
     x := int(pos[0] / LAND_UNIT) * LAND_UNIT;
     y := int(pos[1] / LAND_UNIT) * LAND_UNIT;
     clearArea(x, y, LAND_UNIT, LAND_UNIT);
-    fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.grass");
-    drawLand(x, y, LAND_UNIT/2, LAND_UNIT/2);
-    drawLand(x + LAND_UNIT/2, y, LAND_UNIT/2, LAND_UNIT/2);
-    drawLand(x + LAND_UNIT/2, y + LAND_UNIT/2, LAND_UNIT/2, LAND_UNIT/2);
-    drawLand(x, y + LAND_UNIT/2, LAND_UNIT/2, LAND_UNIT/2);    
+    shape2 := choose([
+        ["ground.grass.2"], 
+        ["ground.marsh", "ground.marsh.2"], 
+        ["ground.grass.3"]
+    ]);
+    fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.grass", shape2);
+    drawLand(x, y, LAND_UNIT, LAND_UNIT, trees, objects, extras);
 }
 
 def drawEdge(fx) {
@@ -328,7 +456,7 @@ def drawWater(pos) {
     e := isGround(x + LAND_UNIT, y + LAND_UNIT/2);
 
     clearArea(x, y, LAND_UNIT, LAND_UNIT);
-    fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.water");
+    fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.water", null);
     
     # edges
     if(n) {
@@ -360,3 +488,4 @@ def drawWater(pos) {
 # put this last so parse errors make the app panic()
 def main() {
 }
+

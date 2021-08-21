@@ -6,14 +6,15 @@
         "editor": {
             "resolution": [ 1024, 768 ],
             "fonts": [
-                { "font": "rudelsberg/Rudelsberg.ttf", "fontSize": 32 }
+                { "font": "Mirza/Mirza-Regular.ttf", "fontSize": 32 }
             ]
         },
         "runner": {
             "resolution": [ 400, 300 ],
             "fonts": [
-                { "font": "rudelsberg/Rudelsberg.ttf", "fontSize": 21 },
-                { "font": "bainsley/Bainsley-VGgJ6.ttf", "fontSize": 12, "alphaMin": 135, "alphaDiv": 4 }
+                { "font": "Mirza/Mirza-Regular.ttf", "fontSize": 21 },
+                { "font": "bainsley/Bainsley-VGgJ6.ttf", "fontSize": 12, "alphaMin": 135, "alphaDiv": 4 },
+                { "font": "Pirata_One/PirataOne-Regular.ttf", "fontSize": 21 }
             ],
             "calendar": {
                 "year": 1350,

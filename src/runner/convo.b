@@ -14,6 +14,7 @@ def startConvo(npc) {
         "parsed": null,
         "answerIndex": 0,
         "quote": false,
+        "action": false,
     };
 }
 
@@ -27,6 +28,7 @@ def renderConvo() {
             }
             player.convo.parsed := parseTopic(t);
             player.convo.quote := false;
+            player.convo.action := false;
         }
         displayConvoMessages();
         player.convo.update := false;        
@@ -109,6 +111,9 @@ def addConvoMessage(x, y, msg, r,g,b) {
     if(player.convo.quote) {
        s := s + "|&c255,220,30|";
     }
+    if(player.convo.action) {
+       s := s + "|&c50,255,30|";
+    }
     while(i < len(msg)) {
         c := substr(msg, i, 1);        
         if(c = "\"") {
@@ -119,7 +124,16 @@ def addConvoMessage(x, y, msg, r,g,b) {
                 s := s + "\"|&c" + CONVO_R + "," + CONVO_G + "," + CONVO_B + "|";
             }
         } else {
-            s := s + c;
+            if(c = "^") {
+                player.convo.action := player.convo.action = false;
+                if(player.convo.action) {
+                    s := s + "|&c50,255,30|";
+                } else {
+                    s := s + "|&c" + CONVO_R + "," + CONVO_G + "," + CONVO_B + "|";
+                }
+            } else {
+                s := s + c;
+            }
         }
         i := i + 1;
     }

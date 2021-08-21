@@ -11,11 +11,11 @@ addNpcDef({
                 if(idx > -1) {
                     player.inventory.remove(idx, "inventory");
                     player.gameState["ourdlen_done"] := 1;
-                    return "The Necromancer takes the manuscript from you and reads it intently. After what seems like several intense minutes he gazes at you with a deranged expression: \"You must leave $immediately.\"";
+                    return "The Necromancer ^takes the manuscript from you^ and reads it intently. After what seems like several intense minutes he gazes at you with a deranged expression: \"You must leave $immediately.\"";
                 } else {
                     if(player.gameState["chores_done"] = null || player.gameState["ghost_warning"] = null) {
                         return "The Necromancer seems lost in his thoughts today. " + 
-                            "\"The time is here, $Lydell. The Alturian $conjunction is near and we have still have much work to do!\" " + 
+                            "\"The time is here, $Lydell. The Alturian $conjunction is near and we still have much work to do!\" " + 
                             "He impatiently motions for you to come closer.";
                     } else {
                         return "The Necromancer says with eyes gleaming: \"Excellent work $Lydell. Now that I have the vial of reagents and your assurance that the spectral trash in the corn field won't interfere, We're ready to begin the $ritual. Let me $explain how it will work.\"";
@@ -44,7 +44,7 @@ addNpcDef({
                 if(idx > -1) {
                     player.inventory.remove(idx, "inventory");
                     player.gameState["chores_done"] := 1;
-                    return "The Necromancer takes the vial of reagents from you. \"Thank you for bringing me this.\" - his expression looks more judgemental than thankful - \"Now before we begin the $ritual, there is the issue of the $ghost in the cornfield you need to deal with...\"";
+                    return "The Necromancer ^takes the vial of reagents^ from you. \"Thank you for bringing me this.\" - his expression looks more judgemental than thankful - \"Now before we begin the $ritual, there is the issue of the $ghost in the cornfield you need to deal with...\"";
                 } else {
                     return "He seems relieved: \"Good. I'm glad to hear that my trusted assistant $Lydell has organized everything for the coming $ritual so we can prevent a potentially era-ending $calamity.\"";
                 }
@@ -117,7 +117,7 @@ addNpcDef({
     "label": "Ghost of Lydell",
     "creature": "ghost",
     "convo": {
-        "": "An apparition floats before you, clothed in the dusty robes of yore. \"I... oooo... arakw...\" - it croaks - \"I hath come to warn thee $Lydell, of events foretold.\" It apprently knows who you are.",
+        "": "An apparition floats before you, clothed in the dusty robes of yore. \"I... oooo... arakw...\" - it croaks - \"I hath come to warn thee $Lydell, of events foretold.\" It apparently knows who you are.",
         "Lydell": "Before you can come to grips with the fact that your fame extends to the unlife, it continues: \"Tidings I bring thee, tidings I was bound to deliver. A $doom hangs on thee - its claws holding thee fast as coffin's nails.\" A fitting remark indeed.",
         "doom": "The ghost warbles on: \"Thou willst travel far to eventually meet thy fate.\" - this can mean anything, you think, until it clarifies: \"An evil presence bleeds into this world from whence I hail. I have come to warn thee that it is thy doom to seek out and $prove thyself against it.\"",
         "prove": "You're about to ignore these ramblings when it adds \"On thy travels seek thee the Azure Chalice of Krynt.\" - you swear it winks at you from under its hood - \"Now hurry Lydell back to thy $master. Aid him in his work, for he knows not what truly will come to pass.\"",

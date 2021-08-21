@@ -32,7 +32,7 @@ addNpcDef({
             if(player.gameState["ourdlen.grain.key"] = null) {
                 player.gameState["ourdlen.grain.key"] := 1;
                 player.inventory.add("key.ourdlen", -1, -1);
-                return "The ancient monk hands you a possibly even older brass key. " + 
+                return "The ancient monk ^hands you a possibly even older brass key.^ " + 
                     "\"Here you go. If you are able to clear out the $grain chamber, you're welcome to take whatever you find there.\" - " + 
                     "you privatly scoff at the notion you'd want anything that belonged to these smelly hermits - " +
                     "\"The monks of $Ourdlen will be forever in your debt!\"";
