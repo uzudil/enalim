@@ -337,7 +337,8 @@
                 { "name": "mountain.sw.2", "size": [ 4, 4, 6], "pos": [120, 840], "alphaMin": 0.75 },
                 { "name": "mountain.se.2", "size": [ 4, 4, 6], "pos": [200, 840], "alphaMin": 0.75 },
                 { "name": "mountain.ne.2", "size": [ 4, 4, 6], "pos": [280, 840], "alphaMin": 0.75 },
-                { "name": "mountain.nw.2", "size": [ 4, 4, 6], "pos": [360, 840], "alphaMin": 0.75 }
+                { "name": "mountain.nw.2", "size": [ 4, 4, 6], "pos": [360, 840], "alphaMin": 0.75 },
+                { "name": "mountain.cave.s", "size": [ 4, 4, 6], "pos": [120, 440], "alphaMin": 0.75 }
             ]
         },
         {
