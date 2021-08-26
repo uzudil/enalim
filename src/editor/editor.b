@@ -1,8 +1,22 @@
 const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead", "plant.pine2" ];
 const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
 const RUG_SIZE = 2;
+editor := {
+    "roofMode": false,
+};
 
 def editorCommand() {
+    if(isPressed(KeyTab)) {
+        if(editor.roofMode) {
+            print("to NO roof");
+            setMaxZ(24, null);
+            editor.roofMode := false;
+        } else {
+            print("to roof");
+            setMaxZ(7, "roof.mountain.1");
+            editor.roofMode := true;
+        }
+    }
     if(isPressed(KeyW)) {
         drawWater(getPosition());
     }
@@ -67,6 +81,9 @@ def editorCommand() {
     }
     if(isPressed(KeyM)) {
         drawMountain(getPosition(), "ground.cave");
+    }
+    if(isPressed(KeyN)) {
+        drawMountain(getPosition(), "ground.cave.2");
     }
     if(isPressed(Key0)) {
         setMaxZ(24, null);
@@ -176,19 +193,27 @@ dungeon := {
         "wall.e.wide": "cave.earth.w", 
         "wall.s.wide": "cave.earth.s", 
         "wall.n.wide": "cave.earth.n", 
+        "corner.se": "cave.dirt.corner.sw",
+        "corner.ne": "cave.dirt.corner.nw",
+        "corner.sw": "cave.dirt.corner.se",
+        "corner.nw": "cave.dirt.corner.ne",
     },
     "ground.cave.2": {
         "floor": "ground.cave.2",
-        "corner.black": "cave.rock.corner.2",
+        "corner.black": "cave.earth.corner.2",
         "corner": "cave.rock.corner.1",
         "wall.w": "cave.rock.e3", 
-        "wall.e": "cave.rock.w3", 
-        "wall.s": "cave.rock.s3", 
+        "wall.e": "cave.earth.w3", 
+        "wall.s": "cave.earth.s3", 
         "wall.n": "cave.rock.n3", 
         "wall.w.wide": "cave.rock.e", 
-        "wall.e.wide": "cave.rock.w", 
-        "wall.s.wide": "cave.rock.s", 
+        "wall.e.wide": "cave.earth.w", 
+        "wall.s.wide": "cave.earth.s", 
         "wall.n.wide": "cave.rock.n",     
+        "corner.se": "cave.rock.corner.sw",
+        "corner.ne": "cave.rock.corner.nw",
+        "corner.sw": "cave.rock.corner.se",
+        "corner.nw": "cave.rock.corner.ne",
     },
 };
 
@@ -238,7 +263,7 @@ def drawDungeonWalls(x, y, d) {
         return 1;
     }
     if(nw_corner) {
-        setShape(x, y, 1, d["corner"]);
+        setShape(x, y, 1, d["corner.black"]);
         setShape(x, y + 1, 1, d["wall.w"]);
         setShape(x + 1, y, 1, d["wall.n"]);
         return 1;
@@ -274,16 +299,16 @@ def drawDungeonWalls(x, y, d) {
     }
 
     if(nw) {
-        setShape(x, y, 1, d["corner"]); 
+        setShape(x, y, 1, d["corner.nw"]); 
     }
     if(ne) {
-        setShape(x + 3, y, 1, d["corner"]); 
+        setShape(x + 3, y, 1, d["corner.ne"]); 
     }
     if(sw) {
-        setShape(x, y + 3, 1, d["corner"]); 
+        setShape(x, y + 3, 1, d["corner.sw"]); 
     }
     if(se) {
-        setShape(x + 3, y + 3, 1, d["corner.black"]); 
+        setShape(x + 3, y + 3, 1, d["corner.se"]); 
     }
     return 1;
 
