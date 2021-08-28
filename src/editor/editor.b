@@ -18,7 +18,10 @@ def editorCommand() {
         }
     }
     if(isPressed(KeyW)) {
-        drawWater(getPosition());
+        drawWater(getPosition(), true);
+    }
+    if(isPressed(KeyQ)) {
+        drawWater(getPosition(), false);
     }
     if(isPressed(KeyG)) {
         drawGrass(getPosition(), 
@@ -74,16 +77,25 @@ def editorCommand() {
         pos := getPosition();
         x := int(pos[0] / 4) * 4;
         y := int(pos[1] / 4) * 4;
-        drawDungeon(x, y);
+        drawDungeon(x, y, 0);
+    }
+    if(isPressed(KeyU)) {
+        pos := getPosition();
+        x := int(pos[0] / 4) * 4;
+        y := int(pos[1] / 4) * 4;
+        drawDungeon(x, y, 1);
+    }
+    if(isPressed(KeyI)) {
+        pos := getPosition();
+        x := int(pos[0] / 4) * 4;
+        y := int(pos[1] / 4) * 4;
+        drawDungeon(x, y, 2);
     }
     if(isPressed(KeyA)) {
         drawRiver(getPosition());
     }
     if(isPressed(KeyM)) {
-        drawMountain(getPosition(), "ground.cave");
-    }
-    if(isPressed(KeyN)) {
-        drawMountain(getPosition(), "ground.cave.2");
+        drawMountain(getPosition());
     }
     if(isPressed(Key0)) {
         setMaxZ(24, null);
@@ -180,8 +192,8 @@ def drawRugEdge(x, y, z, rug) {
     }
 }
 
-dungeon := {
-    "ground.cave": {
+dungeon := [
+    {
         "floor": "ground.cave",
         "corner.black": "cave.earth.corner.2",
         "corner": "cave.earth.corner.1",
@@ -198,7 +210,7 @@ dungeon := {
         "corner.sw": "cave.dirt.corner.se",
         "corner.nw": "cave.dirt.corner.ne",
     },
-    "ground.cave.2": {
+    {
         "floor": "ground.cave.2",
         "corner.black": "cave.earth.corner.2",
         "corner": "cave.rock.corner.1",
@@ -215,24 +227,50 @@ dungeon := {
         "corner.sw": "cave.rock.corner.se",
         "corner.nw": "cave.rock.corner.ne",
     },
-};
+    {
+        "floor": "ground.cave.2",
+        "corner.black": "cave.earth.corner.2",
+        "corner": "dungeon.stone.corner",
+        "wall.w": "dungeon.stone.e3", 
+        "wall.e": "dungeon.stone.w3", 
+        "wall.s": "dungeon.stone.s3", 
+        "wall.n": "dungeon.stone.n3", 
+        "wall.w.wide": "dungeon.stone.e", 
+        "wall.e.wide": "dungeon.stone.w", 
+        "wall.s.wide": "dungeon.stone.s", 
+        "wall.n.wide": "dungeon.stone.n",     
+        "corner.se": "dungeon.stone.corner",
+        "corner.ne": "dungeon.stone.corner",
+        "corner.sw": "dungeon.stone.corner",
+        "corner.nw": "dungeon.stone.corner",
+    },
+];
 
-def isDungeon(x, y) {
+def isDungeonFloor(x, y) {
     info := getShape(x, y, 0);
     if(info != null) {
-        return dungeon[info[0]];
+        return info[0] = "ground.cave" || info[0] = "ground.cave.2";
     }
-    return null;
+    return false;
 }
 
-def drawDungeon(x, y) {
-    d := isDungeon(x, y);
-    if(d != null) {
-        drawDungeonBlock(x, y, d);
+def isUnderMountain(x, y) {
+    info := getShape(x, y, 7);
+    if(info != null) {
+        return array_find(ROCK_ROOF, e => e = info[0]) != null;
+    }
+    return false;
+}
+
+def drawDungeon(x, y, dungeonType) {
+    if(isUnderMountain(x, y)) {
+        drawDungeonBlock(x, y, dungeon[dungeonType]);
     }
 }
 
 def drawDungeonBlock(x, y, d) {
+    eraseShape(x, y, 0);
+    setShape(x, y, 0, d.floor);
     range(0, 4, 1, xx => {
         range(0, 4, 1, yy => {
             eraseShape(x + xx, y + yy, 1);
@@ -242,14 +280,14 @@ def drawDungeonBlock(x, y, d) {
 }
 
 def drawDungeonWalls(x, y, d) {
-    n := isDungeon(x, y - 4) = null;
-    s := isDungeon(x, y + 4) = null;
-    e := isDungeon(x + 4, y) = null;
-    w := isDungeon(x - 4, y) = null;
-    ne := isDungeon(x + 4, y - 4) = null;
-    se := isDungeon(x + 4, y + 4) = null;
-    nw := isDungeon(x - 4, y - 4) = null;
-    sw := isDungeon(x - 4, y + 4) = null;
+    n := isDungeonFloor(x, y - 4) = false;
+    s := isDungeonFloor(x, y + 4) = false;
+    e := isDungeonFloor(x + 4, y) = false;
+    w := isDungeonFloor(x - 4, y) = false;
+    ne := isDungeonFloor(x + 4, y - 4) = false;
+    se := isDungeonFloor(x + 4, y + 4) = false;
+    nw := isDungeonFloor(x - 4, y - 4) = false;
+    sw := isDungeonFloor(x - 4, y + 4) = false;
 
     sw_corner := s && w;
     nw_corner := n && w;
@@ -308,7 +346,7 @@ def drawDungeonWalls(x, y, d) {
         setShape(x, y + 3, 1, d["corner.sw"]); 
     }
     if(se) {
-        setShape(x + 3, y + 3, 1, d["corner.se"]); 
+        setShape(x + 3, y + 3, 1, d["corner.black"]); 
     }
     return 1;
 
@@ -464,11 +502,14 @@ def drawGrass(pos, trees, objects, extras) {
     x := int(pos[0] / LAND_UNIT) * LAND_UNIT;
     y := int(pos[1] / LAND_UNIT) * LAND_UNIT;
     clearArea(x, y, LAND_UNIT, LAND_UNIT);
-    shape2 := choose([
-        ["ground.grass.2"], 
-        ["ground.marsh", "ground.marsh.2"], 
-        ["ground.grass.3"]
-    ]);
+    shape2 := null;
+    if(objects != null) {
+        shape2 := choose([
+            ["ground.grass.2"], 
+            ["ground.marsh", "ground.marsh.2"], 
+            ["ground.grass.3"]
+        ]);
+    }
     fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.grass", shape2);
     drawLand(x, y, LAND_UNIT, LAND_UNIT, trees, objects, extras);
 }
@@ -507,12 +548,11 @@ def drawRiver(pos) {
     });
 }
 
-def drawMountain(pos, caveFloor) {
+def drawMountain(pos) {
     x := int(pos[0] / 4) * 4;
     y := int(pos[1] / 4) * 4;
     if(isCave(x, y) = false) {
         clearArea(x, y, 4, 4);
-        setShape(x, y, 0, caveFloor);
         setShape(x, y, 7, choose(ROCK_ROOF));
         drawMountainEdge(x, y);
 
@@ -608,11 +648,12 @@ def getMountainShape(n, s, w, e, nw, ne, sw, se) {
 }
 
 def isCave(x, y) {
-    info := getShape(x, y, 0);
-    if(info = null) {
-        return false;
-    }
-    return startsWith(info[0], "ground.cave");
+    #info := getShape(x, y, 0);
+    #if(info = null) {
+    #    return false;
+    #}
+    #return startsWith(info[0], "ground.cave");
+    return isUnderMountain(x, y);
 }
 
 def isMountain(x, y) {
@@ -631,7 +672,7 @@ def getMountain(x, y) {
     return info[0];
 }
 
-def drawWater(pos) {
+def drawWater(pos, drawBeach) {
     x := int(pos[0] / LAND_UNIT) * LAND_UNIT;
     y := int(pos[1] / LAND_UNIT) * LAND_UNIT;
 
@@ -643,30 +684,32 @@ def drawWater(pos) {
     clearArea(x, y, LAND_UNIT, LAND_UNIT);
     fillFloor(x, y, LAND_UNIT, LAND_UNIT, "ground.water", null);
     
-    # edges
-    if(n) {
-        print("north edge");
-        range(x, x + LAND_UNIT, 4, xx => {
-            drawEdge(i => setShapeEditor(xx, y + i * 4, 0, "ground.dirt"));
-        });
-    }
-    if(s) {
-        print("south edge");
-        range(x, x + LAND_UNIT, 4, xx => {
-            drawEdge(i => setShapeEditor(xx, y + LAND_UNIT - 4 - i * 4, 0, "ground.dirt"));
-        });
-    }
-    if(e) {
-        print("east edge");
-        range(y, y + LAND_UNIT, 4, yy => {
-            drawEdge(i => setShapeEditor(x + LAND_UNIT - 4 - i * 4, yy, 0, "ground.dirt"));
-        });
-    }
-    if(w) {
-        print("west edge");
-        range(y, y + LAND_UNIT, 4, yy => {
-            drawEdge(i => setShapeEditor(x + i * 4, yy, 0, "ground.dirt"));
-        });
+    if(drawBeach) {
+        # edges
+        if(n) {
+            print("north edge");
+            range(x, x + LAND_UNIT, 4, xx => {
+                drawEdge(i => setShapeEditor(xx, y + i * 4, 0, "ground.dirt"));
+            });
+        }
+        if(s) {
+            print("south edge");
+            range(x, x + LAND_UNIT, 4, xx => {
+                drawEdge(i => setShapeEditor(xx, y + LAND_UNIT - 4 - i * 4, 0, "ground.dirt"));
+            });
+        }
+        if(e) {
+            print("east edge");
+            range(y, y + LAND_UNIT, 4, yy => {
+                drawEdge(i => setShapeEditor(x + LAND_UNIT - 4 - i * 4, yy, 0, "ground.dirt"));
+            });
+        }
+        if(w) {
+            print("west edge");
+            range(y, y + LAND_UNIT, 4, yy => {
+                drawEdge(i => setShapeEditor(x + i * 4, yy, 0, "ground.dirt"));
+            });
+        }
     }
 }
 

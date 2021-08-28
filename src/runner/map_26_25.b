@@ -10,4 +10,11 @@ SECTIONS["26,25"] := {
         }
         return null;
     },
+    "action": (this, x, y, z) => {
+        if(x = 5396 && y = 5010 && z = 1) {
+            timedMessage(x, y, z, "Road to Trinest");            
+            return true;
+        }
+        return null;
+    }
 };
