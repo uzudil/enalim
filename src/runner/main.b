@@ -11,8 +11,22 @@ const MODE_TITLE3 = "title3";
 const MODE_BOOK = "book";
 const MODE_EXIT = "exit";
 
+const PLAYER_SHAPE = "lydell";
+
+const PLAYER_SHAPES = [
+    "",
+    "-sword",
+    "-axe",
+    "-bow",
+    "-staff",
+    "-lance",
+    "-dagger",
+];
+
 # the global player state
 player := {
+    "shape": PLAYER_SHAPE,
+    "shapeIndex": 0,
     "mode": MODE_INIT,
     "move": null,
     "underRoof": false,
@@ -25,12 +39,16 @@ player := {
     "inventory": null,
     "attackTimer": 0,
     "coolTimer": 0,
+    "attackTarget": null,
+    "lastAttackTarget": null,
+    "combatMode": false,
     "gameState": {
         "unlocked": [],
     },
     "cursor": "cursor.nw",
     "mouseDrive": false,
     "mouseOnInteractive": 0,
+    "hp": 20,
 };    
 
 # the player's shape size
@@ -39,8 +57,6 @@ const PLAYER_Y = 2;
 const PLAYER_Z = 4;
 
 const PLAYER_MOVE_SPEED = 0.085;
-
-const PLAYER_SHAPE = "lydell";
 
 const EVENTS_MAP = {};
 
@@ -74,7 +90,7 @@ def events(delta, fadeDir, mouseX, mouseY, mouseWorldX, mouseWorldY, mouseWorldZ
     if(isPressed(KeyX)) {
         player.move.erase();
         saveGame();
-        player.move.setShape(PLAYER_SHAPE);
+        player.move.setShape(player.shape);
         setRoofVisiblity();
     }
 }
@@ -144,9 +160,9 @@ def eventsTitle3(delta, fadeDir) {
         getClick();
         delAllMessages();
         player.mode := MODE_GAME;
-        player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_Z, PLAYER_SHAPE, PLAYER_MOVE_SPEED, true, false);
+        player.move := newMovement(5000, 5015, 1, PLAYER_X, PLAYER_Y, PLAYER_Z, player.shape, PLAYER_MOVE_SPEED, true, false);
         load_game();
-        player.move.setShape(PLAYER_SHAPE);
+        player.move.setShape(player.shape);
         player.move.setAnimation(ANIM_STAND);
         stopCreatures();
         fadeViewTo(player.move.x, player.move.y);
@@ -157,7 +173,7 @@ def eventsTeleport(delta, fadeDir) {
     if(fadeDir = 1) {
         player.move.erase();
         player.move.set(player.teleportPos[0], player.teleportPos[1], player.teleportPos[2]);
-        player.move.setShape(PLAYER_SHAPE);
+        player.move.setShape(player.shape);
         player.teleportPos := null;
         setRoofVisiblity();
         player.mode := MODE_GAME;
@@ -178,8 +194,14 @@ def eventsGameplay(delta, fadeDir) {
         animationType := ANIM_ATTACK;
     } else {
         if(player.coolTimer > 0) {
+            if(player.attackTarget != null) {
+                attackDamage();
+            }
             player.coolTimer := player.coolTimer - delta;
         } else {
+            if(player.combatMode) {
+                continueCombat();
+            }
             if(player.mouseDrive) {
                 if(player.mouseButtonDown = 1) {
                     dx := cursorDir[0];
@@ -190,11 +212,24 @@ def eventsGameplay(delta, fadeDir) {
                     }
                 } else {
                     player.mouseDrive := false;
+                    # eat this click
+                    if(didClick()) {
+                        getClick();
+                    }
                 }
             } else {
                 if(didClick()) {
                     handleGameClick();
                 } else {
+                    if(isPressed(KeyL)) {
+                        player.shapeIndex := player.shapeIndex + 1;
+                        if(player.shapeIndex >= len(PLAYER_SHAPES)) {
+                            player.shapeIndex := 0;
+                        }
+                        player.move.erase();
+                        player.move.setShape(player.shape + PLAYER_SHAPES[player.shapeIndex]);
+                    }
+
                     if(player.mouseButtonDown = 1 && player.mouseOnInteractive = 0 && player.dragShape = null) {
                         player.mouseDrive := true;
                     }
@@ -310,7 +345,7 @@ def handleGameClick() {
                 }
 
                 if(shape[0] = "clock.y") {
-                    timedMessage(pos[0], pos[1], pos[2], getTime());
+                    timedMessage(pos[0], pos[1], pos[2], getTime(), false);
                     return 1;
                 }
 
@@ -322,7 +357,7 @@ def handleGameClick() {
                     return 1;
                 }
 
-                if(shape[0] = "lydell") {
+                if(shape[0] = player.shape + PLAYER_SHAPES[player.shapeIndex]) {
                     openInventory();
                     return 1;
                 }
@@ -335,7 +370,7 @@ def handleGameClick() {
                 }
 
                 if(player.mouseOnInteractive = 1) {
-                    timedMessage(shape[1], shape[2], shape[3], getShapeDescription(shape[0]));
+                    timedMessage(shape[1], shape[2], shape[3], getShapeDescription(shape[0]), false);
                 }
             }
         } else {
@@ -582,7 +617,7 @@ def endDrag(pos) {
         if(pos[2] > 0) {
             info := getShape(pos[0], pos[1], pos[2] - 1);
             if(info != null) {
-                if(info[0] = "lydell") {
+                if(info[0] = player.shape + PLAYER_SHAPES[player.shapeIndex]) {
                     # drop over character
                     index := player.inventory.add(player.dragShape.shape, -1, -1);
                     updateInventoryUi();
@@ -872,19 +907,19 @@ def unlock_door(x, y, z, isPlayer) {
                 locked := false;
                 player.gameState.unlocked[len(player.gameState.unlocked)] := { "x": x, "y": y, "z": z };
                 print("Player unlocks the door with " + key);
-                timedMessage(x, y, z, "Door is unlocked!");
+                timedMessage(x, y, z, "Door is unlocked!", false);
             }
         }
     }
     return locked;
 }
 
-def timedMessage(x, y, z, message) {
-    showMessageAt(x, y, z, message, 2, MESSAGE_R, MESSAGE_G, MESSAGE_B);
+def timedMessage(x, y, z, message, rise) {
+    showMessageAt(x, y, z, message, 2, MESSAGE_R, MESSAGE_G, MESSAGE_B, rise);
 }
 
-def timedMessageXY(x, y, message) {
-    showMessageAtXY(x, y, message, 2, MESSAGE_R, MESSAGE_G, MESSAGE_B);
+def timedMessageXY(x, y, message, rise) {
+    showMessageAtXY(x, y, message, 2, MESSAGE_R, MESSAGE_G, MESSAGE_B, rise);
 }
 
 def save_game() {
@@ -895,6 +930,7 @@ def save_game() {
             "items": pruneItems("inventory", 0, 0, false),
             "inventory": player.inventory.encode(),
             "move": player.move.encode(),
+            "hp": player.hp,
         });
     }
 }
@@ -903,6 +939,7 @@ def load_game() {
     saved := loadMap("savegame.json");
     if(saved != null) {
         setCalendarRaw(saved.calendar);
+        player.hp := saved.hp;
         player.gameState := saved.gameState;
         array_foreach(saved.items, (i, c) => restoreItem(c));
         player.inventory.decode(saved.inventory);
@@ -937,10 +974,67 @@ def startAttack(creature) {
         distAndDir := distanceAndDirToCreature(creature);
         player.move.dir := distAndDir[1];
         if(int(distAndDir[0]) <= creature.template.baseWidth/2 + 1) {
+            # attack
+            if(random() >= 0.75) {
+                timedMessage(
+                    player.move.x + (random() * 4),
+                    player.move.y + (random() * 2) - 6,
+                    player.move.z,
+                    choose(COMBAT_MESSAGES), 
+                    false
+                );
+            }
             player.attackTimer := ANIMATION_SPEED * 2;
             player.coolTimer := 0.5;
+            player.attackTarget := creature;
+            player.combatMode := true;
+        } else {
+            # move nearer to the enemy
         }
     }
+}
+
+def continueCombat() {
+    if(player.lastAttackTarget != null) {
+        if(player.lastAttackTarget.hp > 0) {
+            startAttack(player.lastAttackTarget);
+            return 1;
+        }
+    }
+    c := findNearestMonster();
+    if(c != null) {
+        startAttack(c);
+    }
+}
+
+def findNearestMonster() {
+    targets := array_filter(creatures, c => {
+        d := player.move.distanceTo(c.move.x, c.move.y, c.move.z);
+        return d <= 10;
+    });
+    if(len(targets) > 0) {
+        return choose(targets);
+    } else {
+        return null;
+    }
+}
+
+def attackDamage() {
+    dam := int(random() * 5);
+    takeDamage(player.attackTarget, dam, c => {
+        c.move.erase();
+        array_remove(creatures, cc => {
+            return cc.id = c.id;
+        });
+        player.combatMode := findNearestMonster() != null;
+    });
+    player.lastAttackTarget := player.attackTarget;
+    player.attackTarget := null;
+}
+
+def playerTakeDamage(enemy) {
+    # todo:...
+    player.combatMode := true;
 }
 
 def main() {

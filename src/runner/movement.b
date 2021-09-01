@@ -150,7 +150,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             if(unlock_door(x, y, z, move.isPlayer)) {
                 print("Door is locked.");
                 if(move.isPlayer) {
-                    timedMessage(x, y, z, "Locked!");
+                    timedMessage(x, y, z, "Locked!", false);
                 }
                 return 1;
             }

@@ -9,6 +9,10 @@ def moveMonster(c, delta) {
     }
 
     if(c.monster.coolTime > 0) {
+        if(c.monster.attacking) {
+            playerTakeDamage(c);
+            c.monster.attacking := false;
+        }
         c.monster.coolTime := c.monster.coolTime - delta;
         return ANIM_STAND;
     }
@@ -22,6 +26,7 @@ def moveMonster(c, delta) {
             # todo: combat!
             c.monster.attackTime := ANIMATION_SPEED * c.template.attackSteps; 
             c.monster.coolTime := 0.5;
+            c.monster.attacking := true;
             return ANIM_ATTACK;
         },
     });
@@ -31,5 +36,6 @@ def initMonster(c) {
     return {
         "attackTime": 0,
         "coolTime": 0,
+        "attacking": false,
     };
 }

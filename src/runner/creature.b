@@ -8,6 +8,7 @@ creaturesTemplates := {
         "sizeZ": 2,
         "isFlying": false,
         "movement": "anchor",
+        "hp": 10,
     },
     "monk-blue": {
         "shape": "monk-blue",
@@ -17,6 +18,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "anchor",
+        "hp": 10,
     },
     "ghost": {
         "shape": "ghost",
@@ -26,6 +28,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": true,
         "movement": "anchor",
+        "hp": 10,
     },
     "monk": {
         "shape": "monk",
@@ -35,6 +38,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "anchor",
+        "hp": 10,
     },
     "goblin": {
         "shape": "goblin",
@@ -46,6 +50,7 @@ creaturesTemplates := {
         "movement": "hunt",
         "attackSteps": 2,
         "attack": [1,3],
+        "hp": 20,
     },
     "ogre": {
         "shape": "ogre",
@@ -57,6 +62,7 @@ creaturesTemplates := {
         "movement": "hunt",
         "attackSteps": 2,
         "attack": [2,5],
+        "hp": 40,
     },
     "man-blue": {
         "shape": "man-blue",
@@ -66,6 +72,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "anchor",
+        "hp": 10,
     },
     "man-yellow": {
         "shape": "man-yellow",
@@ -75,6 +82,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "anchor",
+        "hp": 10,
     },
     "woman": {
         "shape": "woman",
@@ -84,6 +92,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "anchor",
+        "hp": 10,
     },
     "woman.brown": {
         "shape": "woman.brown",
@@ -93,6 +102,7 @@ creaturesTemplates := {
         "sizeZ": 4,
         "isFlying": false,
         "movement": "anchor",
+        "hp": 10,
     },
 
 };
@@ -119,6 +129,7 @@ def pruneCreatures(sectionX, sectionY) {
                 "move": c.move.encode(),
                 "npc": encodeNpc(c.npc),
                 "movement": c.movement,
+                "hp": c.hp,
             };
             print("* Pruning creature: " + c.template.shape + " " + c.id);
         }
@@ -142,6 +153,7 @@ def restoreCreature(savedCreature) {
         "standTimer": 0,
         "npc": decodeNpc(savedCreature.npc),
         "movement": savedCreature.movement,
+        "hp": savedCreature.hp,
     };
 }
 
@@ -158,6 +170,7 @@ def setCreature(x, y, z, creature) {
             "standTimer": 0,
             "npc": null,
             "movement": creature.movement,
+            "hp": creature.hp,
         };
         c.move.setShape(creature.shape);
         creatures[len(creatures)] := c;
@@ -236,5 +249,39 @@ def moveCreatureRandomMove(c, delta) {
     }
     if(dirChange) {
         c.move.dir := int(random() * 8);
+    }
+}
+
+def takeDamage(c, dam, onDeath) {
+    if(dam > 0) {
+        showMessageAt(
+            c.move.x, 
+            c.move.y, 
+            c.move.z, 
+            "-" + dam, 
+            2, 
+            DAM_R, DAM_G, DAM_B, 
+            true
+        );
+        c.hp := c.hp - dam;
+        if(c.hp <= 0) {
+            c.hp := 0;
+            setShapeExtra(
+                c.move.x + int(random() * (c.move.width + 2)) - 1,
+                c.move.y + int(random() * (c.move.height + 2)) - 1,
+                c.move.z,
+                "splat.blood.small"
+            );
+            onDeath(c);
+        } else {
+            if(random() >= 0.75) {
+                setShapeExtra(
+                    c.move.x + int(random() * (c.move.width + 2) - 1),
+                    c.move.y + int(random() * (c.move.height + 2) - 1),
+                    c.move.z,
+                    "splat.blood.small"
+                );
+            }
+        }
     }
 }
