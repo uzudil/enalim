@@ -405,7 +405,10 @@
                 { "name": "wall.yellow.y", "size": [ 1, 4, 6], "pos": [448, 368] },
                 { "name": "wall.yellow.low.y", "size": [ 1, 4, 2], "pos": [376, 464] },
                 { "name": "wall.yellow.low.x", "size": [ 4, 1, 2], "pos": [448, 464] },
-                { "name": "item.sword", "size": [ 1, 1, 4], "pos": [112, 184], "drag": true }
+                { "name": "UNUSED-item.sword", "size": [ 1, 1, 4], "pos": [112, 184], "drag": true },
+                { "name": "item.sword", "size": [ 2, 4, 1], "pos": [128, 184], "drag": true },
+                { "name": "item.dagger", "size": [ 2, 2, 1], "pos": [176, 200], "drag": true },
+                { "name": "item.helm.leather", "size": [ 2, 2, 1], "pos": [208, 200], "drag": true }
             ],
             "images": [
                 { "name": "inventory", "size": [192, 176], "pos": [0, 824] },
@@ -422,7 +425,8 @@
                 { "name": "cursor.sw", "size": [24, 24], "pos": [320, 760], "cursor": [0, 23] },
                 { "name": "cursor.s", "size": [24, 24], "pos": [360, 760], "cursor": [11, 23] },
                 { "name": "cursor.se", "size": [24, 24], "pos": [400, 760], "cursor": [23, 23] },
-                { "name": "cursor.no", "size": [24, 24], "pos": [360, 720], "cursor": [0, 0] }
+                { "name": "cursor.no", "size": [24, 24], "pos": [360, 720], "cursor": [0, 0] },
+                { "name": "player", "size": [208, 280], "pos": [680, 280] }
             ]
         }        
     ],    

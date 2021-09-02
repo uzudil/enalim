@@ -229,3 +229,32 @@ def newInventory() {
         },
     };
 }
+
+def newEquipment() {
+    return {
+        "equipment": DEFAULT_EQUIPMENT,
+        "render": self => {
+            uis := [];
+            array_foreach(self.equipment, (slot, shape) => {
+                if(shape != null) {
+                    pos := SLOT_POS[slot];
+                    uis[len(uis)] := {
+                        "type": "uiImage",
+                        "name": shape,
+                        "x": pos[0],
+                        "y": pos[1],
+                    };
+                }
+            });
+            return uis;
+        },
+        "encode": self => self.equipment,
+        "decode": (self, saved) => {
+            if(saved = null) {
+                self.equipment := DEFAULT_EQUIPMENT;
+            } else {
+                self.equipment := saved;
+            }
+        },
+    };
+}

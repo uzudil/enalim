@@ -8,7 +8,7 @@ SECTIONS["25,24"] := {
         setCreature(5182, 4932, 1, creaturesTemplates.ogre);
         setCreature(5170, 4932, 1, creaturesTemplates.ogre);
         setContainer("chest", 5015, 4961, 3, "map", [ "vial.nercromancer", { "shape": "item.book.2", "book": "Raising the dead" } ]);
-        setContainer("chest", 5003, 4961, 1, "map", [ "item.candle", "item.candle", "item.candle" ]);
+        setContainer("chest", 5003, 4961, 1, "map", [ "item.dagger", "item.candle", "item.candle" ]);
         setContainer("chest", 5183, 4925, 3, "map", [ "key.ourdlen2", "item.candle" ]);
     },
     "start": this => {

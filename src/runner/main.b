@@ -13,15 +13,15 @@ const MODE_EXIT = "exit";
 
 const PLAYER_SHAPE = "lydell";
 
-const PLAYER_SHAPES = [
-    "",
-    "-sword",
-    "-axe",
-    "-bow",
-    "-staff",
-    "-lance",
-    "-dagger",
-];
+#const PLAYER_SHAPES = [
+#"",
+#"-sword",
+#"-axe",
+#"-bow",
+#"-staff",
+#"-lance",
+#"-dagger",
+#];
 
 # the global player state
 player := {
@@ -49,6 +49,7 @@ player := {
     "mouseDrive": false,
     "mouseOnInteractive": 0,
     "hp": 20,
+    "equipment": null,
 };    
 
 # the player's shape size
@@ -86,13 +87,6 @@ def events(delta, fadeDir, mouseX, mouseY, mouseWorldX, mouseWorldY, mouseWorldZ
     player.elapsedTime := player.elapsedTime + delta;
 
     EVENTS_MAP[player.mode](delta, fadeDir);
-
-    if(isPressed(KeyX)) {
-        player.move.erase();
-        saveGame();
-        player.move.setShape(player.shape);
-        setRoofVisiblity();
-    }
 }
 
 def eventsConvo(delta, fadeDir) {
@@ -221,15 +215,6 @@ def eventsGameplay(delta, fadeDir) {
                 if(didClick()) {
                     handleGameClick();
                 } else {
-                    if(isPressed(KeyL)) {
-                        player.shapeIndex := player.shapeIndex + 1;
-                        if(player.shapeIndex >= len(PLAYER_SHAPES)) {
-                            player.shapeIndex := 0;
-                        }
-                        player.move.erase();
-                        player.move.setShape(player.shape + PLAYER_SHAPES[player.shapeIndex]);
-                    }
-
                     if(player.mouseButtonDown = 1 && player.mouseOnInteractive = 0 && player.dragShape = null) {
                         player.mouseDrive := true;
                     }
@@ -304,13 +289,20 @@ def handleGameClick() {
         if(dragAction = "") {
             panel := getOverPanel();
             if(panel[0] != null) {
-                print("Click on panel: " + panel[0]);
                 # raise clicked panel
                 if(panel[0] = "inventory") {
                     openInventory();
                 } else {
-                    c := getItemById(panel[0]);
-                    raisePanel(c.id, c.uiImage);
+                    if(panel[0] = "player") {
+                        raisePanel("player", "player");
+                        updateEquipmentPanel();
+                        if(panel[1] >= 144 && panel[1] < 200 && panel[2] >= 218 && panel[2] < 272) {
+                            openInventory();
+                        }
+                    } else {
+                        c := getItemById(panel[0]);
+                        raisePanel(c.id, c.uiImage);
+                    }
                 }
             } else {
                 shape := getShape(pos[0], pos[1], pos[2]);
@@ -357,8 +349,8 @@ def handleGameClick() {
                     return 1;
                 }
 
-                if(shape[0] = player.shape + PLAYER_SHAPES[player.shapeIndex]) {
-                    openInventory();
+                if(shape[0] = player.shape) {
+                    openEquipmentPanel();
                     return 1;
                 }
 
@@ -369,6 +361,7 @@ def handleGameClick() {
                     }
                 }
 
+                print("MAP click: mouseOnInteractive=" + player.mouseOnInteractive);
                 if(player.mouseOnInteractive = 1) {
                     timedMessage(shape[1], shape[2], shape[3], getShapeDescription(shape[0]), false);
                 }
@@ -379,7 +372,7 @@ def handleGameClick() {
             }
             
             desc := getShapeDescription(getContainedShape(dragAction, dragIndex));
-            timedMessageXY(player.mouseX, player.mouseY, desc);
+            timedMessageXY(player.mouseX, player.mouseY, desc, false);
         }
     }
 }
@@ -515,6 +508,74 @@ def updateInventoryUi() {
     updatePanel("inventory", player.inventory.render());
 }
 
+def addToInventory(shape, container, panelX, panelY) {
+    index := player.inventory.add(shape, panelX, panelY);
+    updateInventoryUi();
+    if(container != null) {
+        updateItemLocation(container, index, -1, -1, "inventory");
+    }
+    debugInventory();
+}
+
+def equipItem(shape, panelX, panelY) {
+    obj := OBJECTS_BY_SHAPE[shape];
+    if(obj != null) {
+        # remove equipped item if any
+        if(player.equipment.equipment[obj.slot] != null) {
+            addToInventory(player.equipment.equipment[obj.slot], null, -1, -1);
+        }
+
+        # equip new item
+        player.equipment.equipment[obj.slot] := obj.shape;
+
+        # repaint equipment window
+        updateEquipmentPanel();
+
+        # change player shape
+        setShapeFromEquipment();
+        player.move.erase();
+        player.move.setShape(player.shape);
+
+        return true;
+    }
+    return false;
+}
+
+def unequipItem(slot) {
+    player.equipment.equipment[slot] := null;
+    updateEquipmentPanel();
+    setShapeFromEquipment();
+    player.move.erase();
+    player.move.setShape(player.shape);
+}
+
+def setShapeFromEquipment() {
+    var_shape := array_find(player.equipment.equipment, shape => {
+        if(shape != null) {
+            obj := OBJECTS_BY_SHAPE[shape];
+            if(obj.variation != null) {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    player.shape := PLAYER_SHAPE;
+    if(var_shape != null) {
+        obj := OBJECTS_BY_SHAPE[var_shape];
+        player.shape := PLAYER_SHAPE + "-" + obj.variation;
+    }
+}
+
+def openEquipmentPanel() {
+    raisePanel("player", "player");
+    updateEquipmentPanel();
+}
+
+def updateEquipmentPanel() {
+    updatePanel("player", player.equipment.render());
+}
+
 def getItemName(x, y, z, location) {
     return "unknown";
 }
@@ -568,28 +629,46 @@ def startDrag(pos, action, index) {
         debugInventory();
         updateInventoryUi();
     } else {
-        if(startsWith(action, "i.")) {
-            # drag from a container ui
-            c := getItemById(action);
-            item := c.items.remove(index, action);
+        if(action = "player") {
+            # drag from equipment panel (index is the non-null slot)
+            usedSlots := [];
+            array_foreach(player.equipment.equipment, (i, e) => {
+                if(e != null) {
+                    usedSlots[len(usedSlots)] := i;
+                }
+            });
+            slot := usedSlots[index];
             player.dragShape := {
-                "shape": item.shape,
-                "pos": [item.x, item.y, -1],                
+                "shape": player.equipment.equipment[slot],
+                "pos": [-1, -1, -1],                
                 "fromUi": action,
-                "draggedContainer": item.item,
+                "draggedContainer": null,
             };
-            updateContainerUi(c);
+            unequipItem(slot);
         } else {
-            info := getShape(pos[0], pos[1], pos[2]);
-            if(info != null) {
-                # drag from map
+            if(startsWith(action, "i.")) {
+                # drag from a container ui
+                c := getItemById(action);
+                item := c.items.remove(index, action);
                 player.dragShape := {
-                    "shape": info[0],
-                    "pos": [info[1], info[2], info[3]],
-                    "fromUi": "map",
-                    "draggedContainer": getItem(info[1], info[2], info[3], "map"),
+                    "shape": item.shape,
+                    "pos": [item.x, item.y, -1],                
+                    "fromUi": action,
+                    "draggedContainer": item.item,
                 };
-                eraseShape(info[1], info[2], info[3]);
+                updateContainerUi(c);
+            } else {
+                info := getShape(pos[0], pos[1], pos[2]);
+                if(info != null) {
+                    # drag from map
+                    player.dragShape := {
+                        "shape": info[0],
+                        "pos": [info[1], info[2], info[3]],
+                        "fromUi": "map",
+                        "draggedContainer": getItem(info[1], info[2], info[3], "map"),
+                    };
+                    eraseShape(info[1], info[2], info[3]);
+                }
             }
         }
     }
@@ -617,7 +696,7 @@ def endDrag(pos) {
         if(pos[2] > 0) {
             info := getShape(pos[0], pos[1], pos[2] - 1);
             if(info != null) {
-                if(info[0] = player.shape + PLAYER_SHAPES[player.shapeIndex]) {
+                if(info[0] = player.shape) {
                     # drop over character
                     index := player.inventory.add(player.dragShape.shape, -1, -1);
                     updateInventoryUi();
@@ -645,32 +724,31 @@ def endDrag(pos) {
             panel := getOverPanel();
             if(panel[0] = "inventory") {
                 # drop over inventory panel
-                index := player.inventory.add(player.dragShape.shape, panel[1], panel[2]);
-                updateInventoryUi();
-                if(player.dragShape.draggedContainer != null) {
-                    updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, "inventory");
-                }
-                debugInventory();
+                addToInventory(player.dragShape.shape, player.dragShape.draggedContainer, panel[1], panel[2]);
                 handled := true;
             } else {
-                if(panel[0] != null) {
-                    # drop over a container panel
-                    targetContainer := getItemById(panel[0]);
-                    if(player.dragShape.draggedContainer != null) {
-                        if(targetContainer.id = player.dragShape.draggedContainer.id) {
-                            # trying to drop container on itself?
-                            cancelDrag();
-                            handled := true;
-                        }
-                    }
-                    if(handled = false) {
-                        index := targetContainer.items.add(player.dragShape.shape, panel[1], panel[2]);
-                        updateContainerUi(targetContainer);
+                if(panel[0] = "player") {
+                    handled := equipItem(player.dragShape.shape, panel[1], panel[2]);
+                } else {
+                    if(panel[0] != null) {
+                        # drop over a container panel
+                        targetContainer := getItemById(panel[0]);
                         if(player.dragShape.draggedContainer != null) {
-                            updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, targetContainer.id);
+                            if(targetContainer.id = player.dragShape.draggedContainer.id) {
+                                # trying to drop container on itself?
+                                cancelDrag();
+                                handled := true;
+                            }
                         }
+                        if(handled = false) {
+                            index := targetContainer.items.add(player.dragShape.shape, panel[1], panel[2]);
+                            updateContainerUi(targetContainer);
+                            if(player.dragShape.draggedContainer != null) {
+                                updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, targetContainer.id);
+                            }
+                        }
+                        handled := true;
                     }
-                    handled := true;
                 }
             }
         }
@@ -929,6 +1007,7 @@ def save_game() {
             "gameState": player.gameState,
             "items": pruneItems("inventory", 0, 0, false),
             "inventory": player.inventory.encode(),
+            "equipment": player.equipment.encode(),
             "move": player.move.encode(),
             "hp": player.hp,
         });
@@ -944,6 +1023,8 @@ def load_game() {
         array_foreach(saved.items, (i, c) => restoreItem(c));
         player.inventory.decode(saved.inventory);
         player.move.decode(saved.move);
+        player.equipment.decode(saved.equipment);
+        setShapeFromEquipment();
         return true;
     }
     return false;
@@ -969,77 +1050,11 @@ def distanceAndDirToCreature(creature) {
     return [d, dir];
 }
 
-def startAttack(creature) {
-    if(player.coolTimer <= 0) {
-        distAndDir := distanceAndDirToCreature(creature);
-        player.move.dir := distAndDir[1];
-        if(int(distAndDir[0]) <= creature.template.baseWidth/2 + 1) {
-            # attack
-            if(random() >= 0.75) {
-                timedMessage(
-                    player.move.x + (random() * 4),
-                    player.move.y + (random() * 2) - 6,
-                    player.move.z,
-                    choose(COMBAT_MESSAGES), 
-                    false
-                );
-            }
-            player.attackTimer := ANIMATION_SPEED * 2;
-            player.coolTimer := 0.5;
-            player.attackTarget := creature;
-            player.combatMode := true;
-        } else {
-            # move nearer to the enemy
-        }
-    }
-}
-
-def continueCombat() {
-    if(player.lastAttackTarget != null) {
-        if(player.lastAttackTarget.hp > 0) {
-            startAttack(player.lastAttackTarget);
-            return 1;
-        }
-    }
-    c := findNearestMonster();
-    if(c != null) {
-        startAttack(c);
-    }
-}
-
-def findNearestMonster() {
-    targets := array_filter(creatures, c => {
-        d := player.move.distanceTo(c.move.x, c.move.y, c.move.z);
-        return d <= 10;
-    });
-    if(len(targets) > 0) {
-        return choose(targets);
-    } else {
-        return null;
-    }
-}
-
-def attackDamage() {
-    dam := int(random() * 5);
-    takeDamage(player.attackTarget, dam, c => {
-        c.move.erase();
-        array_remove(creatures, cc => {
-            return cc.id = c.id;
-        });
-        player.combatMode := findNearestMonster() != null;
-    });
-    player.lastAttackTarget := player.attackTarget;
-    player.attackTarget := null;
-}
-
-def playerTakeDamage(enemy) {
-    # todo:...
-    player.combatMode := true;
-}
-
 def main() {
     # register npc-s
     array_foreach(npcReg, (i, npc) => registerNpc(npc));
+
+    initObjects();
 
     EVENTS_MAP[MODE_INIT] := (s, d,f) => eventsInit(d, f);
     EVENTS_MAP[MODE_TELEPORT] := (s, d,f) => eventsTeleport(d, f);
@@ -1053,6 +1068,7 @@ def main() {
 
     # init player
     player.inventory := newInventory();    
+    player.equipment := newEquipment();
 
     setPathThroughShapes(keys(REPLACE_SHAPES));
 
