@@ -300,7 +300,7 @@ def handleGameClick() {
                 raisePanel(c.id, c.uiImage);
             }
         } else {
-            shape := getShape(pos[0], pos[1], pos[2]);
+            shape := getDraggableShape(pos[0], pos[1], pos[2]);
             print("click on no shape");
             if(shape = null) {
                 return 1;
@@ -646,7 +646,7 @@ def startDrag(pos, action, index) {
         };
         updateContainerUi(c);
     } else {
-        info := getShape(pos[0], pos[1], pos[2]);
+        info := getDraggableShape(pos[0], pos[1], pos[2]);
         if(info != null) {
             # drag from map
             player.dragShape := {
@@ -655,7 +655,7 @@ def startDrag(pos, action, index) {
                 "fromUi": "map",
                 "draggedContainer": getItem(info[1], info[2], info[3], "map"),
             };
-            eraseShape(info[1], info[2], info[3]);
+            eraseDraggableShape(info[1], info[2], info[3], info[4]);
         }
     }
     setCursorShape(player.dragShape.shape);
@@ -737,12 +737,12 @@ def endDrag(pos) {
             # drop on map
             x := pos[0];
             y := pos[1];
-            z := findTop(x, y, player.dragShape.shape);        
+            z := findTop(x, y, player.dragShape.shape);
             if(z = 0) {
                 cancelDrag();
             } else {
                 # drop on map
-                setShape(x, y, z, player.dragShape.shape);
+                setDraggableShape(x, y, z, player.dragShape.shape);
                 if(player.dragShape.draggedContainer != null) {
                     updateItemLocation(player.dragShape.draggedContainer, x, y, z, "map");
                 }
@@ -772,7 +772,7 @@ def cancelDrag() {
             y := player.dragShape.pos[1];
             z := player.dragShape.pos[2];
             # drop on map
-            setShape(x, y, z, player.dragShape.shape);
+            setDraggableShape(x, y, z, player.dragShape.shape);
             if(player.dragShape.draggedContainer != null) {
                 updateItemLocation(player.dragShape.draggedContainer, x, y, z, "map");
             }
