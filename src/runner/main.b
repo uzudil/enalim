@@ -301,15 +301,9 @@ def handleGameClick() {
             }
         } else {
             shape := getShape(pos[0], pos[1], pos[2]);
+            print("click on no shape");
             if(shape = null) {
-                extras := getShapeExtra(pos[0], pos[1], pos[2]);
-                if(len(extras) > 0) {
-                    shape := extras[len(extras) - 1];
-                }
-                print("click on no shape");
-                if(shape = null) {
-                    return 1;
-                }
+                return 1;
             }
             print("shape:" + shape + " at " + pos[0] + "," + pos[1] + "," + pos[2]);
 
