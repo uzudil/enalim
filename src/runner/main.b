@@ -186,84 +186,83 @@ def eventsGameplay(delta, fadeDir) {
     if(player.attackTimer > 0) {
         player.attackTimer := player.attackTimer - delta;
         animationType := ANIM_ATTACK;
-    } else {
-        if(player.coolTimer > 0) {
-            if(player.attackTarget != null) {
-                attackDamage();
+    } else if(player.coolTimer > 0) {
+        if(player.attackTarget != null) {
+            attackDamage();
+        }
+        player.coolTimer := player.coolTimer - delta;
+    } else if(player.mouseDrive) {
+        if(player.mouseButtonDown = 1) {
+            dx := cursorDir[0];
+            dy := cursorDir[1];
+            if(dx != 0 || dy != 0) {
+                animationType := ANIM_MOVE;
+                playerMove(dx, dy, delta);
             }
-            player.coolTimer := player.coolTimer - delta;
         } else {
-            if(player.combatMode) {
-                continueCombat();
+            player.mouseDrive := false;
+            # eat this click
+            if(didClick()) {
+                getClick();
             }
-            if(player.mouseDrive) {
-                if(player.mouseButtonDown = 1) {
-                    dx := cursorDir[0];
-                    dy := cursorDir[1];
-                    if(dx != 0 || dy != 0) {
-                        animationType := ANIM_MOVE;
-                        playerMove(dx, dy, delta);
-                    }
-                } else {
-                    player.mouseDrive := false;
-                    # eat this click
-                    if(didClick()) {
-                        getClick();
+        }
+    } else if(didClick()) {
+        handleGameClick();
+    } else {
+        if(player.mouseButtonDown = 1 && player.mouseOnInteractive = 0 && player.dragShape = null) {
+            player.mouseDrive := true;
+        }
+
+        dx := 0;
+        dy := 0;
+        if(isDown(KeyA) || isDown(KeyLeft)) {
+            dx := 1;
+        }
+        if(isDown(KeyD) || isDown(KeyRight)) {
+            dx := -1;
+        }
+        if(isDown(KeyW) || isDown(KeyUp)) {
+            dy := -1;
+        }
+        if(isDown(KeyS) || isDown(KeyDown)) {
+            dy := 1;
+        }
+
+        if(dx != 0 || dy != 0) {
+            animationType := ANIM_MOVE;
+            playerMove(dx, dy, delta);
+        }
+
+        if(isPressed(KeySpace)) {
+            if(player.move.operateDoorNearby() = null) {
+                if(operateWindow() = false) {
+                    if(player.move.findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
+                        player.move.findNearby(1, scriptedAction, null);
                     }
                 }
-            } else {
-                if(didClick()) {
-                    handleGameClick();
-                } else {
-                    if(player.mouseButtonDown = 1 && player.mouseOnInteractive = 0 && player.dragShape = null) {
-                        player.mouseDrive := true;
-                    }
-
-                    dx := 0;
-                    dy := 0;
-                    if(isDown(KeyA) || isDown(KeyLeft)) {
-                        dx := 1;
-                    }
-                    if(isDown(KeyD) || isDown(KeyRight)) {
-                        dx := -1;
-                    }
-                    if(isDown(KeyW) || isDown(KeyUp)) {
-                        dy := -1;
-                    }
-                    if(isDown(KeyS) || isDown(KeyDown)) {
-                        dy := 1;
-                    }
-
-                    if(dx != 0 || dy != 0) {
-                        animationType := ANIM_MOVE;
-                        playerMove(dx, dy, delta);
-                    }
-
-                    if(isPressed(KeySpace)) {
-                        if(player.move.operateDoorNearby() = null) {
-                            if(operateWindow() = false) {
-                                if(player.move.findShapeNearby("clock.y", (x, y, z) => timedMessage(x, y, z, getTime())) = false) {
-                                    player.move.findNearby(1, scriptedAction, null);
-                                }
-                            }
-                        }
-                    }
-
-                    if(isPressed(KeyT)) {
-                        player.move.findNpcNearby(startConvo);
-                    }
-
-                    if(isPressed(KeyI)) {
-                        openInventory();
-                    }
-
-                    if(isPressed(KeyEscape)) {
-                        if(closeTopPanel() != true) {
-                            startExitMode();
-                        }
-                    }                
-                }
             }
+        }
+
+        if(isPressed(KeyT)) {
+            player.move.findNpcNearby(startConvo);
+        }
+
+        if(isPressed(KeyI)) {
+            openInventory();
+        }
+
+        if(isPressed(KeyE)) {
+            openEquipmentPanel();
+        }
+
+        if(isPressed(KeyEscape)) {
+            if(closeTopPanel() != true) {
+                startExitMode();
+            }
+        }
+
+        if(player.combatMode) {
+            continueCombat();
         }
     }
 
@@ -284,96 +283,93 @@ def handleGameClick() {
         } else {
             endDrag(pos);
         }
-    } else {
-        # handle click
-        if(dragAction = "") {
-            panel := getOverPanel();
-            if(panel[0] != null) {
-                # raise clicked panel
-                if(panel[0] = "inventory") {
+    } else if(dragAction = "") {
+        panel := getOverPanel();
+        if(panel[0] != null) {
+            # raise clicked panel
+            if(panel[0] = "inventory") {
+                openInventory();
+            } else if(panel[0] = "player") {
+                raisePanel("player", "player");
+                updateEquipmentPanel();
+                if(panel[1] >= 144 && panel[1] < 200 && panel[2] >= 218 && panel[2] < 272) {
                     openInventory();
-                } else {
-                    if(panel[0] = "player") {
-                        raisePanel("player", "player");
-                        updateEquipmentPanel();
-                        if(panel[1] >= 144 && panel[1] < 200 && panel[2] >= 218 && panel[2] < 272) {
-                            openInventory();
-                        }
-                    } else {
-                        c := getItemById(panel[0]);
-                        raisePanel(c.id, c.uiImage);
-                    }
                 }
             } else {
-                shape := getShape(pos[0], pos[1], pos[2]);
+                c := getItemById(panel[0]);
+                raisePanel(c.id, c.uiImage);
+            }
+        } else {
+            shape := getShape(pos[0], pos[1], pos[2]);
+            if(shape = null) {
+                extras := getShapeExtra(pos[0], pos[1], pos[2]);
+                if(len(extras) > 0) {
+                    shape := extras[len(extras) - 1];
+                }
                 print("click on no shape");
                 if(shape = null) {
                     return 1;
                 }
-                print("shape:" + shape + " at " + pos[0] + "," + pos[1] + "," + pos[2]);
-
-                creature := getCreature(pos[0], pos[1], pos[2]);
-                if(creature != null) {
-                    if(creature.template.movement = "hunt") {
-                        startAttack(creature);
-                        return 1;
-                    }
-                }
-
-                d := player.move.distanceTo(pos[0], pos[1], pos[2]);
-                # print("SHAPE CLICK: " + d);
-                if(d > 8) {
-                    # too far
-                    setCursorTmp("cursor.no");
-                    return 1;
-                }
-
-                if(player.move.operateDoorAt(pos[0], pos[1], pos[2])) {
-                    return 1;
-                }
-
-                if(operateWindowAt(shape[0], pos[0], pos[1], pos[2])) {
-                    return 1;
-                }
-
-                if(shape[0] = "clock.y") {
-                    timedMessage(pos[0], pos[1], pos[2], getTime(), false);
-                    return 1;
-                }
-
-                if(scriptedAction(pos[0], pos[1], pos[2])) {
-                    return 1;
-                }
-
-                if(openContainer(shape[1], shape[2], shape[3], "map")) {
-                    return 1;
-                }
-
-                if(shape[0] = player.shape) {
-                    openEquipmentPanel();
-                    return 1;
-                }
-
-                if(creature != null) {
-                    if(creature.npc != null) {
-                        startConvo(creature.npc);
-                        return 1;
-                    }
-                }
-
-                print("MAP click: mouseOnInteractive=" + player.mouseOnInteractive);
-                if(player.mouseOnInteractive = 1) {
-                    timedMessage(shape[1], shape[2], shape[3], getShapeDescription(shape[0]), false);
-                }
             }
-        } else {
-            if(openContainer(dragIndex, -1, -1, dragAction)) {
+            print("shape:" + shape + " at " + pos[0] + "," + pos[1] + "," + pos[2]);
+
+            creature := getCreature(pos[0], pos[1], pos[2]);
+            if(creature != null && creature.template.movement = "hunt") {
+                startAttack(creature);
                 return 1;
             }
-            
-            desc := getShapeDescription(getContainedShape(dragAction, dragIndex));
-            timedMessageXY(player.mouseX, player.mouseY, desc, false);
+
+            d := player.move.distanceTo(pos[0], pos[1], pos[2]);
+            # print("SHAPE CLICK: " + d);
+            if(d > 8) {
+                # too far
+                setCursorTmp("cursor.no");
+                return 1;
+            }
+
+            if(player.move.operateDoorAt(pos[0], pos[1], pos[2])) {
+                return 1;
+            }
+
+            if(operateWindowAt(shape[0], pos[0], pos[1], pos[2])) {
+                return 1;
+            }
+
+            if(shape[0] = "clock.y") {
+                timedMessage(pos[0], pos[1], pos[2], getTime(), false);
+                return 1;
+            }
+
+            if(scriptedAction(pos[0], pos[1], pos[2])) {
+                return 1;
+            }
+
+            if(openContainer(shape[1], shape[2], shape[3], "map")) {
+                return 1;
+            }
+
+            if(shape[0] = player.shape) {
+                openEquipmentPanel();
+                return 1;
+            }
+
+            if(creature != null && creature.npc != null) {
+                startConvo(creature.npc);
+                return 1;
+            }
+
+            print("MAP click: mouseOnInteractive=" + player.mouseOnInteractive);
+            if(player.mouseOnInteractive = 1) {
+                timedMessage(shape[1], shape[2], shape[3], getShapeDescription(shape[0]), false);
+            }
         }
+    } else {
+        if(openContainer(dragIndex, -1, -1, dragAction)) {
+            return 1;
+        }
+        
+        desc := getShapeDescription(getContainedShape(dragAction, dragIndex));
+        timedMessageXY(player.mouseX, player.mouseY, desc, false);
     }
 }
 
@@ -628,48 +624,44 @@ def startDrag(pos, action, index) {
         };
         debugInventory();
         updateInventoryUi();
-    } else {
-        if(action = "player") {
-            # drag from equipment panel (index is the non-null slot)
-            usedSlots := [];
-            array_foreach(player.equipment.equipment, (i, e) => {
-                if(e != null) {
-                    usedSlots[len(usedSlots)] := i;
-                }
-            });
-            slot := usedSlots[index];
-            player.dragShape := {
-                "shape": player.equipment.equipment[slot],
-                "pos": [-1, -1, -1],                
-                "fromUi": action,
-                "draggedContainer": null,
-            };
-            unequipItem(slot);
-        } else {
-            if(startsWith(action, "i.")) {
-                # drag from a container ui
-                c := getItemById(action);
-                item := c.items.remove(index, action);
-                player.dragShape := {
-                    "shape": item.shape,
-                    "pos": [item.x, item.y, -1],                
-                    "fromUi": action,
-                    "draggedContainer": item.item,
-                };
-                updateContainerUi(c);
-            } else {
-                info := getShape(pos[0], pos[1], pos[2]);
-                if(info != null) {
-                    # drag from map
-                    player.dragShape := {
-                        "shape": info[0],
-                        "pos": [info[1], info[2], info[3]],
-                        "fromUi": "map",
-                        "draggedContainer": getItem(info[1], info[2], info[3], "map"),
-                    };
-                    eraseShape(info[1], info[2], info[3]);
-                }
+    } else if(action = "player") {
+        # drag from equipment panel (index is the non-null slot)
+        usedSlots := [];
+        array_foreach(player.equipment.equipment, (i, e) => {
+            if(e != null) {
+                usedSlots[len(usedSlots)] := i;
             }
+        });
+        slot := usedSlots[index];
+        player.dragShape := {
+            "shape": player.equipment.equipment[slot],
+            "pos": [-1, -1, -1],                
+            "fromUi": action,
+            "draggedContainer": null,
+        };
+        unequipItem(slot);
+    } else if(startsWith(action, "i.")) {
+        # drag from a container ui
+        c := getItemById(action);
+        item := c.items.remove(index, action);
+        player.dragShape := {
+            "shape": item.shape,
+            "pos": [item.x, item.y, -1],                
+            "fromUi": action,
+            "draggedContainer": item.item,
+        };
+        updateContainerUi(c);
+    } else {
+        info := getShape(pos[0], pos[1], pos[2]);
+        if(info != null) {
+            # drag from map
+            player.dragShape := {
+                "shape": info[0],
+                "pos": [info[1], info[2], info[3]],
+                "fromUi": "map",
+                "draggedContainer": getItem(info[1], info[2], info[3], "map"),
+            };
+            eraseShape(info[1], info[2], info[3]);
         }
     }
     setCursorShape(player.dragShape.shape);
@@ -726,30 +718,24 @@ def endDrag(pos) {
                 # drop over inventory panel
                 addToInventory(player.dragShape.shape, player.dragShape.draggedContainer, panel[1], panel[2]);
                 handled := true;
-            } else {
-                if(panel[0] = "player") {
-                    handled := equipItem(player.dragShape.shape, panel[1], panel[2]);
-                } else {
-                    if(panel[0] != null) {
-                        # drop over a container panel
-                        targetContainer := getItemById(panel[0]);
-                        if(player.dragShape.draggedContainer != null) {
-                            if(targetContainer.id = player.dragShape.draggedContainer.id) {
-                                # trying to drop container on itself?
-                                cancelDrag();
-                                handled := true;
-                            }
-                        }
-                        if(handled = false) {
-                            index := targetContainer.items.add(player.dragShape.shape, panel[1], panel[2]);
-                            updateContainerUi(targetContainer);
-                            if(player.dragShape.draggedContainer != null) {
-                                updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, targetContainer.id);
-                            }
-                        }
-                        handled := true;
+            } else if(panel[0] = "player") {
+                handled := equipItem(player.dragShape.shape, panel[1], panel[2]);
+            } else if(panel[0] != null) {
+                # drop over a container panel
+                targetContainer := getItemById(panel[0]);
+                if(player.dragShape.draggedContainer != null && targetContainer.id = player.dragShape.draggedContainer.id) {
+                    # trying to drop container on itself?
+                    cancelDrag();
+                    handled := true;
+                }
+                if(handled = false) {
+                    index := targetContainer.items.add(player.dragShape.shape, panel[1], panel[2]);
+                    updateContainerUi(targetContainer);
+                    if(player.dragShape.draggedContainer != null) {
+                        updateItemLocation(player.dragShape.draggedContainer, index, -1, -1, targetContainer.id);
                     }
                 }
+                handled := true;
             }
         }
 
@@ -782,6 +768,9 @@ def cancelDrag() {
         player.inventory.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
         debugInventory();
         updateInventoryUi();
+    } else if(player.dragShape.fromUi = "player") {
+        # return to equipment
+        equipItem(player.dragShape.shape, -1, -1);
     } else {
         if(player.dragShape.fromUi = "map") {
             # return to original map location
@@ -799,7 +788,7 @@ def cancelDrag() {
             c.items.add(player.dragShape.shape, player.dragShape.pos[0], player.dragShape.pos[1]);
             updateContainerUi(c);
         }
-    }
+    }    
 }
 
 def playerMove(dx, dy, delta) {
@@ -896,10 +885,8 @@ def operateWindowAt(shape, x, y, z) {
 def operateWindow() {
     return player.move.findNearby(1, (x,y,z) => {
         info := getShape(x, y, z);
-        if(info != null) {
-            if(info[0] = "window.x" || info[0] = "window.y") {
-                return info;
-            }
+        if(info != null && (info[0] = "window.x" || info[0] = "window.y")) {
+            return info;
         }
         return null;
     }, info => operateWindowAt(info[0], info[1], info[2], info[3]));
@@ -944,14 +931,12 @@ def inspectRoof() {
             if(info = null) {
                 player.underRoof := false;
                 player.roof := null;
+            } else if(substr(info[0], 0, 5) != "roof." && substr(info[0], 0, 6) != "floor.") {
+                player.underRoof := false;
+                player.roof := null;
             } else {
-                if(substr(info[0], 0, 5) != "roof." && substr(info[0], 0, 6) != "floor.") {
-                    player.underRoof := false;
-                    player.roof := null;
-                } else {
-                    player.roof := info[0];
-                }
-            }
+                player.roof := info[0];
+            }            
         });
         if(player.underRoof) {
             return true;
@@ -979,15 +964,13 @@ def unlock_door(x, y, z, isPlayer) {
         if(key = null) {
             # if there is no key, the door is open
             locked := false;
-        } else {
+        } else if(locked && isPlayer && array_find(player.inventory.items, item => item.shape = key) != null) {
             # does the player have the key?
-            if(locked && isPlayer && array_find(player.inventory.items, item => item.shape = key) != null) {
-                locked := false;
-                player.gameState.unlocked[len(player.gameState.unlocked)] := { "x": x, "y": y, "z": z };
-                print("Player unlocks the door with " + key);
-                timedMessage(x, y, z, "Door is unlocked!", false);
-            }
-        }
+            locked := false;
+            player.gameState.unlocked[len(player.gameState.unlocked)] := { "x": x, "y": y, "z": z };
+            print("Player unlocks the door with " + key);
+            timedMessage(x, y, z, "Door is unlocked!", false);
+        }        
     }
     return locked;
 }

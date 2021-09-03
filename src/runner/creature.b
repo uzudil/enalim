@@ -197,13 +197,11 @@ def moveCreatures(delta) {
 
         if(c.npc != null) {
             animation := moveNpc(c, delta);
+        } else if(c.template.movement = "hunt") {
+            animation := moveMonster(c, delta);
         } else {
-            if(c.template.movement = "hunt") {
-                animation := moveMonster(c, delta);
-            } else {
-                animation := moveCreatureRandom(c, delta);
-            }
-        }
+            animation := moveCreatureRandom(c, delta);
+        }        
         c.move.setAnimation(animation);
     });
 }
@@ -218,16 +216,14 @@ def anchorAndMoveCreatureRandom(c, delta) {
 def moveCreatureRandom(c, delta) {
     if(c.movement = "stand") {
         return ANIM_STAND;
+    } else if(c.standTimer > 0) {
+        animation := ANIM_STAND;
+        c.standTimer := c.standTimer - delta;
     } else {
-        if(c.standTimer > 0) {
-            animation := ANIM_STAND;
-            c.standTimer := c.standTimer - delta;
-        } else {
-            animation := ANIM_MOVE;
-            moveCreatureRandomMove(c, delta);
-            if(random() > 0.995) {
-                c.standTimer := 3;
-            }
+        animation := ANIM_MOVE;
+        moveCreatureRandomMove(c, delta);
+        if(random() > 0.995) {
+            c.standTimer := 3;
         }
     }
     return animation;
@@ -242,10 +238,8 @@ def moveCreatureRandomMove(c, delta) {
     dirChange := false;
     if(distXy > 8) {
         dirChange := true;
-    } else {
-        if(c.move.moveInDir(d[0], d[1], delta, null, null) = false) {
-            dirChange := true;
-        }
+    } else if(c.move.moveInDir(d[0], d[1], delta, null, null) = false) {
+        dirChange := true;
     }
     if(dirChange) {
         c.move.dir := int(random() * 8);
@@ -273,15 +267,13 @@ def takeDamage(c, dam, onDeath) {
                 "splat.blood.small"
             );
             onDeath(c);
-        } else {
-            if(random() >= 0.75) {
-                setShapeExtra(
-                    c.move.x + int(random() * (c.move.width + 2) - 1),
-                    c.move.y + int(random() * (c.move.height + 2) - 1),
-                    c.move.z,
-                    "splat.blood.small"
-                );
-            }
+        } else if(random() >= 0.75) {
+            setShapeExtra(
+                c.move.x + int(random() * (c.move.width + 2) - 1),
+                c.move.y + int(random() * (c.move.height + 2) - 1),
+                c.move.z,
+                "splat.blood.small"
+            );
         }
     }
 }

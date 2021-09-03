@@ -123,18 +123,16 @@ def addConvoMessage(x, y, msg, r,g,b) {
             } else {
                 s := s + "\"|&c" + CONVO_R + "," + CONVO_G + "," + CONVO_B + "|";
             }
-        } else {
-            if(c = "^") {
-                player.convo.action := player.convo.action = false;
-                if(player.convo.action) {
-                    s := s + "|&c50,255,30|";
-                } else {
-                    s := s + "|&c" + CONVO_R + "," + CONVO_G + "," + CONVO_B + "|";
-                }
+        } else if(c = "^") {
+            player.convo.action := player.convo.action = false;
+            if(player.convo.action) {
+                s := s + "|&c50,255,30|";
             } else {
-                s := s + c;
+                s := s + "|&c" + CONVO_R + "," + CONVO_G + "," + CONVO_B + "|";
             }
-        }
+        } else {
+            s := s + c;
+        }        
         i := i + 1;
     }
     player.convo.indexes[len(player.convo.indexes)] := addMessage(x, y, s, 0, r, g, b);
