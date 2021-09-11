@@ -38,13 +38,13 @@ def setItem(uiImage, x, y, z, location, type) {
     c := array_find(items, cc => cc.id = id);
     if(c = null) {
         c := {
-            "id": id,
-            "type": type,
-            "uiImage": uiImage,
-            "x": x,
-            "y": y,
-            "z": z,
-            "location": location,
+            id: id,
+            type: type,
+            uiImage: uiImage,
+            x: x,
+            y: y,
+            z: z,
+            location: location,
         };
         print("*** Adding item of type: " + c.type);
         items[len(items)] := c;
@@ -74,14 +74,14 @@ def getItemById(id) {
 
 def saveItem(item) {
     saved := {
-        "id": item.id,
-        "uiImage": item.uiImage,
-        "type": item.type,
-        "x": item.x,
-        "y": item.y,
-        "z": item.z,
-        "location": item.location,
-        "containers": [],
+        id: item.id,
+        uiImage: item.uiImage,
+        type: item.type,
+        x: item.x,
+        y: item.y,
+        z: item.z,
+        location: item.location,
+        containers: [],
     };
     if(item["items"] != null) {
         saved["items"] := item.items.encode();
@@ -94,13 +94,13 @@ def saveItem(item) {
 
 def loadItem(savedItem) {
     c := {
-        "id": savedItem.id,
-        "uiImage": savedItem.uiImage,
-        "type": savedItem.type,
-        "x": savedItem.x,
-        "y": savedItem.y,
-        "z": savedItem.z,
-        "location": savedItem.location,
+        id: savedItem.id,
+        uiImage: savedItem.uiImage,
+        type: savedItem.type,
+        x: savedItem.x,
+        y: savedItem.y,
+        z: savedItem.z,
+        location: savedItem.location,
     };
     if(savedItem["items"] != null) {
         c["items"] := newInventory();
@@ -169,21 +169,21 @@ def restore_contained(saved) {
 
 def newInventory() {
     return {
-        "items": [],
-        "add": (self, shape, xpos, ypos) => {
+        items: [],
+        add: (self, shape, xpos, ypos) => {
             if(xpos < 0) {
                 xpos := int(50 + random() * 100);
                 ypos := int(30 + random() * 60);
             }
             self.items[len(self.items)] := {
-                "shape": shape,
-                "x": xpos,
-                "y": ypos,
+                shape: shape,
+                x: xpos,
+                y: ypos,
             };
             return len(self.items) - 1;
         },
-        "findIndex": (self, name) => array_find_index(self.items, item => item.shape = name),
-        "remove": (self, index, location) => {
+        findIndex: (self, name) => array_find_index(self.items, item => item.shape = name),
+        remove: (self, index, location) => {
             # adjust the location of items in this inventory
             item := getItem(index, -1, -1, location);
             i := index + 1;
@@ -197,34 +197,34 @@ def newInventory() {
             # remove the item
             invItem := self.items[index];
             out := { 
-                "shape": invItem.shape, 
-                "x": invItem.x, 
-                "y": invItem.y, 
-                "item": item,
+                shape: invItem.shape, 
+                x: invItem.x, 
+                y: invItem.y, 
+                item: item,
             };
             del self.items[index];
             return out;
         },
-        "render": self => {
+        render: self => {
             return array_map(self.items, item => {
                 return {
-                    "type": "uiImage",
-                    "name": item.shape,
-                    "x": item.x,
-                    "y": item.y,
+                    type: "uiImage",
+                    name: item.shape,
+                    x: item.x,
+                    y: item.y,
                 };
             });
         },
-        "encode": self => {
+        encode: self => {
             return array_map(self.items, i => {
                 return {
-                    "shape": i.shape,
-                    "x": i.x,
-                    "y": i.y,
+                    shape: i.shape,
+                    x: i.x,
+                    y: i.y,
                 };
             });
         },
-        "decode": (self, saved) => {
+        decode: (self, saved) => {
             array_foreach(saved, (i, item) => self.add(item.shape, item.x, item.y));
         },
     };
@@ -232,24 +232,24 @@ def newInventory() {
 
 def newEquipment() {
     return {
-        "equipment": DEFAULT_EQUIPMENT,
-        "render": self => {
+        equipment: DEFAULT_EQUIPMENT,
+        render: self => {
             uis := [];
             array_foreach(self.equipment, (slot, shape) => {
                 if(shape != null) {
                     pos := SLOT_POS[slot];
                     uis[len(uis)] := {
-                        "type": "uiImage",
-                        "name": shape,
-                        "x": pos[0],
-                        "y": pos[1],
+                        type: "uiImage",
+                        name: shape,
+                        x: pos[0],
+                        y: pos[1],
                     };
                 }
             });
             return uis;
         },
-        "encode": self => self.equipment,
-        "decode": (self, saved) => {
+        encode: self => self.equipment,
+        decode: (self, saved) => {
             if(saved = null) {
                 self.equipment := DEFAULT_EQUIPMENT;
             } else {

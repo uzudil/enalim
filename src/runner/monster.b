@@ -18,11 +18,11 @@ def moveMonster(c, delta) {
     }
 
     return pathMove(c, delta, {
-        "name": "MONSTER " + c.template.shape, 
-        "dest": player.move, 
-        "nearDistance": 2,
-        "farDistance": 20,
-        "onSuccess": self => {
+        name: "MONSTER " + c.template.shape, 
+        dest: player.move, 
+        nearDistance: 2,
+        farDistance: 20,
+        onSuccess: self => {
             # todo: combat!
             c.monster.attackTime := ANIMATION_SPEED * c.template.attackSteps; 
             c.monster.coolTime := 0.5;
@@ -34,8 +34,8 @@ def moveMonster(c, delta) {
 
 def initMonster(c) {
     return {
-        "attackTime": 0,
-        "coolTime": 0,
-        "attacking": false,
+        attackTime: 0,
+        coolTime: 0,
+        attacking: false,
     };
 }

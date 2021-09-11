@@ -11,7 +11,7 @@ SECTIONS["25,25"] := {
         setContainer("chest", 5010, 5021, 1, "map", [ "item.candle", { "shape": "item.book.2", "book": "On ghosts and spirits" }, "item.candle" ]);
 
         setBook(5027, 5017, 3, "map", "Raising the dead");
-        setBook(5031, 5013, 6, "map", "Necromantic reagents");        
+        setBook(5031, 5013, 6, "map", "Spell reagents");        
         setBook(5197, 5016, 3, "map", "On ghosts and spirits");        
     },
     "teleport": (this, x, y, z) => {

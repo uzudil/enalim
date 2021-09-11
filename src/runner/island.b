@@ -40,7 +40,7 @@ addNpcDef({
         "Vesnu": "The Necromancer's look is somewhere between concern and barely checked irritation. \"Vesnu is an ancient being - some call him a god - of pure malignant energy. Nothing good can come of his awakening. Of course, \" - he adds - \"we have gone over this many times. You are $prepared for the $conjunction, correct?\"",
         "prepared": () => {
             if(player.gameState["chores_done"] = null) {
-                idx := player.inventory.findIndex("vial.nercromancer");
+                idx := player.inventory.findIndex("item.thermex");
                 if(idx > -1) {
                     player.inventory.remove(idx, "inventory");
                     player.gameState["chores_done"] := 1;

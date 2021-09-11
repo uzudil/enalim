@@ -1,10 +1,10 @@
 def initPath(c, name) {
     return {
-        "name": name,
-        "nextCheck": 0,
-        "pathFail": 0,
-        "path": null,
-        "step": 0,
+        name: name,
+        nextCheck: 0,
+        pathFail: 0,
+        path: null,
+        step: 0,
     };
 }
 

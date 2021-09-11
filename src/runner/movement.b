@@ -6,28 +6,28 @@ def decodeMovement(savedMove, width, height, depth, shape, speed, centerView, is
 
 def newMovement(startX, startY, startZ, width, height, depth, shape, speed, centerView, isFlying) {
     return {
-        "x": startX,
-        "y": startY,
-        "z": startZ,
-        "isFlying": isFlying,
-        "centerView": centerView,
-        "isPlayer": centerView,
-        "scrollOffsetX": 0,
-        "scrollOffsetY": 0,
-        "dir": DirW,
-        "speed": speed,
-        "width": width,
-        "height": height,
-        "depth": depth,
-        "shape": shape,
-        "encode": (move) => {
+        x: startX,
+        y: startY,
+        z: startZ,
+        isFlying: isFlying,
+        centerView: centerView,
+        isPlayer: centerView,
+        scrollOffsetX: 0,
+        scrollOffsetY: 0,
+        dir: DirW,
+        speed: speed,
+        width: width,
+        height: height,
+        depth: depth,
+        shape: shape,
+        encode: (move) => {
             return { "x": move.x, "y": move.y, "z": move.z, "dir": move.dir };
         },
-        "decode": (move, saved) => {
+        decode: (move, saved) => {
             move.set(saved.x, saved.y, saved.z);
             move.dir := saved.dir;
         },
-        "moveInDir": (move, dx, dy, delta, interceptMove, onPosChange) => {
+        moveInDir: (move, dx, dy, delta, interceptMove, onPosChange) => {
             move.dir := getDir(dx, dy);
             moved := true;
 
@@ -73,7 +73,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             }
             return moved;
         },
-        "set": (move, x, y, z) => {
+        set: (move, x, y, z) => {
             move.x := x;
             move.y := y;
             move.z := z;
@@ -81,14 +81,14 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
                 setViewScroll(0, 0, int(move.z / 7) * 7);
             }
         },
-        "isAt": (move, x, y, z) => x = move.x && y = move.y && z = move.z,
-        "setAnimation": (move, animation) => setAnimation(move.x, move.y, move.z, animation, move.dir),
-        "erase": move => eraseShapeExact(move.x, move.y, move.z),
-        "setShape": (move, shape) => setShape(move.x, move.y, move.z, shape),
-        "distanceTo": (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),
-        "distanceXyTo": (move, nx, ny) => distance(move.x, move.y, move.z, nx, ny, move.z),
-        "findPath": (move, destX, destY, destZ, dSrc, dDst) => findPath(move.x, move.y, move.z, destX, destY, destZ, move.isFlying, dSrc, dDst),
-        "findNearby": (move, radius, evalFx, successFx) => {
+        isAt: (move, x, y, z) => x = move.x && y = move.y && z = move.z,
+        setAnimation: (move, animation) => setAnimation(move.x, move.y, move.z, animation, move.dir),
+        erase: move => eraseShapeExact(move.x, move.y, move.z),
+        setShape: (move, shape) => setShape(move.x, move.y, move.z, shape),
+        distanceTo: (move, nx, ny, nz) => distance(move.x, move.y, move.z, nx, ny, nz),
+        distanceXyTo: (move, nx, ny) => distance(move.x, move.y, move.z, nx, ny, move.z),
+        findPath: (move, destX, destY, destZ, dSrc, dDst) => findPath(move.x, move.y, move.z, destX, destY, destZ, move.isFlying, dSrc, dDst),
+        findNearby: (move, radius, evalFx, successFx) => {
             found := [false];
             range(-1 * radius, move.width + radius, 1, x => {
                 range(-1 * radius, move.height + radius, 1, y => {
@@ -107,7 +107,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             });
             return found[0];
         },
-        "findShapeNearby": (move, name, fx) => {
+        findShapeNearby: (move, name, fx) => {
             return move.findNearby(1, (x,y,z) => {
                 info := getShape(x, y, z);
                 if(info != null) {
@@ -118,25 +118,25 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
                 return null;
             }, info => fx(info[1], info[2], info[3]));
         },
-        "findNpcNearby": (move, fx) => {
+        findNpcNearby: (move, fx) => {
             if(move.findNearby(4, getNpc, fx) = false) {
                 print("Not near any npc-s.");
             }
         },
-        "forBase": (move, fx) => {
+        forBase: (move, fx) => {
             range(0, move.width, 1, x => {
                 range(0, move.height, 1, y => {
                     fx(move.x + x, move.y + y);
                 });
             });
         },
-        "operateDoorNearby": (move) => {
+        operateDoorNearby: (move) => {
             return array_find(
                 keys(REPLACE_SHAPES), 
                 shape => move.findShapeNearby(shape, (x, y, z) => move.operateDoor(shape, x, y, z))
             );
         },
-        "operateDoorAt": (move, x, y, z) => {
+        operateDoorAt: (move, x, y, z) => {
             shape := getShape(x, y, z);
             if(shape != null) {
                 if(REPLACE_SHAPES[shape[0]] != null) {
@@ -146,7 +146,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             }
             return false;
         },
-        "operateDoor": (move, shape, x, y, z) => {
+        operateDoor: (move, shape, x, y, z) => {
             if(unlock_door(x, y, z, move.isPlayer)) {
                 print("Door is locked.");
                 if(move.isPlayer) {
@@ -178,7 +178,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             }
             print("can't open door");
         },
-        "blockedByCreature": (self, c, nextX, nextY) => {
+        blockedByCreature: (self, c, nextX, nextY) => {
             # blocked by player?
             if(self.intersect(player.move, nextX, nextY)) {
                 return true;
@@ -187,7 +187,7 @@ def newMovement(startX, startY, startZ, width, height, depth, shape, speed, cent
             # blocked by another creature?
             return array_find(creatures, cc => cc.id != c.id && self.intersect(cc.move, nextX, nextY)) != null;
         },
-        "intersect": (self, another, nextX, nextY) => intersect3d(
+        intersect: (self, another, nextX, nextY) => intersect3d(
             nextX, nextY, self.z, self.width, self.height, self.depth,
             another.x, another.y, another.z, another.width, another.height, another.depth
         ),
