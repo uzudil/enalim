@@ -170,7 +170,7 @@ def restore_contained(saved) {
 def newInventory() {
     return {
         items: [],
-        add: (self, shape, xpos, ypos) => {
+        add: (self, shape, xpos=-1, ypos=-1) => {
             if(xpos < 0) {
                 xpos := int(50 + random() * 100);
                 ypos := int(30 + random() * 60);

@@ -32,9 +32,13 @@ def encodeNpc(npc) {
         return {};
     }
     print("* Saving npc " + npc.name);
-    return {
+    o := {
         "name": npc.name
     };
+    if(npc.tradeInv != null) {
+        o.tradeInv := array_map(npc.tradeInv, item => item.name);
+    }
+    return o;
 }
 
 # restore npc from saved copy
@@ -44,6 +48,9 @@ def decodeNpc(savedNpc) {
     }
     print("* Restoring npc " + savedNpc.name);
     n := npcDefs[array_find(keys(npcDefs), k => npcDefs[k].name = savedNpc.name)];
+    if(savedNpc.tradeInv != null) {
+        n.tradeInv := array_map(savedNpc.tradeInv, itemName => array_find(OBJECTS, o => o.name = itemName));
+    }
     return n;
 }
 
@@ -127,4 +134,17 @@ def npcPathMoveSuccess(c, pos, delta) {
         c.movement := c.npc.schedule[c.npc.activeSchedule].movement;    
     }
     return null;
+}
+
+def getTraderInventory(npc, cat) {
+    if(npc.tradeInv = null) {
+        npc.tradeInv := [];
+        items := array_filter(OBJECTS, o => o.cat = cat);
+        while(len(npc.tradeInv) < 5 && len(items) > 0) {
+            idx := random() * len(items);
+            npc.tradeInv[len(npc.tradeInv)] := items[idx];
+            del items[idx];
+        }
+    }
+    return npc.tradeInv;
 }

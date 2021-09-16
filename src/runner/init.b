@@ -64,3 +64,7 @@ const COMBAT_MESSAGES = [
     "I will feast on your grave!",
     "Unleash hell!",
 ];
+
+# item categories
+const CAT_WEAPON = "weapon";
+const CAT_ARMOR = "armor";

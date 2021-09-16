@@ -25,31 +25,32 @@ const PLAYER_SHAPE = "lydell";
 
 # the global player state
 player := {
-    "shape": PLAYER_SHAPE,
-    "shapeIndex": 0,
-    "mode": MODE_INIT,
-    "move": null,
-    "underRoof": false,
-    "roof": null,
-    "teleportPos": null,
-    "convo": null,
-    "elapsedTime": 0,
-    "dragShape": null,
-    "inventoryUi": null,
-    "inventory": null,
-    "attackTimer": 0,
-    "coolTimer": 0,
-    "attackTarget": null,
-    "lastAttackTarget": null,
-    "combatMode": false,
-    "gameState": {
-        "unlocked": [],
+    shape: PLAYER_SHAPE,
+    shapeIndex: 0,
+    mode: MODE_INIT,
+    move: null,
+    underRoof: false,
+    roof: null,
+    teleportPos: null,
+    convo: null,
+    elapsedTime: 0,
+    dragShape: null,
+    inventoryUi: null,
+    inventory: null,
+    attackTimer: 0,
+    coolTimer: 0,
+    attackTarget: null,
+    lastAttackTarget: null,
+    combatMode: false,
+    gameState: {
+        unlocked: [],
     },
-    "cursor": "cursor.nw",
-    "mouseDrive": false,
-    "mouseOnInteractive": 0,
-    "hp": 20,
-    "equipment": null,
+    cursor: "cursor.nw",
+    mouseDrive: false,
+    mouseOnInteractive: 0,
+    hp: 20,
+    equipment: null,
+    coins: 100,
 };    
 
 # the player's shape size
@@ -987,6 +988,7 @@ def save_game() {
             "equipment": player.equipment.encode(),
             "move": player.move.encode(),
             "hp": player.hp,
+            "coins": player.coins,
         });
     }
 }
@@ -996,6 +998,7 @@ def load_game() {
     if(saved != null) {
         setCalendarRaw(saved.calendar);
         player.hp := saved.hp;
+        player.coins := saved.coins;
         player.gameState := saved.gameState;
         array_foreach(saved.items, (i, c) => restoreItem(c));
         player.inventory.decode(saved.inventory);

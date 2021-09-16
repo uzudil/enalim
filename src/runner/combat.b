@@ -39,7 +39,7 @@ def continueCombat() {
 def findNearestMonster() {
     targets := array_filter(creatures, c => {
         d := player.move.distanceTo(c.move.x, c.move.y, c.move.z);
-        return d <= 10;
+        return d <= 10 && c.template.movement = "hunt";
     });
     if(len(targets) > 0) {
         return choose(targets);

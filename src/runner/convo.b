@@ -2,19 +2,28 @@ const CONVO_R=160;
 const CONVO_G=150;
 const CONVO_B=100;
 
+const CMD_SELL = "_sell_";
+const CMD_SELL_PRICE = "_sell_price_";
+const CMD_SELL_CONFIRM = "_sell_confirm_";
+const CMD_BUY = "_buy_";
+const CMD_BUY_PRICE = "_buy_price_";
+const CMD_BUY_CONFIRM = "_buy_confirm_";
+
 def startConvo(npc) {
     player.mode := MODE_CONVO;
     setOverlayBackground(0, 0, 0, 200);
     setCalendarPaused(true);
     player.convo := {
-        "npc": npc,
-        "topic": "",
-        "update": true,
-        "indexes": [],
-        "parsed": null,
-        "answerIndex": 0,
-        "quote": false,
-        "action": false,
+        npc: npc,
+        topic: "",
+        update: true,
+        indexes: [],
+        parsed: null,
+        cmd: null,
+        context: null,
+        answerIndex: 0,
+        quote: false,
+        action: false,
     };
 }
 
@@ -26,7 +35,11 @@ def renderConvo() {
             if(typeof(t) = "function") {
                 t := t();
             }
-            player.convo.parsed := parseTopic(t);
+            if(player.convo.cmd = null) {
+                player.convo.parsed := parseTopic(t);
+            } else {
+                player.convo.parsed := parseConvoCommand(player.convo.cmd, player.convo.topic);
+            }
             player.convo.quote := false;
             player.convo.action := false;
         }
@@ -61,7 +74,7 @@ def decrConvoAnswerIndex() {
 
 def fireConvoAnswerIndex() {
     t := player.convo.parsed.answers[player.convo.answerIndex];
-    if(player.convo.npc.convo[t] = null) {
+    if(player.convo.parsed.cmd = null && player.convo.npc.convo[t] = null) {
         print("Error: missing convo topic: '" + t + "'. Talking to " + player.convo.npc.name);
     } else {
         if(typeof(player.convo.npc.convo[t]) = "string") {
@@ -70,17 +83,15 @@ def fireConvoAnswerIndex() {
             }
         }
         player.convo.topic := t;
+        player.convo.cmd := player.convo.parsed.cmd;
         player.convo.parsed := null;
         player.convo.update := true;
     }
 }
 
 def setConvoAnswerIndexAt(x, y) {
-    if(player.convo = null) {
-        return 1;
-    }
-    if(player.convo.parsed = null) {
-        return 1;
+    if(player.convo = null || player.convo.parsed = null) {
+        return;
     }
     lineCount := len(player.convo.parsed.lines);
     i := int((y - 20 - (lineCount - 1) * LINE_HEIGHT) / LINE_HEIGHT);
@@ -145,10 +156,144 @@ def delConvoMessages() {
     }
 }
 
+def startConvoCommand(cmd, cat, scheduleIndex=0) {
+    if(player.convo.npc.activeSchedule = scheduleIndex) {
+        player.convo.cmd := cmd;
+        player.convo.context := cat;
+        return;
+    } else {
+        return "\"My store is closed. Please come back later.\"";
+    }
+}
+
+def parseConvoCommand(cmd, topic) {
+    if(cmd = CMD_BUY) {
+        return parseConvoCommandBuy(topic);
+    } else if(cmd = CMD_BUY_PRICE) {
+        return parseConvoCommandBuyPrice(topic);
+    } else if(cmd = CMD_BUY_CONFIRM) {
+        return parseConvoCommandBuyConfirm(topic);
+    } else if(cmd = CMD_SELL) {
+        return parseConvoCommandSell(topic);
+    } else if(cmd = CMD_SELL_PRICE) {
+        return parseConvoCommandSellPrice(topic);
+    } else if(cmd = CMD_SELL_CONFIRM) {
+        return parseConvoCommandSellConfirm(topic);
+    }
+    print("Unknown command: " + cmd + " on topic: " + topic);
+    return {
+        lines: [""],
+        answers: [],
+        cmd: cmd,
+    };
+}
+
+def parseConvoCommandSell(topic) {
+    names := array_filter(array_map(player.inventory.items, item => {
+        obj := array_find(OBJECTS, o => o.shape = item.shape);
+        if(obj = null || obj.cat != player.convo.context) {
+            return null;
+        }
+        return obj.name;
+    }), name => name != null);
+    if(len(names) = 0) {
+        return {
+            lines: ["\"Alas, you have nothing that interests me!\""],
+            answers: appendConvoCommands(),
+            cmd: null,
+        };    
+    } else {
+        return {
+            lines: ["\"What do you want to sell?\""],
+            answers: names,
+            cmd: CMD_SELL_PRICE
+        };
+    }
+}
+
+def parseConvoCommandSellPrice(topic) {
+    item := array_find(OBJECTS, item => item.name = topic);
+    player.convo.context := {
+        item: item,
+        price: round(item.price * 0.8),
+    };
+    return {
+        lines: ["\"I will buy it from you for " + player.convo.context.price + " coins.", "Interested?\""],
+        answers: ["Yes", "No"],
+        cmd: CMD_SELL_CONFIRM
+    };
+}
+
+def parseConvoCommandSellConfirm(topic) {
+    if(topic = "Yes") {
+        #player.inventory.add(player.convo.context.item.shape);
+        player.coins :+ player.convo.context.price;
+        return {
+            lines: ["\"Pleasure doing business with you!", "Let me know if there is anything", "else you wish to sell.\""],
+            answers: appendConvoCommands(),
+            cmd: null,
+        };    
+    } else {
+        return {
+            lines: ["\"Ok, let me know if you change your mind.", "Is there is anything else you wish to sell?\""],
+            answers: appendConvoCommands(),
+            cmd: null,
+        };
+    }
+}
+
+def parseConvoCommandBuy(topic) {
+    return {
+        lines: ["\"What do you want to buy?\""],
+        answers: array_map(getTraderInventory(player.convo.npc, player.convo.context), item => item.name),
+        cmd: CMD_BUY_PRICE
+    };
+}
+
+def parseConvoCommandBuyPrice(topic) {
+    item := array_find(player.convo.npc.tradeInv, item => item.name = topic);
+    player.convo.context := {
+        item: item,
+        price: round(item.price * 1.2),
+    };
+    return {
+        lines: ["\"I will sell it to you for " + player.convo.context.price + " coins.", "Interested?\""],
+        answers: ["Yes", "No"],
+        cmd: CMD_BUY_CONFIRM
+    };
+}
+
+def parseConvoCommandBuyConfirm(topic) {
+    if(topic = "Yes") {
+        if(player.coins >= player.convo.context.price) {
+            player.inventory.add(player.convo.context.item.shape);
+            player.coins :- player.convo.context.price;
+            return {
+                lines: ["\"May it serve you well! Let me know if", "there is anything else you wish to buy.\""],
+                answers: appendConvoCommands(),
+                cmd: null,
+            };    
+        } else {
+            return {
+                lines: ["\"Alas, you don't have enough funds!", "Let me know if there is anything else", "you wish to buy.\""],
+                answers: appendConvoCommands(),
+                cmd: null,
+            };    
+        }
+    } else {
+        return {
+            lines: ["\"Ok, let me know if you change your mind.", "Is there is anything else you wisth to buy?\""],
+            answers: appendConvoCommands(),
+            cmd: null,
+        };
+    }
+}
+
 def parseTopic(topic) {
     d := {
-        "lines": [""],
-        "answers": []
+        lines: [""],
+        answers: [],
+        cmd: null,
     };
     i := 0;
     wordStart := 0;
@@ -163,7 +308,18 @@ def parseTopic(topic) {
     if(wordStart < i) {
         addWord(topic, i, wordStart, d);
     }
+    appendConvoCommands(d.answers);
     return d;
+}
+
+def appendConvoCommands(a=[]) {
+    if(player.convo.npc.trade != null) {
+        a[len(a)] := "Buy";
+        a[len(a)] := "Sell";
+        player.convo.npc.convo["Buy"] := () => startConvoCommand(CMD_BUY, player.convo.npc.trade);
+        player.convo.npc.convo["Sell"] := () => startConvoCommand(CMD_SELL, player.convo.npc.trade);
+    }
+    return a;
 }
 
 const CONVO_SUFFIX = [ ",", "!", "?", ".", ":", ";", "\"", "'" ];
@@ -183,20 +339,24 @@ def stripSuffix(w) {
     return w;
 }
 
+def removePunctuation(word) {
+    # remove ending punctuation
+    w := [ word ];
+    array_foreach(CONVO_SUFFIX, (i, p) => {
+        while(endsWith(w[0], p)) {
+            #w[0] := substr(w[0], 0, len(w[0]) - len(p));
+            w[0] := stripSuffix(w[0]);
+        }
+    });
+    return w[0];
+}
+
 def addWord(topic, i, wordStart, d) {
     word := substr(topic, wordStart, (i - wordStart));
-    if(substr(word, 0, 1) = "$") {
+    if(startsWith(word, "$")) {
         word := substr(word, 1, len(word) - 1);
-        
-        # remove ending punctuation
-        w := [ word ];
-        array_foreach(CONVO_SUFFIX, (i, p) => {
-            while(endsWith(w[0], p)) {
-                #w[0] := substr(w[0], 0, len(w[0]) - len(p));
-                w[0] := stripSuffix(w[0]);
-            }
-        });
-        d.answers[len(d.answers)] := w[0];
+        s := removePunctuation(word);
+        d.answers[len(d.answers)] := s;
     }
     lastLine := d.lines[len(d.lines) - 1];
     if(len(lastLine) = 0) {

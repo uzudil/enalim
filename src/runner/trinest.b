@@ -2,15 +2,12 @@ addNpcDef({
     name: "ennid",
     label: "Ennid",
     creature: "woman",
+    trade: CAT_WEAPON,
     convo: {
-        "": "You see sharp-eyed woman before you. \"I am Ennid and run he $weapons shop here in $Trinest.\"",
-        "weapons": () => {
-            # trading goes here... (it should only work on schedule 0)
-            return "todo";
-        },
+        "": "You see sharp-eyed woman before you. \"I am Ennid and run he weapons shop here in $Trinest.\"",
         "Trinest": "\"Trinest is the east-most town on the Enalim mainland. East of us is just the ocean and some $insignificant small islands.\"",
-        "insignificant": "Hmm, seems like she doesn't know about the Necromancer's island. Maybe you should $tell her. Then again, that's the kind of detail that gets one killed in places like this. Ask her about $weapons instead.",
-        "tell": "You pointificate about the island of the Necromancer. \"Fascinating.\" - she says, without a hint of interest - \"Well, let me know if you need any $weapons!\" - she continues.",
+        "insignificant": "Hmm, seems like she doesn't know about the Necromancer's island. Maybe you should $tell her. Then again, that's the kind of detail that gets one killed in places like this. Maybe buy something instead.",
+        "tell": "You pointificate about the island of the Necromancer. \"Fascinating.\" - she says, without a hint of interest - \"Well, let me know if you need any weapons!\" - she continues.",
     },
     waypoints: [ [ 5441, 5015, 1 ], [ 5440, 5027, 1 ], [ 5456, 5027, 1 ], [ 5454, 5044, 1 ], [ 5439, 5042, 1 ] ], 
     schedule: [
@@ -23,8 +20,10 @@ addNpcDef({
     name: "hamid",
     label: "Hamid",
     creature: "man-blue",
+    trade: CAT_ARMOR,
     convo: {
-        "": "Welcome traveler to Sylvanes",
+        "": "A man with a warm smile says: \"Be welcome in Trinest wanderer. I buy and sell armor at my shop. Our $town may be small but rest assured my shop is well equipped. Just ask if you need anything.\"",
+        "town": "\"Trinest is the last town on the east side of the Enalim mainland. My name is Hamid and I trade in high quality armor.\"",
     },
     waypoints: [ [ 5413, 5036, 1 ], [ 5426, 5039, 1 ], [ 5414, 5051, 1 ], [ 5405, 5065, 1 ], [ 5419, 5079, 1 ], [ 5416, 5063, 1 ] ],
     schedule: [

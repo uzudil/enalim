@@ -25,9 +25,9 @@ const SLOT_POS = [
 const DEFAULT_EQUIPMENT = [ null, null, null, null, null, null, null, null, null, null ];
 
 const OBJECTS = [
-    { name: "Broadsword", slot: SLOT_RIGHT_HAND, variation: "sword", shape: "item.sword" },
-    { name: "Dagger", slot: SLOT_RIGHT_HAND, variation: "dagger", shape: "item.dagger" },
-    { name: "Leather Helm", slot: SLOT_HEAD, shape: "item.helm.leather" },
+    { name: "Broadsword", slot: SLOT_RIGHT_HAND, variation: "sword", shape: "item.sword", cat: CAT_WEAPON, price: 150 },
+    { name: "Dagger", slot: SLOT_RIGHT_HAND, variation: "dagger", shape: "item.dagger", cat: CAT_WEAPON, price: 50 },
+    { name: "Leather Helm", slot: SLOT_HEAD, shape: "item.helm.leather", cat: CAT_ARMOR, price: 80 },
 ];
 
 const OBJECTS_BY_SHAPE = {};
