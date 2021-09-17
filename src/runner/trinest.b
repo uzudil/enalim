@@ -32,6 +32,47 @@ addNpcDef({
     ],
 });
 
+addNpcDef({
+    name: "ender",
+    label: "Ender",
+    creature: "man-yellow",
+    convo: {
+        "": () => {
+            if(player.convo.npc.activeSchedule = 0) {
+                return "You see a portly man who has obviously been sampling the local ale: \"Hello there stranger\"
+                     - he slurs slightly - \"you have the look of an $adventurer. I also used to roam the lands freely, 
+                     but lately I've been $stuck in Trinest.\"";
+            } else {
+                return "The portly man seems irritated by the interruption: \"Yes, yes that's very interesting but 
+                    you see I'm quiet tired. Talk to me tomorrow in the $pub.\"";
+            }
+        },
+        "pub": "He points to the inn's downstairs pub: \"By that I mean the pub downstairs. I'll talk to you there tomorrow.\"",
+        "adventurer": "He looks you up and down: \"I could be wrong, but you have the look of somone who is on a mission. 
+            What is it that you $seek?\"",
+        "seek": "You can't decide if he's trustworthy or not. Will you mention that you're looking for $Fearon? Or ask 
+            why he's $stuck in Trinest?",
+        "stuck": "He nods and says: \"Aye, I also was an $adventurer for a time and my quest led me here to Trinest.\". 
+            He sighs and continues: \"I was on the trail of a jewel thief for a large reward, however the thief entered the
+            dungeon $Ravenous and I dare not follow him there.\"",
+        "Ravenous": "\"Ravenous is a large dungeon just north-east of here. Follow the road and it will guide you there. But beware, 
+            its depths are fill with loathsome horrors. Unless you're very foolish or very brave, I would not advise you to enter there. 
+            Many an $adventurer paid the ultimate price for their curiosity in Ravenous!\"",
+        "Fearon": "You mention that you're looking for a man named Fearon. The portly man nods and says: \"I know Fearon well. I would 
+            gladly direct you to him if you could just do me a small $favor.\"",
+        "favor": "He moves closes and whispers conspiratorially: \"You seem like a very brave and experienced $adventurer.\" - he
+            smiles creepily - \"Despite my personal misgivings about the dungeon $Ravenous, I believe you could brave its depths 
+            and bring me the $jewel the thief was carrying. Do that and I will show you the way to Fearon.\"",
+        "jewel": "He winks at you and says: \"You could certainly keep the jewel, but then you'll never find $Fearon. Bring it to
+            me instead and I will personally give you his location.\". Seems like a reasonable trade, you think."
+    },
+    waypoints: [ [ 5472, 5028, 1 ], [ 5481, 5017, 1 ], [ 5465, 5021, 8 ], [ 5482, 5034, 8 ] ],
+    schedule: [
+        { name: "pub", from: 10, to: 22, movement: "anchor", waypointDir: -1 },
+        { name: "room", from: 22, to: 10, movement: "anchor", waypointDir: 1 },
+    ],
+});
+
 # addNpcDef({
 #     "name": "alton",
 #     "label": "Alton",

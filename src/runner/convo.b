@@ -37,6 +37,7 @@ def renderConvo() {
             }
             if(player.convo.cmd = null) {
                 player.convo.parsed := parseTopic(t);
+                appendConvoCommands(player.convo.parsed.answers);
             } else {
                 player.convo.parsed := parseConvoCommand(player.convo.cmd, player.convo.topic);
             }
@@ -297,6 +298,7 @@ def parseTopic(topic) {
     };
     i := 0;
     wordStart := 0;
+    topic := replaceRegexp(topic, "\\s+", " ");
     while(i < len(topic)) {
         c := substr(topic, i, 1);
         if(c = " ") {
@@ -308,12 +310,11 @@ def parseTopic(topic) {
     if(wordStart < i) {
         addWord(topic, i, wordStart, d);
     }
-    appendConvoCommands(d.answers);
     return d;
 }
 
 def appendConvoCommands(a=[]) {
-    if(player.convo.npc.trade != null) {
+    if(player.convo != null && player.convo.npc.trade != null) {
         a[len(a)] := "Buy";
         a[len(a)] := "Sell";
         player.convo.npc.convo["Buy"] := () => startConvoCommand(CMD_BUY, player.convo.npc.trade);
