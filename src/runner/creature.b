@@ -64,6 +64,18 @@ creaturesTemplates := {
         "attack": [2,5],
         "hp": 40,
     },
+    "spirit": {
+        "shape": "ghost",
+        "speed": 0.2,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": true,
+        "movement": "hunt",
+        "attackSteps": 2,
+        "attack": [1,4],
+        "hp": 15,
+    },
     "man-blue": {
         "shape": "man-blue",
         "speed": 0.25,
@@ -123,9 +135,11 @@ def pruneCreatures(sectionX, sectionY) {
         if(b) {
             # not needed: shapes with animations are marked IsSave=false
             # c.move.erase();
+
+            # todo: confusing that name is saved for shape
             removes[len(removes)] := {
                 "id": c.id,
-                "shape": c.template.shape,
+                "shape": c.template.name,
                 "move": c.move.encode(),
                 "npc": encodeNpc(c.npc),
                 "movement": c.movement,
@@ -140,7 +154,7 @@ def pruneCreatures(sectionX, sectionY) {
 }
 
 def restoreCreature(savedCreature) {
-    # todo: this is technically wrong: shape != template name...
+    # todo: confusing that name is saved for shape
     tmpl := creaturesTemplates[savedCreature.shape];
     print("* Restoring creature " + tmpl.shape + " " + savedCreature.id);
     move := decodeMovement(savedCreature.move, tmpl.baseWidth, tmpl.baseHeight, tmpl.sizeZ, tmpl.shape, tmpl.speed, false, tmpl.isFlying);

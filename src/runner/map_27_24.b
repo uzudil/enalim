@@ -3,6 +3,12 @@ SECTIONS["27,24"] := {
         setCreature(5409, 4917, 1, creaturesTemplates.goblin);
         setCreature(5414, 4931, 1, creaturesTemplates.goblin);
         setCreature(5406, 4937, 1, creaturesTemplates.goblin);
+
+        # in caves
+        setCreature(5443, 4909, 1, creaturesTemplates.goblin);
+        setCreature(5437, 4904, 1, creaturesTemplates.goblin);
+        setCreature(5420, 4910, 1, creaturesTemplates.goblin);
+        setCreature(5415, 4897, 1, creaturesTemplates.goblin);
     },
     "teleport": (this, x, y, z) => {
         if(x = 5400 && y <= 4971 && y >= 4968 && z = 1) {
