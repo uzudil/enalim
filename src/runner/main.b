@@ -1035,6 +1035,7 @@ def main() {
     array_foreach(npcReg, (i, npc) => registerNpc(npc));
 
     initObjects();
+    initCreatures();
 
     EVENTS_MAP[MODE_INIT] := (s, d,f) => eventsInit(d, f);
     EVENTS_MAP[MODE_TELEPORT] := (s, d,f) => eventsTeleport(d, f);

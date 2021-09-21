@@ -66,7 +66,7 @@ creaturesTemplates := {
     },
     "spirit": {
         "shape": "ghost",
-        "speed": 0.2,
+        "speed": 0.1,
         "baseWidth": 2,
         "baseHeight": 2,
         "sizeZ": 4,
@@ -116,8 +116,23 @@ creaturesTemplates := {
         "movement": "anchor",
         "hp": 10,
     },
+    "woman2": {
+        "shape": "woman2",
+        "speed": 0.25,
+        "baseWidth": 2,
+        "baseHeight": 2,
+        "sizeZ": 4,
+        "isFlying": false,
+        "movement": "anchor",
+        "hp": 10,
+    },
 
 };
+
+def initCreatures() {
+    # assign a name to every creature
+    array_foreach(keys(creaturesTemplates), (i, k) => { creaturesTemplates[k].name := k; });
+}
 
 creatures := [];
 
@@ -136,10 +151,9 @@ def pruneCreatures(sectionX, sectionY) {
             # not needed: shapes with animations are marked IsSave=false
             # c.move.erase();
 
-            # todo: confusing that name is saved for shape
             removes[len(removes)] := {
                 "id": c.id,
-                "shape": c.template.name,
+                "name": c.template.name,
                 "move": c.move.encode(),
                 "npc": encodeNpc(c.npc),
                 "movement": c.movement,
@@ -154,8 +168,7 @@ def pruneCreatures(sectionX, sectionY) {
 }
 
 def restoreCreature(savedCreature) {
-    # todo: confusing that name is saved for shape
-    tmpl := creaturesTemplates[savedCreature.shape];
+    tmpl := creaturesTemplates[savedCreature.name];
     print("* Restoring creature " + tmpl.shape + " " + savedCreature.id);
     move := decodeMovement(savedCreature.move, tmpl.baseWidth, tmpl.baseHeight, tmpl.sizeZ, tmpl.shape, tmpl.speed, false, tmpl.isFlying);
     move.setShape(tmpl.shape);
@@ -164,7 +177,8 @@ def restoreCreature(savedCreature) {
         "template": tmpl,
         "move": move,
         "anchor": [ move.x, move.y, move.z ],
-        "standTimer": 0,
+        "anchorTimer": 0,
+        "anchorMode": ANIM_MOVE,
         "npc": decodeNpc(savedCreature.npc),
         "movement": savedCreature.movement,
         "hp": savedCreature.hp,
@@ -181,7 +195,8 @@ def setCreature(x, y, z, creature) {
             "template": creature,
             "move": newMovement(x, y, z, creature.baseWidth, creature.baseHeight, creature.sizeZ, creature.shape, creature.speed, false, creature.isFlying),
             "anchor": [ x, y, z ],
-            "standTimer": 0,
+            "anchorTimer": 0,
+            "anchorMode": ANIM_MOVE,
             "npc": null,
             "movement": creature.movement,
             "hp": creature.hp,
@@ -230,17 +245,19 @@ def anchorAndMoveCreatureRandom(c, delta) {
 def moveCreatureRandom(c, delta) {
     if(c.movement = "stand") {
         return ANIM_STAND;
-    } else if(c.standTimer > 0) {
-        animation := ANIM_STAND;
-        c.standTimer := c.standTimer - delta;
     } else {
-        animation := ANIM_MOVE;
-        moveCreatureRandomMove(c, delta);
-        if(random() > 0.995) {
-            c.standTimer := 3;
+        if(c.anchorTimer > 0) {
+            c.anchorTimer :- delta;
+            if(c.anchorMode = ANIM_MOVE) {
+                moveCreatureRandomMove(c, delta);
+            }
+        } else {
+            c.anchorTimer := 0.5 + random() * 2.5;
+            c.anchorMode := choose([ ANIM_MOVE, ANIM_STAND, ANIM_STAND, ANIM_STAND, ANIM_STAND, ANIM_STAND, ANIM_STAND ]);
+            c.move.dir := int(random() * 8);
         }
+        return c.anchorMode;
     }
-    return animation;
 }
 
 def moveCreatureRandomMove(c, delta) {

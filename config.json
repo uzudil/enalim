@@ -692,6 +692,24 @@
                     "dirs": [ "sw", "s", "se", "e", "ne", "n", "nw", "w" ]
                 }
             ]
+        },
+        { 
+            "name": "woman2", 
+            "size": [ 2, 2, 4 ], 
+            "dim": [ 64, 64 ], 
+            "breathe": true,
+            "frames": [
+                {
+                    "name": "move",
+                    "steps": 4,
+                    "dirs": [ "e", "ne", "n", "nw", "w", "sw", "s", "se" ]
+                },
+                {
+                    "name": "stand",
+                    "steps": 1,
+                    "dirs": [ "e", "ne", "n", "nw", "w",  "sw", "s", "se" ]
+                }
+            ]
         }
     ]
 }
