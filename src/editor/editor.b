@@ -1,43 +1,41 @@
 const TREES = [ "plant.oak", "plant.red", "plant.pine", "plant.willow", "plant.dead", "plant.pine2" ];
 const ROCK_ROOF = [ "roof.mountain.1", "roof.mountain.2", "roof.mountain.3" ];
 const RUG_SIZE = 2;
+
+const MODE_SECTION = "section";
+const MODE_INSERT = "insert";
+
 editor := {
-    "roofMode": false,
+    roofMode: false,
+    mode: "",
+    lastX: 0,
+    lastY: 0,
+    dirX: 0,
+    dirY: 0,
 };
 
-def editorCommand() {
-    if(isPressed(KeyTab)) {
-        if(editor.roofMode) {
-            print("to NO roof");
-            setMaxZ(24, null);
-            editor.roofMode := false;
-        } else {
-            print("to roof");
-            setMaxZ(7, "roof.mountain.1");
-            editor.roofMode := true;
-        }
-    }
-    if(isPressed(KeyW)) {
+def editorSectionCommand() {
+    if(isPressed(Key1)) {
         drawWater(getPosition(), true);
     }
-    if(isPressed(KeyQ)) {
+    if(isPressed(Key2)) {
         drawWater(getPosition(), false);
     }
-    if(isPressed(KeyG)) {
+    if(isPressed(Key3)) {
         drawGrass(getPosition(), 
             null,
             ["rock", "rock.corner", "rock.2", "rock.3", "rock.4", "rock.5", "trunk.y", "plant.bush"],
             [ "plant.flower.green.large", "plant.flower.yellow.large", "plant.flower.red.large" ]
         );
     }
-    if(isPressed(KeyV)) {
+    if(isPressed(Key4)) {
         drawGrass(getPosition(), 
             null,
             null,
             null
         );
     }
-    if(isPressed(KeyH)) {
+    if(isPressed(Key5)) {
         drawGrass(getPosition(), 
             array_flatten([
                 array_times("plant.oak", 6), 
@@ -49,7 +47,7 @@ def editorCommand() {
             [ "plant.flower.green.large", "plant.flower.yellow.large", "plant.flower.red.large" ]
         );
     }
-    if(isPressed(KeyJ)) {
+    if(isPressed(Key6)) {
         drawGrass(getPosition(), 
             array_flatten([
                 array_times("plant.pine", 10), 
@@ -59,7 +57,7 @@ def editorCommand() {
             [ "plant.flower.green.large", "plant.flower.yellow.large" ]
         );
     }
-    if(isPressed(KeyK)) {
+    if(isPressed(Key7)) {
         drawGrass(getPosition(), 
             array_flatten([
                 array_times("plant.pine2", 10), 
@@ -69,34 +67,54 @@ def editorCommand() {
             [ "plant.flower.green.large" ]
         );
     }
-    if(isPressed(KeyT)) {
+}
+
+def editorInsertCommand() {
+    step := 0;
+    if(isPressed(Key1)) {
         pos := getPosition();
         drawTree(pos[0], pos[1], pos[2]);
+        step := 4;
     }
-    if(isPressed(KeyY)) {
+    if(isPressed(Key2)) {
         pos := getPosition();
         x := int(pos[0] / 4) * 4;
         y := int(pos[1] / 4) * 4;
-        drawDungeon(x, y, 0);
+        if(drawDungeon(x, y, 0)) {
+            step := 4;
+        }
     }
-    if(isPressed(KeyU)) {
+    if(isPressed(Key3)) {
         pos := getPosition();
         x := int(pos[0] / 4) * 4;
         y := int(pos[1] / 4) * 4;
-        drawDungeon(x, y, 1);
+        if(drawDungeon(x, y, 1)) {
+            step := 4;
+        }
     }
-    if(isPressed(KeyI)) {
+    if(isPressed(Key4)) {
         pos := getPosition();
         x := int(pos[0] / 4) * 4;
         y := int(pos[1] / 4) * 4;
-        drawDungeon(x, y, 2);
+        if(drawDungeon(x, y, 2)) {
+            step := 4;
+        }
     }
-    if(isPressed(KeyA)) {
+    if(isPressed(Key5)) {
         drawRiver(getPosition());
+        step := 4;
     }
-    if(isPressed(KeyM)) {
+    if(isPressed(Key6)) {
         drawMountain(getPosition());
+        step := 4;
     }
+    
+    if(step != 0 && (editor.dirX != 0 || editor.dirY != 0)) {
+        moveViewTo(editor.lastX + editor.dirX * step, editor.lastY + editor.dirY * step);
+    }
+}
+
+def editorDefaultCommand() {
     if(isPressed(Key0)) {
         setMaxZ(24, null);
     }
@@ -117,13 +135,56 @@ def editorCommand() {
     }
     if(isPressed(Key7)) {
         startRug("rug.blue");
-    }    
+    }
     if(isPressed(Key8)) {
         startRug("rug.green");
-    }        
+    }
     if(isPressed(Key9)) {
         startRug("rug.black");
-    }        
+    }
+}
+
+def editorCommand() {
+    pos := getPosition();
+    if(editor.lastX != pos[0] || editor.lastY != pos[1]) {
+        editor.dirX := normalize(pos[0] - editor.lastX);
+        editor.dirY := normalize(pos[1] - editor.lastY);
+        editor.lastX := pos[0];
+        editor.lastY := pos[1];
+    }
+
+    if(isPressed(KeyTab)) {
+        if(editor.roofMode) {
+            print("to NO roof");
+            setMaxZ(24, null);
+            editor.roofMode := false;
+        } else {
+            print("to roof");
+            setMaxZ(7, "roof.mountain.1");
+            editor.roofMode := true;
+        }
+    }
+
+    # switch mode
+    if(isPressed(KeyS)) {
+        editor.mode := MODE_SECTION;
+        setEditorLabel(editor.mode);
+    } else if(isPressed(KeyI)) {
+        editor.mode := MODE_INSERT;
+        setEditorLabel(editor.mode);
+    } else if(isPressed(KeyEscape)) {
+        editor.mode := "";
+        setEditorLabel(editor.mode);
+    }
+
+    # mode details
+    if(editor.mode = MODE_SECTION) {
+        editorSectionCommand();
+    } else if(editor.mode = MODE_INSERT) {
+        editorInsertCommand();
+    } else {
+        editorDefaultCommand();
+    }
 }
 
 def startRug(rug) {
@@ -265,7 +326,9 @@ def isUnderMountain(x, y) {
 def drawDungeon(x, y, dungeonType) {
     if(isUnderMountain(x, y)) {
         drawDungeonBlock(x, y, dungeon[dungeonType]);
+        return true;
     }
+    return false;
 }
 
 def drawDungeonBlock(x, y, d) {
